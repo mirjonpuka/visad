@@ -6,7 +6,9 @@ import { expect, test, type Page } from "@playwright/test";
 // switcher maps document slugs.
 
 async function open(page: Page, url: string) {
-  await page.goto(url, { waitUntil: "networkidle" });
+  await page.goto(url, { waitUntil: "load" });
+  // Pages with a Turnstile widget never go fully idle
+  await page.waitForLoadState("networkidle", { timeout: 8000 }).catch(() => {});
 }
 
 const PAGES = [
@@ -18,6 +20,8 @@ const PAGES = [
   "/zgjidhje/hotele-turizem",
   "/karriera",
   "/privatesia",
+  "/kontakt",
+  "/en/contact",
   "/en/systems/windows",
   "/en/projects/residential-complex",
 ];

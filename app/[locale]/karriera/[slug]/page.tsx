@@ -8,6 +8,7 @@ import { SplitHeadline } from "@/components/motion/reveals";
 import { RichText } from "@/components/ui/RichText";
 import { permanentRedirect } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
+import { getFormConfig } from "@/lib/forms/config";
 import { pageMetadata } from "@/lib/seo";
 import { localizedSlugParams, PLACEHOLDER_SLUG, slugMap } from "@/lib/static-params";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -71,7 +72,7 @@ export default async function JobPage({ params }: Props) {
               {t("careers.applyTitle")}
             </h2>
             <div className="mt-8">
-              <JobApplicationForm jobId={job._id} jobTitle={job.title} />
+              <JobApplicationForm config={getFormConfig()} job={{ id: job.slug, title: job.title }} />
             </div>
           </section>
         </div>

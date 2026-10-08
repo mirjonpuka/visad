@@ -20,7 +20,9 @@ for (const width of widths) {
   await page.addInitScript(() => localStorage.setItem("visad-intro-seen", "1"));
   page.on("console", (m) => m.type() === "error" && errors.push(`[${width}] ${m.text()}`));
   page.on("pageerror", (e) => errors.push(`[${width}] ${e.message}`));
-  await page.goto(base + path, { waitUntil: "networkidle" });
+  // "load" + settle: pages with Turnstile never reach "networkidle"
+  await page.goto(base + path, { waitUntil: "load" });
+  await page.waitForTimeout(1500);
 
   // Scroll through so lazy images load, then return to top
   await page.evaluate(async () => {
@@ -30,7 +32,7 @@ for (const width of widths) {
     }
     window.scrollTo(0, 0);
   });
-  await page.waitForLoadState("networkidle");
+  await page.waitForTimeout(1200);
   await page.waitForTimeout(700);
 
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);

@@ -7,6 +7,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { BenefitsGrid } from "@/components/ui/BenefitsGrid";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Link } from "@/i18n/navigation";
+import { getFormConfig } from "@/lib/forms/config";
 import { pageMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { CAREERS_QUERY } from "@/sanity/lib/queries";
@@ -74,7 +75,7 @@ export default async function CareersPage() {
             <div className="grid-12 gap-y-10">
               <p className="col-span-12 text-body-l text-text-on-light-2 lg:col-span-5">{t("careers.empty")}</p>
               <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-                <JobApplicationForm />
+                <JobApplicationForm config={getFormConfig()} />
               </div>
             </div>
           )}

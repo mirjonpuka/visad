@@ -62,16 +62,102 @@
     "continue": "Vazhdo",
     "back": "Kthehu",
     "send": "Dërgo kërkesën",
+    "success": "Faleminderit! Do t'ju kontaktojmë brenda 24 orësh.",
+    "backHome": "Kthehu te kryefaqja",
+    "required": "e detyrueshme",
+    "optional": "opsionale",
+    "step": "Hapi {n} nga {total}",
+    "quote": {
+      "step1": "Çfarë ju nevojitet?",
+      "step2": "Kontakti",
+      "systems": "Sistemi",
+      "projectType": "Lloji i projektit",
+      "projectTypes": {
+        "new-house": "Shtëpi e re",
+        "renovation": "Rinovim",
+        "apartment-building": "Pallat",
+        "business": "Biznes"
+      },
+      "openings": "Numri i hapjeve",
+      "decrease": "Më pak",
+      "increase": "Më shumë",
+      "dimensions": "Masat e përafërta",
+      "dimensionsHint": "p.sh. 3 dritare 120 × 140 cm, 1 derë 90 × 210 cm",
+      "city": "Qyteti",
+      "name": "Emri dhe mbiemri",
+      "phone": "Telefoni",
+      "email": "Email",
+      "preferredContact": "Si t'ju kontaktojmë?",
+      "contactOptions": { "whatsapp": "WhatsApp", "phone": "Telefon", "email": "Email" },
+      "photos": "Foto të objektit",
+      "photosHint": "Deri në 6 foto, maks. 10 MB secila (JPG, PNG, WebP, HEIC)",
+      "message": "Mesazhi"
+    },
+    "tender": {
+      "company": "Kompania",
+      "contactPerson": "Personi i kontaktit",
+      "role": "Pozicioni",
+      "projectName": "Emri i projektit",
+      "location": "Vendndodhja",
+      "stage": "Faza",
+      "stages": { "design": "Projektim", "tender": "Tender", "construction": "Ndërtim" },
+      "area": "Sipërfaqja e përafërt (m²)",
+      "deadline": "Afati",
+      "documents": "Dokumentet (PDF, DWG, ZIP)",
+      "documentsHint": "Deri në 5 skedarë, maks. 25 MB secili"
+    },
+    "job": {
+      "cv": "CV (PDF)",
+      "cvHint": "Maks. 5 MB"
+    },
+    "consent": "Pranoj politikën e privatësisë",
+    "privacyLink": "Lexo politikën",
+    "files": {
+      "drop": "Tërhiqni skedarët këtu ose",
+      "browse": "zgjidhni nga pajisja",
+      "remove": "Hiq {name}",
+      "retry": "Provo përsëri",
+      "uploading": "Duke ngarkuar…",
+      "done": "U ngarkua",
+      "failed": "Ngarkimi dështoi",
+      "tooMany": "Mund të ngarkoni deri në {max} skedarë."
+    },
+    "sending": "Duke dërguar…",
+    "errorBanner": "Kërkesa nuk u dërgua. Të dhënat tuaja janë ruajtur, provoni përsëri.",
+    "retry": "Provo përsëri",
+    "rateLimited": "Shumë kërkesa në pak kohë. Provoni përsëri pas disa minutash.",
+    "verifying": "Duke verifikuar që nuk jeni robot…",
     "errors": {
       "required": "Kjo fushë është e detyrueshme.",
       "phone": "Shkruani një numër telefoni të vlefshëm.",
       "email": "Shkruani një email të vlefshëm.",
       "fileSize": "Skedari është shumë i madh (maks. {max} MB).",
       "fileType": "Ky lloj skedari nuk lejohet.",
-      "generic": "Diçka shkoi keq. Provoni përsëri."
-    },
-    "success": "Faleminderit! Do t'ju kontaktojmë brenda 24 orësh.",
-    "backHome": "Kthehu te kryefaqja"
+      "generic": "Diçka shkoi keq. Provoni përsëri.",
+      "consent": "Duhet të pranoni politikën e privatësisë.",
+      "number": "Shkruani një numër.",
+      "tooLong": "Teksti është shumë i gjatë.",
+      "uploading": "Prisni sa të mbarojë ngarkimi i skedarëve.",
+      "cv": "Ngarkoni CV-në tuaj."
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "quickLabel": "Kontakt i shpejtë",
+    "whatsappText": "Mënyra më e shpejtë: foto dhe masa direkt në telefon.",
+    "phone": "Telefon",
+    "email": "Email",
+    "formsLabel": "Formularët",
+    "tabQuote": "Kërko ofertë",
+    "tabTender": "Tender / B2B",
+    "visit": "Adresa & orari"
+  },
+  "email": {
+    "confirmSubject": "E morëm kërkesën tuaj — VISAD",
+    "confirmHello": "Përshëndetje {name},",
+    "confirmBody": "Faleminderit që na shkruat. E morëm kërkesën tuaj dhe do t'ju kontaktojmë brenda 24 orësh.",
+    "confirmWhatsapp": "Nëse keni nevojë më shpejt, na shkruani në WhatsApp:",
+    "confirmSign": "Ekipi i VISAD Construction"
   },
   "projects": {
     "filters": {

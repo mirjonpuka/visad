@@ -41,6 +41,12 @@ Everything on the site marked `[TO CONFIRM]` or shown as a placeholder photo is 
 - [ ] WhatsApp prefilled message wording (current: "Përshëndetje VISAD! Ju shkruaj nga faqja: …")
 - [ ] Exact Google Maps location / pin for the address link (currently a search link)
 
+## Forms (owner accounts — the forms already work and save every request in Studio → Kërkesat)
+- [ ] **Resend** account + verify the domain visad.al (DNS records) → `RESEND_API_KEY`; without it no emails are sent
+- [ ] **Cloudflare Turnstile** site for visad.al → `NEXT_PUBLIC_TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY` (required for the live site)
+- [ ] **Vercel Blob** store connected to the project → `BLOB_READ_WRITE_TOKEN` (photo/document/CV uploads on the live site)
+- [ ] Email address for lead notifications (Studio → Cilësimet e faqes → "Email për njoftimet e formularëve"; default info@visad.al)
+
 ## Setup (owner)
 - [ ] Sanity → API → CORS origins: add `http://localhost:3000` with **Allow credentials** (Studio login)
 - [ ] Before launch (Phase 10): create new read/write tokens (the current ones were shared in chat) and a webhook to `https://visad.al/api/revalidate`

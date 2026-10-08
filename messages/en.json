@@ -62,16 +62,102 @@
     "continue": "Continue",
     "back": "Back",
     "send": "Send request",
+    "success": "Thank you! We'll contact you within 24 hours.",
+    "backHome": "Back to home",
+    "required": "required",
+    "optional": "optional",
+    "step": "Step {n} of {total}",
+    "quote": {
+      "step1": "What do you need?",
+      "step2": "Your details",
+      "systems": "System",
+      "projectType": "Project type",
+      "projectTypes": {
+        "new-house": "New house",
+        "renovation": "Renovation",
+        "apartment-building": "Apartment building",
+        "business": "Business"
+      },
+      "openings": "Number of openings",
+      "decrease": "Fewer",
+      "increase": "More",
+      "dimensions": "Approximate sizes",
+      "dimensionsHint": "e.g. 3 windows 120 × 140 cm, 1 door 90 × 210 cm",
+      "city": "City",
+      "name": "Full name",
+      "phone": "Phone",
+      "email": "Email",
+      "preferredContact": "How should we contact you?",
+      "contactOptions": { "whatsapp": "WhatsApp", "phone": "Phone", "email": "Email" },
+      "photos": "Photos of the site",
+      "photosHint": "Up to 6 photos, max. 10 MB each (JPG, PNG, WebP, HEIC)",
+      "message": "Message"
+    },
+    "tender": {
+      "company": "Company",
+      "contactPerson": "Contact person",
+      "role": "Role",
+      "projectName": "Project name",
+      "location": "Location",
+      "stage": "Stage",
+      "stages": { "design": "Design", "tender": "Tender", "construction": "Construction" },
+      "area": "Approx. area (m²)",
+      "deadline": "Deadline",
+      "documents": "Documents (PDF, DWG, ZIP)",
+      "documentsHint": "Up to 5 files, max. 25 MB each"
+    },
+    "job": {
+      "cv": "CV (PDF)",
+      "cvHint": "Max. 5 MB"
+    },
+    "consent": "I accept the privacy policy",
+    "privacyLink": "Read the policy",
+    "files": {
+      "drop": "Drag files here or",
+      "browse": "choose from your device",
+      "remove": "Remove {name}",
+      "retry": "Try again",
+      "uploading": "Uploading…",
+      "done": "Uploaded",
+      "failed": "Upload failed",
+      "tooMany": "You can upload up to {max} files."
+    },
+    "sending": "Sending…",
+    "errorBanner": "Your request was not sent. Your details are kept, please try again.",
+    "retry": "Try again",
+    "rateLimited": "Too many requests in a short time. Please try again in a few minutes.",
+    "verifying": "Checking that you are not a robot…",
     "errors": {
       "required": "This field is required.",
       "phone": "Enter a valid phone number.",
       "email": "Enter a valid email.",
       "fileSize": "File is too large (max {max} MB).",
       "fileType": "This file type is not allowed.",
-      "generic": "Something went wrong. Please try again."
-    },
-    "success": "Thank you! We'll contact you within 24 hours.",
-    "backHome": "Back to home"
+      "generic": "Something went wrong. Please try again.",
+      "consent": "Please accept the privacy policy.",
+      "number": "Enter a number.",
+      "tooLong": "This text is too long.",
+      "uploading": "Please wait until the files have uploaded.",
+      "cv": "Please upload your CV."
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "quickLabel": "Quick contact",
+    "whatsappText": "The fastest way: photos and sizes straight from your phone.",
+    "phone": "Phone",
+    "email": "Email",
+    "formsLabel": "Forms",
+    "tabQuote": "Request a quote",
+    "tabTender": "Tender / B2B",
+    "visit": "Address & hours"
+  },
+  "email": {
+    "confirmSubject": "We received your request — VISAD",
+    "confirmHello": "Hello {name},",
+    "confirmBody": "Thank you for writing to us. We received your request and will contact you within 24 hours.",
+    "confirmWhatsapp": "If you need us sooner, message us on WhatsApp:",
+    "confirmSign": "The VISAD Construction team"
   },
   "projects": {
     "filters": {

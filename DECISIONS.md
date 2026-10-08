@@ -218,6 +218,22 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D7.15 | Job application form slot is in place; the form itself is built with the other forms in Phase 8 | Shared form stack (zod, uploads, Turnstile) |
 | D7.16 | Back/forward between filter states of the same page no longer arms the page-transition crossfade | Next real navigation lost its panel transition |
 
+## Phase 8 — Forms & leads
+
+| # | Decision | Why |
+|---|---|---|
+| D8.1 | One zod schema per form in `lib/forms/schemas.ts`, used on blur/step in the browser and again in the Server Action; error messages are message keys (`form.errors.*`) | Architecture §7.1; localized errors |
+| D8.2 | Small own form state hook (`useFormState`) instead of react-hook-form | Chips, stepper and async file lists are simpler as controlled values; values never reset on error |
+| D8.3 | Quote step 1 has no required fields (03 marks only name, phone, consent with *); "Vazhdo" still validates the step | Lower barrier for homeowners |
+| D8.4 | Job application: CV required, email optional (03 lists the fields without *) | An application without a CV is not useful |
+| D8.5 | Uploads go straight from the browser to **Vercel Blob** with a token from `/api/upload` (type + size limited per kind). Without `BLOB_READ_WRITE_TOKEN` (local dev) a fallback stores the file in the private `leads` dataset; it refuses to run on the production deployment | Architecture §7.2; testable before the Blob store exists, never an open endpoint live |
+| D8.6 | Leads accept file URLs only from `*.public.blob.vercel-storage.com` or `cdn.sanity.io` | No arbitrary links in lead emails |
+| D8.7 | Spam: honeypot (silent fake success) → rate limit 5/10 min/IP (in-memory per instance, production only) → Turnstile "interaction-only" (Cloudflare test keys when not configured; production without a secret fails closed) | Architecture §7.3 |
+| D8.8 | Lead is saved first; emails (Resend) are sent after and never block success. Without `RESEND_API_KEY` emails are skipped with a log line. Staff email in Albanian with all fields, file links and a Studio link, reply-to = customer; confirmation localized | A missing/failed email never loses a request |
+| D8.9 | `?forma=tender` preselects the tab after hydration (page stays prerendered) | UI §11.2 |
+| D8.10 | e2e tests submit real leads named "E2E Test"; `npm run test:cleanup-leads` removes them and their files | Acceptance "creates a lead document" checked against Sanity |
+| D8.11 | `.env.example` (names only) committed as the env checklist | Phase 10 |
+
 ## Open conflicts reported to the client/owner
 - C6 **First-load JS budget** (06 §Performance: Home ≤ 180KB gzip). Measured: **240KB gzip** — Next.js 16 + React 19 runtime alone ≈ 136KB, motion (GSAP/Lenis, within the 04 budget of 60KB) ≈ 51KB, site code ≈ 45KB. three.js is not included. The 180KB target cannot be met with the mandated stack + motion spec; proposal: accept ≤ 250KB, keep three.js/R3F lazy. Real-world check: CLS 0, no long tasks, Lighthouse in Phase 9.
 - C2 3D step texts differ between 05 and 08 → using 08.

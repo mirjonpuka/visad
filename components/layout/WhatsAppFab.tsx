@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { onHeroIn } from "@/components/motion/heroSignal";
 import { cn } from "@/lib/utils";
 import { useLayoutUI } from "./LayoutUIProvider";
 import { useWhatsAppHref } from "./useWhatsAppHref";
@@ -16,12 +17,9 @@ export function WhatsAppFab() {
   const t = useTranslations("cta");
   const href = useWhatsAppHref();
   const { mobileMenuOpen, cookieBannerHeight } = useLayoutUI();
-  // Phase 5: wait for the intro to finish before appearing
+  // Appears once the intro has finished (or right away on later visits)
   const [shown, setShown] = useState(false);
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setShown(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
+  useEffect(() => onHeroIn(() => setShown(true)), []);
 
   const visible = shown && !mobileMenuOpen;
 

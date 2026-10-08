@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { DrawLine } from "@/components/motion/reveals";
 import { cn } from "@/lib/utils";
 
 export type AccordionItem = {
@@ -78,7 +79,9 @@ export function Accordion({
         const triggerId = `${baseId}-t-${item.id}`;
         const panelId = `${baseId}-p-${item.id}`;
         return (
-          <div key={item.id} className="border-t hairline">
+          <div key={item.id} className="relative">
+            {/* Row hairline draws left → right when it enters (Motion §4.8) */}
+            <DrawLine className="absolute inset-x-0 top-0 h-px bg-(--surface-line)" delay={index * 0.05} />
             <Heading className="m-0">
               <button
                 ref={(el) => {

@@ -844,6 +844,193 @@
     rotate: 360deg;
   }
 }
+/* ==========================================================================
+   Motion (Phase 5)
+   ========================================================================== */
+
+/* Animated elements are hidden from first paint until GSAP takes over.
+   `js-motion` is set in <head> only when JS runs and motion is allowed;
+   the 3s safety animation reveals everything if scripts never arrive. */
+html.js-motion [data-anim],
+html.js-motion [data-hero-fade] {
+  visibility: hidden;
+  animation: anim-safety 0s linear 3s forwards;
+}
+@keyframes anim-safety {
+  to {
+    visibility: visible;
+  }
+}
+
+/* Magnetic buttons move with `transform`; the press uses the separate `scale` property */
+.btn:active:not([aria-disabled="true"]),
+.btn[data-force~="active"] {
+  transform: none;
+  scale: 0.98;
+}
+
+/* Custom cursor (Motion §5.4): native cursor hidden except in text fields */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+html.has-cursor :is(input, textarea, [contenteditable="true"]) {
+  cursor: text !important;
+}
+html.has-cursor select {
+  cursor: auto !important;
+}
+
+/* Lenis (recommended styles) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Logo intro (Motion §2), ported from brand/intro/logo-intro-demo.html.
+   <html data-intro="play|skip|done"> is set by the head script and IntroOverlay. */
+.intro {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+html[data-intro="play"] .intro,
+html[data-intro="skip"] .intro {
+  display: block;
+}
+html[data-intro="play"] body,
+html[data-intro="skip"] body {
+  overflow: hidden;
+}
+.intro__stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--color-ink-900);
+}
+/* Visibility is driven by CSS on the same clock as the wipe, so a late
+   hydration never leaves the logo stage on screen */
+.intro {
+  animation: intro-hide 0s linear 2.85s forwards;
+}
+.intro__stage {
+  animation: intro-hide 0s linear 2.3s forwards; /* panel fully covers the screen */
+}
+html[data-intro="skip"] .intro {
+  animation-name: intro-hide-now;
+  animation-delay: 1.1s;
+}
+html[data-intro="skip"] .intro__stage {
+  animation-name: intro-hide-now;
+  animation-delay: 0.55s;
+}
+@keyframes intro-hide {
+  to {
+    visibility: hidden;
+  }
+}
+@keyframes intro-hide-now {
+  to {
+    visibility: hidden;
+  }
+}
+.intro__logo {
+  width: min(520px, 72vw);
+  overflow: visible;
+}
+.intro__swoosh {
+  fill: none;
+  stroke: var(--color-red-500);
+  stroke-width: 80;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: intro-draw 0.9s var(--ease-in-out-quart) 0.15s forwards;
+}
+.intro__letter {
+  fill: #ffffff;
+  transform-box: fill-box;
+  transform: translateY(110%);
+  animation: intro-rise 0.7s var(--ease-out-expo) forwards;
+}
+.intro__l1 {
+  animation-delay: 0.55s;
+}
+.intro__l2 {
+  animation-delay: 0.62s;
+}
+.intro__l3 {
+  animation-delay: 0.69s;
+}
+.intro__l4 {
+  animation-delay: 0.76s;
+}
+.intro__sub {
+  fill: var(--color-red-500);
+  opacity: 0;
+  animation: intro-fade 0.5s ease 1.1s forwards;
+}
+.intro__wipe {
+  position: absolute;
+  inset: 0;
+  background: var(--color-red-500);
+  transform: translateY(100%);
+  animation: intro-wipe 1.1s var(--ease-in-out-quart) 1.75s forwards;
+}
+/* Skip: a differently named animation restarts the wipe immediately */
+html[data-intro="skip"] .intro__wipe {
+  animation-name: intro-wipe-now;
+  animation-delay: 0s;
+}
+@keyframes intro-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes intro-rise {
+  to {
+    transform: none;
+  }
+}
+@keyframes intro-fade {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes intro-wipe {
+  0% {
+    transform: translateY(100%);
+  }
+  45% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+@keyframes intro-wipe-now {
+  0% {
+    transform: translateY(100%);
+  }
+  45% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
 /* Hero scroll cue (UI §3.1): red segment travels down the line, 2s loop */
 .scroll-cue::after {
   content: "";

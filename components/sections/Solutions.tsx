@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { CMSImage } from "@/components/media/CMSImage";
+import { ImageWipe, Reveal, SplitHeadline } from "@/components/motion/reveals";
 import { Link } from "@/i18n/navigation";
 import type { NavItem } from "@/lib/site-data";
 
@@ -16,27 +17,31 @@ export async function Solutions({ title, solutions }: { title?: string | null; s
     <section id="zgjidhje" className="surface-light border-t border-line-light section-y">
       <div className="site-container">
         <header className="mb-14">
-          <p className="font-mono text-eyebrow text-(--surface-fg-3) uppercase">
+          <Reveal as="p" y={12} className="font-mono text-eyebrow text-(--surface-fg-3) uppercase">
             {t("home.solutionsEyebrow")}
-          </p>
-          {title && <h2 className="mt-5 text-h2">{title}</h2>}
+          </Reveal>
+          {title && (
+            <SplitHeadline as="h2" className="mt-5 text-h2">
+              {title}
+            </SplitHeadline>
+          )}
         </header>
 
         <ul className="grid grid-cols-1 gap-x-5 gap-y-12 md:grid-cols-2 laptop:grid-cols-4">
-          {solutions.map((solution) => (
+          {solutions.map((solution, i) => (
             <li key={solution.id}>
               <Link
                 href={{ pathname: "/zgjidhje/[segment]", params: { segment: solution.slug } }}
                 className="group block transition-transform duration-(--dur-l) ease-out-expo hover:-translate-y-1"
               >
-                <div className="overflow-hidden rounded-base">
+                <ImageWipe index={i} className="overflow-hidden rounded-base">
                   <CMSImage
                     image={solution.image}
                     ratio="4/5"
                     sizes="(min-width: 1200px) 320px, (min-width: 768px) 45vw, 90vw"
                     imgClassName="transition-transform duration-(--dur-l) ease-out-expo group-hover:scale-[1.04]"
                   />
-                </div>
+                </ImageWipe>
                 <h3 className="mt-5 text-h4">{solution.title}</h3>
                 {solution.text && <p className="mt-1.5 text-body-s text-(--surface-fg-2)">{solution.text}</p>}
                 <span className="link-arrow mt-4 text-body-s font-medium">

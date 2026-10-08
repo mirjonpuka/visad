@@ -1,5 +1,5 @@
 import { draftMode } from "next/headers";
-import { VisualEditing } from "next-sanity/visual-editing";
+import { LazyVisualEditing } from "./LazyVisualEditing";
 import { DraftModeBanner } from "./DraftModeBanner";
 
 /**
@@ -11,7 +11,7 @@ export async function DraftModeTools() {
   if (!isEnabled) return null;
   return (
     <>
-      <VisualEditing />
+      <LazyVisualEditing />
       <DraftModeBanner />
     </>
   );

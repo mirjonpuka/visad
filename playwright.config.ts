@@ -1,5 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const baseURL = process.env.BASE_URL ?? "http://localhost:3000";
+
 export default defineConfig({
   testDir: "tests/e2e",
   fullyParallel: true,
@@ -9,8 +11,13 @@ export default defineConfig({
   // The dev server compiles routes on first visit
   expect: { timeout: 15_000 },
   use: {
-    baseURL: process.env.BASE_URL ?? "http://localhost:3000",
+    baseURL,
     trace: "retain-on-failure",
+    // Returning visitor: the first-visit intro (Motion §0) is covered by intro.spec.ts
+    storageState: {
+      cookies: [],
+      origins: [{ origin: new URL(baseURL).origin, localStorage: [{ name: "visad-intro-seen", value: "1" }] }],
+    },
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
   webServer: {

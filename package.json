@@ -16,6 +16,7 @@
     "seed": "tsx --env-file=.env.local scripts/seed-sanity.ts"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@sanity/color-input": "^6.1.6",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^6.18.0",

@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { ImageWipe } from "@/components/motion/reveals";
 import { ButtonSecondary } from "@/components/ui/Button";
 import { ProjectTile } from "@/components/ui/ProjectTile";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -44,6 +45,8 @@ export async function FeaturedProjects({ title, intro, projects }: Props) {
         <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 laptop:auto-rows-[290px] laptop:grid-cols-12">
           {projects.slice(0, 5).map((project, i) => (
             <li key={project._id} className={cn("h-80 md:h-[360px] laptop:h-auto", TILE_LAYOUT[i])}>
+              {/* Tiles wipe in, staggered 80ms (UI §3.4, Motion §4.3) */}
+              <ImageWipe index={i} className="h-full rounded-base">
               <ProjectTile
                 title={project.title}
                 slug={project.slug}
@@ -54,6 +57,7 @@ export async function FeaturedProjects({ title, intro, projects }: Props) {
                 sizes={TILE_SIZES[i]}
                 className="h-full"
               />
+              </ImageWipe>
             </li>
           ))}
         </ul>

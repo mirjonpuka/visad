@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Reveal, SplitHeadline } from "@/components/motion/reveals";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -11,7 +12,10 @@ type Props = {
   className?: string;
 };
 
-/** Eyebrow + h2 on the left, optional aside bottom-right; 56px bottom margin (UI §2.7). */
+/**
+ * Eyebrow + h2 on the left, optional aside bottom-right; 56px bottom margin
+ * (UI §2.7). Headline lines rise from masks, eyebrow and aside fade up (Motion §4.1–4.2).
+ */
 export function SectionHeader({ eyebrow, title, aside, as: Heading = "h2", className }: Props) {
   return (
     <header
@@ -21,13 +25,22 @@ export function SectionHeader({ eyebrow, title, aside, as: Heading = "h2", class
       )}
     >
       <div className="max-w-[900px] min-w-0 lg:flex-[1_1_auto]">
-        {eyebrow && <p className="mb-5 font-mono text-eyebrow text-(--surface-fg-3) uppercase">{eyebrow}</p>}
-        <Heading className={cn(Heading === "h1" ? "text-h1" : "text-h2", "text-balance")}>{title}</Heading>
+        {eyebrow && (
+          <Reveal as="p" y={12} className="mb-5 font-mono text-eyebrow text-(--surface-fg-3) uppercase">
+            {eyebrow}
+          </Reveal>
+        )}
+        <SplitHeadline as={Heading} className={cn(Heading === "h1" ? "text-h1" : "text-h2", "text-balance")}>
+          {title}
+        </SplitHeadline>
       </div>
       {aside && (
-        <div className="flex min-w-0 text-body text-(--surface-fg-2) lg:flex-[0_1_420px] lg:justify-end">
+        <Reveal
+          delay={0.15}
+          className="flex min-w-0 text-body text-(--surface-fg-2) lg:flex-[0_1_420px] lg:justify-end"
+        >
           {aside}
-        </div>
+        </Reveal>
       )}
     </header>
   );

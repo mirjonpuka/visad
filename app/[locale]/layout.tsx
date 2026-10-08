@@ -13,6 +13,13 @@ import { LayoutUIProvider } from "@/components/layout/LayoutUIProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
+import { Cursor } from "@/components/motion/Cursor";
+import { IntroOverlay, introHeadScript } from "@/components/motion/IntroOverlay";
+import { LenisProvider } from "@/components/motion/LenisProvider";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { MotionProvider } from "@/components/motion/MotionProvider";
+import { RouteChangeEmitter } from "@/components/motion/routeEvents";
+import { TransitionProvider } from "@/components/motion/TransitionProvider";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -56,24 +63,42 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
   const siteData = await getSiteData();
 
   return (
-    <html lang={locale} className={`${geist.variable} ${geistMono.variable}`}>
+    // The head script sets classes/attributes on <html> before hydration
+    <html lang={locale} className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Decides before first paint whether motion runs and the intro plays (Motion §2) */}
+        <script dangerouslySetInnerHTML={{ __html: introHeadScript }} />
+      </head>
       <body>
         <NextIntlClientProvider>
           <SiteDataProvider value={siteData}>
-            <LayoutUIProvider>
-              <SkipLink />
-              <Navbar />
-              <main id="main" tabIndex={-1} className="outline-none">
-                {children}
-              </main>
-              <Footer />
-              <WhatsAppFab />
-              <CookieBanner />
-            </LayoutUIProvider>
+            <MotionProvider>
+              <LenisProvider>
+                <LayoutUIProvider>
+                  <TransitionProvider>
+                    <IntroOverlay />
+                    <SkipLink />
+                    <Navbar />
+                    <main id="main" tabIndex={-1} className="outline-none">
+                      {children}
+                    </main>
+                    <Footer />
+                    <WhatsAppFab />
+                    <CookieBanner />
+                  </TransitionProvider>
+                  <Cursor />
+                  <Magnetic />
+                </LayoutUIProvider>
+              </LenisProvider>
+            </MotionProvider>
           </SiteDataProvider>
         </NextIntlClientProvider>
         <Suspense fallback={null}>
           <DraftModeTools />
+        </Suspense>
+        {/* The only place that reads the URL for motion (see routeEvents.tsx) */}
+        <Suspense fallback={null}>
+          <RouteChangeEmitter />
         </Suspense>
       </body>
     </html>

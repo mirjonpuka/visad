@@ -1,6 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { HeroUnderNav } from "@/components/layout/LayoutUIProvider";
 import { CMSImage } from "@/components/media/CMSImage";
+import { HeroVideo } from "@/components/media/HeroVideo";
+import { HeroMotion } from "@/components/motion/HeroMotion";
+import { SplitHeadline } from "@/components/motion/reveals";
 import { ButtonPrimary, ButtonSecondary } from "@/components/ui/Button";
 import { Lines } from "@/components/ui/Lines";
 import { cmsHref } from "@/lib/links";
@@ -10,24 +13,30 @@ type Props = { home: NonNullable<HomeData["home"]> };
 
 /**
  * Home hero (UI §3.1): full-bleed image with focal point, bottom gradient,
- * content bottom-left, scroll cue bottom-right (laptop). Entrance and
- * parallax motion are added in Phase 5.
+ * content bottom-left, scroll cue bottom-right (laptop). Entrance after the
+ * intro: headline lines rise, eyebrow/lead/buttons fade up, image settles from
+ * 1.08 → 1; parallax + slight darkening on scroll (Motion §2, §4.4).
  */
 export async function HomeHero({ home }: Props) {
   const t = await getTranslations();
   const ctas = (home.heroCtas ?? []).slice(0, 2);
 
   return (
-    <section className="surface-dark relative isolate flex h-svh max-h-[980px] min-h-[600px] items-end overflow-hidden md:min-h-[720px]">
+    <HeroMotion className="surface-dark relative isolate flex h-svh max-h-[980px] min-h-[600px] items-end overflow-hidden md:min-h-[720px]">
       <HeroUnderNav />
-      <CMSImage
-        image={toSiteImage(home.heroImage)}
-        fill
-        priority
-        sizes="100vw"
-        className="-z-20 rounded-none"
-        placeholderNote="PHOTO: Home hero"
-      />
+      <div data-hero-parallax="" className="absolute inset-0 -z-20">
+        <div data-hero-image="" className="absolute inset-0">
+          <CMSImage
+            image={toSiteImage(home.heroImage)}
+            fill
+            priority
+            sizes="100vw"
+            className="rounded-none"
+            placeholderNote="PHOTO: Home hero"
+          />
+          {home.heroVideo && <HeroVideo src={home.heroVideo} />}
+        </div>
+      </div>
       {/* Transparent at 45% → ink-900 75% at the bottom, for text contrast */}
       <div
         aria-hidden
@@ -41,16 +50,20 @@ export async function HomeHero({ home }: Props) {
 
       <div className="site-container pb-14 md:pb-24">
         {home.heroEyebrow && (
-          <p className="font-mono text-eyebrow text-text-on-dark-2 uppercase">{home.heroEyebrow}</p>
+          <p data-hero-fade="" className="font-mono text-eyebrow text-text-on-dark-2 uppercase">
+            {home.heroEyebrow}
+          </p>
         )}
-        <h1 className="mt-5 max-w-[1000px] text-display-xl text-balance">
+        <SplitHeadline as="h1" trigger="manual" className="mt-5 max-w-[1000px] text-display-xl text-balance">
           <Lines text={home.heroTitle} />
-        </h1>
+        </SplitHeadline>
         {home.heroLead && (
-          <p className="mt-6 max-w-[560px] text-body-l text-text-on-dark-2">{home.heroLead}</p>
+          <p data-hero-fade="" className="mt-6 max-w-[560px] text-body-l text-text-on-dark-2">
+            {home.heroLead}
+          </p>
         )}
         {ctas.length > 0 && (
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <div data-hero-fade="" className="mt-10 flex flex-col gap-3 sm:flex-row">
             {ctas.map((cta, i) => {
               const link = cmsHref(cta.href);
               if (!link || !cta.label) return null;
@@ -71,6 +84,7 @@ export async function HomeHero({ home }: Props) {
       {/* Scroll cue (laptop only): a red segment travelling down a 48px line */}
       <div
         aria-hidden
+        data-hero-fade=""
         className="absolute right-(--gutter) bottom-24 hidden flex-col items-center gap-4 laptop:flex"
       >
         <span className="font-mono text-label text-text-on-dark-2 uppercase [writing-mode:vertical-rl]">
@@ -78,6 +92,6 @@ export async function HomeHero({ home }: Props) {
         </span>
         <span className="scroll-cue relative h-12 w-px overflow-hidden bg-line-dark" />
       </div>
-    </section>
+    </HeroMotion>
   );
 }

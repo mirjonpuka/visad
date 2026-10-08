@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ButtonPrimary, ButtonSecondary } from "@/components/ui/Button";
-import { COOKIE_BANNER_ENABLED } from "@/lib/site";
+import { COOKIE_BANNER_ENABLED } from "@/lib/flags";
 import { cn } from "@/lib/utils";
 import { useLayoutUI } from "./LayoutUIProvider";
 

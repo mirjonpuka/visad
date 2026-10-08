@@ -46,9 +46,12 @@ test("systems accordion: one row open, keyboard moves between rows, image label 
   await expect(rows).toHaveCount(6);
   await expect(rows.nth(0)).toHaveAttribute("aria-expanded", "true");
 
-  await rows.nth(0).focus();
-  await page.keyboard.press("ArrowDown");
-  await expect(rows.nth(1)).toBeFocused();
+  // Retried: the page section may hydrate after "networkidle" on the dev server
+  await expect(async () => {
+    await rows.nth(0).focus();
+    await page.keyboard.press("ArrowDown");
+    await expect(rows.nth(1)).toBeFocused({ timeout: 1000 });
+  }).toPass();
   await page.keyboard.press("Enter");
   await expect(rows.nth(1)).toHaveAttribute("aria-expanded", "true");
   await expect(rows.nth(0)).toHaveAttribute("aria-expanded", "false");

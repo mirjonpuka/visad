@@ -164,7 +164,25 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D4.15 | Home lives in the route group `app/[locale]/(home)/` with its own `loading.tsx` | A `loading.tsx` directly in `[locale]` wrapped every route (incl. the 404 catch-all) in the Home skeleton and broke its prerender |
 | D4.14 | Accessibility checked with axe (Playwright, 4 widths, 0 serious/critical) and Lighthouse (Accessibility 100 desktop + mobile) | Phase 4 acceptance |
 
+## Phase 5 — Motion system
+
+| # | Decision | Why |
+|---|---|---|
+| D5.1 | Motion stack: GSAP 3 (ScrollTrigger, SplitText with masked lines) + `@gsap/react`, Lenis on the GSAP ticker. Motion JS on first load ≈ 51KB gzip | Motion §1, budget ≤ 60KB |
+| D5.2 | `MotionProvider` exposes reducedMotion / isTouch / isLaptop / isLowPower (useSyncExternalStore on media queries) | One source for all motion decisions |
+| D5.3 | Lenis only with a fine pointer and without reduced motion; touch phones keep native scroll | Motion §1 |
+| D5.4 | Hidden-before-reveal styles apply only under `html.js-motion` (set by a tiny head script, not with reduced motion), plus a 3s CSS safety that shows everything if JS never runs the reveal | No invisible content without JS / on errors |
+| D5.5 | Intro (first visit only, `localStorage visad-intro-seen`) is driven by CSS from first paint; JS syncs the WAAPI clock and handles skip (key, click, wheel, touch). The hero entrance listens to `html[data-hero-in]` | Timers started at hydration were late by the hydration time |
+| D5.6 | Route changes are broadcast by one `<RouteChangeEmitter>` inside `<Suspense>`; providers subscribe with `useRouteChange` | `usePathname` in wrapping providers postponed the whole prerendered shell of dynamic routes |
+| D5.7 | Page transitions: document-level click interception of internal links (no special `TransitionLink`), red panel with the destination title; skipped for hreflang links, new tabs, downloads, /studio, /api, same page; browser back/forward use a short crossfade | Every link (incl. CMS content) gets the transition |
+| D5.8 | Custom cursor and magnetic buttons only on laptop with a fine pointer (≥1200px), off with reduced motion; magnetic = 30% element / 15% label, power3.out return | UI §14, Motion §5 |
+| D5.9 | `VisualEditing` loaded with `next/dynamic` only in Draft Mode | Keep the Studio overlay out of the public bundle |
+| D5.10 | Feature flags moved to `lib/flags.ts` | `CookieBanner` importing `lib/site.ts` pulled both image manifests (17KB gzip) into every page |
+| D5.11 | Optional hero video (CMS): mounted after `load`, never with reduced motion / low-power / Save-Data, paused off screen; the image stays as poster and LCP | UI §3.1, Motion §1 |
+| D5.12 | Playwright runs as a returning visitor (intro already seen); `intro.spec.ts` covers first visit + reduced motion | Intro would cover the page in every test |
+
 ## Open conflicts reported to the client/owner
+- C6 **First-load JS budget** (06 §Performance: Home ≤ 180KB gzip). Measured: **240KB gzip** — Next.js 16 + React 19 runtime alone ≈ 136KB, motion (GSAP/Lenis, within the 04 budget of 60KB) ≈ 51KB, site code ≈ 45KB. three.js is not included. The 180KB target cannot be met with the mandated stack + motion spec; proposal: accept ≤ 250KB, keep three.js/R3F lazy. Real-world check: CLS 0, no long tasks, Lighthouse in Phase 9.
 - C2 3D step texts differ between 05 and 08 → using 08.
 - C3 Reply time "brenda ditës" vs "brenda 24 orësh" → one [TO CONFIRM] value.
 - C4 Seed images: 07 says WebP, 09 says JPG masters → plan: JPG masters (Sanity serves AVIF/WebP).

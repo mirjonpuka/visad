@@ -7,8 +7,6 @@ import { localImage, stockImage, type SiteImage } from "./images";
 
 type L10n = { sq: string; en: string; it?: string; de?: string };
 
-/** Cookie banner is built but off at launch (DECISIONS D1.37). */
-export const COOKIE_BANNER_ENABLED = false;
 
 export const contact = {
   companyName: "VISAD Construction",

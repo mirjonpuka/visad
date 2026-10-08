@@ -357,6 +357,81 @@ export const factoryPage = defineType({
   preview: { prepare: () => ({ title: "Faqja e fabrikës" }) },
 });
 
+/** Heroes and intros of the index pages that have no document of their own. */
+export const pageSettings = defineType({
+  name: "pageSettings",
+  title: "Faqet e tjera",
+  type: "document",
+  icon: icon("documents"),
+  groups: [
+    { name: "systems", title: "Sistemet", default: true },
+    { name: "projects", title: "Projektet" },
+    { name: "careers", title: "Karriera" },
+    { name: "contact", title: "Kontakt" },
+  ],
+  fields: [
+    defineField({
+      name: "systemsHero",
+      title: "Sistemet: foto e hero-s",
+      type: "imageWithAlt",
+      group: "systems",
+    }),
+    defineField({
+      name: "systemsTitle",
+      title: "Sistemet: titulli",
+      type: "internationalizedArrayText",
+      group: "systems",
+    }),
+    defineField({
+      name: "systemsIntro",
+      title: "Sistemet: hyrja (rreth sistemeve ALUMIL)",
+      type: "internationalizedArrayText",
+      group: "systems",
+    }),
+    defineField({
+      name: "systemsKeySpecs",
+      title: "Sistemet: 3 vlera kryesore (vetëm nga fletët teknike ALUMIL)",
+      type: "array",
+      of: [defineArrayMember({ type: "spec" })],
+      validation: (r) => r.max(3),
+      group: "systems",
+    }),
+    defineField({
+      name: "projectsIntro",
+      title: "Projektet: hyrja",
+      type: "internationalizedArrayText",
+      group: "projects",
+    }),
+    defineField({
+      name: "careersHero",
+      title: "Karriera: foto e hero-s",
+      type: "imageWithAlt",
+      group: "careers",
+    }),
+    defineField({
+      name: "careersIntro",
+      title: "Karriera: hyrja",
+      type: "internationalizedArrayText",
+      group: "careers",
+    }),
+    defineField({
+      name: "careersBenefits",
+      title: "Karriera: përfitimet (4)",
+      type: "array",
+      of: [defineArrayMember({ type: "benefit" })],
+      validation: (r) => r.max(4),
+      group: "careers",
+    }),
+    defineField({
+      name: "contactLead",
+      title: "Kontakt: teksti hyrës",
+      type: "internationalizedArrayText",
+      group: "contact",
+    }),
+  ],
+  preview: { prepare: () => ({ title: "Faqet e tjera" }) },
+});
+
 // ---------------------------------------------------------------------------
 // Collections
 // ---------------------------------------------------------------------------
@@ -836,12 +911,13 @@ export const legalPage = defineType({
   preview: { select: { title: "title" }, prepare: ({ title }) => ({ title: firstValue(title) }) },
 });
 
-export const singletonTypes = ["siteSettings", "homePage", "factoryPage"] as const;
+export const singletonTypes = ["siteSettings", "homePage", "factoryPage", "pageSettings"] as const;
 
 export const documentTypes = [
   siteSettings,
   homePage,
   factoryPage,
+  pageSettings,
   project,
   system,
   systemSeries,

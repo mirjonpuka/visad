@@ -104,7 +104,74 @@
   "careers": {
     "title": "Work with us",
     "empty": "There are no open positions right now. Send us your CV.",
-    "apply": "Apply"
+    "apply": "Apply",
+    "eyebrow": "Careers",
+    "open": "Open positions",
+    "benefits": "Benefits",
+    "applyTitle": "Apply for this position",
+    "generalTitle": "General application",
+    "types": {
+      "full-time": "Full-time",
+      "part-time": "Part-time",
+      "seasonal": "Seasonal"
+    }
+  },
+  "systems": {
+    "eyebrow": "Systems",
+    "view": "View system",
+    "downloads": "Datasheets & catalogues",
+    "download": "Download",
+    "subnav": "On this page",
+    "overview": "Overview",
+    "series": "Series",
+    "technical": "Technical details",
+    "finishes": "Colours & finishes",
+    "projects": "Projects",
+    "faq": "FAQ",
+    "faqTitle": "Frequently asked questions",
+    "seriesTitle": "ALUMIL series",
+    "property": "Property",
+    "value": "Value",
+    "crossSection": "Profile cross-section",
+    "relatedTitle": "Projects with this system",
+    "allWithSystem": "All projects with this system",
+    "datasheet": "Datasheet",
+    "languages": { "sq": "Albanian", "en": "English", "it": "Italian", "de": "German", "el": "Greek" }
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "count": "{n, plural, one {# project} other {# projects}}",
+    "allCities": "All cities",
+    "filtersLabel": "Project filters",
+    "close": "Close",
+    "gallery": "Gallery",
+    "systemsUsed": "Systems used",
+    "photo": "Photo {n} of {total}",
+    "prev": "Previous photo",
+    "next": "Next photo",
+    "closeGallery": "Close gallery"
+  },
+  "factory": {
+    "eyebrow": "Factory",
+    "process": "Process",
+    "machinery": "Machinery",
+    "certificates": "Certificates",
+    "downloadPdf": "Download PDF",
+    "team": "Team",
+    "visit": "Visit us",
+    "address": "Address",
+    "directions": "Get directions",
+    "loadMap": "Show interactive map",
+    "mapNote": "The map loads from Google Maps only when you open it.",
+    "mapTitle": "Map of the VISAD location",
+    "alumilCertificate": "Certified ALUMIL partner"
+  },
+  "solutionsPage": {
+    "eyebrow": "Solutions",
+    "offer": "What we offer",
+    "systems": "Recommended systems",
+    "projects": "Related projects",
+    "tenderForm": "Tender form"
   },
   "notFound": "This page could not be found.",
   "cookie": {

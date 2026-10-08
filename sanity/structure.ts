@@ -33,6 +33,10 @@ export const contentStructure: StructureResolver = (S) =>
         .icon(icon("block-element"))
         .child(S.document().schemaType("factoryPage").documentId("factoryPage").title("Faqja e fabrikës")),
       S.listItem()
+        .title("Faqet e tjera")
+        .icon(icon("documents"))
+        .child(S.document().schemaType("pageSettings").documentId("pageSettings").title("Faqet e tjera")),
+      S.listItem()
         .title("Cilësimet e faqes")
         .icon(icon("cog"))
         .child(S.document().schemaType("siteSettings").documentId("siteSettings").title("Cilësimet e faqes")),

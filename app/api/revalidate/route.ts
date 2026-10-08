@@ -16,6 +16,7 @@ const TYPE_TAG: Record<string, string> = {
   siteSettings: "settings",
   homePage: "home",
   factoryPage: "factory",
+  pageSettings: "pages",
 };
 
 type Body = { _type?: string; slugs?: (string | null)[] | null };

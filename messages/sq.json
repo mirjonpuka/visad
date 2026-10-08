@@ -104,7 +104,74 @@
   "careers": {
     "title": "Punoni me ne",
     "empty": "Aktualisht nuk ka pozicione të hapura. Na dërgoni CV-në tuaj.",
-    "apply": "Apliko"
+    "apply": "Apliko",
+    "eyebrow": "Karriera",
+    "open": "Pozicionet e hapura",
+    "benefits": "Përfitimet",
+    "applyTitle": "Apliko për këtë pozicion",
+    "generalTitle": "Aplikim i përgjithshëm",
+    "types": {
+      "full-time": "Me kohë të plotë",
+      "part-time": "Me kohë të pjesshme",
+      "seasonal": "Sezonal"
+    }
+  },
+  "systems": {
+    "eyebrow": "Sistemet",
+    "view": "Shiko sistemin",
+    "downloads": "Fleta teknike & katalogë",
+    "download": "Shkarko",
+    "subnav": "Në këtë faqe",
+    "overview": "Përmbledhje",
+    "series": "Seritë",
+    "technical": "Detaje teknike",
+    "finishes": "Ngjyrat & përfundimet",
+    "projects": "Projekte",
+    "faq": "Pyetje",
+    "faqTitle": "Pyetje të shpeshta",
+    "seriesTitle": "Seritë ALUMIL",
+    "property": "Vetia",
+    "value": "Vlera",
+    "crossSection": "Prerja e profilit",
+    "relatedTitle": "Projekte me këtë sistem",
+    "allWithSystem": "Të gjitha projektet me këtë sistem",
+    "datasheet": "Fleta teknike",
+    "languages": { "sq": "Shqip", "en": "Anglisht", "it": "Italisht", "de": "Gjermanisht", "el": "Greqisht" }
+  },
+  "projectsPage": {
+    "title": "Projektet",
+    "count": "{n, plural, one {# projekt} other {# projekte}}",
+    "allCities": "Të gjitha qytetet",
+    "filtersLabel": "Filtrat e projekteve",
+    "close": "Mbyll",
+    "gallery": "Galeria",
+    "systemsUsed": "Sistemet e përdorura",
+    "photo": "Foto {n} nga {total}",
+    "prev": "Foto e mëparshme",
+    "next": "Foto tjetër",
+    "closeGallery": "Mbyll galerinë"
+  },
+  "factory": {
+    "eyebrow": "Fabrika",
+    "process": "Procesi",
+    "machinery": "Makineritë",
+    "certificates": "Certifikatat",
+    "downloadPdf": "Shkarko PDF",
+    "team": "Ekipi",
+    "visit": "Na vizitoni",
+    "address": "Adresa",
+    "directions": "Merrni drejtimet",
+    "loadMap": "Shfaq hartën interaktive",
+    "mapNote": "Harta ngarkohet nga Google Maps vetëm kur e hapni.",
+    "mapTitle": "Harta e vendndodhjes së VISAD",
+    "alumilCertificate": "Partner i certifikuar i ALUMIL"
+  },
+  "solutionsPage": {
+    "eyebrow": "Zgjidhje",
+    "offer": "Çfarë ju ofrojmë",
+    "systems": "Sistemet e rekomanduara",
+    "projects": "Projekte të ngjashme",
+    "tenderForm": "Formulari i tenderit"
   },
   "notFound": "Kjo faqe nuk u gjet.",
   "cookie": {

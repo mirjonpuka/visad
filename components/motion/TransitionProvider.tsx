@@ -44,6 +44,11 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
   const [title, setTitle] = useState("");
   const pending = useRef<{ from: string; covered: Promise<void> } | null>(null);
   const popping = useRef(false);
+  /** Pathname of the page on screen (updated on every route change) */
+  const shownPath = useRef<string | null>(null);
+  useEffect(() => {
+    shownPath.current = location.pathname;
+  }, []);
 
   // Intercept clicks before next/link handles them (capture phase)
   useEffect(() => {
@@ -79,7 +84,9 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
       covered.then(() => router.push(target.href));
     }
     function onPopState() {
-      popping.current = true;
+      // Back/forward between query states of the same page (project filters)
+      // is not a route change: only flag real page changes
+      popping.current = location.pathname !== shownPath.current;
     }
     document.addEventListener("click", onClick, true);
     window.addEventListener("popstate", onPopState);
@@ -91,6 +98,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
 
   // Route changed: reset scroll while covered, then reveal
   useRouteChange(() => {
+    shownPath.current = location.pathname;
     const main = document.getElementById("main");
     const state = pending.current;
 

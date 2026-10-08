@@ -32,7 +32,7 @@ export async function Breadcrumbs({ items, className }: { items: Crumb[]; classN
   return (
     <nav
       aria-label={t("label")}
-      className={cn("font-mono text-label text-text-on-dark-3 uppercase", className)}
+      className={cn("font-mono text-label text-(--surface-fg-3) uppercase", className)}
     >
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {trail.map((crumb, index) => {
@@ -41,13 +41,13 @@ export async function Breadcrumbs({ items, className }: { items: Crumb[]; classN
             <Fragment key={index}>
               <li>
                 {crumb.href && !last ? (
-                  <Link href={crumb.href} className="transition-colors hover:text-text-on-dark">
+                  <Link href={crumb.href} className="transition-colors hover:text-(--surface-fg)">
                     {crumb.label}
                   </Link>
                 ) : (
                   <span
                     aria-current={last ? "page" : undefined}
-                    className={cn(last && "text-text-on-dark-2")}
+                    className={cn(last && "text-(--surface-fg-2)")}
                   >
                     {crumb.label}
                   </span>

@@ -66,7 +66,8 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
     // The head script sets classes/attributes on <html> before hydration
     <html lang={locale} className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
-        {/* Decides before first paint whether motion runs and the intro plays (Motion §2) */}
+        {/* Decides before first paint whether motion runs and the intro plays (Motion §2).
+            Must stay a plain inline script: next/script "beforeInteractive" runs it later. */}
         <script dangerouslySetInnerHTML={{ __html: introHeadScript }} />
       </head>
       <body>

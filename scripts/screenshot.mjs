@@ -16,6 +16,8 @@ const browser = await chromium.launch();
 const errors = [];
 for (const width of widths) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
+  // Returning visitor: no first-visit intro over the screenshots
+  await page.addInitScript(() => localStorage.setItem("visad-intro-seen", "1"));
   page.on("console", (m) => m.type() === "error" && errors.push(`[${width}] ${m.text()}`));
   page.on("pageerror", (e) => errors.push(`[${width}] ${e.message}`));
   await page.goto(base + path, { waitUntil: "networkidle" });

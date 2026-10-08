@@ -47,6 +47,14 @@ Everything on the site marked `[TO CONFIRM]` or shown as a placeholder photo is 
 - [ ] Map pin (Sanity → Cilësimet e faqes → Vendndodhja në hartë)
 - [ ] Privacy policy text (seeded as [TO CONFIRM])
 
+## Inner pages (Phase 7) — sections stay hidden until this content exists
+- [ ] Per system: overview text, 4 benefits, ALUMIL series with 3 specs each, spec table, cross-section drawing, colours/finishes (all from the ALUMIL datasheets — no invented numbers)
+- [ ] Systems page: 3 key values for the intro row (e.g. Uf), only from datasheets
+- [ ] Solutions: 3–4 "Çfarë ju ofrojmë" blocks per audience; hero titles for homeowners, developers, architects (only hotels has one, from the UI spec)
+- [ ] Careers: intro text and 4 benefits (hidden until provided)
+- [ ] Factory: intro text (now the Home factory text), process step descriptions
+- [ ] Project stories ("Sfida & zgjidhja"), client names (only if they agree to be named), area m²
+
 ## Other
 - [ ] Job openings (Careers)
 - [ ] FAQ questions/answers per system

@@ -26,6 +26,7 @@ import { CookieBanner } from "@/components/layout/CookieBanner";
 import { FooterCta } from "@/components/layout/Footer";
 import { devRoutesEnabled } from "@/lib/dev";
 import { localImage, stockImage } from "@/lib/images";
+import { ProjectGallery } from "@/components/sections/ProjectGallery";
 import { ViewportBadge } from "./ViewportBadge";
 
 export const metadata: Metadata = { title: "UI kit", robots: { index: false, follow: false } };
@@ -588,6 +589,30 @@ export default async function KitPage() {
             </div>
           )}
         </Both>
+      </KitSection>
+
+      <KitSection id="gallery" title="ProjectGallery + Lightbox (UI §7.4)">
+        <div className="surface-light py-12">
+          <div className="site-container">
+            <ProjectGallery
+              images={[
+                localImage("project-fishta-hotel-glass-balconies"),
+                localImage("project-house-glass-railings"),
+                localImage("railing-glass-staircase"),
+                localImage("project-villa-glass-balconies-shutters"),
+                localImage("window-pvc-historic-facade"),
+                localImage("visad-truck-aluminium-frames"),
+              ]}
+              labels={{
+                open: "Foto {n} nga {total}",
+                counter: "Foto {n} nga {total}",
+                close: "Mbyll galerinë",
+                prev: "Foto e mëparshme",
+                next: "Foto tjetër",
+              }}
+            />
+          </div>
+        </div>
       </KitSection>
 
       <KitSection id="cookie" title="CookieBanner (preview — off at launch, D1.37)">

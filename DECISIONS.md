@@ -197,6 +197,27 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D6.10 | Polymorphic `as` props typed with `HtmlTag` + `htmlRef()` | R3F adds three.js elements to JSX globally, which breaks `ElementType` |
 | D6.11 | SplitText masks get 0.16em room below the baseline | The cedilla of "ç" was clipped |
 
+## Phase 7 — Inner pages
+
+| # | Decision | Why |
+|---|---|---|
+| D7.1 | New singleton **"Faqet e tjera"** (`pageSettings`): systems hero/title/intro/key specs, projects intro, careers hero/intro/benefits, contact lead. Revalidation tag `pages` | Index pages had no CMS document; 03 needs editable heroes/intros |
+| D7.2 | Sections without CMS content are not rendered (overview, series, specs, finishes, FAQ, benefits, gallery, story, team, downloads); the system sub-nav only lists sections that exist | Never invent specs or details (08); the client fills them later |
+| D7.3 | Detail pages: `generateStaticParams` per locale from Sanity (`lib/static-params.ts`); a placeholder param when a type is empty (Cache Components needs ≥ 1); later documents render on first request behind `loading.tsx` | Prerendered pages, no build error with zero jobs |
+| D7.4 | A slug from another language redirects (308) to this language's slug; the language switcher gets each document's slugs through `<AlternateSlugs>` (tiny client store) | Switching language keeps the user on the same document (UI §0.7) |
+| D7.5 | `pageMetadata()` for every page: CMS SEO fields win, canonical + hreflang alternates (+ x-default = sq) per document | Architecture §6; completed with OG images in Phase 9 |
+| D7.6 | Inner-page CTA reuses the Home CTA copy (`PageCta`, tag `home`) | One place to edit |
+| D7.7 | Projects: full list in the server HTML, filters on the client, stored in the URL (`?lloji=villa&sistemi=dritare&qyteti=…`) with **pushState** so Back undoes a filter; values are stable keys (type values, Albanian system slugs) in every language. Filters applied after hydration (no `useSearchParams`, which would make the grid client-only) | UI §6.2; shareable links; SEO-visible grid |
+| D7.8 | FLIP with Motion (`LazyMotion` + `m` from `motion/react-m`, layout features loaded after hydration): projects page first load +19KB instead of +47KB | Motion §4.7 asks for Motion; keep the page light |
+| D7.9 | City filter is a dropdown and only appears with ≥ 2 distinct cities | All seeded cities are [TO CONFIRM] |
+| D7.10 | Sticky bars follow the navbar: `html[data-nav-hidden]` set by the Navbar; `.sticky-under-nav` moves to top 0 when the navbar hides | Sub-nav / filters never hidden under the navbar |
+| D7.11 | Lightbox: portal dialog, focus trap + return, arrows/swipe/Esc, counter, caption = alt. Tested on `/dev/kit` (no project galleries in the CMS yet) | UI §7.4 |
+| D7.12 | Next project = next in the projects order (year desc), wrapping around | Years are not set yet; avoids A↔B loops |
+| D7.13 | Factory: stats fall back to the site-wide stats; process pinned horizontally on laptop only (fine pointer, ≥1200px, no reduced motion); `#certifikata` always rendered with the ALUMIL partner card; map loads Google Maps only after a click | UI §8, Motion §4.9; privacy |
+| D7.14 | Breadcrumb colours from surface tokens; red numbers on light surfaces use `red-700` (contrast) | axe colour-contrast |
+| D7.15 | Job application form slot is in place; the form itself is built with the other forms in Phase 8 | Shared form stack (zod, uploads, Turnstile) |
+| D7.16 | Back/forward between filter states of the same page no longer arms the page-transition crossfade | Next real navigation lost its panel transition |
+
 ## Open conflicts reported to the client/owner
 - C6 **First-load JS budget** (06 §Performance: Home ≤ 180KB gzip). Measured: **240KB gzip** — Next.js 16 + React 19 runtime alone ≈ 136KB, motion (GSAP/Lenis, within the 04 budget of 60KB) ≈ 51KB, site code ≈ 45KB. three.js is not included. The 180KB target cannot be met with the mandated stack + motion spec; proposal: accept ≤ 250KB, keep three.js/R3F lazy. Real-world check: CLS 0, no long tasks, Lighthouse in Phase 9.
 - C2 3D step texts differ between 05 and 08 → using 08.

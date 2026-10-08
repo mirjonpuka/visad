@@ -107,6 +107,193 @@ export type ProjectListItem = {
   coverImage: SanityImage;
 };
 
+// ---------------------------------------------------------------------------
+// Phase 7 pages
+// ---------------------------------------------------------------------------
+
+/** Portable Text blocks (rendered by components/ui/RichText) */
+export type Blocks = { _type: string; _key?: string; [key: string]: unknown }[] | null;
+
+export type Seo = {
+  title?: string | null;
+  description?: string | null;
+  noIndex?: boolean | null;
+  image?: SanityImage;
+} | null;
+
+export type Spec = { label?: string | null; value?: string | null; unit?: string | null };
+export type Benefit = { icon?: string | null; title?: string | null; text?: string | null };
+
+export type DownloadItem = {
+  _id: string;
+  title: string;
+  url?: string | null;
+  size?: number | null;
+  extension?: string | null;
+  language?: string | null;
+  category?: string | null;
+};
+
+export type ProjectCard = {
+  _id: string;
+  title: string;
+  slug: string;
+  slugs: Slugs;
+  city?: string | null;
+  year?: number | null;
+  projectType?: string | null;
+  coverImage: SanityImage;
+  systems?: string[] | null;
+};
+
+export type SystemCard = {
+  _id: string;
+  title: string;
+  slug: string;
+  slugs: Slugs;
+  text?: string | null;
+  image: SanityImage;
+};
+
+export type SystemsIndexData = {
+  page: {
+    hero: SanityImage;
+    title?: string | null;
+    intro?: string | null;
+    keySpecs?: Spec[] | null;
+  } | null;
+  systems: (SystemCard & { features?: string[] | null })[];
+  downloads: DownloadItem[];
+};
+
+export type SystemData = {
+  _id: string;
+  title: string;
+  slug: string;
+  slugs: Slugs;
+  text?: string | null;
+  heroImage: SanityImage;
+  overview: Blocks;
+  benefits?: Benefit[] | null;
+  series?: {
+    _id: string;
+    title: string;
+    image: SanityImage;
+    specs?: Spec[] | null;
+    datasheet?: string | null;
+    description?: string | null;
+  }[] | null;
+  specs?: Spec[] | null;
+  crossSection: SanityImage;
+  finishes?: {
+    _id: string;
+    name: string;
+    code?: string | null;
+    type?: string | null;
+    swatch?: string | null;
+    image: SanityImage;
+  }[] | null;
+  downloads?: (DownloadItem | null)[] | null;
+  faqs?: { question?: string | null; answer: Blocks }[] | null;
+  projects: ProjectCard[];
+  seo: Seo;
+} | null;
+
+export type ProjectsPageData = {
+  intro?: string | null;
+  projects: (Omit<ProjectCard, "systems"> & { systems?: { key: string; title: string }[] | null })[];
+  systems: { key: string; title: string }[];
+};
+
+export type ProjectPageData = {
+  project: {
+    _id: string;
+    title: string;
+    slug: string;
+    slugs: Slugs;
+    city?: string | null;
+    country?: string | null;
+    year?: number | null;
+    projectType?: string | null;
+    client?: string | null;
+    areaM2?: number | null;
+    summary?: string | null;
+    story: Blocks;
+    coverImage: SanityImage;
+    gallery?: SanityImage[] | null;
+    systems?: SystemCard[] | null;
+    seo: Seo;
+  } | null;
+  order: { _id: string; title: string; slug: string; slugs: Slugs; coverImage: SanityImage }[];
+};
+
+type Stat = { value: string; label?: string | null };
+
+export type FactoryData = {
+  factory: {
+    heroImage: SanityImage;
+    heroVideo?: string | null;
+    title?: string | null;
+    intro?: string | null;
+    stats?: Stat[] | null;
+    processSteps?: { title?: string | null; text?: string | null; image: SanityImage }[] | null;
+    machinery?: { image: SanityImage; caption?: string | null }[] | null;
+    certificates?: {
+      _id: string;
+      title: string;
+      issuer?: string | null;
+      year?: number | null;
+      url?: string | null;
+      thumbnail: SanityImage;
+    }[] | null;
+    team?: { name?: string | null; role?: string | null; photo: SanityImage }[] | null;
+    seo: Seo;
+  } | null;
+  home: { factoryText?: string | null } | null;
+  settings: { stats?: Stat[] | null; alumilCertificate?: string | null } | null;
+};
+
+export type SolutionData = {
+  _id: string;
+  segment: string;
+  title: string;
+  slug: string;
+  slugs: Slugs;
+  heroTitle?: string | null;
+  heroImage: SanityImage;
+  intro?: string | null;
+  benefits?: Benefit[] | null;
+  systems?: SystemCard[] | null;
+  ctaKind?: "whatsapp" | "quote" | "tender" | null;
+  projects: ProjectCard[];
+  downloads: DownloadItem[];
+  seo: Seo;
+} | null;
+
+export type JobListItem = {
+  _id: string;
+  title: string;
+  slug: string;
+  slugs: Slugs;
+  type?: string | null;
+  location?: string | null;
+};
+
+export type CareersData = {
+  page: { hero: SanityImage; intro?: string | null; benefits?: Benefit[] | null } | null;
+  jobs: JobListItem[];
+};
+
+export type JobData = (JobListItem & { publishedAt?: string | null; description: Blocks }) | null;
+
+export type LegalData = {
+  title: string;
+  slug: string;
+  slugs: Slugs;
+  body: Blocks;
+  _updatedAt: string;
+} | null;
+
 /** Cropped size of a Sanity image (crop values are fractions) */
 function croppedSize(image: NonNullable<SanityImage>) {
   const crop = image.crop;

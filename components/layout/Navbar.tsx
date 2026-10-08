@@ -179,6 +179,12 @@ export function Navbar() {
   const transparent = heroUnderNav && !scrolled && !openMenu && !mobileMenuOpen;
   const visible = !hidden || !!openMenu || mobileMenuOpen || focusWithin;
 
+  // Sticky sub-bars (system sub-nav, project filters) sit under the navbar
+  // while it is shown and move to the top when it hides (.sticky-under-nav)
+  useEffect(() => {
+    document.documentElement.toggleAttribute("data-nav-hidden", !visible);
+  }, [visible]);
+
   const link = (href: "/projektet" | "/fabrika" | "/karriera" | "/kontakt", label: string) => (
     <li>
       <Link href={href} className="nav-link" aria-current={isActive(href) ? "page" : undefined}>

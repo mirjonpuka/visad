@@ -564,6 +564,31 @@ async function buildDocuments(): Promise<SanityDocumentStub[]> {
     ),
   });
 
+  // --- other pages (Phase 7) ----------------------------------------------------
+  // Copy from 03 §4 and 08; key specs and careers benefits stay empty until confirmed
+  docs.push({
+    _id: "pageSettings",
+    _type: "pageSettings",
+    systemsHero: await stock("stock-systems-hero"),
+    systemsTitle: text({
+      sq: "Sisteme alumini dhe PVC, të prodhuara në Shkodër.",
+      en: "Aluminium and PVC systems, made in Shkodër.",
+    }),
+    systemsIntro: text({
+      sq: "Punojmë me sistemet e ALUMIL, me performancë të testuar termike dhe akustike, dhe i prodhojmë sipas standardeve të tyre.",
+      en: "We fabricate ALUMIL systems, with tested thermal and acoustic performance, to ALUMIL's standards.",
+    }),
+    projectsIntro: text({
+      sq: "Nga vila private te hotele dhe ndërtesa banimi, punë të realizuara nga ekipi ynë në Shqipëri dhe në rajon.",
+      en: "From private villas to hotels and residential buildings, work delivered by our team in Albania and the region.",
+    }),
+    careersHero: await photo("installation-folding-doors"),
+    contactLead: text({
+      sq: "Na tregoni për projektin tuaj. Ju kthejmë përgjigje brenda 24 orësh.",
+      en: "Tell us about your project. We reply within 24 hours.",
+    }),
+  });
+
   // --- privacy ------------------------------------------------------------------
   docs.push({
     _id: "legal-privacy",

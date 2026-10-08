@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+import { useAlternateSlugs } from "./AlternateSlugs";
 
 const LABELS: Record<string, string> = { sq: "AL", en: "EN", it: "IT", de: "DE" };
 
@@ -17,8 +18,7 @@ type Props = {
 
 /**
  * AL EN IT DE (UI §2.1). Each link points to the same page in the other
- * language (localized pathname). Dynamic slugs are mapped per document once
- * the CMS provides them (Phase 3/7).
+ * language (localized pathname); dynamic slugs come from <AlternateSlugs>.
  */
 export function LanguageSwitcher({ size = "sm", className }: Props) {
   const t = useTranslations();
@@ -26,8 +26,15 @@ export function LanguageSwitcher({ size = "sm", className }: Props) {
   const pathname = usePathname();
   const params = useParams();
 
+  const alternates = useAlternateSlugs();
   const routeParams = Object.fromEntries(Object.entries(params).filter(([key]) => key !== "locale"));
-  const href = { pathname, params: routeParams } as ComponentProps<typeof Link>["href"];
+  /** Same page in another language; dynamic segments use that document's slug there */
+  const hrefFor = (l: string) => {
+    const localized = Object.fromEntries(
+      Object.keys(routeParams).map((key) => [key, alternates?.[l] ?? routeParams[key]]),
+    );
+    return { pathname, params: localized } as ComponentProps<typeof Link>["href"];
+  };
 
   return (
     <nav aria-label={t("nav.language")} className={className}>
@@ -37,7 +44,7 @@ export function LanguageSwitcher({ size = "sm", className }: Props) {
           return (
             <li key={l}>
               <Link
-                href={href}
+                href={hrefFor(l)}
                 locale={l}
                 prefetch={false}
                 hrefLang={l}

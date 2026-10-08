@@ -67,10 +67,14 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D1.34 | `scripts/sync-handoff-assets.mjs` copies logo files, favicons, WebP images (`web/`, `crops/`) and a trimmed `images.manifest.json` out of `_handoff` | `_handoff` stays untouched; the copy is reproducible |
 | D1.35 | Favicons: `app/favicon.ico`, `app/icon.svg` (visad-icon), `app/apple-icon.png`; PWA icons 192/512 in `manifest.ts` | Phase 1 prompt |
 
-## Open conflicts reported to the client/owner (not yet decided)
-- C1 Cookie banner: UI §2.9 (always) vs Architecture §10 (only if non-essential cookies). Plan: build it, keep it off at launch.
+### Approved after Phase 1 review
+| # | Decision | Why |
+|---|---|---|
+| D1.36 | Wordmark SVGs in `public/brand/logo/` use viewBox `0 0 1280 500` (handoff files: `0 0 1280 420`). Patched by `scripts/sync-handoff-assets.mjs`; `_handoff` untouched. Rendered size 104×41 (laptop), 88×34 (phone) | The 420 height cut off the swoosh's bottom tail (y 420–500). Approved by owner |
+| D1.37 | Cookie banner (C1): component is built (Phase 2) but **off at launch**; turned on only when a non-essential cookie/tracker is added | Architecture §10 wins on technical decisions; Vercel Analytics is cookieless. Approved by owner |
+
+## Open conflicts reported to the client/owner
 - C2 3D step texts differ between 05 and 08 → using 08.
 - C3 Reply time "brenda ditës" vs "brenda 24 orësh" → one [TO CONFIRM] value.
 - C4 Seed images: 07 says WebP, 09 says JPG masters → plan: JPG masters (Sanity serves AVIF/WebP).
-- C5 Navbar 1024–1199: full links (§2.1) vs menu button (§14) → to be shown in Phase 2.
-- **Wordmark SVG** (`visad-wordmark-on-*.svg`): viewBox height 420 cuts the swoosh's bottom tail (y 420–500). Confirmed visually in /dev/kit. Fix proposed for Phase 2: a corrected copy in `public/brand/logo/`.
+- C5 Navbar 1024–1199: full links (§2.1) vs menu button (§14) → both variants shown in Phase 2 for the owner to choose.

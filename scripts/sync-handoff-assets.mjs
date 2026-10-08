@@ -9,6 +9,15 @@ const handoff = join(root, "_handoff");
 // Logo SVGs + PNG icons
 cpSync(join(handoff, "brand/logo"), join(root, "public/brand/logo"), { recursive: true });
 
+// Fix: the handoff wordmark's viewBox (height 420) cuts off the swoosh's bottom
+// tail, which sits at y 420–500. Use the full logo's 500 height (DECISIONS D1.36).
+for (const tone of ["on-dark", "on-light"]) {
+  const file = join(root, `public/brand/logo/visad-wordmark-${tone}.svg`);
+  const svg = readFileSync(file, "utf8");
+  if (!svg.includes('viewBox="0 0 1280 420"')) throw new Error(`Unexpected wordmark viewBox in ${file}`);
+  writeFileSync(file, svg.replace('viewBox="0 0 1280 420"', 'viewBox="0 0 1280 500"'));
+}
+
 // App icons (Next.js metadata file conventions)
 cpSync(join(handoff, "brand/logo/favicon.ico"), join(root, "app/favicon.ico"));
 cpSync(join(handoff, "brand/logo/visad-icon.svg"), join(root, "app/icon.svg"));

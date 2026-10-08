@@ -549,7 +549,7 @@ export default async function KitPage() {
                     src={`/brand/logo/visad-wordmark-on-${surface}.svg`}
                     alt="VISAD"
                     width={104}
-                    height={34}
+                    height={41}
                     className="h-auto w-[104px]"
                   />
                 </div>
@@ -559,7 +559,7 @@ export default async function KitPage() {
                     src={`/brand/logo/visad-wordmark-on-${surface}.svg`}
                     alt="VISAD"
                     width={88}
-                    height={29}
+                    height={34}
                     className="h-auto w-[88px]"
                   />
                 </div>

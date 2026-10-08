@@ -24,7 +24,10 @@
     "pexelsId": 16335711,
     "slot": "system-sliding-hero",
     "replaceWith": "large finished Visad sliding glass doors opening to a terrace",
-    "alt": { "sq": "Mur xhami me pamje nga tarraca", "en": "Glass wall opening onto a terrace" }
+    "alt": {
+      "sq": "Mur xhami me pamje nga tarraca",
+      "en": "Glass wall opening onto a terrace"
+    }
   },
   {
     "id": "stock-system-facades",
@@ -41,72 +44,89 @@
     "pexelsId": 1145434,
     "slot": "factory-machines-1",
     "replaceWith": "the CNC cutting saw in the Visad factory",
-    "alt": { "sq": "Sharrë që pret metal me shkëndija", "en": "Saw cutting metal with sparks" }
+    "alt": {
+      "sq": "Sharrë që pret metal me shkëndija",
+      "en": "Saw cutting metal with sparks"
+    }
   },
   {
     "id": "stock-factory-machine-2",
     "pexelsId": 8973680,
     "slot": "factory-machines-2",
     "replaceWith": "the profile crimping machine in the Visad factory",
-    "alt": { "sq": "Makineri industriale në punë", "en": "Industrial machinery at work" }
+    "alt": {
+      "sq": "Makineri industriale në punë",
+      "en": "Industrial machinery at work"
+    }
   },
   {
     "id": "stock-factory-machine-3",
     "pexelsId": 29988955,
     "slot": "factory-machines-3",
     "replaceWith": "the assembly bench in the Visad factory",
-    "alt": { "sq": "Punëtor në një sallë prodhimi", "en": "Worker in a production hall" }
+    "alt": {
+      "sq": "Punëtor në një sallë prodhimi",
+      "en": "Worker in a production hall"
+    }
   },
   {
     "id": "stock-factory-machine-4",
     "pexelsId": 15508177,
     "slot": "factory-machines-4",
     "replaceWith": "stacked ALUMIL profiles in the Visad warehouse",
-    "alt": { "sq": "Profile metalike të vendosura në rafte", "en": "Metal profiles stored on racks" }
+    "alt": {
+      "sq": "Profile metalike të vendosura në rafte",
+      "en": "Metal profiles stored on racks"
+    }
   },
   {
     "id": "stock-process-1",
     "pexelsId": 8853469,
     "slot": "process-1",
     "replaceWith": "a Visad technician measuring an opening on site",
-    "alt": { "sq": "Matje me metër në objekt", "en": "Measuring with a tape measure on site" }
+    "alt": {
+      "sq": "Matje me metër në objekt",
+      "en": "Measuring with a tape measure on site"
+    }
   },
   {
     "id": "stock-process-2",
     "pexelsId": 3862379,
     "slot": "process-2",
     "replaceWith": "a Visad technical drawing of a window or façade",
-    "alt": { "sq": "Vizatim teknik në ekranin e kompjuterit", "en": "Technical drawing on a computer screen" }
+    "alt": {
+      "sq": "Vizatim teknik në ekranin e kompjuterit",
+      "en": "Technical drawing on a computer screen"
+    }
   },
   {
     "id": "stock-process-3",
     "pexelsId": 10406128,
     "slot": "process-3",
     "replaceWith": "CNC cutting of an ALUMIL profile in the Visad factory",
-    "alt": { "sq": "Makinë CNC që përpunon metal", "en": "CNC machine machining metal" }
+    "alt": {
+      "sq": "Makinë CNC që përpunon metal",
+      "en": "CNC machine machining metal"
+    }
   },
   {
     "id": "stock-process-4",
     "pexelsId": 5768107,
     "slot": "process-4",
     "replaceWith": "assembly of a window frame in the Visad factory",
-    "alt": { "sq": "Montim i një kornize dritareje me trapan", "en": "Fixing a window frame with a drill" }
+    "alt": {
+      "sq": "Montim i një kornize dritareje me trapan",
+      "en": "Fixing a window frame with a drill"
+    }
   },
   {
     "id": "stock-process-5",
     "pexelsId": 5691531,
     "slot": "process-5",
     "replaceWith": "the Visad crew installing a window on site",
-    "alt": { "sq": "Montues që vendos një dritare", "en": "Installer fitting a window" }
-  },
-  {
-    "id": "stock-profile-story",
-    "pexelsId": 9729601,
-    "slot": "home-3d-fallback",
-    "replaceWith": "the 3D render of the aluminium profile",
     "alt": {
-      "sq": "Prerje e një profili alumini me urë termike dhe xham dyfish",
-      "en": "Cross-section of an aluminium profile with thermal break and double glazing"
+      "sq": "Montues që vendos një dritare",
+      "en": "Installer fitting a window"
     }
   },
   {
@@ -114,7 +134,10 @@
     "pexelsId": 30728904,
     "slot": "system-shutters-thumbnail",
     "replaceWith": "Visad aluminium shutters on a finished building",
-    "alt": { "sq": "Grila alumini në një fasadë", "en": "Aluminium shutters on a façade" }
+    "alt": {
+      "sq": "Grila alumini në një fasadë",
+      "en": "Aluminium shutters on a façade"
+    }
   },
   {
     "id": "stock-solution-homeowners",
@@ -151,6 +174,9 @@
     "pexelsId": 6615095,
     "slot": "solution-architects",
     "replaceWith": "technical drawings next to aluminium profile samples",
-    "alt": { "sq": "Vizatime arkitekturore mbi tavolinë", "en": "Architectural drawings on a desk" }
+    "alt": {
+      "sq": "Vizatime arkitekturore mbi tavolinë",
+      "en": "Architectural drawings on a desk"
+    }
   }
 ]

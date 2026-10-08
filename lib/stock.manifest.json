@@ -441,40 +441,6 @@
       }
     ]
   },
-  "stock-profile-story": {
-    "id": "stock-profile-story",
-    "alt": {
-      "sq": "Prerje e një profili alumini me urë termike dhe xham dyfish",
-      "en": "Cross-section of an aluminium profile with thermal break and double glazing"
-    },
-    "blurDataURL": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAACwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JbACdMoACweihtXUNQ1q74SQG0EQAAP7dnVTUMVhHPeSXAe2f6xtGjpCy51QvhSFKlE1AwKVw5LUct6l941RnqnU2bmSF3R1Po/NghTfYdSrHR5UaBlfb39Fx2IZlRCYqKY4sM7ScGHiQYKeWrLHItuUHfzELSWMGwGD3ms3s6DnLKeOAxmvFt5J5ZXwAAAA=",
-    "isPlaceholder": true,
-    "placeholderNote": "Temporary photo · will be replaced with the 3D render of the aluminium profile",
-    "slot": "home-3d-fallback",
-    "credit": "Pexels License · https://www.pexels.com/photo/9729601/",
-    "web": [
-      {
-        "src": "/images/stock/stock-profile-story-640.webp",
-        "width": 640,
-        "height": 427
-      },
-      {
-        "src": "/images/stock/stock-profile-story-960.webp",
-        "width": 960,
-        "height": 640
-      },
-      {
-        "src": "/images/stock/stock-profile-story-1600.webp",
-        "width": 1600,
-        "height": 1067
-      },
-      {
-        "src": "/images/stock/stock-profile-story-2400.webp",
-        "width": 2400,
-        "height": 1600
-      }
-    ]
-  },
   "stock-system-shutters": {
     "id": "stock-system-shutters",
     "alt": {

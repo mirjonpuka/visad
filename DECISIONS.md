@@ -181,6 +181,22 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D5.11 | Optional hero video (CMS): mounted after `load`, never with reduced motion / low-power / Save-Data, paused off screen; the image stays as poster and LCP | UI §3.1, Motion §1 |
 | D5.12 | Playwright runs as a returning visitor (intro already seen); `intro.spec.ts` covers first visit + reduced motion | Intro would cover the page in every test |
 
+## Phase 6 — 3D profile story
+
+| # | Decision | Why |
+|---|---|---|
+| D6.1 | Procedural geometry exactly per 05 §Geometry (shapes + chamber holes, 220mm extrusion, bevel 0.4); dovetail ends drawn as 2mm flares that key into both shells | No model file to download |
+| D6.2 | Server HTML is always the static layout (render + list). The client decides once on mount: WebGL2, ≥768px, fine pointer, not low-power, no reduced motion → pinned scene. Phones never download three.js | 05 §Fallbacks; no layout change for phones (no CLS) |
+| D6.3 | Scroll progress lives in a tiny store (`components/three/profileStore.ts`, no three.js imports) written by a scrubbed ScrollTrigger (pin, +250%) and read in `useFrame`; all values damped (lambda 6), `frameloop="demand"`, `"never"` off screen | 05 §Tech; no React re-render per frame |
+| D6.4 | Reflections from three's procedural `RoomEnvironment` (PMREM, once) instead of drei `<Environment>` + Lightformers | Lightformer reflections left flat metal faces almost black in tests; still no HDR file |
+| D6.5 | Own frame-rate guard instead of drei `PerformanceMonitor`: counts only continuous frames while animating; < 40fps for 2s → cheap glass, again → crossfade (400ms) to the static image, pin and steps keep working | With on-demand rendering, idle gaps read as low fps in PerformanceMonitor |
+| D6.6 | Framing centred on the frame without glass (y 62mm) so the glass slides in from above the view in step 4 | Profile was cropped at the bottom |
+| D6.7 | Static render exported by `npm run profile:render` (Playwright reads `/dev/profile-render` at p = 0.5, 2400×1600) → `public/brand/3d/profile-exploded.webp` + `-1200.webp`, flattened on ink-900. Replaces the temporary stock photo (removed) | 05 §Generating the static render |
+| D6.8 | Finish toggle "Argjend / Antracit" (laptop) and the "VISAD × ALUMIL" corner label are DOM overlays over the canvas | Crisp text, accessible buttons |
+| D6.9 | Lazy 3D chunk = 239KB gzip (three + R3F + ContactShadows), loaded only near the section on capable devices; Home first load unchanged except the section logic (+2.5KB) | 05 estimated 160–200KB; three core alone ≈ 150KB |
+| D6.10 | Polymorphic `as` props typed with `HtmlTag` + `htmlRef()` | R3F adds three.js elements to JSX globally, which breaks `ElementType` |
+| D6.11 | SplitText masks get 0.16em room below the baseline | The cedilla of "ç" was clipped |
+
 ## Open conflicts reported to the client/owner
 - C6 **First-load JS budget** (06 §Performance: Home ≤ 180KB gzip). Measured: **240KB gzip** — Next.js 16 + React 19 runtime alone ≈ 136KB, motion (GSAP/Lenis, within the 04 budget of 60KB) ≈ 51KB, site code ≈ 45KB. three.js is not included. The 180KB target cannot be met with the mandated stack + motion spec; proposal: accept ≤ 250KB, keep three.js/R3F lazy. Real-world check: CLS 0, no long tasks, Lighthouse in Phase 9.
 - C2 3D step texts differ between 05 and 08 → using 08.

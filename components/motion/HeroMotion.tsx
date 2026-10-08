@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, type ElementType, type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
+import { htmlRef, type HtmlTag } from "@/lib/utils";
 import { EASE, gsap, useGSAP } from "./gsap";
 import { onHeroIn } from "./heroSignal";
 import { useMotion } from "./MotionProvider";
@@ -19,7 +20,7 @@ export function HeroMotion({
   children,
   id,
 }: {
-  as?: ElementType;
+  as?: HtmlTag;
   className?: string;
   children: ReactNode;
   id?: string;
@@ -67,7 +68,7 @@ export function HeroMotion({
   );
 
   return (
-    <Tag ref={ref} id={id} className={className}>
+    <Tag ref={htmlRef(ref)} id={id} className={className}>
       {children}
     </Tag>
   );

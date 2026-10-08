@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, type ElementType, type ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { useRef, type ReactNode } from "react";
+import { cn, htmlRef, type HtmlTag } from "@/lib/utils";
 import { EASE, ENTER_START, gsap, SplitText, useGSAP } from "./gsap";
 import { onHeroIn } from "./heroSignal";
 import { useMotion } from "./MotionProvider";
@@ -28,7 +28,7 @@ export function SplitHeadline({
   delay = 0,
   /** "scroll" = on enter; "manual" = waits for a `visad:hero-in` event (hero) */
   trigger = "scroll",
-}: Common & { as?: ElementType; delay?: number; trigger?: "scroll" | "manual" }) {
+}: Common & { as?: HtmlTag; delay?: number; trigger?: "scroll" | "manual" }) {
   const ref = useRef<HTMLElement>(null);
   const { reducedMotion, ready } = useMotion();
 
@@ -41,6 +41,8 @@ export function SplitHeadline({
       const split = SplitText.create(el, {
         type: "lines",
         mask: "lines",
+        // Masks get "split-line-mask": extra room for descenders and ç / ë marks
+        linesClass: "split-line",
         autoSplit: true,
         onSplit(self) {
           release(el);
@@ -67,7 +69,7 @@ export function SplitHeadline({
   );
 
   return (
-    <Tag ref={ref} className={className} data-anim="">
+    <Tag ref={htmlRef(ref)} className={className} data-anim="">
       {children}
     </Tag>
   );
@@ -81,7 +83,7 @@ export function Reveal({
   stagger = false,
   delay = 0,
   y = 24,
-}: Common & { as?: ElementType; stagger?: boolean; delay?: number; y?: number }) {
+}: Common & { as?: HtmlTag; stagger?: boolean; delay?: number; y?: number }) {
   const ref = useRef<HTMLElement>(null);
   const { reducedMotion, ready } = useMotion();
 
@@ -105,7 +107,7 @@ export function Reveal({
   );
 
   return (
-    <Tag ref={ref} className={className} data-anim="">
+    <Tag ref={htmlRef(ref)} className={className} data-anim="">
       {children}
     </Tag>
   );

@@ -32,7 +32,7 @@
     "learnMore": "Mëso më shumë",
     "quoteForm": "Formulari i ofertës"
   },
-  "cursor": { "view": "Shiko", "drag": "Tërhiq" },
+  "cursor": { "view": "Shiko", "drag": "Tërhiq", "scroll": "Scroll" },
   "home": {
     "scroll": "Scroll",
     "systemsEyebrow": "01 — Sistemet",
@@ -45,7 +45,11 @@
     "alumilTitle": "Partner i certifikuar i ALUMIL",
     "alumilLogo": "Logo zyrtare e partnerit ALUMIL",
     "certificates": "Certifikatat",
-    "systemOf": "{n} / {total}"
+    "systemOf": "{n} / {total}",
+    "finish": "Ngjyra e profilit",
+    "finishSilver": "Argjend",
+    "finishAnthracite": "Antracit",
+    "profileRenderAlt": "Profil alumini me urë termike, i ndarë në pjesët e tij: guaska e jashtme dhe e brendshme, shiritat poliamidi dhe guarnicionet EPDM"
   },
   "skip": "Kalo te përmbajtja",
   "breadcrumb": { "home": "Kryefaqja", "label": "Vendndodhja në faqe" },

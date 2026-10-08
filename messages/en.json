@@ -32,7 +32,7 @@
     "learnMore": "Learn more",
     "quoteForm": "Quote form"
   },
-  "cursor": { "view": "View", "drag": "Drag" },
+  "cursor": { "view": "View", "drag": "Drag", "scroll": "Scroll" },
   "home": {
     "scroll": "Scroll",
     "systemsEyebrow": "01 — Systems",
@@ -45,7 +45,11 @@
     "alumilTitle": "Certified ALUMIL partner",
     "alumilLogo": "Official ALUMIL partner logo",
     "certificates": "Certificates",
-    "systemOf": "{n} / {total}"
+    "systemOf": "{n} / {total}",
+    "finish": "Profile finish",
+    "finishSilver": "Silver",
+    "finishAnthracite": "Anthracite",
+    "profileRenderAlt": "Thermally broken aluminium profile taken apart: outer and inner shells, polyamide strips and EPDM gaskets"
   },
   "skip": "Skip to content",
   "breadcrumb": { "home": "Home", "label": "Breadcrumb" },

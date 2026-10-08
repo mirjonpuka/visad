@@ -28,6 +28,34 @@ const twMerge = extendTailwindMerge({
   },
 });
 
+/**
+ * Tags for polymorphic `as` props. Not React's ElementType: R3F adds the
+ * three.js elements to JSX globally, which makes that union unusable.
+ */
+export type HtmlTag =
+  | "div"
+  | "section"
+  | "article"
+  | "header"
+  | "footer"
+  | "p"
+  | "span"
+  | "ol"
+  | "ul"
+  | "li"
+  | "dl"
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4";
+
+/** Callback ref for an `as={HtmlTag}` element (a RefObject would need every tag's element type). */
+export function htmlRef(ref: { current: HTMLElement | null }) {
+  return (el: HTMLElement | null) => {
+    ref.current = el;
+  };
+}
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

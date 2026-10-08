@@ -45,6 +45,7 @@ export const routing = defineRouting({
     // Dev-only routes (blocked in production, see lib/dev.ts)
     "/dev/kit": "/dev/kit",
     "/dev/cms": "/dev/cms",
+    "/dev/profile-render": "/dev/profile-render",
   },
 });
 

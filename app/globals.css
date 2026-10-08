@@ -851,6 +851,13 @@
 /* Animated elements are hidden from first paint until GSAP takes over.
    `js-motion` is set in <head> only when JS runs and motion is allowed;
    the 3s safety animation reveals everything if scripts never arrive. */
+/* SplitText line masks: room below the baseline so descenders and the
+   cedilla of "ç" are not clipped; the negative margin keeps line spacing */
+.split-line-mask {
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+
 html.js-motion [data-anim],
 html.js-motion [data-hero-fade] {
   visibility: hidden;

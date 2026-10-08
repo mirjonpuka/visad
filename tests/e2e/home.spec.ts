@@ -58,6 +58,28 @@ test("systems accordion: one row open, keyboard moves between rows, image label 
   await expect(page.locator("#sistemet").getByText(/02 \/ 06 ·/)).toBeVisible();
 });
 
+test("3D profile: pinned WebGL scene on laptop, steps follow the scroll", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await open(page, "/");
+  const section = page.locator("#sistemet");
+  await expect(section.locator(".pin-spacer")).toHaveCount(1);
+  const top = await section.evaluate((el) => el.getBoundingClientRect().top + scrollY);
+  await page.evaluate((y) => window.scrollTo(0, y), top + 100);
+  await expect(section.locator("canvas")).toHaveCount(1);
+  await page.evaluate((y) => window.scrollTo(0, y), top + 900 * 2.4);
+  await expect(section.locator('[aria-current="step"] h3')).toHaveText(/I montuar/);
+});
+
+test("3D profile: phone gets the static render and a plain list", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await open(page, "/");
+  const section = page.locator("#sistemet");
+  await section.scrollIntoViewIfNeeded();
+  await expect(section.locator('img[src*="profile-exploded"]')).toHaveCount(1);
+  await expect(section.locator("canvas")).toHaveCount(0);
+  await expect(section.locator(".pin-spacer")).toHaveCount(0);
+});
+
 test("english home uses English CMS content", async ({ page }) => {
   await open(page, "/en");
   await expect(page.locator("h1")).toContainText("Precision");

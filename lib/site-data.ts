@@ -27,6 +27,8 @@ export type SiteData = {
   openingHours: { days: string; hours: string }[];
   social: { platform: string; url: string }[];
   alumilText: string | null;
+  /** Logo uploaded in Sanity (Cilësimet → Partner ALUMIL); null = use the bundled file */
+  alumilLogo: SiteImage | null;
   systems: NavItem[];
   solutions: NavItem[];
 };
@@ -54,6 +56,7 @@ export async function getSiteData(): Promise<SiteData> {
     openingHours: (s.openingHours ?? []).filter((h) => h.days && h.hours) as SiteData["openingHours"],
     social: (s.social ?? []).filter((x) => x.platform && x.url),
     alumilText: s.alumilText ?? null,
+    alumilLogo: toSiteImage(s.alumilLogo ?? null),
     systems: data.systems.map((x) => ({
       id: x._id,
       title: x.title,

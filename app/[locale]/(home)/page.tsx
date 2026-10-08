@@ -60,7 +60,7 @@ export default async function HomePage() {
       />
       <FactoryTeaser home={home} />
       <Solutions title={home.solutionsTitle} solutions={site.solutions} />
-      <AlumilBand text={site.alumilText} />
+      <AlumilBand text={site.alumilText} logo={site.alumilLogo} />
       <CtaBand title={home.ctaTitle} text={home.ctaText} />
     </>
   );

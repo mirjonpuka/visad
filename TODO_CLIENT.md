@@ -14,7 +14,8 @@ Everything on the site marked `[TO CONFIRM]` or shown as a placeholder photo is 
 ## ALUMIL
 - [ ] Which ALUMIL series are fabricated (window, sliding, façade lines)
 - [ ] ALUMIL datasheets / catalogues (PDF)
-- [ ] Official ALUMIL partner logo kit + partner certificate (PDF)
+- [x] ALUMIL logo (received: `public/brand/partners/alumil-logo.svg`)
+- [ ] ALUMIL partner certificate (PDF) for "Certifikatat"
 - [ ] CE / ISO certificates, if any
 
 ## Projects (for each photo) — seeded in Sanity, edit them in /studio → Projektet
@@ -29,7 +30,6 @@ Everything on the site marked `[TO CONFIRM]` or shown as a placeholder photo is 
 - [ ] Doors hero: Visad aluminium entrance door with handle detail
 - [ ] Sliding hero: large finished sliding glass doors opening to a terrace
 - [ ] Façades: a Visad glass + aluminium façade project (stock photo used so Fishta Hotel is not shown twice)
-- [ ] Official ALUMIL partner logo (footer shows a text badge until then)
 - [ ] Factory machines ×4, process steps ×5
 - [ ] Architects solution: technical drawings + profile samples
 - [ ] Team portraits

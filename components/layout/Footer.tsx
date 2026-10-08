@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { cacheLife } from "next/cache";
 import { getTranslations } from "next-intl/server";
+import { AlumilLogo } from "@/components/ui/AlumilLogo";
 import { ButtonSecondary } from "@/components/ui/Button";
 import { Link } from "@/i18n/navigation";
 import { getSiteData } from "@/lib/site-data";
@@ -48,11 +49,11 @@ export async function Footer() {
               />
             </Link>
             <p className="max-w-[300px] text-body-s text-text-on-dark-2">{t("footer.about")}</p>
-            {/* Text badge until the official ALUMIL partner logo arrives (09 · alumil-partner-logo).
-                The ALUMIL logo is never imitated. */}
-            <p className="self-start rounded-base border border-line-dark px-3 py-2 font-mono text-label text-text-on-dark-2 uppercase">
-              {t("footer.alumil")}
-            </p>
+            {/* ALUMIL partner badge (UI §2.4): official logo on a light tile, never recoloured */}
+            <div className="flex flex-col items-start gap-2">
+              <AlumilLogo cmsLogo={site.alumilLogo} width={120} tile />
+              <span className="font-mono text-label text-text-on-dark-3 uppercase">{t("footer.alumil")}</span>
+            </div>
           </div>
 
           <Column title={t("footer.systems")}>

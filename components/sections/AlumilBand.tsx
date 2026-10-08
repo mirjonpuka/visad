@@ -1,21 +1,17 @@
 import { getTranslations } from "next-intl/server";
+import { AlumilLogo } from "@/components/ui/AlumilLogo";
 import { LinkArrow } from "@/components/ui/LinkArrow";
+import type { SiteImage } from "@/lib/images";
 
-/**
- * ALUMIL partner band (UI §3.7) on alu-100. The official partner logo goes in
- * the 260×120 box once the client sends the ALUMIL partner kit; until then the
- * box says so (the ALUMIL logo is never imitated).
- */
-export async function AlumilBand({ text }: { text: string | null }) {
+/** ALUMIL partner band (UI §3.7) on alu-100: logo (260×120 box) · text · "Certifikatat →". */
+export async function AlumilBand({ text, logo }: { text: string | null; logo: SiteImage | null }) {
   const t = await getTranslations("home");
 
   return (
     <section className="surface-light bg-alu-100 py-[72px]">
       <div className="site-container flex flex-col gap-10 laptop:flex-row laptop:items-center laptop:gap-16">
-        <div className="flex h-[120px] w-[260px] shrink-0 items-center justify-center rounded-base border border-line-light px-6 text-center">
-          <span className="font-mono text-[10px] tracking-[0.06em] text-text-on-light-3 uppercase">
-            {t("alumilLogo")}
-          </span>
+        <div className="flex h-[120px] w-[260px] shrink-0 items-center">
+          <AlumilLogo cmsLogo={logo} width={220} />
         </div>
         <div className="flex-1">
           <h2 className="text-h3">{t("alumilTitle")}</h2>

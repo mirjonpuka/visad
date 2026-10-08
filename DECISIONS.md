@@ -160,6 +160,7 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D4.11 | CTA swoosh: logo swoosh path stretched to the section (`preserveAspectRatio="none"`, 1px non-scaling stroke, 20%) | Full S visible at every width; draws on scroll in Phase 5 |
 | D4.12 | Language links named "EN · English" etc. | WCAG 2.5.3 (label in name), flagged by Lighthouse |
 | D4.13 | Phone factory carousel is focusable (`tabIndex=0`) with `scroll-padding` so the first card aligns with the gutter | axe `scrollable-region-focusable` |
+| D4.16 | ALUMIL logo: official SVG in `public/brand/partners/alumil-logo.svg` (supersedes D2.16, D4.8). Shown full colour on light backgrounds (band, 220px); on dark backgrounds (footer, 120px) on a light alu-100 tile, never recoloured. A logo uploaded in Sanity (Cilësimet → Partner ALUMIL) takes precedence | Owner provided the logo; partner logos must keep their colours |
 | D4.15 | Home lives in the route group `app/[locale]/(home)/` with its own `loading.tsx` | A `loading.tsx` directly in `[locale]` wrapped every route (incl. the 404 catch-all) in the Home skeleton and broke its prerender |
 | D4.14 | Accessibility checked with axe (Playwright, 4 widths, 0 serious/critical) and Lighthouse (Accessibility 100 desktop + mobile) | Phase 4 acceptance |
 

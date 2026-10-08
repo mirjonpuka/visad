@@ -797,6 +797,10 @@
   }
   /* On top of a temporary photo: dark glass so the note stays readable */
   .ph-note--photo {
+    bottom: 8px;
+    padding: 2px 6px;
+    font-size: 8px;
+    letter-spacing: 0.06em;
     background: rgba(14, 15, 17, 0.72);
     color: var(--color-text-on-dark);
     backdrop-filter: blur(6px);
@@ -805,9 +809,8 @@
 }
 
 /* ==========================================================================
-   Navbar layout switch (UI §2.1 vs §14, conflict C5).
-   Laptop links from 1024px by default; with html[data-nav-variant="menu"]
-   the 1024–1199 range uses the menu button instead.
+   Navbar layout switch (conflict C5, owner chose "menu"): full links from
+   1200px; below that the menu button (UI §14 tablet = 768–1199).
    These classes own the `display` of their element.
    ========================================================================== */
 .nav-full {
@@ -816,20 +819,12 @@
 .nav-compact {
   display: flex;
 }
-@media (width >= 64rem) {
+@media (width >= 75rem) {
   .nav-full {
     display: flex;
   }
   .nav-compact {
     display: none;
-  }
-}
-@media (64rem <= width < 75rem) {
-  html[data-nav-variant="menu"] .nav-full {
-    display: none;
-  }
-  html[data-nav-variant="menu"] .nav-compact {
-    display: flex;
   }
 }
 /* Eyebrow next to the logo only where it fits beside the full logo */

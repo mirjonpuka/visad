@@ -80,7 +80,7 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D2.1 | **Navbar uses the full logo (with "CONSTRUCTION") at 140px**, not the 104px wordmark (overrides Brand §1) | Owner's request. 140px is the full logo's minimum width (Brand §1), so it is 140 on every screen |
 | D2.2 | Eyebrow "Sisteme alumini · Shkodër" next to the logo shows only at ≥1440px | With the wider logo it no longer fits beside the links below 1440 |
 | D2.3 | Navbar links gap 24px at 1024–1199, 32px from 1200 | The full link row fits from 1024 (checked in EN, the longest labels) |
-| D2.4 | 1024–1199 layout (C5) is switchable in dev/preview with the "Nav 1024–1199: links / menu" toggle (bottom-left); production default = **links** until the owner chooses | Owner asked to compare both |
+| D2.4 | **1024–1199 uses the menu button; full links from 1200px** (C5). The comparison toggle was removed | Owner chose "menu" after comparing both |
 | D2.5 | Navbar transparency is opt-in per page with `<HeroUnderNav />`; every other page gets the solid navbar from the top | UI §2.1: transparent only over a hero; light page headers would hide white nav content |
 | D2.6 | Mega-menu "Sistemet": thumbnail (16:10, 168px) **beside** the name/description; "Zgjidhje": thumbnail above. Panel ≈ 270–300px tall | UI §2.2 asks for ~360px; stacked 16:10 thumbnails in a 3×2 grid made the panel ~660px |
 | D2.7 | Mega-menu intro lines: "Sisteme alumini dhe PVC, të prodhuara në Shkodër." (from Systems index h1) and "Për kë punojmë." (Home §3.6 h2). Zgjidhje has no "all" link (there is no solutions index page) | Not specified in 03/08 |
@@ -112,10 +112,11 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D2.29 | Stock set: 14 photos for systems hero, doors, sliding, façades, factory machines ×4, process steps ×5, architects. List + notes + alt texts in `scripts/stock-photos.json`; `node scripts/import-stock.mjs` downloads and converts to WebP (`public/images/stock/`, `lib/stock.manifest.json`) | Reproducible; Phase 3 seeds them into Sanity with `isPlaceholder: true` |
 | D2.30 | No stock photos for **team portraits** (the team section stays hidden until real photos exist) and no imitation of the **ALUMIL logo** (footer shows a text badge) | Stock people would be presented as Visad staff; the ALUMIL logo must come from their partner kit |
 | D2.31 | Small thumbnails (mega-menus) show only "Temporary photo"; large images show the full note | The full sentence does not fit 168–250px thumbnails |
+| D2.33 | Notes on temporary photos: Mono 8px, padding 2×6px, 8px from the bottom (smaller than the 10px of UI §13.3) | Owner: "the font on the pics can be smaller" |
 | D2.32 | `experimental.turbopackFileSystemCacheForDev: false` | The dev cache served stale `globals.css` across restarts (twice); production build cache unaffected |
 
 ## Open conflicts reported to the client/owner
 - C2 3D step texts differ between 05 and 08 → using 08.
 - C3 Reply time "brenda ditës" vs "brenda 24 orësh" → one [TO CONFIRM] value.
 - C4 Seed images: 07 says WebP, 09 says JPG masters → plan: JPG masters (Sanity serves AVIF/WebP).
-- C5 Navbar 1024–1199: full links (§2.1) vs menu button (§14) → both variants switchable in dev (D2.4); **waiting for the owner's choice**.
+- C5 Navbar 1024–1199 → resolved: menu button (D2.4).

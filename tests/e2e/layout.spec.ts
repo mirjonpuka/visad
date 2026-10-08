@@ -133,6 +133,19 @@ test.describe("phone 390", () => {
   });
 });
 
+// Owner's choice (C5): 1024–1199 uses the menu button, full links from 1200
+for (const [width, compact] of [
+  [1100, true],
+  [1200, false],
+] as const) {
+  test(`navbar at ${width}px shows ${compact ? "menu button" : "full links"}`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 });
+    await open(page, "/");
+    await expect(page.getByRole("button", { name: "Hap menunë" })).toBeVisible({ visible: compact });
+    await expect(page.getByRole("button", { name: "Sistemet" })).toBeVisible({ visible: !compact });
+  });
+}
+
 for (const width of [360, 390, 768, 1024, 1100, 1280, 1440]) {
   test(`no horizontal overflow at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });

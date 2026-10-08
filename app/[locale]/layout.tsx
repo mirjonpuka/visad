@@ -7,11 +7,9 @@ import { CookieBanner } from "@/components/layout/CookieBanner";
 import { Footer } from "@/components/layout/Footer";
 import { LayoutUIProvider } from "@/components/layout/LayoutUIProvider";
 import { Navbar } from "@/components/layout/Navbar";
-import { NavVariantToggle } from "@/components/layout/NavVariantToggle";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { routing } from "@/i18n/routing";
-import { devRoutesEnabled } from "@/lib/dev";
 import "../globals.css";
 
 // Brand §3: Geist + Geist Mono only, latin + latin-ext (ë, ç)
@@ -58,7 +56,6 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
             <Footer />
             <WhatsAppFab />
             <CookieBanner />
-            {devRoutesEnabled && <NavVariantToggle />}
           </LayoutUIProvider>
         </NextIntlClientProvider>
       </body>

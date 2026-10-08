@@ -1,0 +1,91 @@
+{
+  "nav": {
+    "systems": "Sistemet",
+    "projects": "Projektet",
+    "factory": "Fabrika",
+    "solutions": "Zgjidhje",
+    "careers": "Karriera",
+    "contact": "Kontakt",
+    "tagline": "Sisteme alumini · Shkodër"
+  },
+  "cta": {
+    "quote": "Kërko ofertë",
+    "quoteShort": "Ofertë",
+    "whatsapp": "Shkruani në WhatsApp",
+    "whatsappFab": "Na shkruani në WhatsApp",
+    "projects": "Shiko projektet",
+    "allProjects": "Të gjitha projektet",
+    "allSystems": "Të gjitha sistemet",
+    "details": "Shiko detajet",
+    "datasheet": "Fleta teknike (PDF)",
+    "learnMore": "Mëso më shumë",
+    "quoteForm": "Formulari i ofertës"
+  },
+  "cursor": { "view": "Shiko", "drag": "Tërhiq" },
+  "skip": "Kalo te përmbajtja",
+  "breadcrumb": { "home": "Kryefaqja" },
+  "a11y": {
+    "loading": "Duke u ngarkuar",
+    "open": "Hap",
+    "close": "Mbyll"
+  },
+  "form": {
+    "continue": "Vazhdo",
+    "back": "Kthehu",
+    "send": "Dërgo kërkesën",
+    "errors": {
+      "required": "Kjo fushë është e detyrueshme.",
+      "phone": "Shkruani një numër telefoni të vlefshëm.",
+      "email": "Shkruani një email të vlefshëm.",
+      "fileSize": "Skedari është shumë i madh (maks. {max} MB).",
+      "fileType": "Ky lloj skedari nuk lejohet.",
+      "generic": "Diçka shkoi keq. Provoni përsëri."
+    },
+    "success": "Faleminderit! Do t'ju kontaktojmë brenda 24 orësh.",
+    "backHome": "Kthehu te kryefaqja"
+  },
+  "projects": {
+    "filters": {
+      "type": "Lloji",
+      "system": "Sistemi",
+      "city": "Qyteti",
+      "clear": "Pastro filtrat",
+      "filter": "Filtro",
+      "show": "Shfaq {n} projekte",
+      "loadMore": "Shfaq më shumë",
+      "empty": "Asnjë projekt me këto filtra."
+    },
+    "types": {
+      "residential": "Banim",
+      "villa": "Vila",
+      "hotel": "Hotel",
+      "commercial": "Komercial",
+      "public": "Publik"
+    },
+    "facts": {
+      "client": "Klienti",
+      "category": "Kategoria",
+      "area": "Sipërfaqja",
+      "systems": "Sistemet",
+      "year": "Viti",
+      "story": "Sfida & zgjidhja",
+      "next": "Projekti tjetër"
+    }
+  },
+  "careers": {
+    "title": "Punoni me ne",
+    "empty": "Aktualisht nuk ka pozicione të hapura. Na dërgoni CV-në tuaj.",
+    "apply": "Apliko"
+  },
+  "notFound": "Kjo faqe nuk u gjet.",
+  "cookie": {
+    "text": "Përdorim cookies të domosdoshme për funksionimin e faqes.",
+    "accept": "Prano",
+    "essential": "Vetëm të domosdoshmet"
+  },
+  "footer": {
+    "about": "Sisteme alumini dhe PVC. Prodhim dhe montim në Shkodër.",
+    "company": "Kompania",
+    "copyright": "© {year} VISAD Construction"
+  }
+}

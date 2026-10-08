@@ -1,0 +1,70 @@
+{
+ "project-terrace-glass-railing-vineyard": {
+  "v": 0.3,
+  "hz": 0.0,
+  "cx": 0.5,
+  "cy": 0.45
+ },
+ "project-fishta-hotel-glass-balconies": {
+  "v": 0.9,
+  "hz": 0.0,
+  "cx": 0.5,
+  "cy": 0.5
+ },
+ "project-villa-glass-balconies-shutters": {
+  "v": 1.0,
+  "hz": 1.0,
+  "cx": 0.47,
+  "cy": 0.5,
+  "zoom": 0.94
+ },
+ "project-house-glass-railings": {
+  "v": 0.9,
+  "hz": 0.0,
+  "cx": 0.5,
+  "cy": 0.5
+ },
+ "project-residential-blocks-balconies": {
+  "v": 0.75,
+  "hz": 0.0,
+  "cx": 0.5,
+  "cy": 0.5
+ },
+ "railing-stainless-steel-balcony": {
+  "v": 0.9,
+  "hz": 0.0,
+  "cx": 0.5,
+  "cy": 0.5
+ },
+ "railing-glass-staircase": {
+  "v": 0.9,
+  "hz": 0.0,
+  "cx": 0.5,
+  "cy": 0.5
+ },
+ "window-pvc-historic-facade": {
+  "v": 1.0,
+  "hz": 1.0,
+  "cx": 0.5,
+  "cy": 0.5
+ },
+ "installation-folding-doors": {
+  "v": 0.9,
+  "hz": 0.0,
+  "cx": 0.5,
+  "cy": 0.5
+ },
+ "visad-headquarters-factory": {
+  "v": 1.0,
+  "hz": 0.6,
+  "cx": 0.42,
+  "cy": 0.52,
+  "zoom": 0.72
+ },
+ "visad-truck-aluminium-frames": {
+  "v": 0.8,
+  "hz": 0.0,
+  "cx": 0.5,
+  "cy": 0.5
+ }
+}

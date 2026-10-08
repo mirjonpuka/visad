@@ -1,0 +1,40 @@
+# Still needed from the client ([TO CONFIRM])
+
+Everything on the site marked `[TO CONFIRM]` or shown as a placeholder photo is listed here.
+
+## Facts & numbers
+- [ ] Stats: **9500+** projects, **16+** years, **5** countries (from the old site) — confirm or correct
+- [ ] Founding year
+- [ ] Reply time: "same day" (CTA) or "within 24 hours" (contact page + form success) — pick one
+- [ ] 4th factory stat (e.g. factory m² or team size) — only a real value
+- [ ] Opening hours
+- [ ] Social media links (Facebook, Instagram)
+- [ ] Lead notification email (default info@visad.al)
+
+## ALUMIL
+- [ ] Which ALUMIL series are fabricated (window, sliding, façade lines)
+- [ ] ALUMIL datasheets / catalogues (PDF)
+- [ ] Official ALUMIL partner logo kit + partner certificate (PDF)
+- [ ] CE / ISO certificates, if any
+
+## Projects (for each photo)
+- [ ] Name, city, year, systems used, client type
+  - Fishta Hotel (name known) · Vila me tarracë · Shtëpi me parmakë xhami · Vilë trekatëshe · Kompleks banimi · Shkallë me parmakë xhami · Rinovim dritareje në fasadë historike
+- [ ] Original photos from the phone (not WhatsApp copies)
+- [ ] 6–12 real photos per project for the galleries
+
+## Photos still missing (placeholders on the site)
+- [ ] Systems hero: close-up of a modern aluminium window corner, anthracite
+- [ ] Doors hero: Visad aluminium entrance door with handle detail
+- [ ] Sliding hero: large finished sliding glass doors opening to a terrace
+- [ ] Factory machines ×4, process steps ×5
+- [ ] Architects solution: technical drawings + profile samples
+- [ ] Team portraits
+- [ ] Optional hero video (10–15s loop)
+- [ ] A stronger Home hero photo (current terrace crop is mostly floor tiles)
+- [ ] Higher-resolution HQ photo (current is 1152px, soft as a full-width Factory hero)
+
+## Other
+- [ ] Job openings (Careers)
+- [ ] FAQ questions/answers per system
+- [ ] Italian and German texts: review by a native speaker (Phase 9)

@@ -1,0 +1,6 @@
+_handoff
+.next
+node_modules
+public
+lib/images.manifest.json
+package-lock.json

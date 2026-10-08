@@ -1,0 +1,694 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens — 02_BRAND_GUIDE.md (names used exactly)
+   Fluid sizes interpolate linearly from phone 390px → laptop 1440px.
+   ========================================================================== */
+@theme {
+  /* Only brand colours: drop Tailwind's default palette */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-ink-950: #0a0b0c;
+  --color-ink-900: #0e0f11;
+  --color-ink-800: #16181b;
+  --color-ink-700: #22252a;
+  --color-ink-600: #2e3238;
+  --color-line-dark: rgba(255, 255, 255, 0.12);
+
+  --color-alu-50: #f2f2f0;
+  --color-alu-100: #e4e5e3;
+  --color-alu-200: #d7dadd;
+  --color-alu-300: #c4c8cc;
+  --color-line-light: rgba(0, 0, 0, 0.12);
+
+  --color-text-on-dark: #f2f3f5;
+  --color-text-on-dark-2: #b9bec5;
+  --color-text-on-dark-3: #8b9199;
+  --color-text-on-light: #121315;
+  --color-text-on-light-2: #4a4f57;
+  --color-text-on-light-3: #5e636b;
+
+  --color-red-500: #f2000d; /* Visad Red */
+  --color-red-600: #d7000c; /* button fills, white text */
+  --color-red-700: #b0000a; /* button hover/pressed */
+  --color-red-text-on-dark: #ff4545;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-ink: #08231a; /* text on WhatsApp green (UI §2.6) */
+
+  /* Typography */
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --text-display-xl: clamp(3rem, 1.5143rem + 6.0952vw, 7rem);
+  --text-display-xl--line-height: 0.95;
+  --text-display-xl--letter-spacing: -0.035em;
+  --text-display-xl--font-weight: 500;
+
+  --text-display-l: clamp(2.75rem, 1.7286rem + 4.1905vw, 5.5rem);
+  --text-display-l--line-height: 0.98;
+  --text-display-l--letter-spacing: -0.035em;
+  --text-display-l--font-weight: 500;
+
+  --text-h1: clamp(2.5rem, 1.7571rem + 3.0476vw, 4.5rem);
+  --text-h1--line-height: 1;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h1--font-weight: 500;
+
+  --text-h2: clamp(2.125rem, 1.6143rem + 2.0952vw, 3.5rem);
+  --text-h2--line-height: 1;
+  --text-h2--letter-spacing: -0.03em;
+  --text-h2--font-weight: 500;
+
+  --text-h3: clamp(1.5rem, 1.3607rem + 0.5714vw, 1.875rem);
+  --text-h3--line-height: 1.15;
+  --text-h3--letter-spacing: -0.02em;
+  --text-h3--font-weight: 400;
+
+  --text-h4: clamp(1.125rem, 1.0786rem + 0.1905vw, 1.25rem);
+  --text-h4--line-height: 1.3;
+  --text-h4--letter-spacing: -0.01em;
+  --text-h4--font-weight: 500;
+
+  --text-body-l: clamp(1.0625rem, 1.0161rem + 0.1905vw, 1.1875rem);
+  --text-body-l--line-height: 1.55;
+  --text-body-l--font-weight: 300;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-body--font-weight: 400;
+
+  --text-body-s: 0.875rem;
+  --text-body-s--line-height: 1.55;
+  --text-body-s--font-weight: 400;
+
+  --text-eyebrow: clamp(0.6875rem, 0.6643rem + 0.0952vw, 0.75rem);
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.14em;
+  --text-eyebrow--font-weight: 400;
+
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.1em;
+  --text-label--font-weight: 500;
+
+  --text-stat: clamp(2.75rem, 2.2857rem + 1.9048vw, 4rem);
+  --text-stat--line-height: 1;
+  --text-stat--letter-spacing: -0.03em;
+  --text-stat--font-weight: 500;
+
+  /* Breakpoints (Brand §4) + "laptop" 1200 for container/section rules */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 30rem; /* 480 */
+  --breakpoint-md: 48rem; /* 768 */
+  --breakpoint-lg: 64rem; /* 1024 */
+  --breakpoint-laptop: 75rem; /* 1200 */
+  --breakpoint-xl: 80rem; /* 1280 */
+  --breakpoint-2xl: 90rem; /* 1440 */
+
+  /* Radius: sharp, engineered (circles use rounded-full) */
+  --radius-*: initial;
+  --radius-base: 2px;
+
+  /* Only the WhatsApp FAB and the mega-menu cast shadows */
+  --shadow-*: initial;
+  --shadow-fab: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-mega: 0 24px 48px rgba(0, 0, 0, 0.35);
+
+  /* Easing (Motion §1) */
+  --ease-*: initial;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --animate-shimmer: shimmer 1.4s linear infinite;
+
+  @keyframes shimmer {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+}
+
+:root {
+  /* Durations (Motion §1) — use as duration-(--dur-m) */
+  --dur-xs: 150ms;
+  --dur-s: 250ms;
+  --dur-m: 400ms;
+  --dur-l: 700ms;
+  --dur-xl: 1100ms;
+
+  --container-max: 1440px;
+  --gutter: 20px; /* container side padding on phone */
+  --grid-gap: 16px;
+  --navbar-h: 76px;
+}
+@media (width >= 48rem) {
+  :root {
+    --gutter: 40px;
+  }
+}
+@media (width >= 75rem) {
+  :root {
+    --gutter: 64px;
+    --grid-gap: 20px;
+  }
+}
+
+/* ==========================================================================
+   Surfaces: sections declare dark/light; components read these variables,
+   so skeletons, placeholders and secondary buttons adapt automatically.
+   ========================================================================== */
+:root,
+.surface-dark {
+  --surface-bg: var(--color-ink-900);
+  --surface-fg: var(--color-text-on-dark);
+  --surface-fg-2: var(--color-text-on-dark-2);
+  --surface-fg-3: var(--color-text-on-dark-3);
+  --surface-line: var(--color-line-dark);
+  --sk-base: var(--color-ink-700);
+  --sk-hi: var(--color-ink-600);
+  --ph-note-bg: rgba(255, 255, 255, 0.07);
+  --ph-note-fg: #b9bec5;
+  --btn2-border: rgba(255, 255, 255, 0.35);
+  --btn2-fill: var(--color-white);
+  --btn2-fg: var(--color-text-on-dark);
+  --btn2-fg-hover: var(--color-ink-900);
+  --chip-border: rgba(255, 255, 255, 0.28);
+  --chip-active-bg: var(--color-text-on-dark);
+  --chip-active-fg: var(--color-ink-900);
+}
+.surface-light {
+  --surface-bg: var(--color-alu-50);
+  --surface-fg: var(--color-text-on-light);
+  --surface-fg-2: var(--color-text-on-light-2);
+  --surface-fg-3: var(--color-text-on-light-3);
+  --surface-line: var(--color-line-light);
+  --sk-base: var(--color-alu-200);
+  --sk-hi: var(--color-alu-300);
+  --ph-note-bg: rgba(0, 0, 0, 0.06);
+  --ph-note-fg: #41464e;
+  --btn2-border: var(--color-text-on-light);
+  --btn2-fill: var(--color-text-on-light);
+  --btn2-fg: var(--color-text-on-light);
+  --btn2-fg-hover: var(--color-white);
+  --chip-border: rgba(0, 0, 0, 0.24);
+  --chip-active-bg: var(--color-text-on-light);
+  --chip-active-fg: var(--color-white);
+}
+@layer base {
+  .surface-dark,
+  .surface-light {
+    background-color: var(--surface-bg);
+    color: var(--surface-fg);
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background-color: var(--color-ink-900);
+    color: var(--color-text-on-dark);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-red-600);
+    color: var(--color-white);
+  }
+  /* UI §0.6: visible focus ring, 2px red-500, 2px offset */
+  :focus-visible {
+    outline: 2px solid var(--color-red-500);
+    outline-offset: 2px;
+  }
+  /* UI §15: anchors never hide behind the fixed navbar */
+  [id] {
+    scroll-margin-top: 96px;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* ==========================================================================
+   Layout utilities (Brand §4)
+   ========================================================================== */
+@utility site-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--grid-gap);
+}
+/* Vertical section padding 72 / 96 / 120 */
+@utility section-y {
+  padding-block: 72px;
+  @media (width >= 48rem) {
+    padding-block: 96px;
+  }
+  @media (width >= 75rem) {
+    padding-block: 120px;
+  }
+}
+/* Hero & CTA sections: 140 laptop */
+@utility section-y-xl {
+  padding-block: 96px;
+  @media (width >= 48rem) {
+    padding-block: 120px;
+  }
+  @media (width >= 75rem) {
+    padding-block: 140px;
+  }
+}
+@utility hairline {
+  border-color: var(--surface-line);
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Components (states in plain CSS so the dev kit can force them via
+   data-force="hover|active|focus")
+   ========================================================================== */
+@layer components {
+  /* ---------- Buttons (UI §2.6, Motion §5.1) ---------- */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    overflow: hidden;
+    border-radius: var(--radius-base);
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    isolation: isolate;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color var(--dur-s) var(--ease-standard),
+      color var(--dur-m) var(--ease-out-expo),
+      transform 100ms var(--ease-standard);
+  }
+  .btn-md {
+    height: 44px;
+    padding-inline: 18px;
+    font-size: 14px;
+  }
+  .btn-lg {
+    height: 54px;
+    padding-inline: 26px;
+    font-size: 15px;
+  }
+  .btn__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: opacity var(--dur-s) var(--ease-standard);
+  }
+  .btn__arrow {
+    display: inline-block;
+    transition: transform var(--dur-s) var(--ease-standard);
+  }
+  .btn__spinner {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 9999px;
+    border: 1.5px solid currentColor;
+    border-right-color: transparent;
+    opacity: 0;
+    transition: opacity var(--dur-s) var(--ease-standard);
+    animation: btn-spin 0.7s linear infinite;
+  }
+  .btn[data-loading] .btn__label {
+    opacity: 0;
+  }
+  .btn[data-loading] .btn__spinner {
+    opacity: 1;
+  }
+  .btn:active:not([aria-disabled="true"]),
+  .btn[data-force~="active"] {
+    transform: scale(0.98);
+  }
+  .btn[aria-disabled="true"],
+  .btn:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .btn[data-force~="focus"] {
+    outline: 2px solid var(--color-red-500);
+    outline-offset: 2px;
+  }
+
+  .btn-primary {
+    background-color: var(--color-red-600);
+    color: var(--color-white);
+  }
+  .btn-primary:active,
+  .btn-primary[data-force~="active"] {
+    background-color: var(--color-red-700);
+  }
+
+  .btn-secondary {
+    color: var(--btn2-fg);
+    box-shadow: inset 0 0 0 1px var(--btn2-border);
+  }
+  .btn__fill {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--btn2-fill);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-m) var(--ease-out-expo);
+  }
+
+  .btn-whatsapp {
+    background-color: var(--color-whatsapp);
+    color: var(--color-whatsapp-ink);
+    font-weight: 600;
+  }
+  .btn-whatsapp:active,
+  .btn-whatsapp[data-force~="active"] {
+    background-color: #1fbd5a;
+  }
+
+  .btn[data-force~="hover"] .btn__arrow {
+    transform: translateX(4px);
+  }
+  .btn-primary[data-force~="hover"] {
+    background-color: var(--color-red-700);
+  }
+  .btn-secondary[data-force~="hover"] {
+    color: var(--btn2-fg-hover);
+  }
+  .btn-secondary[data-force~="hover"] .btn__fill {
+    transform: scaleX(1);
+  }
+  .btn-whatsapp[data-force~="hover"] {
+    background-color: #1fbd5a;
+  }
+  @media (hover: hover) {
+    .btn:hover .btn__arrow {
+      transform: translateX(4px);
+    }
+    .btn-primary:hover {
+      background-color: var(--color-red-700);
+    }
+    .btn-secondary:hover {
+      color: var(--btn2-fg-hover);
+    }
+    .btn-secondary:hover .btn__fill {
+      transform: scaleX(1);
+    }
+    .btn-whatsapp:hover {
+      background-color: #1fbd5a;
+    }
+  }
+
+  /* ---------- LinkArrow (UI §2.6, Motion §5.3) ---------- */
+  .link-arrow {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding-bottom: 5px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .link-arrow::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: currentColor;
+    transform-origin: right;
+  }
+  .link-arrow__arrow {
+    display: inline-block;
+    transition: transform var(--dur-m) var(--ease-out-expo);
+  }
+  .link-arrow[data-force~="hover"]::after {
+    animation: line-redraw var(--dur-m) var(--ease-in-out-quart);
+  }
+  .link-arrow[data-force~="hover"] .link-arrow__arrow {
+    transform: translateX(4px);
+  }
+  .link-arrow[data-force~="focus"] {
+    outline: 2px solid var(--color-red-500);
+    outline-offset: 2px;
+  }
+  @media (hover: hover) {
+    .link-arrow:hover::after {
+      animation: line-redraw var(--dur-m) var(--ease-in-out-quart);
+    }
+    .link-arrow:hover .link-arrow__arrow {
+      transform: translateX(4px);
+    }
+  }
+
+  /* ---------- IconButton ---------- */
+  .icon-btn {
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    border-radius: 9999px;
+    color: inherit;
+    box-shadow: inset 0 0 0 1px var(--btn2-border);
+    transition:
+      background-color var(--dur-s) var(--ease-standard),
+      color var(--dur-s) var(--ease-standard);
+  }
+  .icon-btn-40 {
+    width: 40px;
+    height: 40px;
+  }
+  .icon-btn-44 {
+    width: 44px;
+    height: 44px;
+  }
+  .icon-btn[data-force~="hover"] {
+    background-color: var(--btn2-fill);
+    color: var(--btn2-fg-hover);
+  }
+  .icon-btn[data-force~="focus"] {
+    outline: 2px solid var(--color-red-500);
+    outline-offset: 2px;
+  }
+  .icon-btn:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  @media (hover: hover) {
+    .icon-btn:hover {
+      background-color: var(--btn2-fill);
+      color: var(--btn2-fg-hover);
+    }
+  }
+
+  /* ---------- Chip (UI §6.2): 36px visual, 44px touch area ---------- */
+  .chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding-inline: 14px;
+    border-radius: var(--radius-base);
+    font-size: 14px;
+    line-height: 1;
+    white-space: nowrap;
+    color: inherit;
+    box-shadow: inset 0 0 0 1px var(--chip-border);
+    transition:
+      background-color var(--dur-s) var(--ease-standard),
+      color var(--dur-s) var(--ease-standard),
+      box-shadow var(--dur-s) var(--ease-standard);
+  }
+  .chip::before {
+    content: "";
+    position: absolute;
+    inset: -4px 0;
+  }
+  .chip[aria-pressed="true"],
+  .chip[aria-checked="true"],
+  .chip[data-active] {
+    background-color: var(--chip-active-bg);
+    color: var(--chip-active-fg);
+    box-shadow: inset 0 0 0 1px var(--chip-active-bg);
+  }
+  .chip:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .chip[data-force~="hover"] {
+    box-shadow: inset 0 0 0 1px var(--surface-fg);
+  }
+  .chip[data-force~="focus"] {
+    outline: 2px solid var(--color-red-500);
+    outline-offset: 2px;
+  }
+  @media (hover: hover) {
+    .chip:not([aria-pressed="true"]):not([data-active]):hover {
+      box-shadow: inset 0 0 0 1px var(--surface-fg);
+    }
+  }
+
+  /* ---------- Accordion (UI §3.3B) ---------- */
+  .acc-icon {
+    position: relative;
+  }
+  .acc-icon::before,
+  .acc-icon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 1.5px;
+    margin: -0.75px 0 0 -6px;
+    background: currentColor;
+    transition: transform var(--dur-s) var(--ease-out-expo);
+  }
+  .acc-icon::after {
+    transform: rotate(90deg);
+  }
+  /* "+" → "–": the vertical bar turns 90° onto the horizontal one */
+  [aria-expanded="true"] .acc-icon::after {
+    transform: rotate(180deg);
+  }
+  .acc-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--dur-m) var(--ease-out-expo);
+  }
+  .acc-panel[data-open] {
+    grid-template-rows: 1fr;
+  }
+  .acc-panel__inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .acc-panel__content {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 300ms var(--ease-out-expo),
+      transform 300ms var(--ease-out-expo);
+  }
+  .acc-panel[data-open] .acc-panel__content {
+    opacity: 1;
+    transform: none;
+    transition-delay: 100ms;
+  }
+
+  /* ---------- Skeleton (UI §13.2) ---------- */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-base);
+    background-color: var(--sk-base);
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 20%, var(--sk-hi) 50%, transparent 80%);
+    transform: translateX(-100%);
+    animation: var(--animate-shimmer);
+  }
+
+  /* ---------- PlaceholderImage note (UI §13.3) ---------- */
+  .ph-note {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 12px;
+    width: fit-content;
+    max-width: 88%;
+    margin-inline: auto;
+    padding: 4px 8px;
+    border-radius: 3px;
+    background: var(--ph-note-bg);
+    color: var(--ph-note-fg);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+}
+
+@keyframes btn-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+/* Underline shrinks to the right, then regrows from the left */
+@keyframes line-redraw {
+  0% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  50% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  50.01% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion (Motion §9): no movement, only short fades
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+  .skeleton::after {
+    display: none;
+  }
+  .btn__spinner {
+    animation: btn-spin 0.7s linear infinite !important;
+  }
+  .motion-fade {
+    transition: opacity 150ms linear !important;
+  }
+}

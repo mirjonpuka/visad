@@ -1,0 +1,91 @@
+{
+  "nav": {
+    "systems": "Systems",
+    "projects": "Projects",
+    "factory": "Factory",
+    "solutions": "Solutions",
+    "careers": "Careers",
+    "contact": "Contact",
+    "tagline": "Aluminium systems · Shkodër"
+  },
+  "cta": {
+    "quote": "Request a quote",
+    "quoteShort": "Quote",
+    "whatsapp": "Message us on WhatsApp",
+    "whatsappFab": "Chat on WhatsApp",
+    "projects": "View projects",
+    "allProjects": "All projects",
+    "allSystems": "All systems",
+    "details": "View details",
+    "datasheet": "Datasheet (PDF)",
+    "learnMore": "Learn more",
+    "quoteForm": "Quote form"
+  },
+  "cursor": { "view": "View", "drag": "Drag" },
+  "skip": "Skip to content",
+  "breadcrumb": { "home": "Home" },
+  "a11y": {
+    "loading": "Loading",
+    "open": "Open",
+    "close": "Close"
+  },
+  "form": {
+    "continue": "Continue",
+    "back": "Back",
+    "send": "Send request",
+    "errors": {
+      "required": "This field is required.",
+      "phone": "Enter a valid phone number.",
+      "email": "Enter a valid email.",
+      "fileSize": "File is too large (max {max} MB).",
+      "fileType": "This file type is not allowed.",
+      "generic": "Something went wrong. Please try again."
+    },
+    "success": "Thank you! We'll contact you within 24 hours.",
+    "backHome": "Back to home"
+  },
+  "projects": {
+    "filters": {
+      "type": "Type",
+      "system": "System",
+      "city": "City",
+      "clear": "Clear filters",
+      "filter": "Filter",
+      "show": "Show {n} projects",
+      "loadMore": "Load more",
+      "empty": "No projects match these filters."
+    },
+    "types": {
+      "residential": "Residential",
+      "villa": "Villa",
+      "hotel": "Hotel",
+      "commercial": "Commercial",
+      "public": "Public"
+    },
+    "facts": {
+      "client": "Client",
+      "category": "Category",
+      "area": "Area",
+      "systems": "Systems",
+      "year": "Year",
+      "story": "Challenge & solution",
+      "next": "Next project"
+    }
+  },
+  "careers": {
+    "title": "Work with us",
+    "empty": "There are no open positions right now. Send us your CV.",
+    "apply": "Apply"
+  },
+  "notFound": "This page could not be found.",
+  "cookie": {
+    "text": "We use essential cookies to run this site.",
+    "accept": "Accept",
+    "essential": "Essential only"
+  },
+  "footer": {
+    "about": "Aluminium and PVC systems. Made and installed in Shkodër.",
+    "company": "Company",
+    "copyright": "© {year} VISAD Construction"
+  }
+}

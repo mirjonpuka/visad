@@ -1,0 +1,492 @@
+{
+  "project-terrace-glass-railing-vineyard": {
+    "id": "project-terrace-glass-railing-vineyard",
+    "alt": {
+      "sq": "Tarracë me parmakë xhami dhe alumini me pamje nga vreshtat dhe malet",
+      "en": "Terrace with glass and aluminium railing overlooking vineyards and mountains"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRroAAABXRUJQVlA4IK4AAACQBQCdASoYABgAPuVeo02pJSMiMAwBIByJQBYeNkgmyB9WLxhg36spP8G7Pa9+4oSEWFtmAAD+d3tG7gnLTlnPyZpCN1V42JYo2Nb987LAIL5JmaBzNTjwjk+1qPnVVyjXeNl9VDpugRfaLL/Rs43p3cqGD41d9Hi4xNl8U6cN7bmsIg7z3G5SbZwmHtM4XsVj/2VGOwZWPWxlBaS32hs0xmVHbTkWhjBuX45uAAA=",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "home-hero",
+      "projects-index",
+      "solution-homeowners-alt"
+    ],
+    "web": [
+      {
+        "src": "/images/web/project-terrace-glass-railing-vineyard-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/project-terrace-glass-railing-vineyard-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/project-terrace-glass-railing-vineyard-1600.webp",
+        "width": 1600,
+        "height": 1600
+      },
+      {
+        "src": "/images/web/project-terrace-glass-railing-vineyard-2304.webp",
+        "width": 2304,
+        "height": 2304
+      }
+    ],
+    "crops": {
+      "hero-16x9": {
+        "src": "/images/crops/project-terrace-glass-railing-vineyard-hero-16x9.webp",
+        "width": 2304,
+        "height": 1296
+      },
+      "mobile-4x5": {
+        "src": "/images/crops/project-terrace-glass-railing-vineyard-mobile-4x5.webp",
+        "width": 1080,
+        "height": 1350
+      }
+    }
+  },
+  "project-fishta-hotel-glass-balconies": {
+    "id": "project-fishta-hotel-glass-balconies",
+    "alt": {
+      "sq": "Fishta Hotel me ballkone xhami dhe dyer hyrëse xhami",
+      "en": "Fishta Hotel with glass balconies and glass entrance doors"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRv4AAABXRUJQVlA4IPIAAADwBQCdASoYABgAPu1sqlEppaOiqAqpMB2JZACdIWZJ/l2CMFC3+Ko+KS+CbDV+4FMeFhe4800oAADU+eQF9NQQyDzS1GHMMJhVowXjqi/186GLf7XYaIJGXQTwL3cOosZJLzth3go2iEHo0EObTBd9Bma8hEzSA6SrQgNRNmbM9V3grP7r+doHdtDoRaSx70cfnkdWf8O3KwGEzj5oms+yKXqCFGnQhiYfpAU5hHXLkKEP41W089WH+gBWbWRu841f5dj1qPMFGUypRRx2oPERd6hfcsATak4Crme3bZtOy9/VV2ilq7fZzgjxikedbZEwAA==",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "project-tile-1",
+      "system-facades",
+      "solution-hotels"
+    ],
+    "web": [
+      {
+        "src": "/images/web/project-fishta-hotel-glass-balconies-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/project-fishta-hotel-glass-balconies-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/project-fishta-hotel-glass-balconies-1600.webp",
+        "width": 1600,
+        "height": 1600
+      },
+      {
+        "src": "/images/web/project-fishta-hotel-glass-balconies-2560.webp",
+        "width": 2560,
+        "height": 2560
+      }
+    ],
+    "crops": {
+      "wide-16x10": {
+        "src": "/images/crops/project-fishta-hotel-glass-balconies-wide-16x10.webp",
+        "width": 2560,
+        "height": 1600
+      },
+      "tall-4x5": {
+        "src": "/images/crops/project-fishta-hotel-glass-balconies-tall-4x5.webp",
+        "width": 1080,
+        "height": 1350
+      }
+    }
+  },
+  "project-villa-glass-balconies-shutters": {
+    "id": "project-villa-glass-balconies-shutters",
+    "alt": {
+      "sq": "Vilë trekatëshe me ballkone xhami, grila të bardha dhe dyer alumini",
+      "en": "Three-storey villa with glass balconies, white shutters and aluminium doors"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRsoAAABXRUJQVlA4IL4AAABQBQCdASoYABgAPu1srE8ppiQiMBgIATAdiWcAsOwQ8Bn7ptz08iJ0DhbMPTikqBmepUAA8qUtRZ7MuOjt45WdAUfKnGHnAAxByaNX/vyaQV4M7oMakS4S7tW1Zsdsh8yKLaA22WJaHdy8S29sCVmSXcVpC6rOMlxw8bfAOfI1nVhuefpo7GZ16zkisiBtG2RRQ15zHNQ3nnQLYiDeoywU/zlNcLpXlDptUsSDVcHMClCyxodc+ezkEnL19IwA",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "project-tile-4",
+      "system-shutters",
+      "system-doors"
+    ],
+    "web": [
+      {
+        "src": "/images/web/project-villa-glass-balconies-shutters-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/project-villa-glass-balconies-shutters-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/project-villa-glass-balconies-shutters-1600.webp",
+        "width": 1600,
+        "height": 1600
+      },
+      {
+        "src": "/images/web/project-villa-glass-balconies-shutters-2406.webp",
+        "width": 2406,
+        "height": 2406
+      }
+    ],
+    "crops": {
+      "door-4x5": {
+        "src": "/images/crops/project-villa-glass-balconies-shutters-door-4x5.webp",
+        "width": 1080,
+        "height": 1350
+      },
+      "wide-16x10": {
+        "src": "/images/crops/project-villa-glass-balconies-shutters-wide-16x10.webp",
+        "width": 2406,
+        "height": 1504
+      }
+    }
+  },
+  "project-house-glass-railings": {
+    "id": "project-house-glass-railings",
+    "alt": {
+      "sq": "Shtëpi me parmakë xhami në verandë dhe ballkon",
+      "en": "House with glass railings on the porch and balcony"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRvQAAABXRUJQVlA4IOgAAACQBQCdASoYABgAPu1osFAppaUiqAqpMB2JbACdM0zGwBAJNAcpdZROHA9CxJdaRxHBR/+pAAD+vDvbPzA0bnzphKWQlbp3oNYOJhjc8m73/rKKFA8xgYb+yVC+FdRzbh5mqDAi4KRRauqce2347ZKlMnwCokQQiUPn5FpBunWRwbarpy+lDV6VyFnUob90YVPEyl476mU/VMfXPakY6dP0RCr3VKGqQNOSL2BlmKmxhzCq6xHgITE5EMscD25W7yASuy8N6ZQ2T0OocHjmyUqEOeNzoe0afht6OpOyA1Ab3pumZZLwMwAA",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "project-tile-2",
+      "solution-homeowners"
+    ],
+    "web": [
+      {
+        "src": "/images/web/project-house-glass-railings-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/project-house-glass-railings-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/project-house-glass-railings-1600.webp",
+        "width": 1600,
+        "height": 1600
+      },
+      {
+        "src": "/images/web/project-house-glass-railings-2560.webp",
+        "width": 2560,
+        "height": 2560
+      }
+    ],
+    "crops": {
+      "wide-16x10": {
+        "src": "/images/crops/project-house-glass-railings-wide-16x10.webp",
+        "width": 2560,
+        "height": 1600
+      }
+    }
+  },
+  "project-residential-blocks-balconies": {
+    "id": "project-residential-blocks-balconies",
+    "alt": {
+      "sq": "Ndërtesa banimi me ballkone xhami dhe alumini",
+      "en": "Residential buildings with glass and aluminium balconies"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRggBAABXRUJQVlA4IPwAAABwBgCdASoYABgAPulkq02pJaQiMBgMASAdCWYAnTNmj0DzAQFJJ+n1gd/j+kZ6B3qjXhYvEaixjzt5wYAA/pswNk+AIIXOkiIeY0LeNTEqDGbvm7NT3Cp4IbauCKhWDCf+dEEJxxuS3d/pJq/8unvE0WgO/1jbe7488PzyrKMfMt8zZ4U35a16CFBEq0jhMrlAEcDPFmMb4jpfVo61TnGpnbFWgDDxgcfOS3TpoIrQDzLBXBV5vv1kR8KX5Mzv5GqFH56AzPWuHuOZbLp83An+pknrjjwiCZMPxH4BVBPJBUh/Sloa9nXu4BU27YJPjKzcQK0TaRF6GbzgAAA=",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "project-tile-5",
+      "solution-developers"
+    ],
+    "web": [
+      {
+        "src": "/images/web/project-residential-blocks-balconies-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/project-residential-blocks-balconies-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/project-residential-blocks-balconies-1600.webp",
+        "width": 1600,
+        "height": 1600
+      },
+      {
+        "src": "/images/web/project-residential-blocks-balconies-2022.webp",
+        "width": 2022,
+        "height": 2022
+      }
+    ],
+    "crops": {
+      "wide-16x10": {
+        "src": "/images/crops/project-residential-blocks-balconies-wide-16x10.webp",
+        "width": 2022,
+        "height": 1264
+      },
+      "tall-4x5": {
+        "src": "/images/crops/project-residential-blocks-balconies-tall-4x5.webp",
+        "width": 1080,
+        "height": 1350
+      }
+    }
+  },
+  "railing-stainless-steel-balcony": {
+    "id": "railing-stainless-steel-balcony",
+    "alt": {
+      "sq": "Parmak inoksi në ballkon pranë një dritareje alumini",
+      "en": "Stainless-steel balcony railing next to an aluminium window"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACwBACdASoYABgAPu1cqE2ppKQiN/VYATAdiUATpnAQD9CK/kgeyFBC5V0WraoAAP6i6wcgQkgL5ieceuWiQIK+nNFdUFUPG0+wep4/MOQm0DCcd5w2cGiAdSVJ8IfEox5vrKIQPtbkuH5AauwAsoI717fhJHYT8zyQJqnUCeZNa7fzckEDhWcEEJwkE13/gN+eO37QrERoxGREGe21Y4i3zozMFdACeWAAAA==",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "system-balconies"
+    ],
+    "web": [
+      {
+        "src": "/images/web/railing-stainless-steel-balcony-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/railing-stainless-steel-balcony-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/railing-stainless-steel-balcony-1600.webp",
+        "width": 1600,
+        "height": 1600
+      },
+      {
+        "src": "/images/web/railing-stainless-steel-balcony-2560.webp",
+        "width": 2560,
+        "height": 2560
+      }
+    ],
+    "crops": {
+      "wide-16x10": {
+        "src": "/images/crops/railing-stainless-steel-balcony-wide-16x10.webp",
+        "width": 2560,
+        "height": 1600
+      }
+    }
+  },
+  "railing-glass-staircase": {
+    "id": "railing-glass-staircase",
+    "alt": {
+      "sq": "Parmak shkallësh me xhama dhe profile alumini",
+      "en": "Staircase railing with glass panels and aluminium posts"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAACwBgCdASoYABgAPu1krE+ppSQiMBgIATAdiWYAtRr1yqqBR4N0rAS3yRinsde29t2Gw4lyLtwuhLHgxubNwAD+6nhev7/pe+ebt2UYkdnlordJXovn9iJZSA3WJ7gpHkogyJ25ZZn1JR7WYTOploLsF7gmrK/h5Uwn0Y9y9YJtNd4I2e6E15Wuyr165+nhcJRsbbbbRw+kCIL5Z2h+JzACdSXrHMeSNrewt+3GwTMb2jY9C5i1HOpmf1un6/3PwnnlDC0jlmI6H7V/tf1Fbo0lP+zQl/ybu0STAK2i83xbUPXggeaGBRV8Y/uq5FvPj9mQSxPRQShXnh0uG9dFDCZ01HPfVfP1gAA=",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "project-tile-3",
+      "system-balconies-alt"
+    ],
+    "web": [
+      {
+        "src": "/images/web/railing-glass-staircase-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/railing-glass-staircase-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/railing-glass-staircase-1408.webp",
+        "width": 1408,
+        "height": 1408
+      }
+    ],
+    "crops": {
+      "tall-4x5": {
+        "src": "/images/crops/railing-glass-staircase-tall-4x5.webp",
+        "width": 1080,
+        "height": 1350
+      },
+      "wide-16x10": {
+        "src": "/images/crops/railing-glass-staircase-wide-16x10.webp",
+        "width": 1408,
+        "height": 880
+      }
+    }
+  },
+  "window-pvc-historic-facade": {
+    "id": "window-pvc-historic-facade",
+    "alt": {
+      "sq": "Dritare e re PVC e montuar në një fasadë guri historike",
+      "en": "New PVC window fitted in a historic stone façade"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACQBACdASoYABgAPu1oq08ppiOiKA1RMB2JZQDDcBEXb5EqayKk0pl3VEPADAAA/rIEcrtmT93j6DNmWC8GVl4yQNKY8kQrhbsch6HMnb0ly3YzDd/+ZUqZUUwS9H4FXs3kueBKfER20evNUz8hdHXw/RQTFM66++iA/UXOmEyJAiU53QWrv4dgAAA=",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "system-windows"
+    ],
+    "web": [
+      {
+        "src": "/images/web/window-pvc-historic-facade-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/window-pvc-historic-facade-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/window-pvc-historic-facade-1600.webp",
+        "width": 1600,
+        "height": 1600
+      },
+      {
+        "src": "/images/web/window-pvc-historic-facade-2457.webp",
+        "width": 2457,
+        "height": 2457
+      }
+    ],
+    "crops": {
+      "tall-4x5": {
+        "src": "/images/crops/window-pvc-historic-facade-tall-4x5.webp",
+        "width": 1080,
+        "height": 1350
+      },
+      "wide-16x10": {
+        "src": "/images/crops/window-pvc-historic-facade-wide-16x10.webp",
+        "width": 2457,
+        "height": 1536
+      }
+    }
+  },
+  "installation-folding-doors": {
+    "id": "installation-folding-doors",
+    "alt": {
+      "sq": "Instalues i Visad duke montuar dyer palosëse alumini",
+      "en": "Visad installer fitting aluminium folding doors"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4IMIAAACQBQCdASoYABgAPu1oqk+ppaOiKA1RMB2JYwDKAYyUcYTLDC7COHaJMzxl6vWPctaQbQoAAAD9uuYcBhsFE07a0C1XWBh3yvE7Fzmbb15ML+qM152kLsarvjBpGDxmp2Sen0cFeT3KyViGlzrxDLeBRtxqptZYYlITrGj6cHc2gKmHKMx9hxmvxZzhGczSAsFLzKOuODe1lvE3b1Zr6vRox5oaNErSYGj2YAyV9DG1sMlEyTn1dI6hCzCsrrpzYduAAA==",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "factory-3",
+      "system-sliding",
+      "careers-hero"
+    ],
+    "web": [
+      {
+        "src": "/images/web/installation-folding-doors-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/installation-folding-doors-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/installation-folding-doors-1504.webp",
+        "width": 1504,
+        "height": 1504
+      }
+    ],
+    "crops": {
+      "wide-16x10": {
+        "src": "/images/crops/installation-folding-doors-wide-16x10.webp",
+        "width": 1504,
+        "height": 940
+      }
+    }
+  },
+  "visad-headquarters-factory": {
+    "id": "visad-headquarters-factory",
+    "alt": {
+      "sq": "Selia dhe fabrika e Visad në rrugën Shkodër–Koplik",
+      "en": "Visad headquarters and factory on the Shkodër–Koplik road"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRuQAAABXRUJQVlA4INgAAACwBQCdASoYABgAPu1mq02ppaQiMAgBMB2JbACxHt67T9Hhqi2XjBRjaJ5FdITX6DyZLGGJDgAA7I7HYNDG3LUH1I1qk7Ut1WRy2zOP64ZzTLv6CvkmP7UvRe5Pf4rcM8YwsML4P3UyNe/DXu/TmFGPgWdBWTjYnmKA7rnV4+O+P5V3vSivFxFIGgNXMdjbXA1lDSKZhi4meejTOhOxLCtUQ0ch+w8tU0AfRudb/NySc0/fNYibczRtsqA+XycH2FMBEiN2M0dra1p7Mocyzg3C/6RmGCwAAAA=",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "factory-1",
+      "factory-hero",
+      "contact"
+    ],
+    "web": [
+      {
+        "src": "/images/web/visad-headquarters-factory-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/visad-headquarters-factory-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/visad-headquarters-factory-1152.webp",
+        "width": 1152,
+        "height": 1152
+      }
+    ],
+    "crops": {
+      "wide-16x10": {
+        "src": "/images/crops/visad-headquarters-factory-wide-16x10.webp",
+        "width": 1152,
+        "height": 720
+      },
+      "hero-16x9": {
+        "src": "/images/crops/visad-headquarters-factory-hero-16x9.webp",
+        "width": 1152,
+        "height": 648
+      }
+    }
+  },
+  "visad-truck-aluminium-frames": {
+    "id": "visad-truck-aluminium-frames",
+    "alt": {
+      "sq": "Kamioni i Visad duke transportuar korniza alumini",
+      "en": "Visad truck carrying aluminium frames"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRugAAABXRUJQVlA4INwAAADQBQCdASoYABgAPu1srlIppaQiqAgBMB2JZwDKAdz5frOGzNs9AU9yT7eBXu3FcKnTd3mU/LgAAPyIvVawud9TzL0a+apaPc7Stcp7/JUmrMy4O40ttcehNtESjM9geS30NibvLCMBE8U7/WxPGmkgLz7vPcbGZQW604pH26T+mllGE3zNHE6M6Vr21caD7L/6AsSlWQmvgtZbjOdtWplyWy7ZGk/S2mgshnLjF+33343gtAq7j6ZE5h1WSclvdKH2DCXpzrpgeREcYVIDtDSiD2ZskWiLUQ9CIgAA",
+    "realVisadPhoto": true,
+    "isPlaceholder": false,
+    "slots": [
+      "factory-2"
+    ],
+    "web": [
+      {
+        "src": "/images/web/visad-truck-aluminium-frames-640.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "/images/web/visad-truck-aluminium-frames-960.webp",
+        "width": 960,
+        "height": 960
+      },
+      {
+        "src": "/images/web/visad-truck-aluminium-frames-1312.webp",
+        "width": 1312,
+        "height": 1312
+      }
+    ],
+    "crops": {
+      "wide-16x10": {
+        "src": "/images/crops/visad-truck-aluminium-frames-wide-16x10.webp",
+        "width": 1312,
+        "height": 820
+      }
+    }
+  }
+}

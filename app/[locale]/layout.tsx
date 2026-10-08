@@ -3,7 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { locale as rootLocale } from "next/root-params";
+import { Suspense } from "react";
 import { CookieBanner } from "@/components/layout/CookieBanner";
+import { DraftModeTools } from "@/components/layout/DraftModeTools";
+import { SiteDataProvider } from "@/components/layout/SiteDataProvider";
+import { getSiteData } from "@/lib/site-data";
 import { Footer } from "@/components/layout/Footer";
 import { LayoutUIProvider } from "@/components/layout/LayoutUIProvider";
 import { Navbar } from "@/components/layout/Navbar";
@@ -35,6 +39,13 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
+// The whole layout is localized (menus and footer come from Sanity per locale),
+// so it can never sit in the locale-independent App Shell of Partial
+// Prefetching. Each locale is still fully prerendered, and the layout persists
+// across navigations, so nothing blocks. Pages keep their own validation and
+// stream behind loading.tsx skeletons (UI §13.1).
+export const instant = false;
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -42,22 +53,28 @@ export function generateStaticParams() {
 export default async function LocaleLayout({ children }: LayoutProps<"/[locale]">) {
   const locale = await rootLocale();
   if (!hasLocale(routing.locales, locale)) notFound();
+  const siteData = await getSiteData();
 
   return (
     <html lang={locale} className={`${geist.variable} ${geistMono.variable}`}>
       <body>
         <NextIntlClientProvider>
-          <LayoutUIProvider>
-            <SkipLink />
-            <Navbar />
-            <main id="main" tabIndex={-1} className="outline-none">
-              {children}
-            </main>
-            <Footer />
-            <WhatsAppFab />
-            <CookieBanner />
-          </LayoutUIProvider>
+          <SiteDataProvider value={siteData}>
+            <LayoutUIProvider>
+              <SkipLink />
+              <Navbar />
+              <main id="main" tabIndex={-1} className="outline-none">
+                {children}
+              </main>
+              <Footer />
+              <WhatsAppFab />
+              <CookieBanner />
+            </LayoutUIProvider>
+          </SiteDataProvider>
         </NextIntlClientProvider>
+        <Suspense fallback={null}>
+          <DraftModeTools />
+        </Suspense>
       </body>
     </html>
   );

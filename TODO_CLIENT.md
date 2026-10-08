@@ -17,7 +17,8 @@ Everything on the site marked `[TO CONFIRM]` or shown as a placeholder photo is 
 - [ ] Official ALUMIL partner logo kit + partner certificate (PDF)
 - [ ] CE / ISO certificates, if any
 
-## Projects (for each photo)
+## Projects (for each photo) — seeded in Sanity, edit them in /studio → Projektet
+- [ ] For the 7 seeded projects: confirm project type, systems used and "Për kë" (inferred from the photos)
 - [ ] Name, city, year, systems used, client type
   - Fishta Hotel (name known) · Vila me tarracë · Shtëpi me parmakë xhami · Vilë trekatëshe · Kompleks banimi · Shkallë me parmakë xhami · Rinovim dritareje në fasadë historike
 - [ ] Original photos from the phone (not WhatsApp copies)
@@ -39,6 +40,12 @@ Everything on the site marked `[TO CONFIRM]` or shown as a placeholder photo is 
 ## Contact & WhatsApp
 - [ ] WhatsApp prefilled message wording (current: "Përshëndetje VISAD! Ju shkruaj nga faqja: …")
 - [ ] Exact Google Maps location / pin for the address link (currently a search link)
+
+## Setup (owner)
+- [ ] Sanity → API → CORS origins: add `http://localhost:3000` with **Allow credentials** (Studio login)
+- [ ] Before launch (Phase 10): create new read/write tokens (the current ones were shared in chat) and a webhook to `https://visad.al/api/revalidate`
+- [ ] Map pin (Sanity → Cilësimet e faqes → Vendndodhja në hartë)
+- [ ] Privacy policy text (seeded as [TO CONFIRM])
 
 ## Other
 - [ ] Job openings (Careers)

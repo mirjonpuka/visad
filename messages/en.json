@@ -11,7 +11,9 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "language": "Language",
-    "home": "VISAD, home"
+    "home": "VISAD, home",
+    "systemsIntro": "Aluminium and PVC systems, made in Shkodër.",
+    "solutionsIntro": "Who we work for."
   },
   "languages": { "sq": "Shqip", "en": "English", "it": "Italiano", "de": "Deutsch" },
   "whatsapp": {

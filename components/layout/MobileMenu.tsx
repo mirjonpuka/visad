@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, type ComponentProps, type CSSProperties, type Ref } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { ButtonWhatsApp } from "@/components/ui/Button";
 import { Link } from "@/i18n/navigation";
-import { contact, systems, solutions, t10n } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useSiteData } from "./SiteDataProvider";
 import { useWhatsAppHref } from "./useWhatsAppHref";
 
 type Href = ComponentProps<typeof Link>["href"];
@@ -24,7 +24,7 @@ type Props = {
  */
 export function MobileMenu({ open, onNavigate, isActive, ref }: Props) {
   const t = useTranslations();
-  const locale = useLocale();
+  const { systems, solutions, phones } = useSiteData();
   const wa = useWhatsAppHref();
   const [expanded, setExpanded] = useState<"systems" | "solutions" | null>(null);
 
@@ -42,8 +42,8 @@ export function MobileMenu({ open, onNavigate, isActive, ref }: Props) {
       key: "systems",
       label: t("nav.systems"),
       children: systems.map((s) => ({
-        label: t10n(s.title, locale),
-        href: { pathname: "/sistemet/[slug]", params: { slug: t10n(s.slug, locale) } },
+        label: s.title,
+        href: { pathname: "/sistemet/[slug]", params: { slug: s.slug } },
       })),
       all: { label: t("cta.allSystems"), href: "/sistemet" },
     },
@@ -53,8 +53,8 @@ export function MobileMenu({ open, onNavigate, isActive, ref }: Props) {
       key: "solutions",
       label: t("nav.solutions"),
       children: solutions.map((s) => ({
-        label: t10n(s.title, locale),
-        href: { pathname: "/zgjidhje/[segment]", params: { segment: t10n(s.slug, locale) } },
+        label: s.title,
+        href: { pathname: "/zgjidhje/[segment]", params: { segment: s.slug } },
       })),
     },
     { key: "careers", label: t("nav.careers"), href: "/karriera", path: "/karriera" },
@@ -165,7 +165,7 @@ export function MobileMenu({ open, onNavigate, isActive, ref }: Props) {
         <div className="mt-auto flex flex-col gap-6 pt-10">
           <LanguageSwitcher size="lg" />
           <ul className="flex flex-col gap-1">
-            {contact.phones.map((p) => (
+            {phones.map((p) => (
               <li key={p.tel}>
                 <a
                   href={`tel:${p.tel}`}

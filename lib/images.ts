@@ -4,13 +4,22 @@ import stockManifest from "./stock.manifest.json";
 export type ImageSource = { src: string; width: number; height: number };
 
 /**
- * Image shape accepted by CMSImage. Until Sanity is wired up (Phase 3) it is
- * built from the pre-converted WebP files in /public/images.
+ * Image shape accepted by CMSImage. Either a Sanity asset (served by the
+ * Sanity CDN, auto=format) or pre-converted WebP files in /public/images.
  */
 export type SiteImage = {
-  /** All available widths of the same picture, any order */
-  sources: ImageSource[];
-  alt: Partial<Record<string, string>>;
+  /** Sanity asset (toSiteImage in sanity/lib/types.ts); width/height after crop */
+  sanity?: {
+    assetId: string;
+    crop: { top: number; bottom: number; left: number; right: number } | null;
+    hotspot: { x: number; y: number } | null;
+    width: number;
+    height: number;
+  };
+  /** Local WebP widths of the same picture, any order */
+  sources?: ImageSource[];
+  /** Already localized string (Sanity) or per-locale map (local manifest) */
+  alt: string | Partial<Record<string, string>>;
   blurDataURL?: string;
   /** Temporary stock/AI image (Brand §5) */
   isPlaceholder?: boolean;

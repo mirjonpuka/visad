@@ -1,11 +1,10 @@
 "use client";
 
 import type { ComponentProps, CSSProperties, Ref } from "react";
-import { useLocale } from "next-intl";
 import { CMSImage } from "@/components/media/CMSImage";
 import { LinkArrow } from "@/components/ui/LinkArrow";
 import { Link } from "@/i18n/navigation";
-import { t10n, type MenuItem } from "@/lib/site";
+import type { NavItem } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 type Href = ComponentProps<typeof Link>["href"];
@@ -15,7 +14,7 @@ type Props = {
   open: boolean;
   title: string;
   intro: string;
-  items: MenuItem[];
+  items: NavItem[];
   itemHref: (slug: string) => Href;
   allLink?: { href: Href; label: string };
   columns: 3 | 4;
@@ -44,7 +43,6 @@ export function MegaMenu({
   onMouseEnter,
   onMouseLeave,
 }: Props) {
-  const locale = useLocale();
   return (
     <div
       ref={ref}
@@ -72,17 +70,12 @@ export function MegaMenu({
           )}
         >
           {items.map((item, index) => {
-            const slug = t10n(item.slug, locale);
             // 3×2 grid: thumbnail beside the text keeps the panel ~360px tall (UI §2.2)
             const row = columns === 3;
             return (
-              <li
-                key={item.slug.sq}
-                className="mega-item min-w-0"
-                style={{ "--i": index + 1 } as CSSProperties}
-              >
+              <li key={item.id} className="mega-item min-w-0" style={{ "--i": index + 1 } as CSSProperties}>
                 <Link
-                  href={itemHref(slug)}
+                  href={itemHref(item.slug)}
                   className={cn("mega-link group", row ? "flex items-center gap-4" : "block")}
                   onClick={onNavigate}
                 >
@@ -96,18 +89,15 @@ export function MegaMenu({
                       image={item.image}
                       ratio="16/10"
                       decorative
-                      placeholderNote={item.placeholderNote}
                       shortNote
                       sizes={row ? "168px" : "(min-width: 1440px) 250px, 18vw"}
                     />
                   </div>
                   <div className={cn("min-w-0", !row && "mt-4")}>
                     <p className="text-h4">
-                      <span className="mega-name pb-0.5">{t10n(item.title, locale)}</span>
+                      <span className="mega-name pb-0.5">{item.title}</span>
                     </p>
-                    <p className="mt-1.5 line-clamp-1 text-body-s text-text-on-dark-2">
-                      {t10n(item.text, locale)}
-                    </p>
+                    <p className="mt-1.5 line-clamp-1 text-body-s text-text-on-dark-2">{item.text}</p>
                   </div>
                 </Link>
               </li>

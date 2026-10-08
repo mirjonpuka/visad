@@ -115,6 +115,34 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D2.33 | Notes on temporary photos: Mono 8px, padding 2×6px, 8px from the bottom (smaller than the 10px of UI §13.3) | Owner: "the font on the pics can be smaller" |
 | D2.32 | `experimental.turbopackFileSystemCacheForDev: false` | The dev cache served stale `globals.css` across restarts (twice); production build cache unaffected |
 
+## Phase 3 — Sanity CMS + seed
+
+| # | Decision | Why |
+|---|---|---|
+| D3.1 | Studio embedded at `/studio` with **two workspaces**: `/studio/permbajtja` (dataset `production`) and `/studio/kerkesat` (private dataset `leads`). The `npm create sanity` standalone studio was **not** used | Architecture §2 (one app, one deploy) |
+| D3.2 | `sanity.config.ts` / `sanity.cli.ts` at the project root (06 shows `sanity/sanity.config.ts`) | The Sanity CLI looks for them in the root |
+| D3.3 | **GROQ uses `language == $locale`**, not `_key == $locale` as in 07 §1/§5 | `sanity-plugin-internationalized-array` v5 stores the language in a `language` field |
+| D3.4 | Localized slugs: `internationalizedArraySlug` (custom field type), generated from the title in the same language; slugify strips ë/ç accents | CMS §1 |
+| D3.5 | "Sq required" rule on localized fields; others optional with locale → en → sq fallback in every query | CMS §1, Architecture §3 |
+| D3.6 | Badge "Mungon EN/IT/DE" on documents missing translations of their main field(s); lead status shown as coloured badge | CMS §1, §4 |
+| D3.7 | Projects: field groups "Bazë" / "Më shumë", template "Projekt i ri" (country = Shqipëri), cover required, **placeholder photos rejected** on cover and gallery | CMS §3 project |
+| D3.8 | Extra fields not in 07: `solution.cardText` (one line for the mega-menu/cards), `solution.heroTitle`, `homePage.factoryImages`, reusable `step` object | Needed by UI §2.2, §3.5, §3.6, §9 |
+| D3.9 | Seed uploads the **edited JPG masters** (C4) for real photos and the 2400px WebP for stock photos; Sanity serves both as AVIF/WebP | C4 |
+| D3.10 | Seed **publishes** the 7 projects (07 §6 says drafts) with names/city marked `[TO CONFIRM]` (except Fishta Hotel) | Home and Projects need published projects to be built and reviewed; client can unpublish any |
+| D3.11 | Project type, systems used and audience of the 7 seed projects are inferred from the photos and must be confirmed (TODO_CLIENT) | No project data provided |
+| D3.12 | Solutions' recommended systems seeded as a reasonable default (homeowners: doors/windows/shutters; developers: windows/balconies/façades; hotels: sliding/balconies/façades; architects: façades/windows/sliding) | Editable in Studio |
+| D3.13 | System specs, series, benefits and FAQs are **not** seeded | 08: only ALUMIL datasheet values |
+| D3.14 | Seed is idempotent: `npm run seed` only creates missing documents; `npm run seed -- --force` replaces them | Re-running must never overwrite Studio edits |
+| D3.15 | Data layer: one `sanityFetch` with `'use cache'` + `cacheTag` (own tags: type, `type:slug`, `settings`, `home`, `factory`) + `cacheLife('hours')`; `$locale` read from the root param inside the cache scope. `defineLive` / Sanity Live **not** used | Architecture §4 asks for webhook + tag revalidation; Live opens a connection per visitor |
+| D3.16 | Draft Mode: `/api/draft-mode/enable` (`defineEnableDraftMode`), drafts read with the read token, stega + `<VisualEditing />` only in Draft Mode; a small "Parapamje · Dil" banner outside the Presentation iframe | Architecture §4 |
+| D3.17 | Webhook `/api/revalidate`: signature-checked, projection `{_type, "slugs": slug[].value.current}`, `revalidateTag(tag, { expire: 0 })` so editors see changes immediately | Architecture §4 (Next 16 requires a profile argument) |
+| D3.18 | In development the cache revalidates after 5s (`{stale:30, revalidate:5, expire:300}`) because the webhook cannot reach localhost; edits show within ~20s | Owner can test the Studio → site loop locally |
+| D3.19 | `[locale]` layout exports `instant = false` (dev insight "URL data"): the layout is localized, so it cannot be in the locale-independent App Shell; it is still fully prerendered per locale. Pages stream behind their `loading.tsx` skeletons | Next 16.4 Partial Prefetching |
+| D3.20 | Navbar, mega-menus, mobile menu, footer and WhatsApp number/message now come from Sanity (`getSiteData()` + `SiteDataProvider`); `lib/site.ts` is only the seed source | Phase 3 |
+| D3.21 | `CMSImage` renders Sanity images through a custom `next/image` loader (Sanity CDN, `auto=format`, q78, crop applied, `fit=max`); hotspot → `object-position` | Architecture §5 |
+| D3.22 | `@sanity/icons` v5 only exports `<Icon symbol>`: a tiny `icon("cog")` helper wraps it | Library change |
+| D3.23 | Dev-only `/dev/cms` lists the projects from Sanity to check the edit → publish → refresh loop before Phase 7 pages exist | Phase 3 acceptance |
+
 ## Open conflicts reported to the client/owner
 - C2 3D step texts differ between 05 and 08 → using 08.
 - C3 Reply time "brenda ditës" vs "brenda 24 orësh" → one [TO CONFIRM] value.

@@ -3,16 +3,16 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { ButtonPrimary } from "@/components/ui/Button";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useEscape, useFocusTrap, useScrollLock } from "@/lib/hooks";
-import { megaIntro, solutions, systems, t10n } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLayoutUI } from "./LayoutUIProvider";
 import { MegaMenu } from "./MegaMenu";
 import { MobileMenu } from "./MobileMenu";
+import { useSiteData } from "./SiteDataProvider";
 
 type MenuKey = "systems" | "solutions";
 
@@ -28,7 +28,7 @@ const HIDE_AFTER_PX = 400;
  */
 export function Navbar() {
   const t = useTranslations();
-  const locale = useLocale();
+  const { systems, solutions } = useSiteData();
   const pathname = usePathname();
   const { mobileMenuOpen, setMobileMenuOpen, heroUnderNav } = useLayoutUI();
 
@@ -293,7 +293,7 @@ export function Navbar() {
           id="mega-systems"
           open={openMenu === "systems"}
           title={t("nav.systems")}
-          intro={t10n(megaIntro.systems, locale)}
+          intro={t("nav.systemsIntro")}
           items={systems}
           columns={3}
           itemHref={(slug) => ({ pathname: "/sistemet/[slug]", params: { slug } })}
@@ -307,7 +307,7 @@ export function Navbar() {
           id="mega-solutions"
           open={openMenu === "solutions"}
           title={t("nav.solutions")}
-          intro={t10n(megaIntro.solutions, locale)}
+          intro={t("nav.solutionsIntro")}
           items={solutions}
           columns={4}
           itemHref={(segment) => ({ pathname: "/zgjidhje/[segment]", params: { segment } })}

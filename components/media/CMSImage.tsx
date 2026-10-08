@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocale } from "next-intl";
 import type { SiteImage } from "@/lib/images";
 import { cn, pickLocale } from "@/lib/utils";
+import { sanityImageUrl } from "@/sanity/lib/image";
 import { PlaceholderImage } from "./PlaceholderImage";
 
 type Props = {
@@ -18,7 +19,7 @@ type Props = {
   priority?: boolean;
   /** Decorative image → alt="" */
   decorative?: boolean;
-  /** Focal point (Sanity hotspot later), e.g. "50% 30%" */
+  /** Focal point override, e.g. "50% 30%" (default: Sanity hotspot) */
   objectPosition?: string;
   /** Note shown when the slot has no image */
   placeholderNote?: string;
@@ -33,8 +34,9 @@ type Props = {
  * under a skeleton shimmer, fades the image in (500ms) once decoded, and falls
  * back to PlaceholderImage when the slot is empty.
  *
- * Phase 1: reads pre-converted WebP files from /public/images.
- * Phase 3: the loader switches to the Sanity CDN (auto=format → AVIF/WebP).
+ * Sanity images: the next/image loader builds Sanity CDN URLs (auto=format →
+ * AVIF/WebP, q78, crop applied), the hotspot becomes the object-position.
+ * Local images: picks the closest pre-converted WebP width in /public/images.
  */
 export function CMSImage({
   image,
@@ -53,17 +55,19 @@ export function CMSImage({
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
+  const sanity = image?.sanity;
   const sources = image?.sources;
-  const largest = sources?.reduce((a, b) => (b.width > a.width ? b : a));
+  const largest = sources?.length ? sources.reduce((a, b) => (b.width > a.width ? b : a)) : undefined;
 
-  // Pick the smallest pre-generated width that covers the requested width
   const loader = useCallback<ImageLoader>(
     ({ width }) => {
+      if (sanity) return sanityImageUrl(sanity, width);
       if (!sources?.length) return "";
+      // Smallest pre-generated width that covers the requested width
       const sorted = [...sources].sort((a, b) => a.width - b.width);
       return (sorted.find((s) => s.width >= width) ?? sorted[sorted.length - 1]).src;
     },
-    [sources],
+    [sanity, sources],
   );
 
   // Cached images can finish before hydration, so onLoad never fires
@@ -71,9 +75,10 @@ export function CMSImage({
     if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) setLoaded(true);
   }, []);
 
-  const boxRatio = ratio ?? (!fill && largest ? `${largest.width}/${largest.height}` : undefined);
+  const natural = sanity ?? largest;
+  const boxRatio = ratio ?? (!fill && natural ? `${natural.width}/${natural.height}` : undefined);
 
-  if (!image || !largest) {
+  if (!image || !natural) {
     return (
       <PlaceholderImage
         note={placeholderNote}
@@ -83,13 +88,21 @@ export function CMSImage({
     );
   }
 
-  const alt = decorative ? "" : (pickLocale(image.alt, locale) ?? "");
+  const alt = decorative
+    ? ""
+    : typeof image.alt === "string"
+      ? image.alt
+      : (pickLocale(image.alt, locale) ?? "");
   // Temporary photos always say what will replace them (Brand §5, owner request)
   const note = image.isPlaceholder
     ? shortNote
       ? "Temporary photo"
       : (image.placeholderNote ?? "Temporary photo")
     : undefined;
+  const position =
+    objectPosition ?? (sanity?.hotspot ? `${sanity.hotspot.x * 100}% ${sanity.hotspot.y * 100}%` : undefined);
+  // `src` only identifies the image; the loader returns the real URL
+  const src = sanity ? `/sanity/${sanity.assetId}` : largest!.src.replace(/\.webp$/, "");
 
   return (
     <div
@@ -108,7 +121,7 @@ export function CMSImage({
       <Image
         ref={imgRef}
         loader={loader}
-        src={largest.src.replace(/\.webp$/, "")}
+        src={src}
         alt={alt}
         fill
         sizes={sizes}
@@ -120,7 +133,7 @@ export function CMSImage({
           loaded ? "opacity-100" : "opacity-0",
           imgClassName,
         )}
-        style={objectPosition ? { objectPosition } : undefined}
+        style={position ? { objectPosition: position } : undefined}
       />
       {note && <span className="ph-note ph-note--photo">{note}</span>}
     </div>

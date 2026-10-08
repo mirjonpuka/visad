@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { cacheLife } from "next/cache";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { ButtonSecondary } from "@/components/ui/Button";
 import { Link } from "@/i18n/navigation";
-import { contact, systems, t10n } from "@/lib/site";
+import { getSiteData } from "@/lib/site-data";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { WhatsAppButton } from "./WhatsAppButton";
 
@@ -29,8 +29,8 @@ const linkClass =
 /** Footer (UI §2.4): ink-950, 4 columns (laptop) / 2 (tablet) / 1 (phone). */
 export async function Footer() {
   const t = await getTranslations();
-  const locale = await getLocale();
   const year = await currentYear();
+  const site = await getSiteData();
 
   return (
     // Bottom padding keeps the last row clear of the WhatsApp FAB (56px + gap)
@@ -56,13 +56,10 @@ export async function Footer() {
           </div>
 
           <Column title={t("footer.systems")}>
-            {systems.map((s) => (
-              <li key={s.slug.sq}>
-                <Link
-                  href={{ pathname: "/sistemet/[slug]", params: { slug: t10n(s.slug, locale) } }}
-                  className={linkClass}
-                >
-                  {t10n(s.title, locale)}
+            {site.systems.map((s) => (
+              <li key={s.id}>
+                <Link href={{ pathname: "/sistemet/[slug]", params: { slug: s.slug } }} className={linkClass}>
+                  {s.title}
                 </Link>
               </li>
             ))}
@@ -103,11 +100,11 @@ export async function Footer() {
 
           <Column title={t("footer.contact")}>
             <li>
-              <a href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                {t10n(contact.address, locale)}
+              <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                {site.address}
               </a>
             </li>
-            {contact.phones.map((p) => (
+            {site.phones.map((p) => (
               <li key={p.tel}>
                 <a href={`tel:${p.tel}`} className={`${linkClass} tabular`}>
                   {p.display}
@@ -115,25 +112,25 @@ export async function Footer() {
               </li>
             ))}
             <li>
-              <a href={`mailto:${contact.email}`} className={linkClass}>
-                {contact.email}
+              <a href={`mailto:${site.email}`} className={linkClass}>
+                {site.email}
               </a>
             </li>
             <li className="mt-3 text-text-on-dark-3">
               <span className="font-mono text-label uppercase">{t("footer.hours")}</span>
-              {contact.openingHours.length ? (
-                contact.openingHours.map((h) => (
-                  <span key={h.hours} className="block text-text-on-dark-2">
-                    {t10n(h.days, locale)} · {h.hours}
+              {site.openingHours.length ? (
+                site.openingHours.map((h) => (
+                  <span key={h.days + h.hours} className="block text-text-on-dark-2">
+                    {h.days} · {h.hours}
                   </span>
                 ))
               ) : (
                 <span className="block text-text-on-dark-2">[TO CONFIRM]</span>
               )}
             </li>
-            {contact.social.length > 0 && (
+            {site.social.length > 0 && (
               <li className="mt-3 flex gap-4">
-                {contact.social.map((s) => (
+                {site.social.map((s) => (
                   <a
                     key={s.platform}
                     href={s.url}

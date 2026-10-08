@@ -44,6 +44,7 @@ export const routing = defineRouting({
     "/privatesia": { sq: "/privatesia", en: "/privacy", it: "/privacy", de: "/datenschutz" },
     // Dev-only routes (blocked in production, see lib/dev.ts)
     "/dev/kit": "/dev/kit",
+    "/dev/cms": "/dev/cms",
   },
 });
 

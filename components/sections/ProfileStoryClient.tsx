@@ -66,14 +66,31 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
     return () => cancelAnimationFrame(id);
   }, [motion]);
 
-  // Lazy-load the scene when the section is within 600px; pause it off screen
+  // Lazy-load the scene when the section is within 600px — but only after the
+  // visitor has started scrolling, so three.js never competes with the first
+  // load on tall screens where the section is already within the margin
   useEffect(() => {
     if (mode !== "scene" || !stageRef.current) return;
-    const near = new IntersectionObserver(([e]) => e.isIntersecting && setLoad(true), { rootMargin: "600px" });
+    let isNear = false;
+    let scrolled = window.scrollY > 0;
+    const maybeLoad = () => isNear && scrolled && setLoad(true);
+    const onScroll = () => {
+      scrolled = true;
+      maybeLoad();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true, once: true });
+    const near = new IntersectionObserver(
+      ([e]) => {
+        isNear = e.isIntersecting;
+        maybeLoad();
+      },
+      { rootMargin: "600px" },
+    );
     const visible = new IntersectionObserver(([e]) => setOnScreen(e.isIntersecting));
     near.observe(stageRef.current);
     visible.observe(stageRef.current);
     return () => {
+      window.removeEventListener("scroll", onScroll);
       near.disconnect();
       visible.disconnect();
     };

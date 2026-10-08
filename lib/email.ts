@@ -10,7 +10,7 @@ import { client } from "@/sanity/lib/client";
  * missing key never loses a request.
  */
 
-const FROM = process.env.LEAD_FROM_EMAIL ?? "VISAD Construction <noreply@visad.al>";
+const FROM = process.env.LEADS_FROM_EMAIL ?? "VISAD Construction <noreply@visad.al>";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://visad.al";
 
 type Row = [label: string, value: string | number | null | undefined];

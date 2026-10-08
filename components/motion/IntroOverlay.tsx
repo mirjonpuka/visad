@@ -11,7 +11,7 @@ export const INTRO_KEY = "visad-intro-seen";
  * available and decides whether the intro plays (first visit, no reduced
  * motion). Kept tiny and dependency-free.
  */
-export const introHeadScript = `(function(){var d=document.documentElement;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js-motion');if(!localStorage.getItem('${INTRO_KEY}'))d.setAttribute('data-intro','play')}catch(e){}})()`;
+export const introHeadScript = `(function(){var d=document.documentElement;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js-motion');if(/^\\/(en|it|de)?\\/?$/.test(location.pathname)&&!localStorage.getItem('${INTRO_KEY}'))d.setAttribute('data-intro','play');else d.classList.add('hero-css')}catch(e){d.classList.add('hero-css')}})()`;
 
 // Timeline (seconds), from brand/intro/logo-intro-demo.html
 const WIPE_START = 1.75;

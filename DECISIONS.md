@@ -234,7 +234,28 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D8.10 | e2e tests submit real leads named "E2E Test"; `npm run test:cleanup-leads` removes them and their files | Acceptance "creates a lead document" checked against Sanity |
 | D8.11 | `.env.example` (names only) committed as the env checklist | Phase 10 |
 
+## Phase 9 — i18n, SEO, performance, QA
+
+| # | Decision | Why |
+|---|---|---|
+| D9.1 | IT/DE: all UI strings (`messages/it.json`, `de.json`, key parity tested) and all CMS texts machine-translated from EN (`scripts/i18n-content.json` → `migrations/002-translate-it-de.mts`), IT/DE slugs per document | 08 §i18n |
+| D9.2 | "Rishiko": new field `translationReview` on every content document + Studio badge "Rishiko IT/DE"; editors untick a language after review | 08: mark machine translations until reviewed |
+| D9.3 | `sitemap.xml` (all locales, all document slugs, hreflang alternates, `x-default` = sq), `robots.txt` (Studio/API/dev hidden; preview deployments fully disallowed) | Architecture §8 |
+| D9.4 | JSON-LD: `HomeAndConstructionBusiness` on every page (NAP from Sanity, geo/hours/sameAs only once confirmed, no invented `areaServed`), `BreadcrumbList`, `ItemList` (systems), `CreativeWork` (projects; `[TO CONFIRM]` cities left out) | Architecture §8 |
+| D9.5 | OG images from `/api/og` (next/og): ink background, red top line, logo, title, project/page photo on the right (Sanity JPEG); only `cdn.sanity.io` images accepted | Architecture §8 |
+| D9.6 | Project pages without a CMS summary get a meta description built from their own facts (type, city, year, systems) | Lighthouse SEO; no invented text |
+| D9.7 | Redirects: `/galeria(/…)` → `/projektet`, `/wp-*` → `/`, `/xmlrpc.php`, `/feed` → `/` (308 = permanent); `/kontakt/` → `/kontakt` by Next's trailing-slash redirect | Architecture §8 |
+| D9.8 | Security headers on every path; CSP on everything except `/studio`. `'unsafe-inline'` scripts (prerendered pages cannot use nonces). **X-Frame-Options SAMEORIGIN / frame-ancestors 'self'** instead of DENY | The Studio's Presentation tool shows the site in a same-origin iframe (conflict C7) |
+| D9.9 | Vercel Analytics + Speed Insights (cookieless) inside `<Suspense>` | Architecture §1; they read the URL |
+| D9.10 | Logo intro only on the **Home** page (first visit), as listed under UI §3.0 | It covered any first-visited page and delayed its LCP |
+| D9.11 | Hero entrance on full page loads is pure CSS from the first paint (`html.hero-css`); GSAP keeps animating heroes after in-app navigations (panel transition) | Hero text/images no longer wait for hydration (LCP) |
+| D9.12 | Scroll-reveal setups (SplitText, reveals, wipes, lines, count-ups, parallax) run in idle callbacks, each its own small task | One 1.6s hydration task was most of the mobile TBT (Home 2.9s → 0.36s) |
+| D9.13 | Priority images (heroes, first two project tiles) skip the JS fade-in; the 3D scene loads only after the visitor starts scrolling | LCP render delay; 3D was compiling during page load on tall screens |
+| D9.14 | Env var name `LEADS_FROM_EMAIL` as in 06 §11 | Spec name |
+
 ## Open conflicts reported to the client/owner
+- C7 **X-Frame-Options**: 06 §10 asks for `DENY` (except /studio), but the Presentation preview loads site pages inside the Studio → `SAMEORIGIN` (still blocks every other site).
+- C8 **Mobile Lighthouse ≥ 90 / LCP < 2.2s** (06 §9) vs. the mandated first-visit logo intro (≈2.3s on Home by design) and the motion stack. Desktop meets the budget; mobile scores 66–86 under Lighthouse's simulated 4× slower CPU. Proposal: judge mobile on real devices with Vercel Speed Insights after launch.
 - C6 **First-load JS budget** (06 §Performance: Home ≤ 180KB gzip). Measured: **240KB gzip** — Next.js 16 + React 19 runtime alone ≈ 136KB, motion (GSAP/Lenis, within the 04 budget of 60KB) ≈ 51KB, site code ≈ 45KB. three.js is not included. The 180KB target cannot be met with the mandated stack + motion spec; proposal: accept ≤ 250KB, keep three.js/R3F lazy. Real-world check: CLS 0, no long tasks, Lighthouse in Phase 9.
 - C2 3D step texts differ between 05 and 08 → using 08.
 - C3 Reply time "brenda ditës" vs "brenda 24 orësh" → one [TO CONFIRM] value.

@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 import { AlumilBand } from "@/components/sections/AlumilBand";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { FactoryTeaser } from "@/components/sections/FactoryTeaser";
@@ -15,6 +17,20 @@ import { getSiteData } from "@/lib/site-data";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { HOME_QUERY } from "@/sanity/lib/queries";
 import { toSiteImage, type HomeData } from "@/sanity/lib/types";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
+  return {
+    ...pageMetadata({
+      locale,
+      pathname: "/",
+      title: "VISAD Construction",
+      description: t("footer.about"),
+    }),
+    // The layout template would add "· VISAD" to the brand name
+    title: { absolute: `VISAD Construction — ${t("nav.tagline")}` },
+  };
+}
 
 /** Home (UI §3): sections 3.1–3.8. Motion is added in Phase 5, the 3D scene in Phase 6. */
 export default async function HomePage() {

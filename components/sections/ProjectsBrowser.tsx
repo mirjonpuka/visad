@@ -268,6 +268,7 @@ export function ProjectsBrowser({
                         number={String(i + 1).padStart(2, "0")}
                         viewLabel={labels.viewProject}
                         sizes={editorial ? PATTERN_SIZES[i % 5] : "(min-width: 768px) 50vw, 100vw"}
+                        priority={i < 2}
                         className="h-full"
                       />
                     </m.li>

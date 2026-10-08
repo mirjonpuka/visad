@@ -913,6 +913,31 @@ export const legalPage = defineType({
 
 export const singletonTypes = ["siteSettings", "homePage", "factoryPage", "pageSettings"] as const;
 
+/**
+ * "Rishiko" (08 §i18n): languages whose text is a machine translation still
+ * waiting for review. Shown as a badge; editors untick a language once checked.
+ */
+const translationReview = defineField({
+  name: "translationReview",
+  title: "Rishiko përkthimin",
+  description: "Gjuhët me përkthim automatik që duhen kontrolluar. Hiqeni gjuhën pasi ta keni rishikuar.",
+  type: "array",
+  of: [defineArrayMember({ type: "string" })],
+  options: {
+    list: [
+      { title: "English", value: "en" },
+      { title: "Italiano", value: "it" },
+      { title: "Deutsch", value: "de" },
+    ],
+    layout: "grid",
+  },
+});
+
+const withReview = <T extends { fields?: unknown[] }>(type: T): T => ({
+  ...type,
+  fields: [...(type.fields ?? []), translationReview],
+});
+
 export const documentTypes = [
   siteSettings,
   homePage,
@@ -927,4 +952,4 @@ export const documentTypes = [
   download,
   job,
   legalPage,
-];
+].map(withReview);

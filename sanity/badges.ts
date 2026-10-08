@@ -39,6 +39,17 @@ export const MissingTranslationsBadge: DocumentBadgeComponent = ({ draft, publis
   };
 };
 
+/** "Rishiko IT/DE" while machine translations wait for a native speaker (08 §i18n). */
+export const ReviewTranslationsBadge: DocumentBadgeComponent = ({ draft, published }) => {
+  const languages = ((draft ?? published) as { translationReview?: string[] } | null)?.translationReview ?? [];
+  if (!languages.length) return null;
+  return {
+    label: `Rishiko ${languages.map((l) => l.toUpperCase()).join("/")}`,
+    title: "Përkthim automatik: kontrollojeni dhe hiqni gjuhën nga lista 'Rishiko përkthimin'.",
+    color: "primary",
+  };
+};
+
 const STATUS_COLORS: Record<string, "primary" | "success" | "warning" | "danger"> = {
   new: "primary",
   contacted: "warning",

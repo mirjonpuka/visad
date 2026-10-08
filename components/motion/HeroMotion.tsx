@@ -37,11 +37,16 @@ export function HeroMotion({
       const fades = root.querySelectorAll<HTMLElement>("[data-hero-fade]");
       gsap.set(fades, { visibility: "visible" });
       if (reducedMotion) return;
+      // Full page load without intro: CSS already animates the entrance (globals.css "hero-css")
+      const cssEntrance = document.documentElement.classList.contains("hero-css");
 
-      gsap.set(fades, { autoAlpha: 0, y: 24 });
-      if (image) gsap.set(image, { scale: 1.08 });
+      if (!cssEntrance) {
+        gsap.set(fades, { autoAlpha: 0, y: 24 });
+        if (image) gsap.set(image, { scale: 1.08 });
+      }
 
       const stop = onHeroIn((kind) => {
+        if (cssEntrance) return;
         const short = kind === "short";
         if (image) gsap.to(image, { scale: 1, duration: short ? 1.1 : 1.6, ease: EASE.outExpo });
         gsap.to(fades, {

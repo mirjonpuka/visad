@@ -1,1 +1,280 @@
-{}
+{
+  "nav": {
+    "systems": "Sistemi",
+    "projects": "Progetti",
+    "factory": "Stabilimento",
+    "solutions": "Soluzioni",
+    "careers": "Lavora con noi",
+    "contact": "Contatti",
+    "tagline": "Sistemi in alluminio · Scutari",
+    "main": "Navigazione principale",
+    "openMenu": "Apri il menu",
+    "closeMenu": "Chiudi il menu",
+    "language": "Lingua",
+    "home": "VISAD, home",
+    "systemsIntro": "Sistemi in alluminio e PVC, prodotti a Scutari.",
+    "solutionsIntro": "Per chi lavoriamo."
+  },
+  "languages": { "sq": "Shqip", "en": "English", "it": "Italiano", "de": "Deutsch" },
+  "whatsapp": {
+    "message": "Buongiorno VISAD! Vi scrivo dalla pagina del sito: {page}"
+  },
+  "cta": {
+    "quote": "Richiedi un preventivo",
+    "quoteShort": "Preventivo",
+    "whatsapp": "Scriveteci su WhatsApp",
+    "whatsappFab": "Chatta su WhatsApp",
+    "projects": "Vedi i progetti",
+    "allProjects": "Tutti i progetti",
+    "allSystems": "Tutti i sistemi",
+    "details": "Vedi i dettagli",
+    "datasheet": "Scheda tecnica (PDF)",
+    "learnMore": "Scopri di più",
+    "quoteForm": "Modulo preventivo"
+  },
+  "cursor": { "view": "Vedi", "drag": "Trascina", "scroll": "Scorri" },
+  "home": {
+    "scroll": "Scorri",
+    "systemsEyebrow": "01 — Sistemi",
+    "projectsEyebrow": "02 — Progetti",
+    "factoryEyebrow": "03 — Stabilimento",
+    "solutionsEyebrow": "04 — Soluzioni",
+    "statsLabel": "VISAD in cifre",
+    "viewProject": "Vedi il progetto",
+    "factoryLink": "Scopri lo stabilimento",
+    "alumilTitle": "Partner certificato ALUMIL",
+    "alumilLogo": "Logo ufficiale del partner ALUMIL",
+    "certificates": "Certificati",
+    "systemOf": "{n} / {total}",
+    "finish": "Finitura del profilo",
+    "finishSilver": "Argento",
+    "finishAnthracite": "Antracite",
+    "profileRenderAlt": "Profilo in alluminio a taglio termico scomposto: guscio esterno e interno, barrette in poliammide e guarnizioni in EPDM"
+  },
+  "skip": "Vai al contenuto",
+  "breadcrumb": { "home": "Home", "label": "Percorso" },
+  "a11y": {
+    "loading": "Caricamento",
+    "open": "Apri",
+    "close": "Chiudi"
+  },
+  "form": {
+    "continue": "Continua",
+    "back": "Indietro",
+    "send": "Invia la richiesta",
+    "success": "Grazie! Vi contatteremo entro 24 ore.",
+    "backHome": "Torna alla home",
+    "required": "obbligatorio",
+    "optional": "facoltativo",
+    "step": "Passo {n} di {total}",
+    "quote": {
+      "step1": "Di cosa avete bisogno?",
+      "step2": "I vostri dati",
+      "systems": "Sistema",
+      "projectType": "Tipo di progetto",
+      "projectTypes": {
+        "new-house": "Casa nuova",
+        "renovation": "Ristrutturazione",
+        "apartment-building": "Condominio",
+        "business": "Attività commerciale"
+      },
+      "openings": "Numero di aperture",
+      "decrease": "Meno",
+      "increase": "Di più",
+      "dimensions": "Misure indicative",
+      "dimensionsHint": "es. 3 finestre 120 × 140 cm, 1 porta 90 × 210 cm",
+      "city": "Città",
+      "name": "Nome e cognome",
+      "phone": "Telefono",
+      "email": "Email",
+      "preferredContact": "Come preferite essere contattati?",
+      "contactOptions": { "whatsapp": "WhatsApp", "phone": "Telefono", "email": "Email" },
+      "photos": "Foto del cantiere",
+      "photosHint": "Fino a 6 foto, max. 10 MB ciascuna (JPG, PNG, WebP, HEIC)",
+      "message": "Messaggio"
+    },
+    "tender": {
+      "company": "Azienda",
+      "contactPerson": "Referente",
+      "role": "Ruolo",
+      "projectName": "Nome del progetto",
+      "location": "Località",
+      "stage": "Fase",
+      "stages": { "design": "Progettazione", "tender": "Gara", "construction": "Costruzione" },
+      "area": "Superficie indicativa (m²)",
+      "deadline": "Scadenza",
+      "documents": "Documenti (PDF, DWG, ZIP)",
+      "documentsHint": "Fino a 5 file, max. 25 MB ciascuno"
+    },
+    "job": {
+      "cv": "CV (PDF)",
+      "cvHint": "Max. 5 MB"
+    },
+    "consent": "Accetto l'informativa sulla privacy",
+    "privacyLink": "Leggi l'informativa",
+    "files": {
+      "drop": "Trascinate qui i file oppure",
+      "browse": "sceglieteli dal dispositivo",
+      "remove": "Rimuovi {name}",
+      "retry": "Riprova",
+      "uploading": "Caricamento…",
+      "done": "Caricato",
+      "failed": "Caricamento non riuscito",
+      "tooMany": "Potete caricare fino a {max} file."
+    },
+    "sending": "Invio in corso…",
+    "errorBanner": "La richiesta non è stata inviata. I vostri dati sono stati conservati, riprovate.",
+    "retry": "Riprova",
+    "rateLimited": "Troppe richieste in poco tempo. Riprovate tra qualche minuto.",
+    "verifying": "Verifichiamo che non siate un robot…",
+    "errors": {
+      "required": "Questo campo è obbligatorio.",
+      "phone": "Inserite un numero di telefono valido.",
+      "email": "Inserite un indirizzo email valido.",
+      "fileSize": "Il file è troppo grande (max. {max} MB).",
+      "fileType": "Questo tipo di file non è consentito.",
+      "generic": "Si è verificato un errore. Riprovate.",
+      "consent": "È necessario accettare l'informativa sulla privacy.",
+      "number": "Inserite un numero.",
+      "tooLong": "Il testo è troppo lungo.",
+      "uploading": "Attendete il termine del caricamento dei file.",
+      "cv": "Caricate il vostro CV."
+    }
+  },
+  "contact": {
+    "title": "Contatti",
+    "quickLabel": "Contatto rapido",
+    "whatsappText": "Il modo più rapido: foto e misure direttamente dal telefono.",
+    "phone": "Telefono",
+    "email": "Email",
+    "formsLabel": "Moduli",
+    "tabQuote": "Richiedi un preventivo",
+    "tabTender": "Gare / B2B",
+    "visit": "Indirizzo e orari"
+  },
+  "email": {
+    "confirmSubject": "Abbiamo ricevuto la vostra richiesta — VISAD",
+    "confirmHello": "Buongiorno {name},",
+    "confirmBody": "Grazie per averci scritto. Abbiamo ricevuto la vostra richiesta e vi contatteremo entro 24 ore.",
+    "confirmWhatsapp": "Se avete bisogno di noi prima, scriveteci su WhatsApp:",
+    "confirmSign": "Il team di VISAD Construction"
+  },
+  "projects": {
+    "filters": {
+      "type": "Tipo",
+      "system": "Sistema",
+      "city": "Città",
+      "clear": "Azzera i filtri",
+      "filter": "Filtra",
+      "show": "Mostra {n} progetti",
+      "loadMore": "Mostra altri",
+      "empty": "Nessun progetto corrisponde a questi filtri."
+    },
+    "types": {
+      "residential": "Residenziale",
+      "villa": "Villa",
+      "hotel": "Hotel",
+      "commercial": "Commerciale",
+      "public": "Pubblico"
+    },
+    "facts": {
+      "client": "Cliente",
+      "category": "Categoria",
+      "area": "Superficie",
+      "systems": "Sistemi",
+      "year": "Anno",
+      "story": "Sfida e soluzione",
+      "next": "Progetto successivo"
+    }
+  },
+  "careers": {
+    "title": "Lavora con noi",
+    "empty": "Al momento non ci sono posizioni aperte. Inviateci il vostro CV.",
+    "apply": "Candidati",
+    "eyebrow": "Lavora con noi",
+    "open": "Posizioni aperte",
+    "benefits": "Vantaggi",
+    "applyTitle": "Candidati per questa posizione",
+    "generalTitle": "Candidatura spontanea",
+    "types": {
+      "full-time": "Tempo pieno",
+      "part-time": "Part-time",
+      "seasonal": "Stagionale"
+    }
+  },
+  "systems": {
+    "eyebrow": "Sistemi",
+    "view": "Vedi il sistema",
+    "downloads": "Schede tecniche e cataloghi",
+    "download": "Scarica",
+    "subnav": "In questa pagina",
+    "overview": "Panoramica",
+    "series": "Serie",
+    "technical": "Dettagli tecnici",
+    "finishes": "Colori e finiture",
+    "projects": "Progetti",
+    "faq": "Domande",
+    "faqTitle": "Domande frequenti",
+    "seriesTitle": "Serie ALUMIL",
+    "property": "Caratteristica",
+    "value": "Valore",
+    "crossSection": "Sezione del profilo",
+    "relatedTitle": "Progetti con questo sistema",
+    "allWithSystem": "Tutti i progetti con questo sistema",
+    "datasheet": "Scheda tecnica",
+    "languages": { "sq": "Albanese", "en": "Inglese", "it": "Italiano", "de": "Tedesco", "el": "Greco" }
+  },
+  "projectsPage": {
+    "title": "Progetti",
+    "count": "{n, plural, one {# progetto} other {# progetti}}",
+    "allCities": "Tutte le città",
+    "filtersLabel": "Filtri dei progetti",
+    "close": "Chiudi",
+    "gallery": "Galleria",
+    "systemsUsed": "Sistemi utilizzati",
+    "photo": "Foto {n} di {total}",
+    "prev": "Foto precedente",
+    "next": "Foto successiva",
+    "closeGallery": "Chiudi la galleria"
+  },
+  "factory": {
+    "eyebrow": "Stabilimento",
+    "process": "Processo",
+    "machinery": "Macchinari",
+    "certificates": "Certificati",
+    "downloadPdf": "Scarica il PDF",
+    "team": "Team",
+    "visit": "Venite a trovarci",
+    "address": "Indirizzo",
+    "directions": "Indicazioni stradali",
+    "loadMap": "Mostra la mappa interattiva",
+    "mapNote": "La mappa viene caricata da Google Maps solo quando la aprite.",
+    "mapTitle": "Mappa della sede VISAD",
+    "alumilCertificate": "Partner certificato ALUMIL"
+  },
+  "solutionsPage": {
+    "eyebrow": "Soluzioni",
+    "offer": "Cosa offriamo",
+    "systems": "Sistemi consigliati",
+    "projects": "Progetti correlati",
+    "tenderForm": "Modulo per gare"
+  },
+  "notFound": "Questa pagina non è stata trovata.",
+  "cookie": {
+    "text": "Utilizziamo solo cookie essenziali per il funzionamento del sito.",
+    "accept": "Accetta",
+    "essential": "Solo essenziali",
+    "label": "Cookie"
+  },
+  "footer": {
+    "about": "Sistemi in alluminio e PVC. Prodotti e installati a Scutari.",
+    "ctaTitle": "Avete un progetto?",
+    "systems": "Sistemi",
+    "company": "Azienda",
+    "contact": "Contatti",
+    "privacy": "Privacy",
+    "hours": "Orari",
+    "alumil": "Partner certificato ALUMIL",
+    "copyright": "© {year} VISAD Construction"
+  }
+}

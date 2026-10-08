@@ -13,7 +13,9 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SystemCard } from "@/components/ui/SystemCard";
 import { Link, permanentRedirect } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { pageMetadata } from "@/lib/seo";
+import { sanityImageUrl } from "@/sanity/lib/image";
 import { localizedSlugParams, PLACEHOLDER_SLUG, slugMap } from "@/lib/static-params";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PROJECT_PAGE_QUERY } from "@/sanity/lib/queries";
@@ -36,15 +38,25 @@ async function getData(slug: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const [data, locale] = await Promise.all([getData(slug), getLocale()]);
+  const [data, locale, t] = await Promise.all([getData(slug), getLocale(), getTranslations()]);
   const project = data?.project;
   if (!project) return {};
+  // Without a CMS summary: a description from the project's own facts
+  const facts = [
+    project.projectType ? t(`projects.types.${project.projectType}` as "projects.types.villa") : null,
+    project.city && !project.city.includes("[TO CONFIRM]") ? project.city : null,
+    project.year,
+  ].filter(Boolean);
+  const systemNames = (project.systems ?? []).map((s) => s?.title).filter(Boolean).join(", ");
+  const fallback = [`${project.title}${facts.length ? ` — ${facts.join(", ")}` : ""}.`, systemNames && `${t("projects.facts.systems")}: ${systemNames}.`, t("footer.about")]
+    .filter(Boolean)
+    .join(" ");
   return pageMetadata({
     locale,
     pathname: "/projektet/[slug]",
     param: { key: "slug", slugs: slugMap(project.slugs, routing.locales) },
     title: project.title,
-    description: project.summary,
+    description: project.summary || fallback,
     seo: project.seo?.image?.assetId ? project.seo : { ...project.seo, image: project.coverImage },
   });
 }
@@ -190,6 +202,24 @@ export default async function ProjectPage({ params }: Props) {
       )}
 
       <PageCta />
+
+      {/* CreativeWork (Architecture §8): name, image, location */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          ...(project.summary ? { description: project.summary } : {}),
+          ...(project.coverImage?.assetId
+            ? { image: sanityImageUrl({ assetId: project.coverImage.assetId, crop: project.coverImage.crop ?? null }, 1600) }
+            : {}),
+          ...(project.city && !project.city.includes("[TO CONFIRM]")
+            ? { locationCreated: { "@type": "Place", name: [project.city, project.country].filter(Boolean).join(", ") } }
+            : {}),
+          ...(project.year ? { dateCreated: String(project.year) } : {}),
+          creator: { "@id": `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://visad.al"}/#business` },
+        }}
+      />
     </>
   );
 }

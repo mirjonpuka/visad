@@ -130,7 +130,8 @@ export function CMSImage({
         onLoad={() => setLoaded(true)}
         className={cn(
           "motion-fade object-cover transition-opacity duration-500 ease-standard",
-          loaded ? "opacity-100" : "opacity-0",
+          // LCP images paint as soon as they decode, without waiting for hydration
+          loaded || priority ? "opacity-100" : "opacity-0",
           imgClassName,
         )}
         style={position ? { objectPosition: position } : undefined}

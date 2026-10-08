@@ -848,9 +848,6 @@
    Motion (Phase 5)
    ========================================================================== */
 
-/* Animated elements are hidden from first paint until GSAP takes over.
-   `js-motion` is set in <head> only when JS runs and motion is allowed;
-   the 3s safety animation reveals everything if scripts never arrive. */
 /* Sticky bars under the navbar (system sub-nav, project filters): follow the
    navbar as it hides on scroll down and returns on scroll up */
 .sticky-under-nav {
@@ -961,6 +958,9 @@ textarea.field-input {
   margin-bottom: -0.16em;
 }
 
+/* Animated elements are hidden from first paint until GSAP takes over.
+   `js-motion` is set in <head> only when JS runs and motion is allowed;
+   the 3s safety animation reveals everything if scripts never arrive. */
 html.js-motion [data-anim],
 html.js-motion [data-hero-fade] {
   visibility: hidden;
@@ -969,6 +969,45 @@ html.js-motion [data-hero-fade] {
 @keyframes anim-safety {
   to {
     visibility: visible;
+  }
+}
+
+/* Hero entrance on a full page load without the intro (`hero-css`, set by the
+   head script): pure CSS from the first paint, so the hero text and image do
+   not wait for hydration (LCP, Architecture §9). Same motion as the GSAP
+   entrance used after in-app navigations (Motion §2): image settles 1.08 → 1,
+   headline rises from a mask, eyebrow/lead/buttons fade up. */
+html.js-motion.hero-css [data-hero-fade],
+html.js-motion.hero-css [data-hero-title] {
+  visibility: visible;
+}
+html.js-motion.hero-css [data-hero-fade] {
+  animation: hero-fade-up 0.9s var(--ease-out-expo) 0.25s both;
+}
+html.js-motion.hero-css [data-hero-title] {
+  animation: hero-title-rise 1s var(--ease-out-expo) 0.05s both;
+}
+html.js-motion.hero-css [data-hero-image] {
+  animation: hero-image-settle 1.6s var(--ease-out-expo) both;
+}
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+@keyframes hero-title-rise {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(40px);
+  }
+  to {
+    clip-path: inset(0 0 -0.2em 0);
+  }
+}
+@keyframes hero-image-settle {
+  from {
+    transform: scale(1.08);
   }
 }
 

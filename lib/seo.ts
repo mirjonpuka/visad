@@ -34,11 +34,16 @@ export function pageMetadata({ locale, pathname, param, title, description, seo 
   const locales = param ? routing.locales.filter((l) => param.slugs[l]) : routing.locales;
   const languages: Record<string, string> = Object.fromEntries(locales.map((l) => [l, href(pathname, l, param)]));
   languages["x-default"] = href(pathname, "sq", param);
-  const image = seo?.image?.assetId
+  const photo = seo?.image?.assetId
     ? sanityImageUrl({ assetId: seo.image.assetId, crop: seo.image.crop ?? null }, 1200)
     : undefined;
   const finalTitle = seo?.title || title;
   const finalDescription = seo?.description || description || undefined;
+  // Branded card from /api/og (title + photo when there is one)
+  const og = new URL("/api/og", SITE_URL);
+  og.searchParams.set("title", finalTitle);
+  if (photo) og.searchParams.set("image", photo);
+  const image = og.toString();
 
   return {
     title: finalTitle,
@@ -51,8 +56,9 @@ export function pageMetadata({ locale, pathname, param, title, description, seo 
       siteName: "VISAD Construction",
       locale,
       type: "website",
-      ...(image ? { images: [{ url: image, width: 1200 }] } : {}),
+      images: [{ url: image, width: 1200, height: 630, alt: finalTitle }],
     },
+    twitter: { card: "summary_large_image", title: finalTitle, description: finalDescription, images: [image] },
     ...(seo?.noIndex ? { robots: { index: false, follow: true } } : {}),
   };
 }

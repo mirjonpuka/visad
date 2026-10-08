@@ -2,7 +2,7 @@
 
 import { useRef, type ReactNode } from "react";
 import { cn, htmlRef, type HtmlTag } from "@/lib/utils";
-import { EASE, ENTER_START, gsap, SplitText, useGSAP } from "./gsap";
+import { afterIdle, EASE, ENTER_START, gsap, SplitText, useGSAP } from "./gsap";
 import { onHeroIn } from "./heroSignal";
 import { useMotion } from "./MotionProvider";
 
@@ -33,43 +33,57 @@ export function SplitHeadline({
   const { reducedMotion, ready } = useMotion();
 
   useGSAP(
-    () => {
+    (_, contextSafe) => {
       if (!ready || !ref.current) return;
       const el = ref.current;
       if (reducedMotion) return release(el);
+      // Hero headline on a full page load: CSS animates it ("hero-css" in globals.css)
+      if (trigger === "manual" && document.documentElement.classList.contains("hero-css")) return release(el);
       let tween: gsap.core.Tween | undefined;
-      const split = SplitText.create(el, {
-        type: "lines",
-        mask: "lines",
-        // Masks get "split-line-mask": extra room for descenders and ç / ë marks
-        linesClass: "split-line",
-        autoSplit: true,
-        onSplit(self) {
-          release(el);
-          tween?.kill();
-          tween = gsap.from(self.lines, {
-            yPercent: 100,
-            duration: 0.9,
-            ease: EASE.outExpo,
-            stagger: 0.09,
-            delay,
-            paused: trigger === "manual",
-            scrollTrigger: trigger === "scroll" ? { trigger: el, start: ENTER_START, once: true } : undefined,
-          });
-          return tween;
-        },
-      });
-      const stop = trigger === "manual" ? onHeroIn(() => tween?.play()) : undefined;
+      let split: SplitText | undefined;
+      let stop: (() => void) | undefined;
+      const setup = () => {
+        split = SplitText.create(el, {
+          type: "lines",
+          mask: "lines",
+          // Masks get "split-line-mask": extra room for descenders and ç / ë marks
+          linesClass: "split-line",
+          autoSplit: true,
+          onSplit(self) {
+            release(el);
+            tween?.kill();
+            tween = gsap.from(self.lines, {
+              yPercent: 100,
+              duration: 0.9,
+              ease: EASE.outExpo,
+              stagger: 0.09,
+              delay,
+              paused: trigger === "manual",
+              scrollTrigger: trigger === "scroll" ? { trigger: el, start: ENTER_START, once: true } : undefined,
+            });
+            return tween;
+          },
+        });
+        stop = trigger === "manual" ? onHeroIn(() => tween?.play()) : undefined;
+      };
+      // Hero headlines immediately; scroll reveals when the browser is idle
+      const cancel = trigger === "scroll" ? afterIdle(contextSafe!(setup)) : (setup(), undefined);
       return () => {
+        cancel?.();
         stop?.();
-        split.revert();
+        split?.revert();
       };
     },
     { dependencies: [ready, reducedMotion], scope: ref },
   );
 
   return (
-    <Tag ref={htmlRef(ref)} className={className} data-anim="">
+    <Tag
+      ref={htmlRef(ref)}
+      className={className}
+      data-anim=""
+      data-hero-title={trigger === "manual" ? "" : undefined}
+    >
       {children}
     </Tag>
   );
@@ -88,20 +102,24 @@ export function Reveal({
   const { reducedMotion, ready } = useMotion();
 
   useGSAP(
-    () => {
+    (_, contextSafe) => {
       if (!ready || !ref.current) return;
       const el = ref.current;
-      release(el);
-      if (reducedMotion) return;
-      gsap.from(stagger ? el.children : el, {
-        autoAlpha: 0,
-        y,
-        duration: 0.7,
-        ease: EASE.outExpo,
-        stagger: stagger ? 0.06 : 0,
-        delay,
-        scrollTrigger: { trigger: el, start: ENTER_START, once: true },
-      });
+      if (reducedMotion) return release(el);
+      return afterIdle(
+        contextSafe!(() => {
+          release(el);
+          gsap.from(stagger ? el.children : el, {
+            autoAlpha: 0,
+            y,
+            duration: 0.7,
+            ease: EASE.outExpo,
+            stagger: stagger ? 0.06 : 0,
+            delay,
+            scrollTrigger: { trigger: el, start: ENTER_START, once: true },
+          });
+        }),
+      );
     },
     { dependencies: [ready, reducedMotion], scope: ref },
   );
@@ -122,22 +140,26 @@ export function ImageWipe({ className, children, index = 0 }: Common & { index?:
   const { reducedMotion, ready } = useMotion();
 
   useGSAP(
-    () => {
+    (_, contextSafe) => {
       if (!ready || !ref.current) return;
       const el = ref.current;
-      release(el);
-      if (reducedMotion) return;
-      const img = el.querySelector("img");
-      const tl = gsap.timeline({
-        delay: index * 0.08,
-        scrollTrigger: { trigger: el, start: ENTER_START, once: true },
-      });
-      tl.fromTo(
-        el,
-        { clipPath: "inset(100% 0% 0% 0%)" },
-        { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: EASE.inOutQuart, clearProps: "clipPath" },
+      if (reducedMotion) return release(el);
+      return afterIdle(
+        contextSafe!(() => {
+          release(el);
+          const img = el.querySelector("img");
+          const tl = gsap.timeline({
+            delay: index * 0.08,
+            scrollTrigger: { trigger: el, start: ENTER_START, once: true },
+          });
+          tl.fromTo(
+            el,
+            { clipPath: "inset(100% 0% 0% 0%)" },
+            { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: EASE.inOutQuart, clearProps: "clipPath" },
+          );
+          if (img) tl.fromTo(img, { scale: 1.15 }, { scale: 1, duration: 1.1, ease: EASE.inOutQuart }, 0);
+        }),
       );
-      if (img) tl.fromTo(img, { scale: 1.15 }, { scale: 1, duration: 1.1, ease: EASE.inOutQuart }, 0);
     },
     { dependencies: [ready, reducedMotion], scope: ref },
   );
@@ -163,22 +185,26 @@ export function Parallax({
   const { reducedMotion, isTouch, ready } = useMotion();
 
   useGSAP(
-    () => {
+    (_, contextSafe) => {
       if (!ready || reducedMotion || isTouch || !ref.current) return;
       const el = ref.current;
       const trigger = el.parentElement ?? el;
-      gsap.fromTo(
-        el,
-        { yPercent: -amount },
-        { yPercent: amount, ease: "none", scrollTrigger: { trigger, start: "top bottom", end: "bottom top", scrub: true } },
+      return afterIdle(
+        contextSafe!(() => {
+          gsap.fromTo(
+            el,
+            { yPercent: -amount },
+            { yPercent: amount, ease: "none", scrollTrigger: { trigger, start: "top bottom", end: "bottom top", scrub: true } },
+          );
+          if (darken) {
+            gsap.to(el, {
+              filter: "brightness(0.7)",
+              ease: "none",
+              scrollTrigger: { trigger, start: "top top", end: "bottom top", scrub: true },
+            });
+          }
+        }),
       );
-      if (darken) {
-        gsap.to(el, {
-          filter: "brightness(0.7)",
-          ease: "none",
-          scrollTrigger: { trigger, start: "top top", end: "bottom top", scrub: true },
-        });
-      }
     },
     { dependencies: [ready, reducedMotion, isTouch], scope: ref },
   );
@@ -196,19 +222,23 @@ export function DrawLine({ className, delay = 0 }: { className?: string; delay?:
   const { reducedMotion, ready } = useMotion();
 
   useGSAP(
-    () => {
+    (_, contextSafe) => {
       if (!ready || !ref.current) return;
       const el = ref.current;
-      release(el);
-      if (reducedMotion) return;
-      gsap.from(el, {
-        scaleX: 0,
-        transformOrigin: "left center",
-        duration: 1.1,
-        ease: EASE.inOutQuart,
-        delay,
-        scrollTrigger: { trigger: el, start: "top 92%", once: true },
-      });
+      if (reducedMotion) return release(el);
+      return afterIdle(
+        contextSafe!(() => {
+          release(el);
+          gsap.from(el, {
+            scaleX: 0,
+            transformOrigin: "left center",
+            duration: 1.1,
+            ease: EASE.inOutQuart,
+            delay,
+            scrollTrigger: { trigger: el, start: "top 92%", once: true },
+          });
+        }),
+      );
     },
     { dependencies: [ready, reducedMotion], scope: ref },
   );
@@ -226,25 +256,29 @@ export function CountUp({ value, className }: { value: string; className?: strin
   const match = value.match(/^(\D*)(\d+(?:[.,]\d+)?)(.*)$/);
 
   useGSAP(
-    () => {
+    (_, contextSafe) => {
       if (!ready || reducedMotion || !match || !ref.current) return;
       const el = ref.current;
       const [, prefix, digits, suffix] = match;
       const target = Number(digits.replace(",", "."));
       const counter = { n: 0 };
-      el.textContent = `${prefix}0${suffix}`;
-      gsap.to(counter, {
-        n: target,
-        duration: 1.6,
-        ease: EASE.outExpo,
-        scrollTrigger: { trigger: el, start: ENTER_START, once: true },
-        onUpdate: () => {
-          el.textContent = `${prefix}${Math.round(counter.n)}${suffix}`;
-        },
-        onComplete: () => {
-          el.textContent = value;
-        },
-      });
+      return afterIdle(
+        contextSafe!(() => {
+          el.textContent = `${prefix}0${suffix}`;
+          gsap.to(counter, {
+            n: target,
+            duration: 1.6,
+            ease: EASE.outExpo,
+            scrollTrigger: { trigger: el, start: ENTER_START, once: true },
+            onUpdate: () => {
+              el.textContent = `${prefix}${Math.round(counter.n)}${suffix}`;
+            },
+            onComplete: () => {
+              el.textContent = value;
+            },
+          });
+        }),
+      );
     },
     { dependencies: [ready, reducedMotion, value], scope: ref },
   );

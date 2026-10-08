@@ -68,6 +68,8 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
       setTitle(target.title);
       // The next page's hero waits until the panel lifts
       delete document.documentElement.dataset.heroIn;
+      // From now on heroes enter with GSAP when the panel lifts, not with CSS under the panel
+      document.documentElement.classList.remove("hero-css");
       const covered = new Promise<void>((resolve) => {
         const tl = gsap.timeline({ onComplete: resolve });
         tl.set(panelRef.current, { yPercent: 100, visibility: "visible" })

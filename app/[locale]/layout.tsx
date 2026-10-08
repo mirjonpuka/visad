@@ -20,7 +20,10 @@ import { Magnetic } from "@/components/motion/Magnetic";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { RouteChangeEmitter } from "@/components/motion/routeEvents";
 import { TransitionProvider } from "@/components/motion/TransitionProvider";
+import { BusinessJsonLd } from "@/components/seo/JsonLd";
 import { routing } from "@/i18n/routing";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "../globals.css";
 
 // Brand §3: Geist + Geist Mono only, latin + latin-ext (ë, ç)
@@ -94,6 +97,12 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
             </MotionProvider>
           </SiteDataProvider>
         </NextIntlClientProvider>
+        <BusinessJsonLd site={siteData} locale={locale} />
+        {/* Cookieless (Architecture §1), so no consent needed; they read the URL → Suspense */}
+        <Suspense fallback={null}>
+          <Analytics />
+          <SpeedInsights />
+        </Suspense>
         <Suspense fallback={null}>
           <DraftModeTools />
         </Suspense>

@@ -9,7 +9,7 @@ import { defineConfig, defineField } from "sanity";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { internationalizedArray } from "sanity-plugin-internationalized-array";
-import { LeadStatusBadge, MissingTranslationsBadge } from "./sanity/badges";
+import { LeadStatusBadge, MissingTranslationsBadge, ReviewTranslationsBadge } from "./sanity/badges";
 import {
   apiVersion,
   dataset,
@@ -75,7 +75,7 @@ export default defineConfig([
           : actions,
       newDocumentOptions: (options, { creationContext }) =>
         creationContext.type === "global" ? options.filter((o) => !singletons.has(o.templateId)) : options,
-      badges: (badges) => [...badges, MissingTranslationsBadge],
+      badges: (badges) => [...badges, MissingTranslationsBadge, ReviewTranslationsBadge],
     },
   },
   {

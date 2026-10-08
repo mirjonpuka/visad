@@ -4,7 +4,8 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { HeroUnderNav } from "@/components/layout/LayoutUIProvider";
 import { ContactForms } from "@/components/forms/ContactForms";
-import { Reveal, SplitHeadline } from "@/components/motion/reveals";
+import { HeroMotion } from "@/components/motion/HeroMotion";
+import { SplitHeadline } from "@/components/motion/reveals";
 import { MapVisit } from "@/components/sections/MapVisit";
 import { getFormConfig } from "@/lib/forms/config";
 import { SYSTEM_KEYS } from "@/lib/forms/schemas";
@@ -41,20 +42,22 @@ export default async function ContactPage() {
 
   return (
     <>
-      <section className="surface-dark pt-(--navbar-h)">
+      <HeroMotion className="surface-dark pt-(--navbar-h)">
         <HeroUnderNav />
         <div className="site-container pt-12 pb-16 md:pt-20 md:pb-24">
-          <Breadcrumbs items={[{ label: t("contact.title") }]} />
-          <SplitHeadline as="h1" className="mt-8 text-display-l">
+          <div data-hero-fade="">
+            <Breadcrumbs items={[{ label: t("contact.title") }]} />
+          </div>
+          <SplitHeadline as="h1" trigger="manual" className="mt-8 text-display-l">
             {t("contact.title")}
           </SplitHeadline>
           {lead && (
-            <Reveal as="p" className="mt-6 max-w-[560px] text-body-l text-text-on-dark-2">
+            <p data-hero-fade="" className="mt-6 max-w-[560px] text-body-l text-text-on-dark-2">
               {lead}
-            </Reveal>
+            </p>
           )}
 
-          <Reveal as="ul" stagger className="mt-14 grid gap-4 md:grid-cols-3" aria-label={t("contact.quickLabel")}>
+          <ul data-hero-fade="" className="mt-14 grid gap-4 md:grid-cols-3" aria-label={t("contact.quickLabel")}>
             <li>
               <a
                 href={whatsappHref(site.whatsappNumber)}
@@ -87,9 +90,9 @@ export default async function ContactPage() {
                 <span className="font-mono text-body text-text-on-dark-2">{site.email}</span>
               </a>
             </li>
-          </Reveal>
+          </ul>
         </div>
-      </section>
+      </HeroMotion>
 
       <section id="formulari" className="surface-light scroll-mt-24 section-y">
         <div className="site-container">

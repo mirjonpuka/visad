@@ -99,7 +99,7 @@ test.describe("laptop 1440", () => {
 
   test("localized links: Projects in German", async ({ page }) => {
     await open(page, "/de");
-    await expect(page.locator("header").getByRole("link", { name: "Projects" })).toHaveAttribute(
+    await expect(page.locator("header").getByRole("link", { name: "Projekte" })).toHaveAttribute(
       "href",
       "/de/projekte",
     );

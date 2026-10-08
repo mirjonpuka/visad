@@ -18,4 +18,18 @@ export const EASE = {
 /** Default trigger: element top reaches 85% of the viewport, play once (Motion §4) */
 export const ENTER_START = "top 85%";
 
+/**
+ * Run `fn` when the browser is idle (≤ 1.5s later). Scroll reveals set up
+ * this way, each in its own small task, instead of all inside React's
+ * hydration commit — that one long task was most of the mobile TBT (Phase 9).
+ */
+export function afterIdle(fn: () => void) {
+  if (typeof window.requestIdleCallback === "function") {
+    const id = window.requestIdleCallback(fn, { timeout: 1500 });
+    return () => window.cancelIdleCallback(id);
+  }
+  const id = window.setTimeout(fn, 50);
+  return () => window.clearTimeout(id);
+}
+
 export { gsap, ScrollTrigger, SplitText, useGSAP };

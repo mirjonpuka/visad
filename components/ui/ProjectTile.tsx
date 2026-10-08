@@ -11,6 +11,8 @@ type Props = {
   number: string;
   viewLabel: string;
   sizes: string;
+  /** Above-the-fold tile (projects index): eager + high priority */
+  priority?: boolean;
   className?: string;
 };
 
@@ -19,7 +21,7 @@ type Props = {
  * bottom-left, Mono number top-right. Hover (laptop): image 1.04, overlay
  * darkens, "Shiko projektin →" slides up 12px (Motion §5.5).
  */
-export function ProjectTile({ title, slug, meta, image, number, viewLabel, sizes, className }: Props) {
+export function ProjectTile({ title, slug, meta, image, number, viewLabel, sizes, priority, className }: Props) {
   return (
     <Link
       href={{ pathname: "/projektet/[slug]", params: { slug } }}
@@ -30,6 +32,7 @@ export function ProjectTile({ title, slug, meta, image, number, viewLabel, sizes
         image={image}
         fill
         sizes={sizes}
+        priority={priority}
         imgClassName="transition-transform duration-(--dur-l) ease-out-expo group-hover:scale-[1.04]"
         className="rounded-none"
       />

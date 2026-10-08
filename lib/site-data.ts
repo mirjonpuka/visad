@@ -18,6 +18,8 @@ export type NavItem = {
 export type SiteData = {
   companyName: string;
   address: string;
+  /** Map pin (Cilësimet → Vendndodhja në hartë); null until set */
+  geo: { lat: number; lng: number } | null;
   mapsUrl: string;
   phones: { display: string; tel: string }[];
   email: string;
@@ -48,6 +50,7 @@ export async function getSiteData(): Promise<SiteData> {
   return {
     companyName: s.companyName ?? "VISAD Construction",
     address,
+    geo: s.geo ? { lat: s.geo.lat, lng: s.geo.lng } : null,
     mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`,
     phones: (s.phones ?? []).map((p) => ({ display: p.number, tel: p.number.replace(/[^\d+]/g, "") })),
     email: s.email ?? "info@visad.al",

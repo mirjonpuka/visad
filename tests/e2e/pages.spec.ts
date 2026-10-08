@@ -114,6 +114,25 @@ test("lightbox: opens from the gallery, arrows move, Esc closes and returns focu
   await expect(thumb).toBeFocused();
 });
 
+test("Italian and German pages use their own slugs and translated CMS content", async ({ page }) => {
+  await open(page, "/it/sistemi/finestre");
+  await expect(page.locator("h1")).toHaveText("Finestre");
+  await open(page, "/de");
+  await expect(page.locator("h1")).toContainText("Präzision");
+  await expect(page.locator('header a[hreflang="it"]').first()).toHaveAttribute("href", "/it");
+  await open(page, "/de/projekte/wohnanlage");
+  await expect(page.locator("h1")).toContainText("Wohnanlage");
+});
+
+test("all message files have the same keys", async () => {
+  const fs = await import("node:fs");
+  const keys = (o: Record<string, unknown>, p = ""): string[] =>
+    Object.entries(o).flatMap(([k, v]) => (v && typeof v === "object" ? keys(v as Record<string, unknown>, `${p}${k}.`) : [p + k]));
+  const read = (l: string) => keys(JSON.parse(fs.readFileSync(`messages/${l}.json`, "utf8"))).sort();
+  const base = read("sq");
+  for (const locale of ["en", "it", "de"]) expect(read(locale), locale).toEqual(base);
+});
+
 test("unknown URL shows the 404 page", async ({ page }) => {
   const response = await page.goto("/nuk-ekziston");
   expect(response?.status()).toBe(404);

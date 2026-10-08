@@ -28,13 +28,14 @@ async function getJob(slug: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const [job, locale] = await Promise.all([getJob(slug), getLocale()]);
+  const [job, locale, t] = await Promise.all([getJob(slug), getLocale(), getTranslations()]);
   if (!job) return {};
   return pageMetadata({
     locale,
     pathname: "/karriera/[slug]",
     param: { key: "slug", slugs: slugMap(job.slugs, routing.locales) },
     title: job.title,
+    description: [job.title, job.location, t("careers.title")].filter(Boolean).join(" · "),
   });
 }
 

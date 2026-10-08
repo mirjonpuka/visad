@@ -1,1 +1,280 @@
-{}
+{
+  "nav": {
+    "systems": "Systeme",
+    "projects": "Projekte",
+    "factory": "Werk",
+    "solutions": "Lösungen",
+    "careers": "Karriere",
+    "contact": "Kontakt",
+    "tagline": "Aluminiumsysteme · Shkodër",
+    "main": "Hauptnavigation",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "language": "Sprache",
+    "home": "VISAD, Startseite",
+    "systemsIntro": "Systeme aus Aluminium und PVC, gefertigt in Shkodër.",
+    "solutionsIntro": "Für wen wir arbeiten."
+  },
+  "languages": { "sq": "Shqip", "en": "English", "it": "Italiano", "de": "Deutsch" },
+  "whatsapp": {
+    "message": "Hallo VISAD! Ich schreibe Ihnen von der Seite: {page}"
+  },
+  "cta": {
+    "quote": "Angebot anfordern",
+    "quoteShort": "Angebot",
+    "whatsapp": "Per WhatsApp schreiben",
+    "whatsappFab": "Chat auf WhatsApp",
+    "projects": "Projekte ansehen",
+    "allProjects": "Alle Projekte",
+    "allSystems": "Alle Systeme",
+    "details": "Details ansehen",
+    "datasheet": "Datenblatt (PDF)",
+    "learnMore": "Mehr erfahren",
+    "quoteForm": "Angebotsformular"
+  },
+  "cursor": { "view": "Ansehen", "drag": "Ziehen", "scroll": "Scrollen" },
+  "home": {
+    "scroll": "Scrollen",
+    "systemsEyebrow": "01 — Systeme",
+    "projectsEyebrow": "02 — Projekte",
+    "factoryEyebrow": "03 — Werk",
+    "solutionsEyebrow": "04 — Lösungen",
+    "statsLabel": "VISAD in Zahlen",
+    "viewProject": "Projekt ansehen",
+    "factoryLink": "Das Werk entdecken",
+    "alumilTitle": "Zertifizierter ALUMIL-Partner",
+    "alumilLogo": "Offizielles Logo des ALUMIL-Partners",
+    "certificates": "Zertifikate",
+    "systemOf": "{n} / {total}",
+    "finish": "Profiloberfläche",
+    "finishSilver": "Silber",
+    "finishAnthracite": "Anthrazit",
+    "profileRenderAlt": "Thermisch getrenntes Aluminiumprofil in Einzelteilen: Außen- und Innenschale, Polyamidstege und EPDM-Dichtungen"
+  },
+  "skip": "Zum Inhalt springen",
+  "breadcrumb": { "home": "Startseite", "label": "Brotkrumen-Navigation" },
+  "a11y": {
+    "loading": "Wird geladen",
+    "open": "Öffnen",
+    "close": "Schließen"
+  },
+  "form": {
+    "continue": "Weiter",
+    "back": "Zurück",
+    "send": "Anfrage senden",
+    "success": "Vielen Dank! Wir melden uns innerhalb von 24 Stunden.",
+    "backHome": "Zur Startseite",
+    "required": "Pflichtfeld",
+    "optional": "optional",
+    "step": "Schritt {n} von {total}",
+    "quote": {
+      "step1": "Was benötigen Sie?",
+      "step2": "Ihre Kontaktdaten",
+      "systems": "System",
+      "projectType": "Projektart",
+      "projectTypes": {
+        "new-house": "Neubau",
+        "renovation": "Sanierung",
+        "apartment-building": "Mehrfamilienhaus",
+        "business": "Gewerbe"
+      },
+      "openings": "Anzahl der Öffnungen",
+      "decrease": "Weniger",
+      "increase": "Mehr",
+      "dimensions": "Ungefähre Maße",
+      "dimensionsHint": "z. B. 3 Fenster 120 × 140 cm, 1 Tür 90 × 210 cm",
+      "city": "Ort",
+      "name": "Vor- und Nachname",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "preferredContact": "Wie sollen wir Sie kontaktieren?",
+      "contactOptions": { "whatsapp": "WhatsApp", "phone": "Telefon", "email": "E-Mail" },
+      "photos": "Fotos vom Objekt",
+      "photosHint": "Bis zu 6 Fotos, max. 10 MB je Foto (JPG, PNG, WebP, HEIC)",
+      "message": "Nachricht"
+    },
+    "tender": {
+      "company": "Unternehmen",
+      "contactPerson": "Ansprechpartner",
+      "role": "Position",
+      "projectName": "Projektname",
+      "location": "Standort",
+      "stage": "Phase",
+      "stages": { "design": "Planung", "tender": "Ausschreibung", "construction": "Bau" },
+      "area": "Ungefähre Fläche (m²)",
+      "deadline": "Frist",
+      "documents": "Unterlagen (PDF, DWG, ZIP)",
+      "documentsHint": "Bis zu 5 Dateien, max. 25 MB je Datei"
+    },
+    "job": {
+      "cv": "Lebenslauf (PDF)",
+      "cvHint": "Max. 5 MB"
+    },
+    "consent": "Ich akzeptiere die Datenschutzerklärung",
+    "privacyLink": "Datenschutzerklärung lesen",
+    "files": {
+      "drop": "Dateien hierher ziehen oder",
+      "browse": "vom Gerät auswählen",
+      "remove": "{name} entfernen",
+      "retry": "Erneut versuchen",
+      "uploading": "Wird hochgeladen…",
+      "done": "Hochgeladen",
+      "failed": "Hochladen fehlgeschlagen",
+      "tooMany": "Sie können bis zu {max} Dateien hochladen."
+    },
+    "sending": "Wird gesendet…",
+    "errorBanner": "Ihre Anfrage wurde nicht gesendet. Ihre Angaben bleiben erhalten, bitte versuchen Sie es erneut.",
+    "retry": "Erneut versuchen",
+    "rateLimited": "Zu viele Anfragen in kurzer Zeit. Bitte versuchen Sie es in einigen Minuten erneut.",
+    "verifying": "Wir prüfen, dass Sie kein Roboter sind…",
+    "errors": {
+      "required": "Dieses Feld ist erforderlich.",
+      "phone": "Bitte geben Sie eine gültige Telefonnummer ein.",
+      "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "fileSize": "Die Datei ist zu groß (max. {max} MB).",
+      "fileType": "Dieser Dateityp ist nicht erlaubt.",
+      "generic": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "consent": "Bitte akzeptieren Sie die Datenschutzerklärung.",
+      "number": "Bitte geben Sie eine Zahl ein.",
+      "tooLong": "Der Text ist zu lang.",
+      "uploading": "Bitte warten Sie, bis die Dateien hochgeladen sind.",
+      "cv": "Bitte laden Sie Ihren Lebenslauf hoch."
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "quickLabel": "Schnellkontakt",
+    "whatsappText": "Der schnellste Weg: Fotos und Maße direkt vom Handy.",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "formsLabel": "Formulare",
+    "tabQuote": "Angebot anfordern",
+    "tabTender": "Ausschreibung / B2B",
+    "visit": "Adresse & Öffnungszeiten"
+  },
+  "email": {
+    "confirmSubject": "Wir haben Ihre Anfrage erhalten — VISAD",
+    "confirmHello": "Guten Tag {name},",
+    "confirmBody": "Vielen Dank für Ihre Nachricht. Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden.",
+    "confirmWhatsapp": "Wenn es schneller gehen soll, schreiben Sie uns per WhatsApp:",
+    "confirmSign": "Ihr Team von VISAD Construction"
+  },
+  "projects": {
+    "filters": {
+      "type": "Art",
+      "system": "System",
+      "city": "Ort",
+      "clear": "Filter zurücksetzen",
+      "filter": "Filtern",
+      "show": "{n} Projekte anzeigen",
+      "loadMore": "Mehr laden",
+      "empty": "Keine Projekte für diese Filter."
+    },
+    "types": {
+      "residential": "Wohnbau",
+      "villa": "Villa",
+      "hotel": "Hotel",
+      "commercial": "Gewerbe",
+      "public": "Öffentlich"
+    },
+    "facts": {
+      "client": "Bauherr",
+      "category": "Kategorie",
+      "area": "Fläche",
+      "systems": "Systeme",
+      "year": "Jahr",
+      "story": "Aufgabe & Lösung",
+      "next": "Nächstes Projekt"
+    }
+  },
+  "careers": {
+    "title": "Arbeiten Sie mit uns",
+    "empty": "Derzeit sind keine Stellen offen. Senden Sie uns Ihren Lebenslauf.",
+    "apply": "Bewerben",
+    "eyebrow": "Karriere",
+    "open": "Offene Stellen",
+    "benefits": "Vorteile",
+    "applyTitle": "Auf diese Stelle bewerben",
+    "generalTitle": "Initiativbewerbung",
+    "types": {
+      "full-time": "Vollzeit",
+      "part-time": "Teilzeit",
+      "seasonal": "Saisonal"
+    }
+  },
+  "systems": {
+    "eyebrow": "Systeme",
+    "view": "System ansehen",
+    "downloads": "Datenblätter & Kataloge",
+    "download": "Herunterladen",
+    "subnav": "Auf dieser Seite",
+    "overview": "Überblick",
+    "series": "Serien",
+    "technical": "Technische Details",
+    "finishes": "Farben & Oberflächen",
+    "projects": "Projekte",
+    "faq": "Fragen",
+    "faqTitle": "Häufige Fragen",
+    "seriesTitle": "ALUMIL-Serien",
+    "property": "Eigenschaft",
+    "value": "Wert",
+    "crossSection": "Profilschnitt",
+    "relatedTitle": "Projekte mit diesem System",
+    "allWithSystem": "Alle Projekte mit diesem System",
+    "datasheet": "Datenblatt",
+    "languages": { "sq": "Albanisch", "en": "Englisch", "it": "Italienisch", "de": "Deutsch", "el": "Griechisch" }
+  },
+  "projectsPage": {
+    "title": "Projekte",
+    "count": "{n, plural, one {# Projekt} other {# Projekte}}",
+    "allCities": "Alle Orte",
+    "filtersLabel": "Projektfilter",
+    "close": "Schließen",
+    "gallery": "Galerie",
+    "systemsUsed": "Eingesetzte Systeme",
+    "photo": "Foto {n} von {total}",
+    "prev": "Vorheriges Foto",
+    "next": "Nächstes Foto",
+    "closeGallery": "Galerie schließen"
+  },
+  "factory": {
+    "eyebrow": "Werk",
+    "process": "Ablauf",
+    "machinery": "Maschinen",
+    "certificates": "Zertifikate",
+    "downloadPdf": "PDF herunterladen",
+    "team": "Team",
+    "visit": "Besuchen Sie uns",
+    "address": "Adresse",
+    "directions": "Route planen",
+    "loadMap": "Interaktive Karte anzeigen",
+    "mapNote": "Die Karte wird erst beim Öffnen von Google Maps geladen.",
+    "mapTitle": "Karte des VISAD-Standorts",
+    "alumilCertificate": "Zertifizierter ALUMIL-Partner"
+  },
+  "solutionsPage": {
+    "eyebrow": "Lösungen",
+    "offer": "Was wir bieten",
+    "systems": "Empfohlene Systeme",
+    "projects": "Passende Projekte",
+    "tenderForm": "Ausschreibungsformular"
+  },
+  "notFound": "Diese Seite wurde nicht gefunden.",
+  "cookie": {
+    "text": "Wir verwenden nur notwendige Cookies für den Betrieb der Website.",
+    "accept": "Akzeptieren",
+    "essential": "Nur notwendige",
+    "label": "Cookies"
+  },
+  "footer": {
+    "about": "Systeme aus Aluminium und PVC. Gefertigt und montiert in Shkodër.",
+    "ctaTitle": "Haben Sie ein Projekt?",
+    "systems": "Systeme",
+    "company": "Unternehmen",
+    "contact": "Kontakt",
+    "privacy": "Datenschutz",
+    "hours": "Öffnungszeiten",
+    "alumil": "Zertifizierter ALUMIL-Partner",
+    "copyright": "© {year} VISAD Construction"
+  }
+}

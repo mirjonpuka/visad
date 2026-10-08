@@ -6,7 +6,12 @@ import { PageCta } from "@/components/sections/PageCta";
 import { PageHero } from "@/components/sections/PageHero";
 import { ButtonSecondary } from "@/components/ui/Button";
 import { DownloadsList } from "@/components/ui/DownloadsList";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { getPathname } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://visad.al";
 import { cn } from "@/lib/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { SYSTEMS_INDEX_QUERY } from "@/sanity/lib/queries";
@@ -31,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /** Systems index (UI §4): hero, intro row, 6 alternating rows, downloads, CTA. */
 export default async function SystemsPage() {
-  const t = await getTranslations();
+  const [t, locale] = await Promise.all([getTranslations(), getLocale()]);
   const { page, systems, downloads } = await getData();
   const keySpecs = (page?.keySpecs ?? []).filter((s) => s.label && s.value);
 
@@ -136,6 +141,21 @@ export default async function SystemsPage() {
       )}
 
       <PageCta />
+
+      {/* ItemList of the systems (Architecture §8) */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: t("nav.systems"),
+          itemListElement: systems.map((system, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: system.title,
+            url: SITE_URL + getPathname({ href: { pathname: "/sistemet/[slug]", params: { slug: system.slug } }, locale: locale as Locale }),
+          })),
+        }}
+      />
     </>
   );
 }

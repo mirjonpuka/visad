@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { Reveal, SplitHeadline } from "@/components/motion/reveals";
+import { HeroMotion } from "@/components/motion/HeroMotion";
+import { SplitHeadline } from "@/components/motion/reveals";
 import { PageCta } from "@/components/sections/PageCta";
 import { ProjectsBrowser } from "@/components/sections/ProjectsBrowser";
 import { pageMetadata } from "@/lib/seo";
@@ -27,26 +28,28 @@ export default async function ProjectsPage() {
 
   return (
     <>
-      <header className="surface-light pt-(--navbar-h)">
+      <HeroMotion as="header" className="surface-light pt-(--navbar-h)">
         <div className="site-container pt-12 pb-12 md:pt-20 md:pb-16">
-          <Breadcrumbs items={[{ label: t("projectsPage.title") }]} className="text-text-on-light-3" />
+          <div data-hero-fade="">
+            <Breadcrumbs items={[{ label: t("projectsPage.title") }]} />
+          </div>
           <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
             <div>
-              <SplitHeadline as="h1" className="text-display-l">
+              <SplitHeadline as="h1" trigger="manual" className="text-display-l">
                 {t("projectsPage.title")}
               </SplitHeadline>
-              <Reveal as="p" y={12} className="mt-4 font-mono text-label text-text-on-light-3 uppercase tabular">
+              <p data-hero-fade="" className="mt-4 font-mono text-label text-text-on-light-3 uppercase tabular">
                 {t("projectsPage.count", { n: projects.length })}
-              </Reveal>
+              </p>
             </div>
             {intro && (
-              <Reveal as="p" delay={0.15} className="max-w-[420px] text-body text-text-on-light-2">
+              <p data-hero-fade="" className="max-w-[420px] text-body text-text-on-light-2">
                 {intro}
-              </Reveal>
+              </p>
             )}
           </div>
         </div>
-      </header>
+      </HeroMotion>
 
       <ProjectsBrowser
         projects={projects.map((p) => ({

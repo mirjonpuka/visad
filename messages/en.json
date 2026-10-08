@@ -33,6 +33,20 @@
     "quoteForm": "Quote form"
   },
   "cursor": { "view": "View", "drag": "Drag" },
+  "home": {
+    "scroll": "Scroll",
+    "systemsEyebrow": "01 — Systems",
+    "projectsEyebrow": "02 — Projects",
+    "factoryEyebrow": "03 — Factory",
+    "solutionsEyebrow": "04 — Solutions",
+    "statsLabel": "VISAD in numbers",
+    "viewProject": "View project",
+    "factoryLink": "Discover the factory",
+    "alumilTitle": "Certified ALUMIL partner",
+    "alumilLogo": "Official ALUMIL partner logo",
+    "certificates": "Certificates",
+    "systemOf": "{n} / {total}"
+  },
   "skip": "Skip to content",
   "breadcrumb": { "home": "Home", "label": "Breadcrumb" },
   "a11y": {

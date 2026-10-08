@@ -24,7 +24,11 @@ export function SectionHeader({ eyebrow, title, aside, as: Heading = "h2", class
         {eyebrow && <p className="mb-5 font-mono text-eyebrow text-(--surface-fg-3) uppercase">{eyebrow}</p>}
         <Heading className={cn(Heading === "h1" ? "text-h1" : "text-h2", "text-balance")}>{title}</Heading>
       </div>
-      {aside && <div className="min-w-0 text-body text-(--surface-fg-2) lg:flex-[0_1_420px]">{aside}</div>}
+      {aside && (
+        <div className="flex min-w-0 text-body text-(--surface-fg-2) lg:flex-[0_1_420px] lg:justify-end">
+          {aside}
+        </div>
+      )}
     </header>
   );
 }

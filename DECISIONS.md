@@ -143,8 +143,29 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D3.22 | `@sanity/icons` v5 only exports `<Icon symbol>`: a tiny `icon("cog")` helper wraps it | Library change |
 | D3.23 | Dev-only `/dev/cms` lists the projects from Sanity to check the edit → publish → refresh loop before Phase 7 pages exist | Phase 3 acceptance |
 
+## Phase 4 — Home page (static layout)
+
+| # | Decision | Why |
+|---|---|---|
+| D4.1 | Home built from `HOME_QUERY` + `getSiteData()` (solutions); sections 3.1–3.8 as server components, only the systems accordion is a client component | UI §3; minimal client JS |
+| D4.2 | **No photo appears twice on Home**: audience cards (homeowners, developers, hotels) use temporary stock photos; Sliding systems and Shutters thumbnails too (system detail heroes keep real photos). Applied to Sanity with `scripts/migrations/001-no-repeated-photos.mts`; seed updated | Owner rule "don't repeat the pictures"; Brand §5 allows stock in atmosphere slots |
+| D4.3 | 3D section (§3.3A) uses the static fallback layout with a temporary photo of a real aluminium profile section (note: "will be replaced with the 3D render") | Phase 4 prompt; render is exported in Phase 6 |
+| D4.4 | New field `homePage.profileStoryTitle` ("Inxhinieri në çdo milimetër."); seed fills fields added later with `setIfMissing` | Text in UI §3.3 had no CMS field |
+| D4.5 | Section eyebrows ("01 — Sistemet" …), "Partner i certifikuar i ALUMIL", "Shiko projektin", "Certifikatat" are UI strings in `messages/*.json` | Static labels, not editorial content |
+| D4.6 | Side image of the systems accordion from tablet (768) up, inline image on phone | UI §14 table: tablet = side image |
+| D4.7 | Project tile meta = "Qyteti · first system · Viti" (empty parts skipped) | UI §3.4 |
+| D4.8 | ALUMIL band logo box shows "Logo zyrtare e partnerit ALUMIL" in Mono until the official kit arrives | Never imitate the ALUMIL logo |
+| D4.9 | Hero: extra top shade (ink 70% → transparent, 224px) so white navbar content stays readable over bright photos | Visual check over the terrace photo |
+| D4.10 | Hero video (optional CMS field) is not rendered yet | Added with the motion work (lazy start, saveData) in Phase 5 |
+| D4.11 | CTA swoosh: logo swoosh path stretched to the section (`preserveAspectRatio="none"`, 1px non-scaling stroke, 20%) | Full S visible at every width; draws on scroll in Phase 5 |
+| D4.12 | Language links named "EN · English" etc. | WCAG 2.5.3 (label in name), flagged by Lighthouse |
+| D4.13 | Phone factory carousel is focusable (`tabIndex=0`) with `scroll-padding` so the first card aligns with the gutter | axe `scrollable-region-focusable` |
+| D4.15 | Home lives in the route group `app/[locale]/(home)/` with its own `loading.tsx` | A `loading.tsx` directly in `[locale]` wrapped every route (incl. the 404 catch-all) in the Home skeleton and broke its prerender |
+| D4.14 | Accessibility checked with axe (Playwright, 4 widths, 0 serious/critical) and Lighthouse (Accessibility 100 desktop + mobile) | Phase 4 acceptance |
+
 ## Open conflicts reported to the client/owner
 - C2 3D step texts differ between 05 and 08 → using 08.
 - C3 Reply time "brenda ditës" vs "brenda 24 orësh" → one [TO CONFIRM] value.
 - C4 Seed images: 07 says WebP, 09 says JPG masters → plan: JPG masters (Sanity serves AVIF/WebP).
 - C5 Navbar 1024–1199 → resolved: menu button (D2.4).
+

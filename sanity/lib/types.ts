@@ -50,6 +50,51 @@ export type LayoutData = {
   }[];
 };
 
+type TitleText = { title?: string | null; text?: string | null };
+
+export type HomeData = {
+  settings: { stats?: { value: string; label?: string | null }[] | null; whatsappNumber?: string } | null;
+  home: {
+    heroImage: SanityImage;
+    heroVideo?: string | null;
+    heroEyebrow?: string | null;
+    heroTitle?: string | null;
+    heroLead?: string | null;
+    heroCtas?: { label?: string | null; href?: string | null; kind?: string | null }[] | null;
+    profileStoryTitle?: string | null;
+    profileStorySteps?: TitleText[] | null;
+    systemsTitle?: string | null;
+    featuredProjectsTitle?: string | null;
+    featuredProjectsIntro?: string | null;
+    factoryTitle?: string | null;
+    factoryText?: string | null;
+    factorySteps?: TitleText[] | null;
+    factoryImages?: SanityImage[] | null;
+    solutionsTitle?: string | null;
+    ctaTitle?: string | null;
+    ctaText?: string | null;
+  } | null;
+  systems: {
+    _id: string;
+    title: string;
+    slug: string;
+    slugs: Slugs;
+    text: string;
+    image: SanityImage;
+    hasDatasheet: boolean;
+  }[];
+  featured: {
+    _id: string;
+    title: string;
+    slug: string;
+    slugs: Slugs;
+    city?: string | null;
+    year?: number | null;
+    coverImage: SanityImage;
+    systems?: string[] | null;
+  }[];
+};
+
 export type ProjectListItem = {
   _id: string;
   title: string;

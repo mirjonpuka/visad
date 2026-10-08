@@ -33,6 +33,20 @@
     "quoteForm": "Formulari i ofertës"
   },
   "cursor": { "view": "Shiko", "drag": "Tërhiq" },
+  "home": {
+    "scroll": "Scroll",
+    "systemsEyebrow": "01 — Sistemet",
+    "projectsEyebrow": "02 — Projektet",
+    "factoryEyebrow": "03 — Fabrika",
+    "solutionsEyebrow": "04 — Zgjidhje",
+    "statsLabel": "VISAD në shifra",
+    "viewProject": "Shiko projektin",
+    "factoryLink": "Njihuni me fabrikën",
+    "alumilTitle": "Partner i certifikuar i ALUMIL",
+    "alumilLogo": "Logo zyrtare e partnerit ALUMIL",
+    "certificates": "Certifikatat",
+    "systemOf": "{n} / {total}"
+  },
   "skip": "Kalo te përmbajtja",
   "breadcrumb": { "home": "Kryefaqja", "label": "Vendndodhja në faqe" },
   "a11y": {

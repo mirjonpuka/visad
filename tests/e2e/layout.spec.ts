@@ -85,10 +85,10 @@ test.describe("laptop 1440", () => {
 
   test("language switcher keeps the current page", async ({ page }) => {
     await open(page, "/dev/kit");
-    await page.locator("header").getByRole("link", { name: "English" }).click();
+    await page.locator("header").getByRole("link", { name: "EN · English" }).click();
     await expect(page).toHaveURL(/\/en\/dev\/kit$/);
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
-    await page.locator("header").getByRole("link", { name: "Shqip" }).click();
+    await page.locator("header").getByRole("link", { name: "AL · Shqip" }).click();
     await expect(page).toHaveURL(/\/dev\/kit$/);
     await expect(page.locator("html")).toHaveAttribute("lang", "sq");
   });

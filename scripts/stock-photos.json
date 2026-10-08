@@ -100,6 +100,53 @@
     "alt": { "sq": "Montues që vendos një dritare", "en": "Installer fitting a window" }
   },
   {
+    "id": "stock-profile-story",
+    "pexelsId": 9729601,
+    "slot": "home-3d-fallback",
+    "replaceWith": "the 3D render of the aluminium profile",
+    "alt": {
+      "sq": "Prerje e një profili alumini me urë termike dhe xham dyfish",
+      "en": "Cross-section of an aluminium profile with thermal break and double glazing"
+    }
+  },
+  {
+    "id": "stock-system-shutters",
+    "pexelsId": 30728904,
+    "slot": "system-shutters-thumbnail",
+    "replaceWith": "Visad aluminium shutters on a finished building",
+    "alt": { "sq": "Grila alumini në një fasadë", "en": "Aluminium shutters on a façade" }
+  },
+  {
+    "id": "stock-solution-homeowners",
+    "pexelsId": 35361412,
+    "slot": "solution-homeowners",
+    "replaceWith": "a Visad family house with large windows and sliding doors",
+    "alt": {
+      "sq": "Shtëpi moderne me dritare të mëdha dhe dyer rrëshqitëse",
+      "en": "Modern house with large windows and sliding doors"
+    }
+  },
+  {
+    "id": "stock-solution-developers",
+    "pexelsId": 39214892,
+    "slot": "solution-developers",
+    "replaceWith": "a residential building fitted by Visad (whole-building project)",
+    "alt": {
+      "sq": "Ndërtesë banimi me dritare alumini dhe ballkone",
+      "en": "Residential building with aluminium windows and balconies"
+    }
+  },
+  {
+    "id": "stock-solution-hotels",
+    "pexelsId": 5794098,
+    "slot": "solution-hotels",
+    "replaceWith": "a Visad hotel project with glass balconies and sea or lake view",
+    "alt": {
+      "sq": "Ballkon xhami i një hoteli me pamje nga deti",
+      "en": "Hotel glass balcony overlooking the sea"
+    }
+  },
+  {
     "id": "stock-solution-architects",
     "pexelsId": 6615095,
     "slot": "solution-architects",

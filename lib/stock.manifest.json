@@ -441,6 +441,176 @@
       }
     ]
   },
+  "stock-profile-story": {
+    "id": "stock-profile-story",
+    "alt": {
+      "sq": "Prerje e një profili alumini me urë termike dhe xham dyfish",
+      "en": "Cross-section of an aluminium profile with thermal break and double glazing"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAACwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JbACdMoACweihtXUNQ1q74SQG0EQAAP7dnVTUMVhHPeSXAe2f6xtGjpCy51QvhSFKlE1AwKVw5LUct6l941RnqnU2bmSF3R1Po/NghTfYdSrHR5UaBlfb39Fx2IZlRCYqKY4sM7ScGHiQYKeWrLHItuUHfzELSWMGwGD3ms3s6DnLKeOAxmvFt5J5ZXwAAAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with the 3D render of the aluminium profile",
+    "slot": "home-3d-fallback",
+    "credit": "Pexels License · https://www.pexels.com/photo/9729601/",
+    "web": [
+      {
+        "src": "/images/stock/stock-profile-story-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-profile-story-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "src": "/images/stock/stock-profile-story-1600.webp",
+        "width": 1600,
+        "height": 1067
+      },
+      {
+        "src": "/images/stock/stock-profile-story-2400.webp",
+        "width": 2400,
+        "height": 1600
+      }
+    ]
+  },
+  "stock-system-shutters": {
+    "id": "stock-system-shutters",
+    "alt": {
+      "sq": "Grila alumini në një fasadë",
+      "en": "Aluminium shutters on a façade"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAABQBACdASoYABAAPu1yrU+pp6QiMAgBMB2JbACdOUAA498COSvHD5u35/HAAP5SJ4U9SYDnFJt3pw0dfXtb/hy7oGFvfzqAUrmau5Tfx568eB87A1220ZQI5vkpH+2lmhxAAA==",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with Visad aluminium shutters on a finished building",
+    "slot": "system-shutters-thumbnail",
+    "credit": "Pexels License · https://www.pexels.com/photo/30728904/",
+    "web": [
+      {
+        "src": "/images/stock/stock-system-shutters-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-system-shutters-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "src": "/images/stock/stock-system-shutters-1600.webp",
+        "width": 1600,
+        "height": 1067
+      },
+      {
+        "src": "/images/stock/stock-system-shutters-2400.webp",
+        "width": 2400,
+        "height": 1600
+      }
+    ]
+  },
+  "stock-solution-homeowners": {
+    "id": "stock-solution-homeowners",
+    "alt": {
+      "sq": "Shtëpi moderne me dritare të mëdha dhe dyer rrëshqitëse",
+      "en": "Modern house with large windows and sliding doors"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAAAwBACdASoYAA0APu1iqU2ppaOiMAgBMB2JaACsACG8ed7QOWjT8R4h9ZgA/rd4JLtd1IOYDKbSEx1FKsYa4mQ44XFJrhbgZxEOMu/u+dU3Am0C1KJhzhiWlanaTwg6qg+yS//bb3hvtmT6OGpWjvk7yfnKNPrYmk4YI2xRRGJRd48zfWz297XqMfbF2+FFsJ0fsturc/fAWtPAvAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a Visad family house with large windows and sliding doors",
+    "slot": "solution-homeowners",
+    "credit": "Pexels License · https://www.pexels.com/photo/35361412/",
+    "web": [
+      {
+        "src": "/images/stock/stock-solution-homeowners-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "src": "/images/stock/stock-solution-homeowners-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "src": "/images/stock/stock-solution-homeowners-1600.webp",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "/images/stock/stock-solution-homeowners-2400.webp",
+        "width": 2400,
+        "height": 1350
+      }
+    ]
+  },
+  "stock-solution-developers": {
+    "id": "stock-solution-developers",
+    "alt": {
+      "sq": "Ndërtesë banimi me dritare alumini dhe ballkone",
+      "en": "Residential building with aluminium windows and balconies"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRsQAAABXRUJQVlA4ILgAAACQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JQBOkF/1IHuxQPGEMLC+5cPp9K/gA/GbWdEIC2d5dxmTSCPjIKj8mrseb147g/A8QFWQp36HtqSDZKuno0bj/LT1paEgAN5JqzUuIDeFWasIrhy4IXbnUF/Asa6j9O0ZNdffjMcI0HY/7ZmcJMNGiOB0Xz1YGvssfLIVUm9IS9y9sec4gktB7sPu4PiTZvEuJlseGU0cByKOBre2PAAAA",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a residential building fitted by Visad (whole-building project)",
+    "slot": "solution-developers",
+    "credit": "Pexels License · https://www.pexels.com/photo/39214892/",
+    "web": [
+      {
+        "src": "/images/stock/stock-solution-developers-640.webp",
+        "width": 640,
+        "height": 960
+      },
+      {
+        "src": "/images/stock/stock-solution-developers-960.webp",
+        "width": 960,
+        "height": 1440
+      },
+      {
+        "src": "/images/stock/stock-solution-developers-1600.webp",
+        "width": 1600,
+        "height": 2400
+      },
+      {
+        "src": "/images/stock/stock-solution-developers-2400.webp",
+        "width": 2400,
+        "height": 3600
+      }
+    ]
+  },
+  "stock-solution-hotels": {
+    "id": "stock-solution-hotels",
+    "alt": {
+      "sq": "Ballkon xhami i një hoteli me pamje nga deti",
+      "en": "Hotel glass balcony overlooking the sea"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAABwBACdASoRABgAPu1kqU2ppaQiMAgBMB2JQBbZjtIVi29JkCqdnn1eWA5fgAD8ggSD3+6lxtS1MiphLNXNxjj4zFmnoIfJ8TR7qASA4p/vusG7LWDclKNswVyyytuY/3IgyGuh+t2Vgi0HrqjveIrp5HXbJVw7sUogNeY48SbklF3nymVkTknaPtq1Y5isjMCeUt1cAAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a Visad hotel project with glass balconies and sea or lake view",
+    "slot": "solution-hotels",
+    "credit": "Pexels License · https://www.pexels.com/photo/5794098/",
+    "web": [
+      {
+        "src": "/images/stock/stock-solution-hotels-640.webp",
+        "width": 640,
+        "height": 896
+      },
+      {
+        "src": "/images/stock/stock-solution-hotels-960.webp",
+        "width": 960,
+        "height": 1344
+      },
+      {
+        "src": "/images/stock/stock-solution-hotels-1600.webp",
+        "width": 1600,
+        "height": 2240
+      },
+      {
+        "src": "/images/stock/stock-solution-hotels-2207.webp",
+        "width": 2207,
+        "height": 3090
+      }
+    ]
+  },
   "stock-solution-architects": {
     "id": "stock-solution-architects",
     "alt": {

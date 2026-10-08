@@ -81,6 +81,7 @@ export const HOME_QUERY = defineQuery(`{
     "heroTitle": ${L("heroTitle")},
     "heroLead": ${L("heroLead")},
     heroCtas[]{ "label": ${L("label")}, href, kind },
+    "profileStoryTitle": ${L("profileStoryTitle")},
     profileStorySteps[]{ "title": ${L("title")}, "text": ${L("text")} },
     "systemsTitle": ${L("systemsTitle")},
     "featuredProjectsTitle": ${L("featuredProjectsTitle")},

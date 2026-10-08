@@ -210,11 +210,11 @@ async function buildDocuments(): Promise<SanityDocumentStub[]> {
       hero: () => photo("window-pvc-historic-facade"),
     },
     "sisteme-rreshqitese": {
-      thumb: () => photo("installation-folding-doors"),
+      thumb: () => stock("stock-system-sliding"),
       hero: () => stock("stock-system-sliding"),
     },
     grila: {
-      thumb: () => photo("project-villa-glass-balconies-shutters"),
+      thumb: () => stock("stock-system-shutters"),
       hero: () => photo("project-villa-glass-balconies-shutters"),
     },
     "ballkone-parmake": {
@@ -248,19 +248,19 @@ async function buildDocuments(): Promise<SanityDocumentStub[]> {
   > = {
     "pronare-shtepish": {
       segment: "homeowners",
-      image: () => photo("project-house-glass-railings"),
+      image: () => stock("stock-solution-homeowners"),
       cta: "whatsapp",
       systems: ["dyer", "dritare", "grila"],
     },
     "zhvillues-ndertues": {
       segment: "developers",
-      image: () => photo("project-residential-blocks-balconies"),
+      image: () => stock("stock-solution-developers"),
       cta: "quote",
       systems: ["dritare", "ballkone-parmake", "fasada"],
     },
     "hotele-turizem": {
       segment: "hotels",
-      image: () => photo("project-fishta-hotel-glass-balconies"),
+      image: () => stock("stock-solution-hotels"),
       cta: "quote",
       systems: ["sisteme-rreshqitese", "ballkone-parmake", "fasada"],
       heroTitle: {
@@ -477,6 +477,7 @@ async function buildDocuments(): Promise<SanityDocumentStub[]> {
         "s5",
       ),
     ],
+    profileStoryTitle: PROFILE_STORY_TITLE,
     systemsTitle: str({ sq: "Sisteme për çdo hapje.", en: "A system for every opening." }),
     featuredProjectsTitle: str({ sq: "Projekte të zgjedhura.", en: "Selected projects." }),
     featuredProjectsIntro: text({
@@ -578,6 +579,16 @@ async function buildDocuments(): Promise<SanityDocumentStub[]> {
   return docs;
 }
 
+const PROFILE_STORY_TITLE = str({
+  sq: "Inxhinieri në çdo milimetër.",
+  en: "Engineering in every millimetre.",
+});
+
+/** Schema fields added after the first seed (Phase 4+), applied with setIfMissing */
+const FIELDS_ADDED_LATER: Record<string, Record<string, unknown>> = {
+  homePage: { profileStoryTitle: PROFILE_STORY_TITLE },
+};
+
 async function main() {
   console.log(`Seeding ${client.config().projectId}/${client.config().dataset}${FORCE ? " (force)" : ""} …`);
   const docs = await buildDocuments();
@@ -588,6 +599,9 @@ async function main() {
     if (FORCE) tx.createOrReplace(doc as SanityDocumentStub & { _id: string });
     else tx.createIfNotExists(doc as SanityDocumentStub & { _id: string });
   }
+  // Fields added after the first seed: fill them only where still empty
+  for (const [id, fields] of Object.entries(FIELDS_ADDED_LATER)) tx.patch(id, (p) => p.setIfMissing(fields));
+
   const result = await tx.commit({ visibility: "async" });
   console.log(
     `${FORCE ? "Replaced" : "Created (if missing)"} ${docs.length} documents · tx ${result.transactionId}`,

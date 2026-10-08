@@ -42,7 +42,8 @@ export function LanguageSwitcher({ size = "sm", className }: Props) {
                 prefetch={false}
                 hrefLang={l}
                 lang={l}
-                aria-label={t(`languages.${l}`)}
+                // Name contains the visible code (WCAG 2.5.3 label in name)
+                aria-label={`${LABELS[l]} · ${t(`languages.${l}`)}`}
                 aria-current={active ? "true" : undefined}
                 className={cn(
                   "inline-flex items-center justify-center font-mono uppercase transition-colors duration-(--dur-s) ease-standard",

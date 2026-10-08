@@ -466,10 +466,12 @@
     outline-offset: 2px;
   }
   @media (hover: hover) {
-    .link-arrow:hover::after {
+    .link-arrow:hover::after,
+    .group:hover .link-arrow::after {
       animation: line-redraw var(--dur-m) var(--ease-in-out-quart);
     }
-    .link-arrow:hover .link-arrow__arrow {
+    .link-arrow:hover .link-arrow__arrow,
+    .group:hover .link-arrow__arrow {
       transform: translateX(4px);
     }
   }
@@ -842,6 +844,32 @@
     rotate: 360deg;
   }
 }
+/* Hero scroll cue (UI §3.1): red segment travels down the line, 2s loop */
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 40%;
+  background: var(--color-red-500);
+  animation: scroll-cue 2s var(--ease-in-out-quart) infinite;
+}
+@keyframes scroll-cue {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(250%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue::after {
+    animation: none;
+    transform: translateY(75%);
+  }
+}
+
 /* Underline shrinks to the right, then regrows from the left */
 @keyframes line-redraw {
   0% {

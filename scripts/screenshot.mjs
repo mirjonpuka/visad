@@ -35,8 +35,15 @@ for (const width of widths) {
   if (overflow > 0) console.log(`⚠ ${width}px: horizontal overflow ${overflow}px`);
 
   if (bySection) {
-    for (const id of await page.$$eval("section[id]", (els) => els.map((e) => e.id))) {
-      await page.locator(`section#${id}`).screenshot({ path: `${outDir}/${slug}-${width}-${id}.png` });
+    // Top-level sections of <main> (falls back to section[id] for pages like the kit)
+    const selector = (await page.locator("main > section").count()) > 1 ? "main > section" : "section[id]";
+    const sections = page.locator(selector);
+    for (let i = 0; i < (await sections.count()); i++) {
+      const section = sections.nth(i);
+      const name = (await section.getAttribute("id")) ?? `s${i + 1}`;
+      await section.screenshot({
+        path: `${outDir}/${slug}-${width}-${String(i + 1).padStart(2, "0")}-${name}.png`,
+      });
     }
   } else {
     await page.screenshot({ path: `${outDir}/${slug}-${width}.png`, fullPage: true });

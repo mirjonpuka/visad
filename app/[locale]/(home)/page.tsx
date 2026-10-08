@@ -1,0 +1,67 @@
+import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import { AlumilBand } from "@/components/sections/AlumilBand";
+import { CtaBand } from "@/components/sections/CtaBand";
+import { FactoryTeaser } from "@/components/sections/FactoryTeaser";
+import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
+import { HomeHero } from "@/components/sections/HomeHero";
+import { ProfileStory } from "@/components/sections/ProfileStory";
+import { Solutions } from "@/components/sections/Solutions";
+import { StatsBand } from "@/components/sections/StatsBand";
+import { SystemsAccordion } from "@/components/sections/SystemsAccordion";
+import { LinkArrow } from "@/components/ui/LinkArrow";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { getSiteData } from "@/lib/site-data";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { HOME_QUERY } from "@/sanity/lib/queries";
+import { toSiteImage, type HomeData } from "@/sanity/lib/types";
+
+/** Home (UI §3): sections 3.1–3.8. Motion is added in Phase 5, the 3D scene in Phase 6. */
+export default async function HomePage() {
+  const t = await getTranslations();
+  const [data, site] = await Promise.all([
+    sanityFetch<HomeData>({ query: HOME_QUERY, tags: ["home", "settings", "system", "project"] }),
+    getSiteData(),
+  ]);
+  const home = data.home;
+  if (!home) notFound();
+
+  return (
+    <>
+      <HomeHero home={home} />
+      <StatsBand stats={data.settings?.stats ?? []} />
+
+      <section id="sistemet" className="surface-dark border-t border-line-dark section-y">
+        <div className="site-container">
+          <ProfileStory title={home.profileStoryTitle} steps={home.profileStorySteps ?? []} />
+          <div className="mt-24 laptop:mt-36">
+            <SectionHeader
+              title={home.systemsTitle}
+              aside={<LinkArrow href="/sistemet">{t("cta.allSystems")}</LinkArrow>}
+            />
+            <SystemsAccordion
+              systems={data.systems.map((s) => ({
+                id: s._id,
+                title: s.title,
+                slug: s.slug,
+                text: s.text,
+                image: toSiteImage(s.image),
+                hasDatasheet: s.hasDatasheet,
+              }))}
+            />
+          </div>
+        </div>
+      </section>
+
+      <FeaturedProjects
+        title={home.featuredProjectsTitle}
+        intro={home.featuredProjectsIntro}
+        projects={data.featured}
+      />
+      <FactoryTeaser home={home} />
+      <Solutions title={home.solutionsTitle} solutions={site.solutions} />
+      <AlumilBand text={site.alumilText} />
+      <CtaBand title={home.ctaTitle} text={home.ctaText} />
+    </>
+  );
+}

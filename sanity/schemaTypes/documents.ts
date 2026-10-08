@@ -192,6 +192,12 @@ export const homePage = defineType({
       group: "hero",
     }),
     defineField({
+      name: "profileStoryTitle",
+      title: "3D: titulli",
+      type: "internationalizedArrayString",
+      group: "sections",
+    }),
+    defineField({
       name: "profileStorySteps",
       title: "3D: 5 hapat",
       type: "array",

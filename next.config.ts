@@ -46,6 +46,13 @@ const nextConfig: NextConfig = {
   // Old WordPress URLs (Architecture §8)
   async redirects() {
     return [
+      // www → apex (Phase 10); also set "Redirect to visad.al" on the Vercel domain
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.visad.al" }],
+        destination: "https://visad.al/:path*",
+        permanent: true,
+      },
       { source: "/galeria", destination: "/projektet", permanent: true },
       { source: "/galeria/:path*", destination: "/projektet", permanent: true },
       { source: "/:slug(wp-.*)", destination: "/", permanent: true },

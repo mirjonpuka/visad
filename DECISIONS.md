@@ -253,6 +253,15 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D9.13 | Priority images (heroes, first two project tiles) skip the JS fade-in; the 3D scene loads only after the visitor starts scrolling | LCP render delay; 3D was compiling during page load on tall screens |
 | D9.14 | Env var name `LEADS_FROM_EMAIL` as in 06 §11 | Spec name |
 
+## Phase 10 — Launch preparation
+
+| # | Decision | Why |
+|---|---|---|
+| D10.1 | `LAUNCH.md`: accounts/keys, env vars, Sanity CORS + webhook + roles, domain + www, Search Console, Google Business Profile, post-deploy checks | Phase 10 checklist |
+| D10.2 | www → apex redirect also in `next.config.ts` (host condition) | Works whatever the Vercel domain setting is |
+| D10.3 | README: developer setup + editor guide in Albanian (add a project, replace a temporary photo, translations, leads) with screenshot placeholders | Phase 10 prompt |
+| D10.4 | Deployment itself, DNS, token rotation, Search Console and Business Profile are left to the owner (need their accounts) | Outward-facing, owner access |
+
 ## Open conflicts reported to the client/owner
 - C7 **X-Frame-Options**: 06 §10 asks for `DENY` (except /studio), but the Presentation preview loads site pages inside the Studio → `SAMEORIGIN` (still blocks every other site).
 - C8 **Mobile Lighthouse ≥ 90 / LCP < 2.2s** (06 §9) vs. the mandated first-visit logo intro (≈2.3s on Home by design) and the motion stack. Desktop meets the budget; mobile scores 66–86 under Lighthouse's simulated 4× slower CPU. Proposal: judge mobile on real devices with Vercel Speed Insights after launch.

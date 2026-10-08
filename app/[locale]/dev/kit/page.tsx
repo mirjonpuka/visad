@@ -21,6 +21,9 @@ import {
   SkeletonTile,
   SkeletonTitle,
 } from "@/components/media/Skeleton";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { CookieBanner } from "@/components/layout/CookieBanner";
+import { FooterCta } from "@/components/layout/Footer";
 import { devRoutesEnabled } from "@/lib/dev";
 import { localImage } from "@/lib/images";
 import { ViewportBadge } from "./ViewportBadge";
@@ -123,11 +126,12 @@ export default async function KitPage() {
   const t = await getTranslations();
 
   return (
-    <main className="surface-dark pb-32">
+    <div className="surface-dark pt-(--navbar-h) pb-32">
       <ViewportBadge />
 
       <header className="site-container pt-16 pb-10">
-        <p className="font-mono text-eyebrow text-text-on-dark-3 uppercase">Dev · Phase 1</p>
+        <Breadcrumbs items={[{ label: "Dev" }, { label: "UI kit" }]} />
+        <p className="mt-10 font-mono text-eyebrow text-text-on-dark-3 uppercase">Dev · Phase 1–2</p>
         <h1 className="mt-4 text-h1">UI kit</h1>
         <p className="mt-4 max-w-[560px] text-body-l text-text-on-dark-2">
           Every component in every state, on dark and light. Check at 1440, 1024, 768 and 390 wide.
@@ -145,6 +149,8 @@ export default async function KitPage() {
             "skeletons",
             "images",
             "logo",
+            "cookie",
+            "footer-cta",
           ].map((s) => (
             <a key={s} href={`#${s}`} className="text-text-on-dark-2 hover:text-text-on-dark">
               {s}
@@ -568,6 +574,21 @@ export default async function KitPage() {
           )}
         </Both>
       </KitSection>
-    </main>
+
+      <KitSection id="cookie" title="CookieBanner (preview — off at launch, D1.37)">
+        <div className="site-container">
+          <CookieBanner preview />
+        </div>
+      </KitSection>
+
+      <section id="footer-cta" className="border-t border-line-dark pt-16">
+        <div className="site-container">
+          <h2 className="mb-8 font-mono text-eyebrow text-text-on-dark-3 uppercase">
+            FooterCta (pages without the CTA section)
+          </h2>
+        </div>
+        <FooterCta />
+      </section>
+    </div>
   );
 }

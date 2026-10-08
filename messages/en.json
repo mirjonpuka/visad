@@ -6,7 +6,16 @@
     "solutions": "Solutions",
     "careers": "Careers",
     "contact": "Contact",
-    "tagline": "Aluminium systems · Shkodër"
+    "tagline": "Aluminium systems · Shkodër",
+    "main": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "home": "VISAD, home"
+  },
+  "languages": { "sq": "Shqip", "en": "English", "it": "Italiano", "de": "Deutsch" },
+  "whatsapp": {
+    "message": "Hello VISAD! I'm writing from your website page: {page}"
   },
   "cta": {
     "quote": "Request a quote",
@@ -23,7 +32,7 @@
   },
   "cursor": { "view": "View", "drag": "Drag" },
   "skip": "Skip to content",
-  "breadcrumb": { "home": "Home" },
+  "breadcrumb": { "home": "Home", "label": "Breadcrumb" },
   "a11y": {
     "loading": "Loading",
     "open": "Open",
@@ -81,11 +90,18 @@
   "cookie": {
     "text": "We use essential cookies to run this site.",
     "accept": "Accept",
-    "essential": "Essential only"
+    "essential": "Essential only",
+    "label": "Cookies"
   },
   "footer": {
     "about": "Aluminium and PVC systems. Made and installed in Shkodër.",
+    "ctaTitle": "Have a project?",
+    "systems": "Systems",
     "company": "Company",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "hours": "Opening hours",
+    "alumil": "Certified ALUMIL partner",
     "copyright": "© {year} VISAD Construction"
   }
 }

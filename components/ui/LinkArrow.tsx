@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { AppHref } from "./Button";
@@ -8,6 +8,7 @@ type Props = {
   className?: string;
   /** Mono uppercase label style (used in accordions, cards) */
   mono?: boolean;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
   "data-force"?: string;
 } & (
   | { href: AppHref; externalHref?: never; download?: never }

@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ComponentProps, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ComponentProps, MouseEventHandler, ReactNode } from "react";
 import { MessageCircle } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -21,13 +21,18 @@ type CommonProps = {
   "data-force"?: string;
 };
 
-type AsInternalLink = CommonProps & { href: AppHref; externalHref?: never; title?: string };
-type AsExternalLink = CommonProps & {
-  externalHref: string;
-  href?: never;
-  newTab?: boolean;
+type LinkExtras = {
   title?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
+  "aria-label"?: string;
 };
+type AsInternalLink = CommonProps & LinkExtras & { href: AppHref; externalHref?: never };
+type AsExternalLink = CommonProps &
+  LinkExtras & {
+    externalHref: string;
+    href?: never;
+    newTab?: boolean;
+  };
 type AsButton = CommonProps &
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "disabled"> & {
     href?: never;

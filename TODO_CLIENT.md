@@ -34,6 +34,10 @@ Everything on the site marked `[TO CONFIRM]` or shown as a placeholder photo is 
 - [ ] A stronger Home hero photo (current terrace crop is mostly floor tiles)
 - [ ] Higher-resolution HQ photo (current is 1152px, soft as a full-width Factory hero)
 
+## Contact & WhatsApp
+- [ ] WhatsApp prefilled message wording (current: "Përshëndetje VISAD! Ju shkruaj nga faqja: …")
+- [ ] Exact Google Maps location / pin for the address link (currently a search link)
+
 ## Other
 - [ ] Job openings (Careers)
 - [ ] FAQ questions/answers per system

@@ -11,7 +11,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm run lint && npm run typecheck && npm run build",
-    "sync-assets": "node scripts/sync-handoff-assets.mjs"
+    "sync-assets": "node scripts/sync-handoff-assets.mjs",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@sanity/image-url": "^2.1.1",

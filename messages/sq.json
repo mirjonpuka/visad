@@ -6,7 +6,16 @@
     "solutions": "Zgjidhje",
     "careers": "Karriera",
     "contact": "Kontakt",
-    "tagline": "Sisteme alumini · Shkodër"
+    "tagline": "Sisteme alumini · Shkodër",
+    "main": "Navigimi kryesor",
+    "openMenu": "Hap menunë",
+    "closeMenu": "Mbyll menunë",
+    "language": "Gjuha",
+    "home": "VISAD, kryefaqja"
+  },
+  "languages": { "sq": "Shqip", "en": "English", "it": "Italiano", "de": "Deutsch" },
+  "whatsapp": {
+    "message": "Përshëndetje VISAD! Ju shkruaj nga faqja: {page}"
   },
   "cta": {
     "quote": "Kërko ofertë",
@@ -23,7 +32,7 @@
   },
   "cursor": { "view": "Shiko", "drag": "Tërhiq" },
   "skip": "Kalo te përmbajtja",
-  "breadcrumb": { "home": "Kryefaqja" },
+  "breadcrumb": { "home": "Kryefaqja", "label": "Vendndodhja në faqe" },
   "a11y": {
     "loading": "Duke u ngarkuar",
     "open": "Hap",
@@ -81,11 +90,18 @@
   "cookie": {
     "text": "Përdorim cookies të domosdoshme për funksionimin e faqes.",
     "accept": "Prano",
-    "essential": "Vetëm të domosdoshmet"
+    "essential": "Vetëm të domosdoshmet",
+    "label": "Cookies"
   },
   "footer": {
     "about": "Sisteme alumini dhe PVC. Prodhim dhe montim në Shkodër.",
+    "ctaTitle": "Keni një projekt?",
+    "systems": "Sistemet",
     "company": "Kompania",
+    "contact": "Kontakt",
+    "privacy": "Privatësia",
+    "hours": "Orari",
+    "alumil": "Partner i certifikuar ALUMIL",
     "copyright": "© {year} VISAD Construction"
   }
 }

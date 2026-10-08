@@ -73,8 +73,37 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D1.36 | Wordmark SVGs in `public/brand/logo/` use viewBox `0 0 1280 500` (handoff files: `0 0 1280 420`). Patched by `scripts/sync-handoff-assets.mjs`; `_handoff` untouched. Rendered size 104×41 (laptop), 88×34 (phone) | The 420 height cut off the swoosh's bottom tail (y 420–500). Approved by owner |
 | D1.37 | Cookie banner (C1): component is built (Phase 2) but **off at launch**; turned on only when a non-essential cookie/tracker is added | Architecture §10 wins on technical decisions; Vercel Analytics is cookieless. Approved by owner |
 
+## Phase 2 — Layout shell
+
+| # | Decision | Why |
+|---|---|---|
+| D2.1 | **Navbar uses the full logo (with "CONSTRUCTION") at 140px**, not the 104px wordmark (overrides Brand §1) | Owner's request. 140px is the full logo's minimum width (Brand §1), so it is 140 on every screen |
+| D2.2 | Eyebrow "Sisteme alumini · Shkodër" next to the logo shows only at ≥1440px | With the wider logo it no longer fits beside the links below 1440 |
+| D2.3 | Navbar links gap 24px at 1024–1199, 32px from 1200 | The full link row fits from 1024 (checked in EN, the longest labels) |
+| D2.4 | 1024–1199 layout (C5) is switchable in dev/preview with the "Nav 1024–1199: links / menu" toggle (bottom-left); production default = **links** until the owner chooses | Owner asked to compare both |
+| D2.5 | Navbar transparency is opt-in per page with `<HeroUnderNav />`; every other page gets the solid navbar from the top | UI §2.1: transparent only over a hero; light page headers would hide white nav content |
+| D2.6 | Mega-menu "Sistemet": thumbnail (16:10, 168px) **beside** the name/description; "Zgjidhje": thumbnail above. Panel ≈ 270–300px tall | UI §2.2 asks for ~360px; stacked 16:10 thumbnails in a 3×2 grid made the panel ~660px |
+| D2.7 | Mega-menu intro lines: "Sisteme alumini dhe PVC, të prodhuara në Shkodër." (from Systems index h1) and "Për kë punojmë." (Home §3.6 h2). Zgjidhje has no "all" link (there is no solutions index page) | Not specified in 03/08 |
+| D2.8 | Mega-menu focus trap engages only when focus is already inside (trigger or panel), so hovering never steals keyboard focus | UI §2.2 trap + hover opening |
+| D2.9 | Mobile menu sits under the navbar (z-40 vs z-50); the burger morphs into × and focus is trapped across navbar + menu | Keeps one × button (the morphing burger, Motion §5.7) |
+| D2.10 | Menus close on any route change, including back/forward | Avoids a menu left open over a new page |
+| D2.11 | Language switcher keeps the internal route + params; dynamic slugs are passed through unchanged until the CMS provides per-locale slugs (Phase 3/7). Query strings are not carried over yet | Architecture §3 |
+| D2.12 | Footer "Keni një projekt?" row is a separate `FooterCta` that pages without the CTA section render as their last block (404 now; Careers, Privacy later) | The layout cannot know if a page ends with the CTA section (UI §2.4) |
+| D2.13 | Footer "Zgjidhje" link goes to `/#zgjidhje` (Home section) | There is no solutions index route |
+| D2.14 | Social links render as Mono text links ("FACEBOOK", "INSTAGRAM") and are hidden while the CMS list is empty | lucide has no brand icons (Brand §6: lucide only) |
+| D2.15 | Opening hours show "[TO CONFIRM]" until provided | Never invent data |
+| D2.16 | ALUMIL badge in the footer is a small `PlaceholderImage` + "Partner i certifikuar ALUMIL" until the official logo arrives | 09 · `alumil-partner-logo` |
+| D2.17 | WhatsApp prefilled message: "Përshëndetje VISAD! Ju shkruaj nga faqja: {page}" / EN equivalent; page = document title | UI §2.5 asks for a localized message incl. page title; wording not given |
+| D2.18 | WhatsApp FAB expands with `clip-path` (circle → pill), not a width animation; its wrapper ignores pointer events so the hidden pill area never blocks clicks | Motion §1 (no width animation) |
+| D2.19 | FAB appears on mount for now; Phase 5 delays it until the intro finishes | UI §2.5 |
+| D2.20 | Footer has extra bottom padding so the FAB never covers its last row | Visual check |
+| D2.21 | Cookie banner component complete (12-month cookie `visad-consent`, `visad:consent` event for future analytics); `COOKIE_BANNER_ENABLED = false` | D1.37 |
+| D2.22 | Basic localized 404 inside the layout (`[...rest]` catch-all, `instant = false`); full 404 design in Phase 7 | Nav links to unbuilt pages must not drop the site chrome |
+| D2.23 | Static menu/contact data in `lib/site.ts` until Phase 3 (Sanity) | Phase 2 prompt |
+| D2.24 | Playwright smoke tests in `tests/e2e/layout.spec.ts` (`npm run test:e2e`, 2 workers locally) | Phase 2 acceptance; reused in Phase 9 |
+
 ## Open conflicts reported to the client/owner
 - C2 3D step texts differ between 05 and 08 → using 08.
 - C3 Reply time "brenda ditës" vs "brenda 24 orësh" → one [TO CONFIRM] value.
 - C4 Seed images: 07 says WebP, 09 says JPG masters → plan: JPG masters (Sanity serves AVIF/WebP).
-- C5 Navbar 1024–1199: full links (§2.1) vs menu button (§14) → both variants shown in Phase 2 for the owner to choose.
+- C5 Navbar 1024–1199: full links (§2.1) vs menu button (§14) → both variants switchable in dev (D2.4); **waiting for the owner's choice**.

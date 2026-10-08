@@ -3,7 +3,15 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { locale as rootLocale } from "next/root-params";
+import { CookieBanner } from "@/components/layout/CookieBanner";
+import { Footer } from "@/components/layout/Footer";
+import { LayoutUIProvider } from "@/components/layout/LayoutUIProvider";
+import { Navbar } from "@/components/layout/Navbar";
+import { NavVariantToggle } from "@/components/layout/NavVariantToggle";
+import { SkipLink } from "@/components/layout/SkipLink";
+import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { routing } from "@/i18n/routing";
+import { devRoutesEnabled } from "@/lib/dev";
 import "../globals.css";
 
 // Brand §3: Geist + Geist Mono only, latin + latin-ext (ë, ç)
@@ -40,7 +48,19 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
   return (
     <html lang={locale} className={`${geist.variable} ${geistMono.variable}`}>
       <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <LayoutUIProvider>
+            <SkipLink />
+            <Navbar />
+            <main id="main" tabIndex={-1} className="outline-none">
+              {children}
+            </main>
+            <Footer />
+            <WhatsAppFab />
+            <CookieBanner />
+            {devRoutesEnabled && <NavVariantToggle />}
+          </LayoutUIProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

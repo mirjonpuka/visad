@@ -3,7 +3,7 @@
  * 01_PROJECT_BRIEF.md, 08_CONTENT.md and 09_ASSETS.md. Text is { sq, en };
  * other locales fall back to en (Architecture §3).
  */
-import { localImage, type SiteImage } from "./images";
+import { localImage, stockImage, type SiteImage } from "./images";
 
 type L10n = { sq: string; en: string; it?: string; de?: string };
 
@@ -46,7 +46,7 @@ export const systems: MenuItem[] = [
       sq: "Dyer hyrëse dhe të brendshme alumini me profile të holla, izolim termik dhe siguri të lartë.",
       en: "Aluminium entrance and interior doors with slim profiles, thermal insulation and high security.",
     },
-    image: localImage("project-villa-glass-balconies-shutters", "wide-16x10"),
+    image: stockImage("stock-system-doors"),
   },
   {
     slug: { sq: "dritare", en: "windows" },
@@ -91,7 +91,7 @@ export const systems: MenuItem[] = [
       sq: "Fasada xhami dhe alumini për ndërtesa banimi dhe komerciale, nga projektimi deri te montimi.",
       en: "Glass and aluminium façades for residential and commercial buildings, from design to installation.",
     },
-    image: localImage("project-fishta-hotel-glass-balconies", "wide-16x10"),
+    image: stockImage("stock-system-facades"),
   },
 ];
 
@@ -130,8 +130,7 @@ export const solutions: MenuItem[] = [
       sq: "Fleta teknike, detaje dhe ofertë për tendera publike.",
       en: "Datasheets, details and bids for public tenders.",
     },
-    image: null,
-    placeholderNote: "PHOTO: technical drawings next to aluminium profile samples",
+    image: stockImage("stock-solution-architects"),
   },
 ];
 

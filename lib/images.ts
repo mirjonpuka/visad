@@ -1,4 +1,5 @@
 import manifest from "./images.manifest.json";
+import stockManifest from "./stock.manifest.json";
 
 export type ImageSource = { src: string; width: number; height: number };
 
@@ -28,6 +29,30 @@ type ManifestEntry = {
 
 const entries = manifest as Record<string, ManifestEntry>;
 export type LocalImageId = keyof typeof manifest;
+
+type StockEntry = {
+  alt: Record<string, string>;
+  blurDataURL: string;
+  placeholderNote: string;
+  web: ImageSource[];
+};
+export type StockImageId = keyof typeof stockManifest;
+
+/**
+ * Temporary stock photo (Pexels License) for a slot that has no Visad photo
+ * yet. Always flagged as placeholder, so CMSImage shows the "will be replaced
+ * with …" note. Never used on project pages (Brand §5).
+ */
+export function stockImage(id: StockImageId): SiteImage {
+  const entry = (stockManifest as Record<string, StockEntry>)[id];
+  return {
+    sources: entry.web,
+    alt: entry.alt,
+    blurDataURL: entry.blurDataURL,
+    isPlaceholder: true,
+    placeholderNote: entry.placeholderNote,
+  };
+}
 
 /** A handoff photo, either the full square image (all widths) or one crop. */
 export function localImage(id: LocalImageId, crop?: string): SiteImage {

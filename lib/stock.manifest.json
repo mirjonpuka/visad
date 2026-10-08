@@ -1,0 +1,478 @@
+{
+  "stock-systems-hero": {
+    "id": "stock-systems-hero",
+    "alt": {
+      "sq": "Shtëpi moderne me dritare dhe dyer të mëdha xhami",
+      "en": "Modern house with large glass windows and doors"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRrgAAABXRUJQVlA4IKwAAAAwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JbACsLwABpoLTQVEkPuS925AA/ud8hwqHTeBchHBs14ffPh7RAXybjeON47lLH/My2cniS4chlUgVCuMvodnNcBXGcg7/lNJ8fb26sPD+MpK5Cg4L2Ffd+iOJYVpZ/3BnTiqVhsFQlteWkHwPkvsM8iAcxuAMMc0pKWPOBZ5mESEZ0WJEjOItm4vn9VyhtzgAQIAA",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with close-up of a modern aluminium window corner, anthracite, daylight",
+    "slot": "systems-hero",
+    "credit": "Pexels License · https://www.pexels.com/photo/7031607/",
+    "web": [
+      {
+        "src": "/images/stock/stock-systems-hero-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-systems-hero-960.webp",
+        "width": 960,
+        "height": 641
+      },
+      {
+        "src": "/images/stock/stock-systems-hero-1600.webp",
+        "width": 1600,
+        "height": 1068
+      },
+      {
+        "src": "/images/stock/stock-systems-hero-2400.webp",
+        "width": 2400,
+        "height": 1602
+      }
+    ]
+  },
+  "stock-system-doors": {
+    "id": "stock-system-doors",
+    "alt": {
+      "sq": "Detaj i një dere moderne me dorezë në ngjyrë antracit",
+      "en": "Detail of a modern door with an anthracite handle"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAADQBACdASoYABgAPu1qqk8ppiOiMBgIATAdiWMAghUC3CBI8VEE1A64QQoXcX9LwADfX0Q/CAnSRRshJjnMM9w5S7LJkOAr/aTyGGM78UA+zeaB5v9AqpwZtrCF45v68pixQ8SADWNB9VQPabF/wE27/WNfSuX9ki3PCnJOMQKDcE4AAAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with Visad aluminium entrance door, full height, with handle detail",
+    "slot": "system-doors",
+    "credit": "Pexels License · https://www.pexels.com/photo/7046169/",
+    "web": [
+      {
+        "src": "/images/stock/stock-system-doors-640.webp",
+        "width": 640,
+        "height": 646
+      },
+      {
+        "src": "/images/stock/stock-system-doors-960.webp",
+        "width": 960,
+        "height": 969
+      },
+      {
+        "src": "/images/stock/stock-system-doors-1600.webp",
+        "width": 1600,
+        "height": 1615
+      },
+      {
+        "src": "/images/stock/stock-system-doors-2400.webp",
+        "width": 2400,
+        "height": 2423
+      }
+    ]
+  },
+  "stock-system-sliding": {
+    "id": "stock-system-sliding",
+    "alt": {
+      "sq": "Mur xhami me pamje nga tarraca",
+      "en": "Glass wall opening onto a terrace"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAACwBACdASoSABgAPu1kqU2ppaQiMAgBMB2JZQCsAAy/VD1P2XZF4p1ZH2mxmHsAAPnXwPn/BnHJnX7Viar/Fb8LS45xHgQ1+5Uwx23GRtny1JDbM711XYMT5e9/5rImOfvlLGRDOo6xMIHXbMdASA5OC8z8jVE3xrckO37qg2j2AdRcDPWr2877Q6RAfmFDZakWw8z83fFIZkjrj/dF6jGZZUWxaCGpQAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with large finished Visad sliding glass doors opening to a terrace",
+    "slot": "system-sliding-hero",
+    "credit": "Pexels License · https://www.pexels.com/photo/16335711/",
+    "web": [
+      {
+        "src": "/images/stock/stock-system-sliding-640.webp",
+        "width": 640,
+        "height": 853
+      },
+      {
+        "src": "/images/stock/stock-system-sliding-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/stock/stock-system-sliding-1600.webp",
+        "width": 1600,
+        "height": 2133
+      },
+      {
+        "src": "/images/stock/stock-system-sliding-2400.webp",
+        "width": 2400,
+        "height": 3200
+      }
+    ]
+  },
+  "stock-system-facades": {
+    "id": "stock-system-facades",
+    "alt": {
+      "sq": "Fasadë xhami dhe alumini e një ndërtese",
+      "en": "Glass and aluminium façade of a building"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwCdACHe/cVYnw9pcHmmEAD+3oe7lPoP5wJyrNMXPbManBOhWpAUI8qBnDcBNs6XpbVjf2FBJVmAAAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a Visad glass and aluminium façade project",
+    "slot": "system-facades",
+    "credit": "Pexels License · https://www.pexels.com/photo/9901861/",
+    "web": [
+      {
+        "src": "/images/stock/stock-system-facades-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-system-facades-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "src": "/images/stock/stock-system-facades-1600.webp",
+        "width": 1600,
+        "height": 1067
+      },
+      {
+        "src": "/images/stock/stock-system-facades-2400.webp",
+        "width": 2400,
+        "height": 1600
+      }
+    ]
+  },
+  "stock-factory-machine-1": {
+    "id": "stock-factory-machine-1",
+    "alt": {
+      "sq": "Sharrë që pret metal me shkëndija",
+      "en": "Saw cutting metal with sparks"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRs4AAABXRUJQVlA4IMIAAABwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JbACdMoMYACzC3N1CovK7TP8jEADiEB3Zi5re/gncA6h/tjhv1xLO0vbBobTvpTm8fwrdyYUZ16MgMXose1fM26gl8kiEt7AWOlNzoAP5Cvrtdvfzn3PW23GRotEBu0WUAb6hzAn0NS9zAfH9yfTZ7CR8UADTiKf/fi8b2iSXGa63XkLIVGJ+oORSlDW5M3DctIC6Qt2N//uwwMA6K5Up+33Hr9Yb+rtwAA==",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with the CNC cutting saw in the Visad factory",
+    "slot": "factory-machines-1",
+    "credit": "Pexels License · https://www.pexels.com/photo/1145434/",
+    "web": [
+      {
+        "src": "/images/stock/stock-factory-machine-1-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-1-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-1-1600.webp",
+        "width": 1600,
+        "height": 1067
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-1-2400.webp",
+        "width": 2400,
+        "height": 1600
+      }
+    ]
+  },
+  "stock-factory-machine-2": {
+    "id": "stock-factory-machine-2",
+    "alt": {
+      "sq": "Makineri industriale në punë",
+      "en": "Industrial machinery at work"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAABwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JYwCxDIjgyBGarxaY/gyer99zjAD2aNRMPD35EuCu1lfYM9DkLMXI4wiQQtuBVarEbLPYTSV8+WPOlNBguBFpvJye92Lu+/2cGCojA6uA+CHElNHXbL7/SzKxQMnBj1RYM4khAMYtSIA60s/7LcIzusajWsF3skAr7Xnl8jc9Jyq/GA3+i42TT0U9KSVwAAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with the profile crimping machine in the Visad factory",
+    "slot": "factory-machines-2",
+    "credit": "Pexels License · https://www.pexels.com/photo/8973680/",
+    "web": [
+      {
+        "src": "/images/stock/stock-factory-machine-2-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-2-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-2-1600.webp",
+        "width": 1600,
+        "height": 1067
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-2-2400.webp",
+        "width": 2400,
+        "height": 1600
+      }
+    ]
+  },
+  "stock-factory-machine-3": {
+    "id": "stock-factory-machine-3",
+    "alt": {
+      "sq": "Punëtor në një sallë prodhimi",
+      "en": "Worker in a production hall"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAACwAwCdASoYAA0APu1iqk2ppaQiMAgBMB2JZwC7AB0ZFsCZ7hVBwAD+otnXiRoWHGU0brFbpxTLI8mfOGd9bJZHllkKD5vDhZKmNpcEldPjBUOsa19lJy53JTUxw2wYjxo1mfAPK9hYGew13UpJn5eZCqJOiMa068djg1+WxICS7Cz6udHLrPL8gfxBkeuSl1VkAA==",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with the assembly bench in the Visad factory",
+    "slot": "factory-machines-3",
+    "credit": "Pexels License · https://www.pexels.com/photo/29988955/",
+    "web": [
+      {
+        "src": "/images/stock/stock-factory-machine-3-640.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-3-960.webp",
+        "width": 960,
+        "height": 540
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-3-1600.webp",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-3-2400.webp",
+        "width": 2400,
+        "height": 1350
+      }
+    ]
+  },
+  "stock-factory-machine-4": {
+    "id": "stock-factory-machine-4",
+    "alt": {
+      "sq": "Profile metalike të vendosura në rafte",
+      "en": "Metal profiles stored on racks"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRswAAABXRUJQVlA4IMAAAACQBQCdASoYABIAPu1sq1EppaOiqAqpMB2JZQDDZunWAALE0hqQC2OGTryQLiINOP5FBLNSMAD+qURN7HT7t2Ffx0tc3gAuYfS7ZqBg5G+xI170Xg8lcCqw6SaQW0ESQ5WBgWsLSWazuee5vcoyhS55IJpwvmIpfHGVTFmkjfCFgJVk+iTqa9s2GtB3xwTj0OGvU4vmAvTCAoR/yLKto6ElQUJyZqEUUqjnBHdPGjM2eZcoFeviFprIzsiC63m7gAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with stacked ALUMIL profiles in the Visad warehouse",
+    "slot": "factory-machines-4",
+    "credit": "Pexels License · https://www.pexels.com/photo/15508177/",
+    "web": [
+      {
+        "src": "/images/stock/stock-factory-machine-4-640.webp",
+        "width": 640,
+        "height": 480
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-4-960.webp",
+        "width": 960,
+        "height": 720
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-4-1600.webp",
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "/images/stock/stock-factory-machine-4-2400.webp",
+        "width": 2400,
+        "height": 1800
+      }
+    ]
+  },
+  "stock-process-1": {
+    "id": "stock-process-1",
+    "alt": {
+      "sq": "Matje me metër në objekt",
+      "en": "Measuring with a tape measure on site"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAABwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbACdAdwA4Ir+Oe+BNo95byMIAADiapsTrEuETPgl0ZGm4PJXREM+62vOhQKdId1+H/En/H7K+9OZjywa6260ZhaceaCb6jjncMlZZ8Q5fq5O+cPyDeHZe27Q6mWrzqvBKqy96Smx0G+dXKzNDs13x2XjJZcWRwsUim0VXcwKxCw15onxYdvwAAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a Visad technician measuring an opening on site",
+    "slot": "process-1",
+    "credit": "Pexels License · https://www.pexels.com/photo/8853469/",
+    "web": [
+      {
+        "src": "/images/stock/stock-process-1-640.webp",
+        "width": 640,
+        "height": 958
+      },
+      {
+        "src": "/images/stock/stock-process-1-960.webp",
+        "width": 960,
+        "height": 1437
+      },
+      {
+        "src": "/images/stock/stock-process-1-1600.webp",
+        "width": 1600,
+        "height": 2395
+      },
+      {
+        "src": "/images/stock/stock-process-1-2400.webp",
+        "width": 2400,
+        "height": 3593
+      }
+    ]
+  },
+  "stock-process-2": {
+    "id": "stock-process-2",
+    "alt": {
+      "sq": "Vizatim teknik në ekranin e kompjuterit",
+      "en": "Technical drawing on a computer screen"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRp4AAABXRUJQVlA4IJIAAADwAwCdASoYABAAPu1kq04ppaQiMAgBMB2JYwDA3Bg97aVlhRH9IGwAAP70MaAuPwRsOiWUaD1xT77zxzvCWScIXyw1pBQCtkfIdal4AttUoDES99iH0pmtb/O1nM8HsXPYdp7aOFZMN0R8Uw/0+AmBaQf2qnJx/azSJcUcBD9OJemcStDLeCnPIZjXzYdx6gAAAA==",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a Visad technical drawing of a window or façade",
+    "slot": "process-2",
+    "credit": "Pexels License · https://www.pexels.com/photo/3862379/",
+    "web": [
+      {
+        "src": "/images/stock/stock-process-2-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-process-2-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "src": "/images/stock/stock-process-2-1600.webp",
+        "width": 1600,
+        "height": 1067
+      },
+      {
+        "src": "/images/stock/stock-process-2-2400.webp",
+        "width": 2400,
+        "height": 1601
+      }
+    ]
+  },
+  "stock-process-3": {
+    "id": "stock-process-3",
+    "alt": {
+      "sq": "Makinë CNC që përpunon metal",
+      "en": "CNC machine machining metal"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRtIAAABXRUJQVlA4IMYAAAAQBQCdASoYABYAPu1qqVAppaOiqA1RMB2JZQC2yAziDLOOHGpvhCx/D2QxnbC/LLQAAP7dMC6hq9dplppoVJ4mvM7Jbfjdl6bmpvxqlJWR5z2BQRprzlUqIBEVub9HkN2ydsHk/S1zKoUq1w3H+2jevrSLahv3JhQF1TQiL83ldD00FZnh91Vf3irlnVYtbEen3bTsN4znuWexiDdqlzfpgEgUcXn2wK+eA6r8XZ9D8LrC+gabn5cT+tiul9ENuIhvIbFucAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with CNC cutting of an ALUMIL profile in the Visad factory",
+    "slot": "process-3",
+    "credit": "Pexels License · https://www.pexels.com/photo/10406128/",
+    "web": [
+      {
+        "src": "/images/stock/stock-process-3-640.webp",
+        "width": 640,
+        "height": 588
+      },
+      {
+        "src": "/images/stock/stock-process-3-960.webp",
+        "width": 960,
+        "height": 883
+      },
+      {
+        "src": "/images/stock/stock-process-3-1600.webp",
+        "width": 1600,
+        "height": 1471
+      },
+      {
+        "src": "/images/stock/stock-process-3-2400.webp",
+        "width": 2400,
+        "height": 2207
+      }
+    ]
+  },
+  "stock-process-4": {
+    "id": "stock-process-4",
+    "alt": {
+      "sq": "Montim i një kornize dritareje me trapan",
+      "en": "Fixing a window frame with a drill"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAADwAwCdASoYABAAPu1iqU2ppaOiMAgBMB2JYwC7ABJMzFykLm6Zqp0AAP7c3CgGE2bJ2g4lK3dFngU7Kyl36I2eblmGvszM94v3RlMQFwMzZi+1NV5mMt5kj6xN6BPwqdwr7aCgMSpAFSxKjGDSHoX+AAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with assembly of a window frame in the Visad factory",
+    "slot": "process-4",
+    "credit": "Pexels License · https://www.pexels.com/photo/5768107/",
+    "web": [
+      {
+        "src": "/images/stock/stock-process-4-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-process-4-960.webp",
+        "width": 960,
+        "height": 641
+      },
+      {
+        "src": "/images/stock/stock-process-4-1600.webp",
+        "width": 1600,
+        "height": 1068
+      },
+      {
+        "src": "/images/stock/stock-process-4-2400.webp",
+        "width": 2400,
+        "height": 1602
+      }
+    ]
+  },
+  "stock-process-5": {
+    "id": "stock-process-5",
+    "alt": {
+      "sq": "Montues që vendos një dritare",
+      "en": "Installer fitting a window"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAwCdASoYABAAPu1iqU2ppaOiMAgBMB2JZwDG9BYCTv0nI5g33TAAAO9kaZZV08n6tlWTtCqMPg2lloyAgagc4h0QJIcF4QdxImusOylyYcXz2cFJpQ9/wDpeso3G9IQlAAAA",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with the Visad crew installing a window on site",
+    "slot": "process-5",
+    "credit": "Pexels License · https://www.pexels.com/photo/5691531/",
+    "web": [
+      {
+        "src": "/images/stock/stock-process-5-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-process-5-960.webp",
+        "width": 960,
+        "height": 641
+      },
+      {
+        "src": "/images/stock/stock-process-5-1600.webp",
+        "width": 1600,
+        "height": 1068
+      },
+      {
+        "src": "/images/stock/stock-process-5-2400.webp",
+        "width": 2400,
+        "height": 1602
+      }
+    ]
+  },
+  "stock-solution-architects": {
+    "id": "stock-solution-architects",
+    "alt": {
+      "sq": "Vizatime arkitekturore mbi tavolinë",
+      "en": "Architectural drawings on a desk"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRrIAAABXRUJQVlA4IKYAAAAQBACdASoYABAAPu1iqU2ppaOiMAgBMB2JZwAD5bjIkm1b6iPOOD7GAADgMl4QnTV5OOP17g7m7Lp9+IUzqiwvSgFwaaRms4nSdEP5A93eI/vFrH09AEF0XlupDNYqkcyUrytw4iX59lqOTdOVK4+baAEb+zWOch6QZ2BqjEGBb0/moS6bmqTUZ7w9fe9k91SHd6HKJ1REf7Zfa1J35nw8qqT+mAAA",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with technical drawings next to aluminium profile samples",
+    "slot": "solution-architects",
+    "credit": "Pexels License · https://www.pexels.com/photo/6615095/",
+    "web": [
+      {
+        "src": "/images/stock/stock-solution-architects-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-solution-architects-960.webp",
+        "width": 960,
+        "height": 640
+      },
+      {
+        "src": "/images/stock/stock-solution-architects-1600.webp",
+        "width": 1600,
+        "height": 1067
+      },
+      {
+        "src": "/images/stock/stock-solution-architects-2400.webp",
+        "width": 2400,
+        "height": 1600
+      }
+    ]
+  }
+}

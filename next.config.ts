@@ -6,6 +6,11 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
+  experimental: {
+    // The dev filesystem cache served stale globals.css (Tailwind loader) across
+    // restarts; keep dev output always in sync with the files (DECISIONS D2.28).
+    turbopackFileSystemCacheForDev: false,
+  },
   turbopack: {
     rules: {
       "*.css": {

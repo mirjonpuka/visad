@@ -25,7 +25,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { FooterCta } from "@/components/layout/Footer";
 import { devRoutesEnabled } from "@/lib/dev";
-import { localImage } from "@/lib/images";
+import { localImage, stockImage } from "@/lib/images";
 import { ViewportBadge } from "./ViewportBadge";
 
 export const metadata: Metadata = { title: "UI kit", robots: { index: false, follow: false } };
@@ -517,20 +517,35 @@ export default async function KitPage() {
                 />
               </div>
               <div className="flex flex-col gap-3">
-                <StateLabel>CMSImage · empty slot</StateLabel>
+                <StateLabel>CMSImage · temporary stock photo + note</StateLabel>
                 <CMSImage
-                  image={null}
+                  image={stockImage(surface === "dark" ? "stock-factory-machine-1" : "stock-process-1")}
                   ratio="16/10"
-                  sizes="40vw"
-                  placeholderNote="PHOTO: close-up of a modern aluminium window corner, anthracite, daylight"
+                  sizes="(min-width: 1024px) 22vw, (min-width: 768px) 40vw, 90vw"
                 />
               </div>
               <div className="flex flex-col gap-3">
-                <StateLabel>PlaceholderImage 4:5</StateLabel>
-                <PlaceholderImage
+                <StateLabel>CMSImage · temporary 4:5 + note</StateLabel>
+                <CMSImage
+                  image={stockImage(surface === "dark" ? "stock-system-doors" : "stock-solution-architects")}
                   ratio="4/5"
-                  note="PHOTO: technical drawings next to aluminium profile samples"
+                  sizes="(min-width: 1024px) 22vw, (min-width: 768px) 40vw, 90vw"
                 />
+              </div>
+              <div className="flex flex-col gap-3">
+                <StateLabel>Thumbnail · short note</StateLabel>
+                <div className="w-[168px]">
+                  <CMSImage
+                    image={stockImage("stock-system-facades")}
+                    ratio="16/10"
+                    sizes="168px"
+                    shortNote
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <StateLabel>PlaceholderImage · last-resort fallback (no photo at all)</StateLabel>
+                <PlaceholderImage ratio="16/10" note="PHOTO: what belongs here" />
               </div>
             </div>
           )}

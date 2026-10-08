@@ -795,6 +795,13 @@
     text-transform: uppercase;
     text-align: center;
   }
+  /* On top of a temporary photo: dark glass so the note stays readable */
+  .ph-note--photo {
+    background: rgba(14, 15, 17, 0.72);
+    color: var(--color-text-on-dark);
+    backdrop-filter: blur(6px);
+    pointer-events: none;
+  }
 }
 
 /* ==========================================================================

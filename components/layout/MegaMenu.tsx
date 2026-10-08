@@ -96,7 +96,8 @@ export function MegaMenu({
                       image={item.image}
                       ratio="16/10"
                       decorative
-                      placeholderNote={row ? undefined : item.placeholderNote}
+                      placeholderNote={item.placeholderNote}
+                      shortNote
                       sizes={row ? "168px" : "(min-width: 1440px) 250px, 18vw"}
                     />
                   </div>

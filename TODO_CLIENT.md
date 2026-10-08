@@ -23,10 +23,12 @@ Everything on the site marked `[TO CONFIRM]` or shown as a placeholder photo is 
 - [ ] Original photos from the phone (not WhatsApp copies)
 - [ ] 6–12 real photos per project for the galleries
 
-## Photos still missing (placeholders on the site)
+## Photos still missing (temporary stock photos on the site, each labelled "will be replaced with …")
 - [ ] Systems hero: close-up of a modern aluminium window corner, anthracite
 - [ ] Doors hero: Visad aluminium entrance door with handle detail
 - [ ] Sliding hero: large finished sliding glass doors opening to a terrace
+- [ ] Façades: a Visad glass + aluminium façade project (stock photo used so Fishta Hotel is not shown twice)
+- [ ] Official ALUMIL partner logo (footer shows a text badge until then)
 - [ ] Factory machines ×4, process steps ×5
 - [ ] Architects solution: technical drawings + profile samples
 - [ ] Team portraits

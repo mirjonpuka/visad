@@ -3,7 +3,6 @@
 import Image, { type ImageLoader } from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocale } from "next-intl";
-import { showPlaceholderNotes } from "@/lib/dev";
 import type { SiteImage } from "@/lib/images";
 import { cn, pickLocale } from "@/lib/utils";
 import { PlaceholderImage } from "./PlaceholderImage";
@@ -23,6 +22,8 @@ type Props = {
   objectPosition?: string;
   /** Note shown when the slot has no image */
   placeholderNote?: string;
+  /** Small thumbnails: show only "Temporary photo" instead of the full note */
+  shortNote?: boolean;
   className?: string;
   imgClassName?: string;
 };
@@ -44,6 +45,7 @@ export function CMSImage({
   decorative,
   objectPosition,
   placeholderNote,
+  shortNote,
   className,
   imgClassName,
 }: Props) {
@@ -82,7 +84,12 @@ export function CMSImage({
   }
 
   const alt = decorative ? "" : (pickLocale(image.alt, locale) ?? "");
-  const note = image.isPlaceholder && showPlaceholderNotes ? image.placeholderNote : undefined;
+  // Temporary photos always say what will replace them (Brand §5, owner request)
+  const note = image.isPlaceholder
+    ? shortNote
+      ? "Temporary photo"
+      : (image.placeholderNote ?? "Temporary photo")
+    : undefined;
 
   return (
     <div
@@ -115,7 +122,7 @@ export function CMSImage({
         )}
         style={objectPosition ? { objectPosition } : undefined}
       />
-      {note && <span className="ph-note">{note}</span>}
+      {note && <span className="ph-note ph-note--photo">{note}</span>}
     </div>
   );
 }

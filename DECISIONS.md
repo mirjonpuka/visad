@@ -102,6 +102,18 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D2.23 | Static menu/contact data in `lib/site.ts` until Phase 3 (Sanity) | Phase 2 prompt |
 | D2.24 | Playwright smoke tests in `tests/e2e/layout.spec.ts` (`npm run test:e2e`, 2 workers locally) | Phase 2 acceptance; reused in Phase 9 |
 
+### Owner request after Phase 2: real-looking placeholder photos
+| # | Decision | Why |
+|---|---|---|
+| D2.25 | Empty image slots get a **temporary stock photo** (Pexels License: free commercial use, no attribution required) with a small note at the bottom centre: "Temporary photo · will be replaced with …". Grey `PlaceholderImage` remains only as a last-resort fallback | Owner request; replaces the grey-box design of UI §13.3 / Brand §5 |
+| D2.26 | The note on temporary photos shows **in every environment**, including production (supersedes D1.30) | Owner request; Brand §5 also says production shows the note while the slot is still a placeholder |
+| D2.27 | **Project pages and project tiles never use stock photos**, only real Visad photos | Brief §"Proof points", Brand §5: stock labelled as a Visad project would misrepresent their work |
+| D2.28 | No photo is repeated across the menus: Dyer → stock door detail, Fasada → stock aluminium/glass façade (09 assigned Fishta Hotel to both Fasada and Hotels; Fishta stays on Hotels) | Owner: "you don't have to repeat the pictures" |
+| D2.29 | Stock set: 14 photos for systems hero, doors, sliding, façades, factory machines ×4, process steps ×5, architects. List + notes + alt texts in `scripts/stock-photos.json`; `node scripts/import-stock.mjs` downloads and converts to WebP (`public/images/stock/`, `lib/stock.manifest.json`) | Reproducible; Phase 3 seeds them into Sanity with `isPlaceholder: true` |
+| D2.30 | No stock photos for **team portraits** (the team section stays hidden until real photos exist) and no imitation of the **ALUMIL logo** (footer shows a text badge) | Stock people would be presented as Visad staff; the ALUMIL logo must come from their partner kit |
+| D2.31 | Small thumbnails (mega-menus) show only "Temporary photo"; large images show the full note | The full sentence does not fit 168–250px thumbnails |
+| D2.32 | `experimental.turbopackFileSystemCacheForDev: false` | The dev cache served stale `globals.css` across restarts (twice); production build cache unaffected |
+
 ## Open conflicts reported to the client/owner
 - C2 3D step texts differ between 05 and 08 → using 08.
 - C3 Reply time "brenda ditës" vs "brenda 24 orësh" → one [TO CONFIRM] value.

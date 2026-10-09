@@ -49,10 +49,6 @@
     "finish": "Profile finish",
     "finishSilver": "Silver",
     "finishAnthracite": "Anthracite",
-    "view3d": "View in 3D",
-    "view3dOpen": "Open",
-    "view3dClose": "Close",
-    "view3dDrag": "Drag to rotate",
     "profileRenderAlt": "Thermally broken aluminium window: frame, sash, EPDM gaskets, double glazing and handle"
   },
   "skip": "Skip to content",

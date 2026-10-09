@@ -295,6 +295,16 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | R2.D2 | Careers hero = `visad-truck-aluminium-frames` wide 16:10 crop (migration 005, alt texts reused from the same photo on Home). With no open positions: one centred 720px column — title, "Aktualisht nuk ka pozicione të hapura…" and the application form directly below; with open positions the list stays as before | Owner brief |
 | R2.E1 | Phones / touch: still render + "Shiko në 3D" (secondary button). The tap lazy-loads `WindowViewer` (three.js + R3F, **+245KB gzip in 2 requests**, ready in ~2s on fast network): same window geometry without wall/daylight/fly-through, dpr 1, no transmission, no shadows, frameloop "demand". Horizontal drag turns it ±0.8 rad (no zoom/pan); `touch-action: pan-y` keeps vertical swipes scrolling the page, so the orbit is yaw-only. "Hap / Mbyll" chip opens the sash in 600ms (ease in-out) and steps the camera back so the open sash stays in view. Reduced motion, low-power devices or no WebGL2 → the still image only, no button | Owner brief |
 
+## Owner feedback round 3 (overrides R2 where they differ)
+
+| # | Decision | Why |
+|---|---|---|
+| R3.1 | Phone 3D: **no viewer, no controls** (replaces R2.E1). The finished, closed window sits behind the steps text under a 75% ink shade; while the section scrolls by it opens and the camera flies through it (the desktop timeline 0.70 → 0.98, scrubbed both ways, no pin), then fades into the section colour. dpr 1, loads near the section after the first scroll; portrait canvases start the camera further back so the whole window fits. Reduced motion / low power / no WebGL2 → still image | Owner |
+| R3.2 | Phone menu fits one screen: row size and padding scale with the screen height (22–32px), phones side by side, and language/phones/WhatsApp are pinned to the bottom, so WhatsApp is reachable without scrolling even with a submenu open (checked at 390×664 and 390×844) | Owner |
+| R3.3 | Stats numbers are static again (count-up removed; replaces that part of R2.C2; line icons stay) | Owner: "remove the counter" |
+| R3.4 | Footer on phones: Systems and Company columns side by side | Owner |
+| R3.5 | Ridge credit is the owner's badge image again (hover swaps to the second image), replacing the R2.B3 text link: centred in the bottom bar on laptop, bottom-right corner on phones | Owner: "as I told you before" |
+
 ## Open conflicts reported to the client/owner
 - C7 **X-Frame-Options**: 06 §10 asks for `DENY` (except /studio), but the Presentation preview loads site pages inside the Studio → `SAMEORIGIN` (still blocks every other site).
 - C8 **Mobile Lighthouse ≥ 90 / LCP < 2.2s** (06 §9) vs. the mandated first-visit logo intro (≈2.3s on Home by design) and the motion stack. Desktop meets the budget; mobile scores 66–86 under Lighthouse's simulated 4× slower CPU. Proposal: judge mobile on real devices with Vercel Speed Insights after launch.

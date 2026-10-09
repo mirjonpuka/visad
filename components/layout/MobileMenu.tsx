@@ -69,14 +69,15 @@ export function MobileMenu({ open, onNavigate, isActive, ref }: Props) {
       data-open={open ? "" : undefined}
       inert={!open}
     >
-      <div className="site-container flex min-h-full flex-col pt-[calc(var(--navbar-h)+16px)] pb-8">
+      <div className="site-container flex min-h-full flex-col pt-[calc(var(--navbar-h)+8px)]">
         <nav aria-label={t("nav.main")}>
           <ul className="border-b border-line-dark">
             {rows.map((row, index) => {
               const number = String(index + 1).padStart(2, "0");
               const style = { "--i": index } as CSSProperties;
+              // Rows scale with the screen height so the whole menu, WhatsApp included, fits without scrolling
               const rowClass =
-                "flex w-full items-center gap-4 py-4 text-left text-[32px] leading-[1.1] tracking-[-0.02em]";
+                "flex w-full items-center gap-4 py-[clamp(8px,1.6svh,16px)] text-left text-[clamp(22px,4.2svh,32px)] leading-[1.1] tracking-[-0.02em]";
               const numberEl = (
                 <span className="w-8 shrink-0 font-mono text-[12px] tracking-[0.1em] text-text-on-dark-3">
                   {number}
@@ -162,9 +163,10 @@ export function MobileMenu({ open, onNavigate, isActive, ref }: Props) {
           </ul>
         </nav>
 
-        <div className="mt-auto flex flex-col gap-6 pt-10">
+        {/* Pinned to the bottom: reachable without scrolling, even with a submenu open */}
+        <div className="sticky bottom-0 mt-auto flex flex-col gap-3 bg-ink-900 pt-5 pb-[max(16px,env(safe-area-inset-bottom))]">
           <LanguageSwitcher size="lg" />
-          <ul className="flex flex-col gap-1">
+          <ul className="flex flex-wrap gap-x-6">
             {phones.map((p) => (
               <li key={p.tel}>
                 <a

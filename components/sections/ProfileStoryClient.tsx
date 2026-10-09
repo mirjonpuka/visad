@@ -2,21 +2,16 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { Rotate3d } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
 import { useMotion } from "@/components/motion/MotionProvider";
 import { Reveal, SplitHeadline } from "@/components/motion/reveals";
 import { profileStore, ramp, type ProfileFinish } from "@/components/three/profileStore";
-import type { ViewerControls } from "@/components/three/WindowViewer";
-import { ButtonSecondary } from "@/components/ui/Button";
 import { Chip } from "@/components/ui/Chip";
 import { cn } from "@/lib/utils";
 
-// three.js + R3F live only in these lazy chunks (never in the first load)
+// three.js + R3F live only in this lazy chunk (never in the first load)
 const WindowScene = dynamic(() => import("@/components/three/WindowScene"), { ssr: false });
-// Phones (owner brief E1): requested only after a tap on "Shiko në 3D"
-const WindowViewer = dynamic(() => import("@/components/three/WindowViewer"), { ssr: false });
 
 type Step = { title?: string | null; text?: string | null };
 
@@ -26,15 +21,7 @@ type Props = {
   steps: Step[];
   /** Still render of the same scene, transparent background */
   poster: { src: string; alt: string };
-  labels: {
-    finish: string;
-    silver: string;
-    anthracite: string;
-    view3d: string;
-    open: string;
-    close: string;
-    dragHint: string;
-  };
+  labels: { finish: string; silver: string; anthracite: string };
 };
 
 const STEP_COUNT = 5;
@@ -45,6 +32,8 @@ function navbarHeight() {
 }
 const FEATHER =
   "linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent)";
+/** Phone backdrop: soft top and bottom edges into the section */
+const FEATHER_Y = "linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent)";
 /** Remounts after a lost WebGL context before falling back to the still image */
 const MAX_RECOVERIES = 3;
 
@@ -59,8 +48,8 @@ function canRunScene(flags: ReturnType<typeof useMotion>) {
   }
 }
 
-/** Phones / touch (owner brief E1): the light viewer is offered unless low power or reduced motion. */
-function canRunViewer(flags: ReturnType<typeof useMotion>) {
+/** Phones / touch (owner): the window opens behind the text unless low power or reduced motion. */
+function canRunBackdrop(flags: ReturnType<typeof useMotion>) {
   if (flags.reducedMotion || flags.isLowPower) return false;
   try {
     return !!document.createElement("canvas").getContext("webgl2");
@@ -77,7 +66,9 @@ function canRunViewer(flags: ReturnType<typeof useMotion>) {
  */
 export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Props) {
   const motion = useMotion();
-  const [mode, setMode] = useState<"static" | "scene">("static");
+  // scene = pinned desktop story; backdrop = phone: closed window opens and the camera flies
+  // through it behind the text while the section scrolls by; static = still image only
+  const [mode, setMode] = useState<"static" | "scene" | "backdrop">("static");
   const [load, setLoad] = useState(false);
   const [onScreen, setOnScreen] = useState(false);
   const [sceneReady, setSceneReady] = useState(false);
@@ -89,28 +80,21 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
   const lineRef = useRef<HTMLSpanElement>(null);
   const fadeRef = useRef<HTMLDivElement>(null);
   const decided = useRef(false);
-  // Phone viewer: offered → loading (chunk + first frame) → ready
-  const [viewer, setViewer] = useState<"off" | "offered" | "loading" | "ready">("off");
-  const [open, setOpen] = useState(false);
-  const viewerControls = useRef<ViewerControls | null>(null);
-  const dragX = useRef<number | null>(null);
 
   // Decide once on mount (3D spec: "decide once")
   useEffect(() => {
     if (!motion.ready || decided.current) return;
     decided.current = true;
-    if (!canRunScene(motion)) {
-      if (!canRunViewer(motion)) return;
-      const id = requestAnimationFrame(() => setViewer("offered"));
-      return () => cancelAnimationFrame(id);
-    }
-    const id = requestAnimationFrame(() => setMode("scene"));
+    const next = canRunScene(motion) ? "scene" : canRunBackdrop(motion) ? "backdrop" : null;
+    if (!next) return;
+    const id = requestAnimationFrame(() => setMode(next));
     return () => cancelAnimationFrame(id);
   }, [motion]);
 
   // Load the scene within 600px of the section, after the visitor started scrolling
   useEffect(() => {
-    if (mode !== "scene" || !stageRef.current) return;
+    const target = mode === "backdrop" ? pinRef.current : stageRef.current;
+    if (mode === "static" || !target) return;
     let isNear = false;
     let scrolled = window.scrollY > 0;
     const maybeLoad = () => isNear && scrolled && setLoad(true);
@@ -127,8 +111,8 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
       { rootMargin: "600px" },
     );
     const visible = new IntersectionObserver(([e]) => setOnScreen(e.isIntersecting));
-    near.observe(stageRef.current);
-    visible.observe(stageRef.current);
+    near.observe(target);
+    visible.observe(target);
     return () => {
       window.removeEventListener("scroll", onScroll);
       near.disconnect();
@@ -166,6 +150,27 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
     { dependencies: [mode], scope: pinRef },
   );
 
+  // Phone backdrop: no pin. While the text scrolls by, the finished (closed) window opens and the
+  // camera flies through it — the last part of the desktop timeline (0.7 → 0.98), scrubbed both ways
+  useGSAP(
+    () => {
+      if (mode !== "backdrop" || !pinRef.current) return;
+      const proxy = { p: 0 };
+      gsap.to(proxy, {
+        p: 1,
+        ease: "none",
+        scrollTrigger: { trigger: pinRef.current, start: "top 70%", end: "bottom 30%", scrub: 1 },
+        onUpdate() {
+          profileStore.set({ progress: 0.7 + 0.28 * proxy.p });
+          if (fadeRef.current) fadeRef.current.style.opacity = String(ramp(proxy.p, 0.85, 1));
+        },
+      });
+      profileStore.set({ progress: 0.7 });
+      return () => profileStore.set({ progress: 0 });
+    },
+    { dependencies: [mode], scope: pinRef },
+  );
+
   // Lost WebGL context (GPU reset): remount the canvas a few times
   function onContextLost() {
     setSceneReady(false);
@@ -173,15 +178,9 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
   }
 
   const scene = mode === "scene";
-  const sceneAlive = scene && load && recoveries <= MAX_RECOVERIES;
+  const backdrop = mode === "backdrop";
+  const sceneAlive = (scene || backdrop) && load && recoveries <= MAX_RECOVERIES;
   const showCanvas = sceneAlive && sceneReady;
-  const viewerOn = viewer === "loading" || viewer === "ready";
-
-  function toggleOpen() {
-    const next = !open;
-    setOpen(next);
-    viewerControls.current?.setOpen(next);
-  }
 
   function chooseFinish(next: ProfileFinish) {
     setFinish(next);
@@ -196,8 +195,37 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
         "grid-12 gap-y-12",
         // One screen below the navbar: text column and canvas share the full height
         scene && "h-[calc(100svh-var(--navbar-h))] min-h-[560px] items-stretch py-6",
+        backdrop && "relative isolate py-16",
       )}
     >
+      {/* Phone: the window opens behind the text, always under a dark shade so the text reads */}
+      {backdrop && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 overflow-hidden"
+          style={{ maskImage: FEATHER_Y, WebkitMaskImage: FEATHER_Y }}
+        >
+          {sceneAlive && (
+            <div
+              className={cn(
+                "ease-out absolute inset-0 transition-opacity duration-[400ms]",
+                showCanvas ? "opacity-100" : "opacity-0",
+              )}
+            >
+              <WindowScene
+                key={recoveries}
+                active={onScreen}
+                dpr={1}
+                onReady={() => setSceneReady(true)}
+                onContextLost={onContextLost}
+              />
+            </div>
+          )}
+          <div className="absolute inset-0 bg-ink-900/75" />
+          <div ref={fadeRef} className="absolute inset-0 bg-ink-900 opacity-0" />
+        </div>
+      )}
+
       <div className="col-span-12 flex flex-col justify-center lg:col-span-5">
         <Reveal as="p" y={12} className="font-mono text-eyebrow text-text-on-dark-3 uppercase">
           {eyebrow}
@@ -262,56 +290,26 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
         </div>
       </div>
 
-      <div className="col-span-12 flex items-center lg:col-span-7">
+      {/* The still image column: desktop scene stage, or phones without the backdrop */}
+      <div className={cn("col-span-12 flex items-center lg:col-span-7", backdrop && "hidden")}>
         {/* No box, no border: the scene's wall and the poster share the section colour */}
         <div
           ref={stageRef}
           className={cn(
             "relative mx-auto w-full max-w-[640px]",
             scene ? "h-full min-h-[420px]" : "aspect-[4/5] max-h-[78svh]",
-            viewer !== "off" && "mb-16",
           )}
           data-cursor={showCanvas ? "scroll" : undefined}
-          // Phone viewer: horizontal drag turns the window, vertical swipes still scroll the page
-          style={viewerOn ? { touchAction: "pan-y" } : undefined}
-          onPointerDown={viewer === "ready" ? (e) => void (dragX.current = e.clientX) : undefined}
-          onPointerMove={
-            viewer === "ready"
-              ? (e) => {
-                  if (dragX.current === null) return;
-                  viewerControls.current?.drag(e.clientX - dragX.current);
-                  dragX.current = e.clientX;
-                }
-              : undefined
-          }
-          onPointerUp={() => void (dragX.current = null)}
-          onPointerCancel={() => void (dragX.current = null)}
         >
           <Image
             src={poster.src}
             alt={poster.alt}
             fill
             sizes="(min-width: 1440px) 640px, (min-width: 1024px) 50vw, 100vw"
-            className={cn(
-              "object-contain transition-opacity duration-[400ms]",
-              (showCanvas || viewer === "ready") && "opacity-0",
-            )}
+            className={cn("object-contain transition-opacity duration-[400ms]", showCanvas && "opacity-0")}
           />
 
-          {viewerOn && (
-            <div
-              role="img"
-              aria-label={`${poster.alt} — ${labels.dragHint}`}
-              className={cn(
-                "absolute inset-0 transition-opacity duration-[400ms]",
-                viewer === "ready" ? "opacity-100" : "opacity-0",
-              )}
-            >
-              <WindowViewer controlsRef={viewerControls} onReady={() => setViewer("ready")} />
-            </div>
-          )}
-
-          {sceneAlive && (
+          {scene && sceneAlive && (
             <div
               aria-hidden
               className={cn(
@@ -342,33 +340,7 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
             />
           )}
 
-          {viewer !== "off" && (
-            <div className="absolute inset-x-0 top-full mt-4 flex items-center justify-center gap-4">
-              {viewer === "ready" ? (
-                <>
-                  <Chip active={open} onClick={toggleOpen}>
-                    {open ? labels.close : labels.open}
-                  </Chip>
-                  <span aria-hidden className="font-mono text-label text-text-on-dark-3 uppercase">
-                    {labels.dragHint}
-                  </span>
-                </>
-              ) : (
-                <ButtonSecondary
-                  surface="dark"
-                  loading={viewer === "loading"}
-                  onClick={() => setViewer("loading")}
-                >
-                  <span className="inline-flex items-center gap-2">
-                    <Rotate3d aria-hidden className="size-4" strokeWidth={1.5} />
-                    {labels.view3d}
-                  </span>
-                </ButtonSecondary>
-              )}
-            </div>
-          )}
-
-          {showCanvas && (
+          {scene && showCanvas && (
             <>
               <span
                 aria-hidden

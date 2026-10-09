@@ -65,7 +65,8 @@ export function SplitHeadline({
               stagger: 0.09,
               delay,
               paused: trigger === "manual",
-              scrollTrigger: trigger === "scroll" ? { trigger: el, start: ENTER_START, once: true } : undefined,
+              scrollTrigger:
+                trigger === "scroll" ? { trigger: el, start: ENTER_START, once: true } : undefined,
               // Done: back to the plain heading, nothing clipped any more (accents, descenders)
               onComplete: () => {
                 done = true;
@@ -205,7 +206,11 @@ export function Parallax({
           gsap.fromTo(
             el,
             { yPercent: -amount },
-            { yPercent: amount, ease: "none", scrollTrigger: { trigger, start: "top bottom", end: "bottom top", scrub: true } },
+            {
+              yPercent: amount,
+              ease: "none",
+              scrollTrigger: { trigger, start: "top bottom", end: "bottom top", scrub: true },
+            },
           );
           if (darken) {
             gsap.to(el, {
@@ -255,51 +260,4 @@ export function DrawLine({ className, delay = 0 }: { className?: string; delay?:
   );
 
   return <span ref={ref} aria-hidden data-anim="" className={cn("block", className)} />;
-}
-
-/**
- * §4.6 Count-up from 0 in 1.6s (expo.out), keeping prefix/suffix ("9500+").
- * The final value is in the HTML; tabular numbers keep the width steady.
- */
-export function CountUp({ value, className }: { value: string; className?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const { reducedMotion, ready } = useMotion();
-  const match = value.match(/^(\D*)(\d+(?:[.,]\d+)?)(.*)$/);
-
-  useGSAP(
-    (_, contextSafe) => {
-      if (!ready || reducedMotion || !match || !ref.current) return;
-      const el = ref.current;
-      const [, prefix, digits, suffix] = match;
-      const target = Number(digits.replace(",", "."));
-      const counter = { n: 0 };
-      return afterIdle(
-        contextSafe!(() => {
-          el.textContent = `${prefix}0${suffix}`;
-          gsap.to(counter, {
-            n: target,
-            duration: 1.6,
-            ease: EASE.outExpo,
-            scrollTrigger: { trigger: el, start: ENTER_START, once: true },
-            onUpdate: () => {
-              el.textContent = `${prefix}${Math.round(counter.n)}${suffix}`;
-            },
-            onComplete: () => {
-              el.textContent = value;
-            },
-          });
-        }),
-      );
-    },
-    { dependencies: [ready, reducedMotion, value], scope: ref },
-  );
-
-  return (
-    <>
-      <span ref={ref} aria-hidden className={cn("tabular", className)}>
-        {value}
-      </span>
-      <span className="sr-only">{value}</span>
-    </>
-  );
 }

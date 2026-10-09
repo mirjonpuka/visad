@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { CountUp, Reveal } from "@/components/motion/reveals";
+import { Reveal } from "@/components/motion/reveals";
 import { StatIcon } from "@/components/ui/StatIcon";
 import { cn } from "@/lib/utils";
 
@@ -9,9 +9,8 @@ const ICONS = ["building", "notebook", "map"] as const;
 
 /**
  * Stats band (UI §3.2, owner brief C2/D1) — used on Home and on the Factory
- * page. Each column centred: line icon, number (counts up once when the band
- * enters the viewport, then stays), label. Values from the CMS, [TO CONFIRM]
- * until the client confirms them.
+ * page. Each column centred: line icon, number (static — owner: no counter),
+ * label. Values from the CMS, [TO CONFIRM] until the client confirms them.
  */
 export async function StatsBand({ stats, className }: { stats: Stat[]; className?: string }) {
   const t = await getTranslations("home");
@@ -29,9 +28,7 @@ export async function StatsBand({ stats, className }: { stats: Stat[]; className
             >
               <StatIcon kind={ICONS[i % ICONS.length]} size={40} />
               <p className="flex flex-col items-center gap-1.5">
-                <span className="text-stat leading-none">
-                  <CountUp value={stat.value} />
-                </span>
+                <span className="text-stat leading-none tabular">{stat.value}</span>
                 <span className="text-body-s text-text-on-dark-2">{stat.label}</span>
               </p>
             </li>

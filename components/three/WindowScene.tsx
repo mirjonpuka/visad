@@ -77,8 +77,18 @@ function Window({ fixedProgress, active, still }: WindowProps) {
 
   const mats = useMemo(
     () => ({
-      aluminium: new THREE.MeshStandardMaterial({ color: FINISH[profileStore.finish], metalness: 0.85, roughness: 0.38, envMapIntensity: 0.75 }),
-      polyamide: new THREE.MeshStandardMaterial({ color: "#2A2C2F", roughness: 0.85, emissive: "#F2000D", emissiveIntensity: 0 }),
+      aluminium: new THREE.MeshStandardMaterial({
+        color: FINISH[profileStore.finish],
+        metalness: 0.85,
+        roughness: 0.38,
+        envMapIntensity: 0.75,
+      }),
+      polyamide: new THREE.MeshStandardMaterial({
+        color: "#2A2C2F",
+        roughness: 0.85,
+        emissive: "#F2000D",
+        emissiveIntensity: 0,
+      }),
       epdm: new THREE.MeshStandardMaterial({ color: "#111214", roughness: 0.95 }),
       glass: new THREE.MeshStandardMaterial({
         color: "#CFE3E6",
@@ -98,8 +108,18 @@ function Window({ fixedProgress, active, still }: WindowProps) {
 
   useEffect(
     () => () => {
-      [...geo.frame, ...geo.sash].forEach((m) => [m.aluminium, m.aluminiumInner, m.polyamide, m.epdm].forEach((g) => g.dispose()));
-      [geo.glass.pane, geo.glass.spacer, geo.handle.base, geo.handle.lever, geo.hinge, geo.slot, geo.wall].forEach((g) => g.dispose());
+      [...geo.frame, ...geo.sash].forEach((m) =>
+        [m.aluminium, m.aluminiumInner, m.polyamide, m.epdm].forEach((g) => g.dispose()),
+      );
+      [
+        geo.glass.pane,
+        geo.glass.spacer,
+        geo.handle.base,
+        geo.handle.lever,
+        geo.hinge,
+        geo.slot,
+        geo.wall,
+      ].forEach((g) => g.dispose());
       Object.values(mats).forEach((m) => m.dispose());
       outside.dispose();
     },
@@ -147,7 +167,8 @@ function Window({ fixedProgress, active, still }: WindowProps) {
     };
     c.frame = c.frame.map((v, i) => damp(v, target.frame[i]));
     c.sash = c.sash.map((v, i) => damp(v, target.sash[i]));
-    for (const key of ["glow", "yaw", "pitch", "glass", "handle", "open", "fly"] as const) c[key] = damp(c[key], target[key]);
+    for (const key of ["glow", "yaw", "pitch", "glass", "handle", "open", "fly"] as const)
+      c[key] = damp(c[key], target[key]);
 
     // Frame bars: from 900mm outside + towards the camera, spinning slightly
     SIDES.forEach((side, i) => {
@@ -172,12 +193,16 @@ function Window({ fixedProgress, active, still }: WindowProps) {
       g.position.set(ox * 500 * (1 - e), oy * 500 * (1 - e), 900 * (1 - e));
       g.visible = e > 0.001;
     });
-    (strip.current?.material as THREE.MeshStandardMaterial | undefined)?.setValues({ emissiveIntensity: 0.55 * c.glow });
+    (strip.current?.material as THREE.MeshStandardMaterial | undefined)?.setValues({
+      emissiveIntensity: 0.55 * c.glow,
+    });
 
     // Step 4 (owner brief C3): the glass comes from far behind the profile along Z and fades in
     glass.current!.position.z = -1600 * (1 - c.glass);
     glass.current!.visible = c.glass > 0.001;
-    (glassPane.current?.material as THREE.MeshStandardMaterial | undefined)?.setValues({ opacity: 0.22 * c.glass });
+    (glassPane.current?.material as THREE.MeshStandardMaterial | undefined)?.setValues({
+      opacity: 0.22 * c.glass,
+    });
     handle.current!.scale.setScalar(Math.max(0.001, c.handle));
     handle.current!.visible = c.handle > 0.001;
     // The hinges arrive with the sash bar they sit on (left)
@@ -190,9 +215,12 @@ function Window({ fixedProgress, active, still }: WindowProps) {
     if (still) root.current!.rotation.set(0.1, 0.5, 0);
     else root.current!.rotation.set(c.pitch, c.yaw, 0);
 
-    // Camera: from the room, out through the open window into the light
+    // Camera: from the room, out through the open window into the light. On portrait
+    // canvases (phone backdrop) it starts further back so the whole window fits the width.
     const fly = c.fly * c.fly; // ease in
-    state.camera.position.set(0.14 * ramp(c.fly, 0, 0.4), 0, 4.2 - 5.9 * fly);
+    const fitWidth = 0.95 / (Math.tan(THREE.MathUtils.degToRad(15)) * (state.size.width / state.size.height));
+    const startZ = Math.max(4.2, fitWidth);
+    state.camera.position.set(0.14 * ramp(c.fly, 0, 0.4), 0, startZ - (startZ + 1.7) * fly);
     lookAt.set(0, 0, -3);
     state.camera.lookAt(lookAt);
 
@@ -232,7 +260,12 @@ function Window({ fixedProgress, active, still }: WindowProps) {
             {/* Drainage slots on the outside face of the bottom bar */}
             {m.side === "bottom" &&
               [-360, 0, 360].map((x) => (
-                <mesh key={x} geometry={geo.slot} material={mats.epdm} position={[x, -WINDOW.height / 2 + 22, -WINDOW.frameDepth / 2 - 1]} />
+                <mesh
+                  key={x}
+                  geometry={geo.slot}
+                  material={mats.epdm}
+                  position={[x, -WINDOW.height / 2 + 22, -WINDOW.frameDepth / 2 - 1]}
+                />
               ))}
           </group>
         ))}
@@ -242,7 +275,12 @@ function Window({ fixedProgress, active, still }: WindowProps) {
           {/* Two hinges on the hinge edge, room side */}
           <group ref={hinges}>
             {[1, -1].map((s) => (
-              <mesh key={s} geometry={geo.hinge} material={mats.handle} position={[6, s * (sashSize.h / 2 - 230), WINDOW.sashDepth / 2 + 6]} />
+              <mesh
+                key={s}
+                geometry={geo.hinge}
+                material={mats.handle}
+                position={[6, s * (sashSize.h / 2 - 230), WINDOW.sashDepth / 2 + 6]}
+              />
             ))}
           </group>
           <group position={[sashSize.w / 2, 0, 0]}>

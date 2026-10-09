@@ -15,9 +15,9 @@ async function currentYear() {
   return new Date().getFullYear();
 }
 
-function Column({ title, children }: { title: string; children: ReactNode }) {
+function Column({ title, children, className }: { title: string; children: ReactNode; className?: string }) {
   return (
-    <div>
+    <div className={className}>
       <h2 className="mb-5 font-mono text-eyebrow text-text-on-dark-3 uppercase">{title}</h2>
       <ul className="flex flex-col gap-1 text-body-s">{children}</ul>
     </div>
@@ -27,7 +27,7 @@ function Column({ title, children }: { title: string; children: ReactNode }) {
 const linkClass =
   "inline-flex min-h-8 items-center text-text-on-dark-2 transition-colors duration-(--dur-s) ease-standard hover:text-text-on-dark";
 
-/** Footer (UI §2.4): ink-950, 4 columns (laptop) / 2 (tablet) / 1 (phone). */
+/** Footer (UI §2.4): ink-950, 4 columns (laptop) / 2 (tablet); phone: Systems and Company side by side (owner). */
 export async function Footer() {
   const t = await getTranslations();
   const year = await currentYear();
@@ -37,8 +37,8 @@ export async function Footer() {
     // The WhatsApp FAB hides while the bottom bar is visible (B2), so no extra bottom padding
     <footer className="border-t border-line-dark bg-ink-950 pt-[72px] text-text-on-dark">
       <div className="site-container">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 laptop:grid-cols-4 laptop:gap-5">
-          <div className="flex flex-col gap-5 laptop:pr-8">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 laptop:grid-cols-4 laptop:gap-5">
+          <div className="col-span-2 flex flex-col gap-5 md:col-span-1 laptop:pr-8">
             <Link href="/" aria-label={t("nav.home")} className="self-start">
               <Image
                 src="/brand/logo/visad-logo-on-dark.svg"
@@ -85,14 +85,20 @@ export async function Footer() {
                   className={`${linkClass} cursor-pointer list-none gap-2 [&::-webkit-details-marker]:hidden`}
                 >
                   {t("nav.solutions")}
-                  <span aria-hidden className="text-[12px] transition-transform duration-(--dur-s) group-open:rotate-180">
+                  <span
+                    aria-hidden
+                    className="text-[12px] transition-transform duration-(--dur-s) group-open:rotate-180"
+                  >
                     ▾
                   </span>
                 </summary>
                 <ul className="mt-1 mb-2 flex flex-col gap-1 border-l border-line-dark pl-4">
                   {site.solutions.map((s) => (
                     <li key={s.id}>
-                      <Link href={{ pathname: "/zgjidhje/[segment]", params: { segment: s.slug } }} className={linkClass}>
+                      <Link
+                        href={{ pathname: "/zgjidhje/[segment]", params: { segment: s.slug } }}
+                        className={linkClass}
+                      >
                         {s.title}
                       </Link>
                     </li>
@@ -118,7 +124,7 @@ export async function Footer() {
           </Column>
 
           {/* Owner brief B3: "Adresa: …", "Tel: …" ×2, "E-mail: …" ×2 — linked */}
-          <Column title={t("footer.contact")}>
+          <Column title={t("footer.contact")} className="col-span-2 md:col-span-1">
             <li>
               <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
                 <span>
@@ -174,22 +180,39 @@ export async function Footer() {
             )}
           </Column>
         </div>
-
       </div>
 
-      {/* Bottom bar (owner brief B3): hairline edge to edge; © · credit · languages */}
+      {/* Bottom bar: hairline edge to edge. Laptop: © · Ridge badge (centre) · languages.
+          Phone: © and languages on the left, the badge in the bottom-right corner (owner). */}
       <div data-footer-bottom="" className="mt-16 border-t border-line-dark">
-        <div className="site-container flex flex-col items-start gap-4 py-6 md:flex-row md:items-center md:gap-8">
-          <p className="font-mono text-label text-text-on-dark-3 uppercase">{t("footer.copyright", { year })}</p>
+        <div className="site-container grid grid-cols-[1fr_auto] items-end gap-x-4 gap-y-3 py-6 md:grid-cols-[1fr_auto_1fr] md:items-center">
+          <p className="font-mono text-label text-text-on-dark-3 uppercase">
+            {t("footer.copyright", { year })}
+          </p>
+          {/* Site credit (owner request): their badge images, hover swaps to the second one */}
           <a
             href="https://ridgeabove.com/"
             target="_blank"
             rel="noopener"
-            className="font-mono text-label text-text-on-dark-3 uppercase transition-colors duration-(--dur-s) hover:text-text-on-dark"
+            aria-label={t("footer.credit")}
+            className="group ease-out relative col-start-2 row-span-2 row-start-1 inline-flex h-[42px] w-[150px] self-end transition-transform duration-150 active:scale-[0.97] md:row-span-1 md:self-center"
           >
-            {t("footer.credit")}
+            <Image
+              src="/brand/partners/powered-by-ridge.png"
+              alt=""
+              fill
+              sizes="150px"
+              className="object-contain transition-opacity duration-(--dur-s) group-hover:opacity-0 group-focus-visible:opacity-0"
+            />
+            <Image
+              src="/brand/partners/powered-by-ridge-hover.png"
+              alt=""
+              fill
+              sizes="150px"
+              className="object-contain opacity-0 transition-opacity duration-(--dur-s) group-hover:opacity-100 group-focus-visible:opacity-100"
+            />
           </a>
-          <LanguageSwitcher className="md:ml-auto" />
+          <LanguageSwitcher className="md:col-start-3 md:justify-self-end" />
         </div>
       </div>
     </footer>

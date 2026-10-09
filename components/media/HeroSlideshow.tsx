@@ -10,13 +10,15 @@ const INTERVAL = 6000;
 
 /**
  * Home hero photos (owner request): crossfade 1.4s every 6s with a slow zoom.
- * The first photo is the LCP image (priority); the others mount after the
- * page has loaded. Reduced motion: first photo only. Pauses while the tab is
+ * The first photo is the LCP image (priority); each next photo mounts one
+ * slide ahead, after the page has loaded. Reduced motion: first photo only. Pauses while the tab is
  * hidden or the hero is scrolled out of view.
  */
 export function HeroSlideshow({ images, placeholderNote }: { images: SiteImage[]; placeholderNote?: string }) {
   const { ready, reducedMotion } = useMotion();
   const [index, setIndex] = useState(0);
+  /** Highest photo index loaded so far (photos stay mounted once reached) */
+  const [reach, setReach] = useState(1);
   const [mounted, setMounted] = useState(false);
   const cycling = ready && !reducedMotion && images.length > 1;
 
@@ -39,7 +41,12 @@ export function HeroSlideshow({ images, placeholderNote }: { images: SiteImage[]
     const hero = document.querySelector("[data-hero-image]");
     if (hero) observer.observe(hero);
     const id = window.setInterval(() => {
-      if (visible && !document.hidden) setIndex((i) => (i + 1) % images.length);
+      if (!visible || document.hidden) return;
+      setIndex((i) => {
+        const next = (i + 1) % images.length;
+        setReach((r) => Math.max(r, next + 1));
+        return next;
+      });
     }, INTERVAL);
     return () => {
       window.clearInterval(id);
@@ -50,7 +57,9 @@ export function HeroSlideshow({ images, placeholderNote }: { images: SiteImage[]
   return (
     <>
       {images.map((image, i) => {
-        if (i > 0 && !mounted) return null;
+        // Only the current and the next photo are loaded (A2: the others used to
+        // download at once and slowed the project tiles on 4G)
+        if (i > 0 && (!mounted || i > reach)) return null;
         const active = i === index;
         return (
           <div

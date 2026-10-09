@@ -17,6 +17,8 @@ type Props = {
   fill?: boolean;
   /** LCP image: eager + high fetch priority (Architecture §5) */
   priority?: boolean;
+  /** Sanity quality (default 78); tiles use less (A2) */
+  quality?: number;
   /** Decorative image → alt="" */
   decorative?: boolean;
   /** Focal point override, e.g. "50% 30%" (default: Sanity hotspot) */
@@ -44,6 +46,7 @@ export function CMSImage({
   ratio,
   fill,
   priority,
+  quality,
   decorative,
   objectPosition,
   placeholderNote,
@@ -61,13 +64,13 @@ export function CMSImage({
 
   const loader = useCallback<ImageLoader>(
     ({ width }) => {
-      if (sanity) return sanityImageUrl(sanity, width);
+      if (sanity) return sanityImageUrl(sanity, width, quality);
       if (!sources?.length) return "";
       // Smallest pre-generated width that covers the requested width
       const sorted = [...sources].sort((a, b) => a.width - b.width);
       return (sorted.find((s) => s.width >= width) ?? sorted[sorted.length - 1]).src;
     },
-    [sanity, sources],
+    [sanity, sources, quality],
   );
 
   // Cached images can finish before hydration, so onLoad never fires

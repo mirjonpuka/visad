@@ -14,6 +14,7 @@ export type SanityHotspot = { x: number; y: number; width?: number; height?: num
 export function sanityImageUrl(
   image: { assetId: string; crop?: SanityCrop | null; hotspot?: SanityHotspot | null },
   width: number,
+  quality = 78,
 ) {
   return builder
     .image({
@@ -23,7 +24,7 @@ export function sanityImageUrl(
     })
     .width(width)
     .auto("format")
-    .quality(78)
+    .quality(quality)
     .fit("max")
     .url();
 }

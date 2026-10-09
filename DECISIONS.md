@@ -278,6 +278,14 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | F1.10 | `PREVIEW_SITE=true` review deployment: noindex, forms with Turnstile test keys and Sanity uploads, no external accounts needed | Owner wants to send a link to the client |
 | F1.11 | Sanity tokens kept as they are | Owner decision (LAUNCH.md still recommends rotating before go-live) |
 
+## Owner feedback round 2 (A–E brief; this brief wins over _handoff where they differ)
+
+| # | Decision | Why |
+|---|---|---|
+| R2.A1 | Headline line reveal starts at 130% (below the mask's 0.16em accent room) and the SplitText markup is **reverted when the reveal ends**; a later re-split stays static. Hero CSS title ends with an unclipped clip-path | Root cause: at the first frame the letter tops sat in the mask's extra room; iOS Safari kept them painted as ghost fragments under the heading; masks also clipped accents while present |
+| R2.A2 | Featured project tiles: no wipe (blur placeholder at once), q65 and 70vw on phones; hero slideshow loads one photo ahead; systems accordion loads photos only for rows opened; preconnect to cdn.sanity.io | Root cause: tiles stayed hidden until idle-time animation setup (up to the 3s safety), and 6 accordion + 3 hero photos downloaded together with the tiles. Phone, fast 4G, 4× CPU — tiles visible 663ms → 62ms, all photos 4.8s → 1.6s (median), 863KB → ~350KB |
+| R2.A3 | Footer "Zgjidhje" is a disclosure with the 4 solution pages | Root cause: it linked to /#zgjidhje (Home); the phone menu itself already opened the accordion |
+
 ## Open conflicts reported to the client/owner
 - C7 **X-Frame-Options**: 06 §10 asks for `DENY` (except /studio), but the Presentation preview loads site pages inside the Studio → `SAMEORIGIN` (still blocks every other site).
 - C8 **Mobile Lighthouse ≥ 90 / LCP < 2.2s** (06 §9) vs. the mandated first-visit logo intro (≈2.3s on Home by design) and the motion stack. Desktop meets the budget; mobile scores 66–86 under Lighthouse's simulated 4× slower CPU. Proposal: judge mobile on real devices with Vercel Speed Insights after launch.

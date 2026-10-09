@@ -41,6 +41,7 @@ export function SplitHeadline({
       if (trigger === "manual" && document.documentElement.classList.contains("hero-css")) return release(el);
       let tween: gsap.core.Tween | undefined;
       let split: SplitText | undefined;
+      let done = false;
       let stop: (() => void) | undefined;
       const setup = () => {
         split = SplitText.create(el, {
@@ -51,15 +52,25 @@ export function SplitHeadline({
           autoSplit: true,
           onSplit(self) {
             release(el);
+            // Already revealed: a later re-split (resize) stays static
+            if (done) return;
             tween?.kill();
             tween = gsap.from(self.lines, {
-              yPercent: 100,
+              // 130%: the lines start below the mask's extra accent room, so no
+              // letter tops show there at the first frame (iOS Safari kept those
+              // as ghost fragments under the heading — A1)
+              yPercent: 130,
               duration: 0.9,
               ease: EASE.outExpo,
               stagger: 0.09,
               delay,
               paused: trigger === "manual",
               scrollTrigger: trigger === "scroll" ? { trigger: el, start: ENTER_START, once: true } : undefined,
+              // Done: back to the plain heading, nothing clipped any more (accents, descenders)
+              onComplete: () => {
+                done = true;
+                split?.revert();
+              },
             });
             return tween;
           },

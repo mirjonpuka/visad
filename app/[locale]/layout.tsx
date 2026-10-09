@@ -74,6 +74,8 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
         {/* Decides before first paint whether motion runs and the intro plays (Motion §2).
             Must stay a plain inline script: next/script "beforeInteractive" runs it later. */}
         <script dangerouslySetInnerHTML={{ __html: introHeadScript }} />
+        {/* All CMS photos come from here: open the connection early (A2) */}
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="anonymous" />
       </head>
       <body>
         <NextIntlClientProvider>

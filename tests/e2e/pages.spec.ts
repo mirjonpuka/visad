@@ -133,6 +133,23 @@ test("all message files have the same keys", async () => {
   for (const locale of ["en", "it", "de"]) expect(read(locale), locale).toEqual(base);
 });
 
+test("phone: 'Zgjidhje' opens the 4 solution pages in the menu and in the footer, never the homepage", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await open(page, "/projektet");
+  await page.getByRole("button", { name: /menu/i }).first().click();
+  const menuButton = page.locator("#mobile-menu button", { hasText: "Zgjidhje" });
+  await menuButton.click();
+  await expect(menuButton).toHaveAttribute("aria-expanded", "true");
+  await expect(page.locator("#mm-solutions a[href^='/zgjidhje/']")).toHaveCount(4);
+  await expect(page).toHaveURL(/\/projektet$/);
+  await page.keyboard.press("Escape");
+
+  const footer = page.locator("footer");
+  await footer.locator("summary", { hasText: "Zgjidhje" }).click();
+  await expect(footer.locator("details a[href^='/zgjidhje/']")).toHaveCount(4);
+  await expect(footer.locator("a[href='/#zgjidhje']")).toHaveCount(0);
+});
+
 test("unknown URL shows the 404 page", async ({ page }) => {
   const response = await page.goto("/nuk-ekziston");
   expect(response?.status()).toBe(404);

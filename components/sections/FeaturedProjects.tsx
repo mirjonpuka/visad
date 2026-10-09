@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import { ImageWipe } from "@/components/motion/reveals";
 import { ButtonSecondary } from "@/components/ui/Button";
 import { ProjectTile } from "@/components/ui/ProjectTile";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -19,12 +18,13 @@ const TILE_LAYOUT = [
   "laptop:col-span-5 laptop:col-start-1 laptop:row-span-2 laptop:row-start-3",
   "laptop:col-span-7 laptop:col-start-6 laptop:row-span-2 laptop:row-start-3",
 ];
+// Phone: 70vw (≈ 830px at 3× DPR instead of 1200px) — the tiles stay sharp, ~3× lighter (A2)
 const TILE_SIZES = [
-  "(min-width: 1200px) 58vw, (min-width: 768px) 100vw, 100vw",
-  "(min-width: 1200px) 41vw, (min-width: 768px) 50vw, 100vw",
-  "(min-width: 1200px) 41vw, (min-width: 768px) 50vw, 100vw",
-  "(min-width: 1200px) 41vw, (min-width: 768px) 50vw, 100vw",
-  "(min-width: 1200px) 58vw, (min-width: 768px) 50vw, 100vw",
+  "(min-width: 1200px) 58vw, (min-width: 768px) 100vw, 70vw",
+  "(min-width: 1200px) 41vw, (min-width: 768px) 50vw, 70vw",
+  "(min-width: 1200px) 41vw, (min-width: 768px) 50vw, 70vw",
+  "(min-width: 1200px) 41vw, (min-width: 768px) 50vw, 70vw",
+  "(min-width: 1200px) 58vw, (min-width: 768px) 50vw, 70vw",
 ];
 
 type Props = {
@@ -45,8 +45,8 @@ export async function FeaturedProjects({ title, intro, projects }: Props) {
         <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 laptop:auto-rows-[290px] laptop:grid-cols-12">
           {projects.slice(0, 5).map((project, i) => (
             <li key={project._id} className={cn("h-80 md:h-[360px] laptop:h-auto", TILE_LAYOUT[i])}>
-              {/* Tiles wipe in, staggered 80ms (UI §3.4, Motion §4.3) */}
-              <ImageWipe index={i} className="h-full rounded-base">
+              {/* No wipe here (A2): the tiles show their blur placeholder at once and the
+                  photo fades in when loaded, instead of staying hidden until the animation is set up */}
               <ProjectTile
                 title={project.title}
                 slug={project.slug}
@@ -57,7 +57,6 @@ export async function FeaturedProjects({ title, intro, projects }: Props) {
                 sizes={TILE_SIZES[i]}
                 className="h-full"
               />
-              </ImageWipe>
             </li>
           ))}
         </ul>

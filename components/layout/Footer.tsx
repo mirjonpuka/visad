@@ -77,10 +77,28 @@ export async function Footer() {
                 {t("nav.factory")}
               </Link>
             </li>
+            {/* No solutions index page: "Zgjidhje" opens the 4 solution pages (A3 — it used to
+                jump to the homepage section) */}
             <li>
-              <Link href={{ pathname: "/", hash: "zgjidhje" }} className={linkClass}>
-                {t("nav.solutions")}
-              </Link>
+              <details className="group">
+                <summary
+                  className={`${linkClass} cursor-pointer list-none gap-2 [&::-webkit-details-marker]:hidden`}
+                >
+                  {t("nav.solutions")}
+                  <span aria-hidden className="text-[12px] transition-transform duration-(--dur-s) group-open:rotate-180">
+                    ▾
+                  </span>
+                </summary>
+                <ul className="mt-1 mb-2 flex flex-col gap-1 border-l border-line-dark pl-4">
+                  {site.solutions.map((s) => (
+                    <li key={s.id}>
+                      <Link href={{ pathname: "/zgjidhje/[segment]", params: { segment: s.slug } }} className={linkClass}>
+                        {s.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </li>
             <li>
               <Link href="/karriera" className={linkClass}>

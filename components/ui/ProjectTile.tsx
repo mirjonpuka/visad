@@ -33,6 +33,8 @@ export function ProjectTile({ title, slug, meta, image, number, viewLabel, sizes
         fill
         sizes={sizes}
         priority={priority}
+        // Under a gradient and a title: q65 looks the same and is ~40% lighter (A2)
+        quality={65}
         imgClassName="transition-transform duration-(--dur-l) ease-out-expo group-hover:scale-[1.04]"
         className="rounded-none"
       />

@@ -1001,8 +1001,10 @@ html.js-motion.hero-css [data-hero-image] {
     clip-path: inset(0 0 100% 0);
     transform: translateY(40px);
   }
+  /* Ends unclipped on every side: accents above capitals (Ë, Ç) and the
+     cedilla below ç stay whole (A1) */
   to {
-    clip-path: inset(0 0 -0.2em 0);
+    clip-path: inset(-50% -10% -50% -10%);
   }
 }
 @keyframes hero-image-settle {

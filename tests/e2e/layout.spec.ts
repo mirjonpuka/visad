@@ -83,8 +83,11 @@ test.describe("laptop 1440", () => {
       // Sub-pixel tolerance: Lenis + the 400ms translate settle around -76
       await expect.poll(headerY, { timeout: 1500 }).toBeLessThan(-70);
     }).toPass();
-    await page.mouse.wheel(0, -300);
-    await expect.poll(headerY).toBeGreaterThan(-1);
+    // Retried as well: one small wheel step can land between scroll events
+    await expect(async () => {
+      await page.mouse.wheel(0, -300);
+      await expect.poll(headerY, { timeout: 1500 }).toBeGreaterThan(-1);
+    }).toPass();
   });
 
   test("language switcher keeps the current page", async ({ page }) => {

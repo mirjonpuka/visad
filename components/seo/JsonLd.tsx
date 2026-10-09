@@ -28,7 +28,7 @@ export function BusinessJsonLd({ site, locale }: { site: SiteData; locale: strin
         url: SITE_URL,
         logo: `${SITE_URL}/brand/logo/visad-logo-on-light.svg`,
         image: `${SITE_URL}/brand/logo/visad-logo-on-light.svg`,
-        email: site.email,
+        email: site.emails.length > 1 ? site.emails : site.emails[0],
         telephone: site.phones.map((p) => p.tel),
         inLanguage: locale,
         address: {

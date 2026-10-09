@@ -23,6 +23,8 @@ export type SiteData = {
   mapsUrl: string;
   phones: { display: string; tel: string }[];
   email: string;
+  /** All public e-mails in order (footer, contact page, JSON-LD) */
+  emails: string[];
   whatsappNumber: string;
   /** Prefilled message with {page} placeholder, or null to use the UI default */
   whatsappMessage: string | null;
@@ -54,6 +56,7 @@ export async function getSiteData(): Promise<SiteData> {
     mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`,
     phones: (s.phones ?? []).map((p) => ({ display: p.number, tel: p.number.replace(/[^\d+]/g, "") })),
     email: s.email ?? "info@visad.al",
+    emails: s.emails?.filter(Boolean).length ? s.emails.filter(Boolean) : [s.email ?? "info@visad.al"],
     whatsappNumber: s.whatsappNumber || FALLBACK_WHATSAPP,
     whatsappMessage: s.whatsappMessage ?? null,
     openingHours: (s.openingHours ?? []).filter((h) => h.days && h.hours) as SiteData["openingHours"],

@@ -275,6 +275,10 @@
     "privacy": "Datenschutz",
     "hours": "Öffnungszeiten",
     "alumil": "Zertifizierter ALUMIL-Partner",
-    "copyright": "© {year} VISAD Construction"
+    "copyright": "© {year} VISAD Construction",
+    "addressLabel": "Adresse",
+    "phoneLabel": "Tel",
+    "emailLabel": "E-Mail",
+    "credit": "Powered by Ridge Above"
   }
 }

@@ -34,8 +34,8 @@ export async function Footer() {
   const site = await getSiteData();
 
   return (
-    // Bottom padding keeps the last row clear of the WhatsApp FAB (56px + gap)
-    <footer className="border-t border-line-dark bg-ink-950 pt-[72px] pb-[calc(56px+var(--fab-gap)+24px)] text-text-on-dark">
+    // The WhatsApp FAB hides while the bottom bar is visible (B2), so no extra bottom padding
+    <footer className="border-t border-line-dark bg-ink-950 pt-[72px] text-text-on-dark">
       <div className="site-container">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 laptop:grid-cols-4 laptop:gap-5">
           <div className="flex flex-col gap-5 laptop:pr-8">
@@ -117,24 +117,34 @@ export async function Footer() {
             </li>
           </Column>
 
+          {/* Owner brief B3: "Adresa: …", "Tel: …" ×2, "E-mail: …" ×2 — linked */}
           <Column title={t("footer.contact")}>
             <li>
               <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                {site.address}
+                <span>
+                  <span className="text-text-on-dark-3">{t("footer.addressLabel")}:</span> {site.address}
+                </span>
               </a>
             </li>
             {site.phones.map((p) => (
               <li key={p.tel}>
-                <a href={`tel:${p.tel}`} className={`${linkClass} tabular`}>
-                  {p.display}
+                <a href={`tel:${p.tel}`} className={linkClass}>
+                  <span>
+                    <span className="text-text-on-dark-3">{t("footer.phoneLabel")}:</span>{" "}
+                    <span className="tabular">{p.display}</span>
+                  </span>
                 </a>
               </li>
             ))}
-            <li>
-              <a href={`mailto:${site.email}`} className={linkClass}>
-                {site.email}
-              </a>
-            </li>
+            {site.emails.map((email) => (
+              <li key={email}>
+                <a href={`mailto:${email}`} className={`${linkClass} break-all`}>
+                  <span>
+                    <span className="text-text-on-dark-3">{t("footer.emailLabel")}:</span> {email}
+                  </span>
+                </a>
+              </li>
+            ))}
             <li className="mt-3 text-text-on-dark-3">
               <span className="font-mono text-label uppercase">{t("footer.hours")}</span>
               {site.openingHours.length ? (
@@ -165,35 +175,22 @@ export async function Footer() {
           </Column>
         </div>
 
-        <div className="mt-16 flex flex-col-reverse items-start gap-4 border-t border-line-dark pt-6 md:flex-row md:items-center md:justify-between">
-          <p className="font-mono text-label text-text-on-dark-3 uppercase">
-            {t("footer.copyright", { year })}
-          </p>
-          <LanguageSwitcher />
+      </div>
+
+      {/* Bottom bar (owner brief B3): hairline edge to edge; © · credit · languages */}
+      <div data-footer-bottom="" className="mt-16 border-t border-line-dark">
+        <div className="site-container flex flex-col items-start gap-4 py-6 md:flex-row md:items-center md:gap-8">
+          <p className="font-mono text-label text-text-on-dark-3 uppercase">{t("footer.copyright", { year })}</p>
+          <a
+            href="https://ridgeabove.com/"
+            target="_blank"
+            rel="noopener"
+            className="font-mono text-label text-text-on-dark-3 uppercase transition-colors duration-(--dur-s) hover:text-text-on-dark"
+          >
+            {t("footer.credit")}
+          </a>
+          <LanguageSwitcher className="md:ml-auto" />
         </div>
-        {/* Site credit (owner request) */}
-        <a
-          href="https://ridgeabove.com/"
-          target="_blank"
-          rel="noopener"
-          aria-label="Powered by Ridge Above"
-          className="group relative mt-6 inline-flex h-[50px] w-[182px]"
-        >
-          <Image
-            src="/brand/partners/powered-by-ridge.png"
-            alt=""
-            fill
-            sizes="182px"
-            className="object-contain object-left transition-opacity duration-(--dur-s) group-hover:opacity-0 group-focus-visible:opacity-0"
-          />
-          <Image
-            src="/brand/partners/powered-by-ridge-hover.png"
-            alt=""
-            fill
-            sizes="182px"
-            className="object-contain object-left opacity-0 transition-opacity duration-(--dur-s) group-hover:opacity-100 group-focus-visible:opacity-100"
-          />
-        </a>
       </div>
     </footer>
   );

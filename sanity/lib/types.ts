@@ -25,6 +25,7 @@ export type LayoutData = {
     whatsappNumber?: string;
     whatsappMessage?: string | null;
     email?: string;
+    emails?: string[] | null;
     openingHours?: { days?: string; hours?: string }[] | null;
     social?: { platform: string; url: string }[] | null;
     alumilText?: string | null;

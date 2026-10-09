@@ -41,6 +41,7 @@ export const LAYOUT_QUERY = defineQuery(`{
     whatsappNumber,
     "whatsappMessage": ${L("whatsappMessage")},
     email,
+    emails,
     openingHours[]{ "days": ${L("days")}, hours },
     social[]{ platform, url },
     "alumilText": ${L("alumilPartner.text")},

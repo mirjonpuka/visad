@@ -77,6 +77,13 @@ export const siteSettings = defineType({
       description: "{page} zëvendësohet me titullin e faqes.",
     }),
     defineField({ name: "email", title: "Email publik", type: "string" }),
+    defineField({
+      name: "emails",
+      title: "E-mail-et publike (footer, kontakt)",
+      description: "Shfaqen me radhë në footer dhe te Kontakti. Bosh = përdoret 'Email publik'.",
+      type: "array",
+      of: [defineArrayMember({ type: "string", validation: (r) => r.email() })],
+    }),
     defineField({ name: "leadEmail", title: "Email për njoftimet e formularëve", type: "string" }),
     defineField({
       name: "openingHours",

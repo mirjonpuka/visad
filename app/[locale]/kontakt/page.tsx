@@ -83,12 +83,21 @@ export default async function ContactPage() {
                 ))}
               </ul>
             </li>
-            <li>
-              <a href={`mailto:${site.email}`} className={`${card} h-full border-line-dark hover:border-text-on-dark-3`}>
-                <Mail size={28} strokeWidth={1.5} aria-hidden className="text-text-on-dark-2" />
-                <span className="text-h4">{t("contact.email")}</span>
-                <span className="font-mono text-body text-text-on-dark-2">{site.email}</span>
-              </a>
+            <li className={`${card} border-line-dark`}>
+              <Mail size={28} strokeWidth={1.5} aria-hidden className="text-text-on-dark-2" />
+              <span className="text-h4">{t("contact.email")}</span>
+              <ul className="flex flex-col gap-1">
+                {site.emails.map((email) => (
+                  <li key={email}>
+                    <a
+                      href={`mailto:${email}`}
+                      className="inline-flex min-h-11 items-center font-mono text-body break-all text-text-on-dark-2 underline-offset-4 hover:underline"
+                    >
+                      {email}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </li>
           </ul>
         </div>

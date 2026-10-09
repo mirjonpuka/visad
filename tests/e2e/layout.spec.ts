@@ -109,6 +109,27 @@ test.describe("laptop 1440", () => {
   });
 });
 
+test("WhatsApp button: hides while scrolling, returns after, hidden over the footer bottom bar", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await open(page, "/sistemet");
+  const fab = page.locator("[data-fab-visible]");
+  await expect(fab).toHaveCount(1);
+  // Keep scrolling: hidden and not clickable
+  await page.mouse.move(700, 400);
+  for (let i = 0; i < 4; i++) {
+    await page.mouse.wheel(0, 120);
+    await page.waitForTimeout(120);
+  }
+  await expect(fab).toHaveCount(0);
+  // ~600ms after the last scroll it is back
+  await expect(fab).toHaveCount(1, { timeout: 3000 });
+  // Bottom of the page: footer bar visible → stays hidden
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForTimeout(1500);
+  await expect(page.locator("[data-footer-bottom]")).toBeInViewport();
+  await expect(fab).toHaveCount(0);
+});
+
 test.describe("phone 390", () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true });
 

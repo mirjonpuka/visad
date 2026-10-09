@@ -15,7 +15,8 @@
     "test:e2e": "playwright test",
     "seed": "tsx --env-file=.env.local scripts/seed-sanity.ts",
     "profile:render": "node scripts/export-profile-render.mjs",
-    "test:cleanup-leads": "tsx --env-file=.env.local scripts/cleanup-test-leads.ts"
+    "test:cleanup-leads": "tsx --env-file=.env.local scripts/cleanup-test-leads.ts",
+    "favicons": "node scripts/make-favicons.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

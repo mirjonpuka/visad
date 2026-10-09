@@ -50,8 +50,9 @@ export default async function HomePage() {
       <section id="sistemet" className="surface-dark border-t border-line-dark section-y">
         <div className="site-container">
           <ProfileStory title={home.profileStoryTitle} steps={home.profileStorySteps ?? []} />
-          <div className="mt-24 laptop:mt-36">
+          <div className="mt-20 laptop:mt-28">
             <SectionHeader
+              className="mb-8 laptop:mb-10"
               title={home.systemsTitle}
               aside={<LinkArrow href="/sistemet">{t("cta.allSystems")}</LinkArrow>}
             />

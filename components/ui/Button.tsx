@@ -78,8 +78,6 @@ function ButtonBase({ variant, icon, props }: { variant: Variant; icon?: ReactNo
   const state = {
     "data-loading": loading ? "" : undefined,
     "aria-busy": loading || undefined,
-    // Large buttons are magnetic on laptop (Motion §5.2, wired in Phase 5)
-    "data-magnetic": size === "lg" ? "" : undefined,
   };
 
   if ("href" in rest && rest.href !== undefined) {

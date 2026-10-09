@@ -3,8 +3,8 @@ import { CMSImage } from "@/components/media/CMSImage";
 import type { SiteImage } from "@/lib/images";
 import { cn } from "@/lib/utils";
 
-/** Official ALUMIL logo file (brand colours; for light backgrounds only) */
-export const ALUMIL_LOGO_SRC = "/brand/partners/alumil-logo.svg";
+/** Official ALUMIL logo as a transparent PNG (owner request), rendered from the official SVG */
+export const ALUMIL_LOGO_SRC = "/brand/partners/alumil-logo.png";
 const RATIO = 220 / 84.73;
 
 /**

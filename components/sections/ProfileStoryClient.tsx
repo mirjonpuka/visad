@@ -1,18 +1,17 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { CMSImage } from "@/components/media/CMSImage";
 import { gsap, useGSAP } from "@/components/motion/gsap";
 import { useMotion } from "@/components/motion/MotionProvider";
-import { ImageWipe, Reveal, SplitHeadline } from "@/components/motion/reveals";
-import { profileStore, type ProfileFinish } from "@/components/three/profileStore";
+import { Reveal, SplitHeadline } from "@/components/motion/reveals";
+import { profileStore, ramp, type ProfileFinish } from "@/components/three/profileStore";
 import { Chip } from "@/components/ui/Chip";
-import type { SiteImage } from "@/lib/images";
 import { cn } from "@/lib/utils";
 
 // three.js + R3F live only in this lazy chunk (never in the first load)
-const ProfileScene = dynamic(() => import("@/components/three/ProfileScene"), { ssr: false });
+const WindowScene = dynamic(() => import("@/components/three/WindowScene"), { ssr: false });
 
 type Step = { title?: string | null; text?: string | null };
 
@@ -20,11 +19,16 @@ type Props = {
   eyebrow: string;
   title?: string | null;
   steps: Step[];
-  image: SiteImage;
+  /** Still render of the same scene, transparent background */
+  poster: { src: string; alt: string };
   labels: { finish: string; silver: string; anthracite: string };
 };
 
 const STEP_COUNT = 5;
+const FEATHER =
+  "linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent)";
+/** Remounts after a lost WebGL context before falling back to the still image */
+const MAX_RECOVERIES = 3;
 
 /** WebGL2 + capable device + no reduced motion + ≥768px fine pointer (3D spec §Fallbacks). */
 function canRunScene(flags: ReturnType<typeof useMotion>) {
@@ -38,23 +42,24 @@ function canRunScene(flags: ReturnType<typeof useMotion>) {
 }
 
 /**
- * Systems part A (UI §3.3A, 3D spec). Server HTML = the static layout (render
- * image + the 5 steps as a list), which phones, low-power devices and reduced
- * motion keep. On capable devices the section is pinned (~250vh), the steps
- * follow the scroll progress and the WebGL scene loads 600px before view.
+ * Systems part A (UI §3.3A, owner feedback): a window is built, opens, and
+ * the camera flies out through it as the visitor scrolls the pinned section
+ * (300vh, scrubbed both ways). Server HTML = the still render + the 5 steps
+ * as a list, which phones, low-power devices and reduced motion keep.
  */
-export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Props) {
+export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Props) {
   const motion = useMotion();
   const [mode, setMode] = useState<"static" | "scene">("static");
   const [load, setLoad] = useState(false);
   const [onScreen, setOnScreen] = useState(false);
   const [sceneReady, setSceneReady] = useState(false);
-  const [lowFps, setLowFps] = useState(false);
+  const [recoveries, setRecoveries] = useState(0);
   const [active, setActive] = useState(0);
   const [finish, setFinish] = useState<ProfileFinish>(profileStore.finish);
   const pinRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLSpanElement>(null);
+  const fadeRef = useRef<HTMLDivElement>(null);
   const decided = useRef(false);
 
   // Decide once on mount (3D spec: "decide once")
@@ -66,9 +71,7 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
     return () => cancelAnimationFrame(id);
   }, [motion]);
 
-  // Lazy-load the scene when the section is within 600px — but only after the
-  // visitor has started scrolling, so three.js never competes with the first
-  // load on tall screens where the section is already within the margin
+  // Load the scene within 600px of the section, after the visitor started scrolling
   useEffect(() => {
     if (mode !== "scene" || !stageRef.current) return;
     let isNear = false;
@@ -96,7 +99,7 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
     };
   }, [mode]);
 
-  // Pinned scroll timeline: progress 0 → 1 over 250vh, scrub 1
+  // Pinned scroll timeline: progress 0 → 1 over 300vh, scrub 1 (works up and down)
   useGSAP(
     () => {
       if (mode !== "scene" || !pinRef.current) return;
@@ -107,7 +110,7 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
         scrollTrigger: {
           trigger: pinRef.current,
           start: "top top",
-          end: "+=250%",
+          end: "+=300%",
           pin: true,
           scrub: 1,
           invalidateOnRefresh: true,
@@ -115,6 +118,8 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
         onUpdate() {
           profileStore.set({ progress: proxy.p });
           if (lineRef.current) lineRef.current.style.transform = `scaleY(${proxy.p})`;
+          // The fly-through ends in the section colour, so the next section follows seamlessly
+          if (fadeRef.current) fadeRef.current.style.opacity = String(ramp(proxy.p, 0.88, 0.95));
           setActive(Math.min(STEP_COUNT - 1, Math.floor(proxy.p * STEP_COUNT)));
         },
       });
@@ -123,16 +128,15 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
     { dependencies: [mode], scope: pinRef },
   );
 
-  // Low frame rate: crossfade to the image (400ms), then drop the scene
-  const [sceneGone, setSceneGone] = useState(false);
-  useEffect(() => {
-    if (!lowFps) return;
-    const id = window.setTimeout(() => setSceneGone(true), 450);
-    return () => window.clearTimeout(id);
-  }, [lowFps]);
+  // Lost WebGL context (GPU reset): remount the canvas a few times
+  function onContextLost() {
+    setSceneReady(false);
+    window.setTimeout(() => setRecoveries((n) => n + 1), 400);
+  }
 
   const scene = mode === "scene";
-  const showCanvas = scene && sceneReady && !lowFps;
+  const sceneAlive = scene && load && recoveries <= MAX_RECOVERIES;
+  const showCanvas = sceneAlive && sceneReady;
 
   function chooseFinish(next: ProfileFinish) {
     setFinish(next);
@@ -140,10 +144,7 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
   }
 
   return (
-    <div
-      ref={pinRef}
-      className={cn("grid-12 gap-y-12", scene && "min-h-svh content-center py-(--navbar-h)")}
-    >
+    <div ref={pinRef} className={cn("grid-12 gap-y-12", scene && "min-h-svh content-center py-(--navbar-h)")}>
       <div className="col-span-12 lg:col-span-5">
         <Reveal as="p" y={12} className="font-mono text-eyebrow text-text-on-dark-3 uppercase">
           {eyebrow}
@@ -158,28 +159,16 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
           {/* Vertical progress line; red fill follows the scroll progress */}
           <span aria-hidden className="absolute top-1 bottom-1 left-0 w-px bg-line-dark">
             {scene && (
-              <span
-                ref={lineRef}
-                className="absolute inset-0 origin-top bg-red-500"
-                style={{ transform: "scaleY(0)" }}
-              />
+              <span ref={lineRef} className="absolute inset-0 origin-top bg-red-500" style={{ transform: "scaleY(0)" }} />
             )}
           </span>
           <Reveal as="ol" stagger className={cn("flex flex-col", scene ? "gap-6" : "gap-8")}>
             {steps.map((step, i) => (
               <li key={i} aria-current={scene && i === active ? "step" : undefined}>
-                <div
-                  className={cn(
-                    "flex flex-col gap-1.5 transition-opacity duration-300",
-                    scene && i !== active && "opacity-35",
-                  )}
-                >
-                  <span className="font-mono text-label text-red-text-on-dark tabular">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                <div className={cn("flex flex-col gap-1.5 transition-opacity duration-300", scene && i !== active && "opacity-35")}>
+                  <span className="font-mono text-label text-red-text-on-dark tabular">{String(i + 1).padStart(2, "0")}</span>
                   <h3 className="relative self-start text-h4">
                     {step.title}
-                    {/* Step 5: a thin red line draws under the title */}
                     {scene && i === STEP_COUNT - 1 && (
                       <span
                         aria-hidden
@@ -199,28 +188,36 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
       </div>
 
       <div className="col-span-12 lg:col-span-7">
-        <div ref={stageRef} className="relative" data-cursor={showCanvas ? "scroll" : undefined}>
-          <ImageWipe className="rounded-base">
-            <div className={cn("transition-opacity duration-[400ms]", showCanvas && "opacity-0")}>
-              <CMSImage image={image} ratio="3/2" sizes="(min-width: 1440px) 760px, (min-width: 1024px) 56vw, 100vw" />
-            </div>
-          </ImageWipe>
+        {/* No box, no border: the scene's wall and the poster share the section colour */}
+        <div
+          ref={stageRef}
+          className="relative mx-auto aspect-[4/5] max-h-[78svh] w-full max-w-[640px]"
+          data-cursor={showCanvas ? "scroll" : undefined}
+        >
+          <Image
+            src={poster.src}
+            alt={poster.alt}
+            fill
+            sizes="(min-width: 1440px) 640px, (min-width: 1024px) 50vw, 100vw"
+            className={cn("object-contain transition-opacity duration-[400ms]", showCanvas && "opacity-0")}
+          />
 
-          {scene && load && !sceneGone && (
+          {sceneAlive && (
             <div
               aria-hidden
-              className={cn(
-                "absolute inset-0 transition-opacity duration-[400ms]",
-                showCanvas ? "opacity-100" : "opacity-0",
-              )}
+              className={cn("absolute inset-0 transition-opacity duration-[400ms]", showCanvas ? "opacity-100" : "opacity-0")}
+              // Feathered edges: the daylight of the fly-through dissolves into the page, no hard box
+              style={{ maskImage: FEATHER, WebkitMaskImage: FEATHER, maskComposite: "intersect", WebkitMaskComposite: "source-in" }}
             >
-              <ProfileScene
-                active={onScreen && !lowFps}
+              <WindowScene
+                key={recoveries}
+                active={onScreen}
                 onReady={() => setSceneReady(true)}
-                onLowFps={() => setLowFps(true)}
+                onContextLost={onContextLost}
               />
             </div>
           )}
+          {scene && <div ref={fadeRef} aria-hidden className="pointer-events-none absolute -inset-px bg-ink-900 opacity-0" />}
 
           {showCanvas && (
             <>
@@ -233,12 +230,7 @@ export function ProfileStoryClient({ eyebrow, title, steps, image, labels }: Pro
               >
                 VISAD × ALUMIL
               </span>
-              {/* Finish toggle (laptop): silver / anthracite */}
-              <div
-                role="group"
-                aria-label={labels.finish}
-                className="absolute top-4 right-4 hidden gap-2 laptop:flex"
-              >
+              <div role="group" aria-label={labels.finish} className="absolute top-4 right-4 hidden gap-2 laptop:flex">
                 {(["silver", "anthracite"] as const).map((value) => (
                   <Chip key={value} active={finish === value} onClick={() => chooseFinish(value)}>
                     {labels[value]}

@@ -178,5 +178,65 @@
       "sq": "Vizatime arkitekturore mbi tavolinë",
       "en": "Architectural drawings on a desk"
     }
+  },
+  {
+    "id": "stock-hero-1",
+    "pexelsId": 31737860,
+    "slot": "home-hero",
+    "replaceWith": "a Visad project at dusk (villa or hotel with lit windows)",
+    "alt": {
+      "sq": "Vilë moderne në mbrëmje me dritare të mëdha të ndriçuara",
+      "en": "Modern villa at dusk with large lit windows"
+    }
+  },
+  {
+    "id": "stock-hero-2",
+    "pexelsId": 6775268,
+    "slot": "home-hero",
+    "replaceWith": "a Visad sliding door opening onto a terrace with a view",
+    "alt": {
+      "sq": "Dhomë ndenjeje që hapet me mur xhami drejt një tarrace me pamje nga deti",
+      "en": "Living room opening through a glass wall onto a sea-view terrace"
+    }
+  },
+  {
+    "id": "stock-hero-3",
+    "pexelsId": 2599538,
+    "slot": "home-hero",
+    "replaceWith": "a Visad glass and aluminium façade",
+    "alt": {
+      "sq": "Fasada xhami dhe alumini që pasqyrojnë qiellin",
+      "en": "Glass and aluminium façades reflecting the sky"
+    }
+  },
+  {
+    "id": "stock-hero-4",
+    "pexelsId": 7031604,
+    "slot": "home-hero",
+    "replaceWith": "a finished Visad house with aluminium windows and doors",
+    "alt": {
+      "sq": "Shtëpi moderne me dritare dhe dyer të mëdha xhami",
+      "en": "Modern house with large glass windows and doors"
+    }
+  },
+  {
+    "id": "stock-system-windows",
+    "pexelsId": 2972114,
+    "slot": "system-windows",
+    "replaceWith": "Visad aluminium windows on a finished building",
+    "alt": {
+      "sq": "Dritare alumini me hapje në fasadë",
+      "en": "Aluminium windows opening on a façade"
+    }
+  },
+  {
+    "id": "stock-system-railings",
+    "pexelsId": 34147115,
+    "slot": "system-railings",
+    "replaceWith": "Visad glass balcony railings on a finished building",
+    "alt": {
+      "sq": "Ballkone me parmakë xhami në një ndërtesë banimi",
+      "en": "Balconies with glass railings on a residential building"
+    }
   }
 ]

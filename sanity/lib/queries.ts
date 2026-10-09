@@ -76,6 +76,7 @@ export const HOME_QUERY = defineQuery(`{
   },
   "home": *[_id == "homePage"][0]{
     "heroImage": heroImage${IMAGE},
+    "heroImages": heroImages[]${IMAGE},
     "heroVideo": heroVideo.asset->url,
     "heroEyebrow": ${L("heroEyebrow")},
     "heroTitle": ${L("heroTitle")},

@@ -36,6 +36,7 @@ export function SystemsAccordion({ systems }: { systems: AccordionSystem[] }) {
   return (
     <div className="grid grid-cols-1 gap-16 md:grid-cols-[46fr_54fr] md:gap-10 laptop:gap-16">
       <Accordion
+        size="md"
         open={open}
         onOpenChange={onOpenChange}
         items={systems.map((system, i) => ({
@@ -43,7 +44,7 @@ export function SystemsAccordion({ systems }: { systems: AccordionSystem[] }) {
           number: String(i + 1).padStart(2, "0"),
           title: system.title,
           content: (
-            <div className="flex max-w-[460px] flex-col gap-6">
+            <div className="flex max-w-[460px] flex-col gap-4">
               {/* Phone: the image lives inside the open row */}
               <div className="md:hidden">
                 <CMSImage image={system.image} ratio="16/10" sizes="90vw" />
@@ -72,7 +73,8 @@ export function SystemsAccordion({ systems }: { systems: AccordionSystem[] }) {
       />
 
       {/* Tablet & laptop: one large image for the open system */}
-      <div className="relative hidden min-h-[520px] overflow-hidden rounded-base md:block laptop:min-h-[620px]">
+      {/* Compact (owner): the whole section fits about one screen at 1440×900 */}
+      <div className="relative hidden min-h-[420px] overflow-hidden rounded-base md:block laptop:min-h-[460px]">
         {systems.map((system, i) => (
           <div
             key={system.id}

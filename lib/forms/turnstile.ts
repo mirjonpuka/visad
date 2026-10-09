@@ -1,4 +1,5 @@
 import "server-only";
+import { STRICT_PRODUCTION } from "@/lib/preview-site";
 
 /**
  * Cloudflare Turnstile verification (Architecture §7.3). Without keys
@@ -10,7 +11,7 @@ const TEST_SECRET = "1x0000000000000000000000000000000AA";
 
 export async function verifyTurnstile(token: string, ip?: string | null) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret && process.env.VERCEL_ENV === "production") {
+  if (!secret && STRICT_PRODUCTION) {
     console.error("[turnstile] TURNSTILE_SECRET_KEY missing in production");
     return false;
   }

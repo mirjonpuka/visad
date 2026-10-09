@@ -158,6 +158,16 @@ export const homePage = defineType({
   fields: [
     defineField({ name: "heroImage", title: "Foto e hero-s", type: "imageWithAlt", group: "hero" }),
     defineField({
+      name: "heroImages",
+      title: "Fotot e hero-s (ndërrohen me radhë, 2–6)",
+      description: "Nëse ka më shumë se një foto, ato shfaqen njëra pas tjetrës me zbehje. Bosh = përdoret 'Foto e hero-s'.",
+      type: "array",
+      of: [defineArrayMember({ type: "imageWithAlt" })],
+      options: { layout: "grid" },
+      validation: (r) => r.max(6),
+      group: "hero",
+    }),
+    defineField({
       name: "heroVideo",
       title: "Video (opsionale, ≤ 4MB, MP4)",
       type: "file",

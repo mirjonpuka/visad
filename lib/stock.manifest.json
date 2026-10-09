@@ -610,5 +610,209 @@
         "height": 1600
       }
     ]
+  },
+  "stock-hero-1": {
+    "id": "stock-hero-1",
+    "alt": {
+      "sq": "Vilë moderne në mbrëmje me dritare të mëdha të ndriçuara",
+      "en": "Modern villa at dusk with large lit windows"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbAC7AB57ah60C+OiBJy3OuwA/vEd6NjoR4DwexQSyyc3UWyxq4Q41WqrGoI8dx4y2kDBAE7isFWj4B7rfYE7VZNRMSZvtT8sR/IfFpA+NglTO77d5mna5/2G0MNfe8oGL9JGEAWUf272Zv7lLpkeEC1hle+J0+J0sQ8/D3hP2XXBuywzSsw1QkWOqw/8iAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a Visad project at dusk (villa or hotel with lit windows)",
+    "slot": "home-hero",
+    "credit": "Pexels License · https://www.pexels.com/photo/31737860/",
+    "web": [
+      {
+        "src": "/images/stock/stock-hero-1-640.webp",
+        "width": 640,
+        "height": 960
+      },
+      {
+        "src": "/images/stock/stock-hero-1-960.webp",
+        "width": 960,
+        "height": 1440
+      },
+      {
+        "src": "/images/stock/stock-hero-1-1600.webp",
+        "width": 1600,
+        "height": 2400
+      },
+      {
+        "src": "/images/stock/stock-hero-1-2400.webp",
+        "width": 2400,
+        "height": 3600
+      }
+    ]
+  },
+  "stock-hero-2": {
+    "id": "stock-hero-2",
+    "alt": {
+      "sq": "Dhomë ndenjeje që hapet me mur xhami drejt një tarrace me pamje nga deti",
+      "en": "Living room opening through a glass wall onto a sea-view terrace"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRqAAAABXRUJQVlA4IJQAAACwBACdASoYAA8APu1iqU2ppaOiMAgBMB2JQBOmUDX/xa9bJocmeU+FKKkCdSzIAP7r/jNlp6qVnA7uKtuoBMDSoH4uqPBE9qOZKxcRIZP4jcUn/Mhpsc2Nkl+FbA2GPxjujY9mnHvlaPHmEWtny2FY+5S5z/hOXSF0pduGbs/3iiybyO73ygcaSxJd/9RIM2wOEAAA",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a Visad sliding door opening onto a terrace with a view",
+    "slot": "home-hero",
+    "credit": "Pexels License · https://www.pexels.com/photo/6775268/",
+    "web": [
+      {
+        "src": "/images/stock/stock-hero-2-640.webp",
+        "width": 640,
+        "height": 407
+      },
+      {
+        "src": "/images/stock/stock-hero-2-960.webp",
+        "width": 960,
+        "height": 611
+      },
+      {
+        "src": "/images/stock/stock-hero-2-1600.webp",
+        "width": 1600,
+        "height": 1018
+      },
+      {
+        "src": "/images/stock/stock-hero-2-2400.webp",
+        "width": 2400,
+        "height": 1527
+      }
+    ]
+  },
+  "stock-hero-3": {
+    "id": "stock-hero-3",
+    "alt": {
+      "sq": "Fasada xhami dhe alumini që pasqyrojnë qiellin",
+      "en": "Glass and aluminium façades reflecting the sky"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRrQAAABXRUJQVlA4IKgAAAAwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JbACdMoACBNd8lArZ+9wV6AAA/svsVFWdkx51C2BPiLOFrFF1Tl04BQpTEclrPBNKrgkckRAsnlDfgcIIdrXccxzV4Y0reZeZvOVpIEhFuUWQT0uHQ3CrX0bNJXYU15cDSDBa+yU3b5AYN5EsQUCbU3J3aqqWEFG5fi5vkmjCBhkNHQBCS5bwgY4jYfqYgAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a Visad glass and aluminium façade",
+    "slot": "home-hero",
+    "credit": "Pexels License · https://www.pexels.com/photo/2599538/",
+    "web": [
+      {
+        "src": "/images/stock/stock-hero-3-640.webp",
+        "width": 640,
+        "height": 426
+      },
+      {
+        "src": "/images/stock/stock-hero-3-960.webp",
+        "width": 960,
+        "height": 639
+      },
+      {
+        "src": "/images/stock/stock-hero-3-1600.webp",
+        "width": 1600,
+        "height": 1065
+      },
+      {
+        "src": "/images/stock/stock-hero-3-2400.webp",
+        "width": 2400,
+        "height": 1597
+      }
+    ]
+  },
+  "stock-hero-4": {
+    "id": "stock-hero-4",
+    "alt": {
+      "sq": "Shtëpi moderne me dritare dhe dyer të mëdha xhami",
+      "en": "Modern house with large glass windows and doors"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRsAAAABXRUJQVlA4ILQAAABwBACdASoYABAAPu1iqU2ppaOiMAgBMB2JbACdMoR2bf/gNMzJZaSv8nOQQADMjOYsYlyzd4WDQT2zRSMXgB4WkERw73iXCYr4IaZxznuwyJxIRUSfvPoTyjwmcaDZNcBpitV15KfxtOp7OrwXYieeYerDmJ6HfP1tWIb9hynTfOCVEWSsXDY4jh6DmRPyp9zWUqwkY9oslbpu8U+XBqBynrhsd2mkm1ZnLf/xFhDX3sXAAAA=",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with a finished Visad house with aluminium windows and doors",
+    "slot": "home-hero",
+    "credit": "Pexels License · https://www.pexels.com/photo/7031604/",
+    "web": [
+      {
+        "src": "/images/stock/stock-hero-4-640.webp",
+        "width": 640,
+        "height": 427
+      },
+      {
+        "src": "/images/stock/stock-hero-4-960.webp",
+        "width": 960,
+        "height": 641
+      },
+      {
+        "src": "/images/stock/stock-hero-4-1600.webp",
+        "width": 1600,
+        "height": 1068
+      },
+      {
+        "src": "/images/stock/stock-hero-4-2400.webp",
+        "width": 2400,
+        "height": 1602
+      }
+    ]
+  },
+  "stock-system-windows": {
+    "id": "stock-system-windows",
+    "alt": {
+      "sq": "Dritare alumini me hapje në fasadë",
+      "en": "Aluminium windows opening on a façade"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRhwBAABXRUJQVlA4IBABAABQBgCdASoSABgAPu1qrFEppaQiqAqpMB2JbACdMoMlxHHb7otjsrO1oRecN1w7jV0no/laFn8N89EkLAD90naUYbQLHF5HgmFu5Llu4fWNa5DWnkXl78gvTCkYqVaGHqhjPWmQTo+6bsx4fm8qU+V6tnsB9lwq863FacrDUtBBP7fhfALi4gz1mlnFJS0Or0xfZ2yCd/e341f3K+UivEa+R1OhWGP1Zd7xQZ24Av75qbKFZfJjqwmYHMnggMJEo1R7CZdfZTg+ZUgIV4Qk9oWda2bm7HadXLzxC6A0pSut3WJWYgbjie8AqdJwt4USpJvrMvk11qvOFo3Ny77nHk3HiTtW5cHqyMkUouzJkuugAA==",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with Visad aluminium windows on a finished building",
+    "slot": "system-windows",
+    "credit": "Pexels License · https://www.pexels.com/photo/2972114/",
+    "web": [
+      {
+        "src": "/images/stock/stock-system-windows-640.webp",
+        "width": 640,
+        "height": 853
+      },
+      {
+        "src": "/images/stock/stock-system-windows-960.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/stock/stock-system-windows-1600.webp",
+        "width": 1600,
+        "height": 2133
+      },
+      {
+        "src": "/images/stock/stock-system-windows-2400.webp",
+        "width": 2400,
+        "height": 3200
+      }
+    ]
+  },
+  "stock-system-railings": {
+    "id": "stock-system-railings",
+    "alt": {
+      "sq": "Ballkone me parmakë xhami në një ndërtesë banimi",
+      "en": "Balconies with glass railings on a residential building"
+    },
+    "blurDataURL": "data:image/webp;base64,UklGRsoAAABXRUJQVlA4IL4AAACwBACdASoQABgAPu1iqU2ppaOiMAgBMB2JQBUh6/h5JUW/guxkKD+YUTnJDGoAAP2cWvPI6Jmyk9RTyA4iiGyglTIWCnYHGIP39zsd+8roTzult0Xzxp9WoEZDLWfDh2uVtGu9A5TudKtjL6mRT/RXrMbqg+QjBiKFJ3T5c/aNnsYnHKh/ZAerlmjYOFeo567pkEW7rXR1zZIbzqtuW24gaV2pAXEt3Ra6xktTsNQQ7DUNrLWqPRt1FlvAVQAA",
+    "isPlaceholder": true,
+    "placeholderNote": "Temporary photo · will be replaced with Visad glass balcony railings on a finished building",
+    "slot": "system-railings",
+    "credit": "Pexels License · https://www.pexels.com/photo/34147115/",
+    "web": [
+      {
+        "src": "/images/stock/stock-system-railings-640.webp",
+        "width": 640,
+        "height": 958
+      },
+      {
+        "src": "/images/stock/stock-system-railings-960.webp",
+        "width": 960,
+        "height": 1436
+      },
+      {
+        "src": "/images/stock/stock-system-railings-1600.webp",
+        "width": 1600,
+        "height": 2394
+      },
+      {
+        "src": "/images/stock/stock-system-railings-1636.webp",
+        "width": 1636,
+        "height": 2448
+      }
+    ]
   }
 }

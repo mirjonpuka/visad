@@ -2,6 +2,19 @@
 
 Steps marked **(owner)** need your accounts/access. Everything else is ready in the code.
 
+## 0. Review link for the client (before the real launch)
+
+A free Vercel project gives a link like `visad-review.vercel.app` you can send to the client.
+
+1. Push the code to GitHub (private repository).
+2. vercel.com → **Add New → Project** → import the GitHub repository → Framework: Next.js (auto).
+3. **Environment Variables** (copy from your `.env.local`):
+   `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_LEADS_DATASET`, `SANITY_API_READ_TOKEN`, `SANITY_API_WRITE_TOKEN`, `SANITY_REVALIDATE_SECRET`, plus
+   - `PREVIEW_SITE` = `true` (hidden from Google; forms work without Turnstile/Blob/Resend)
+   - `NEXT_PUBLIC_SITE_URL` = the Vercel URL (e.g. `https://visad-review.vercel.app`) — set it after the first deploy, then redeploy
+4. **Deploy**. Then in sanity.io/manage → API → CORS origins add the Vercel URL with **Allow credentials** (so `/studio` works there too).
+5. Send the link. Form requests the client tests appear in Studio → Kërkesat (no emails until Resend is set up).
+
 ## 1. Accounts & keys (owner)
 - [ ] **Vercel** project from this Git repository (framework: Next.js, root `/`, build `npm run build`)
 - [ ] **Sanity**: create **new** tokens (the current ones were shared in chat): sanity.io/manage → project `c5x17bia` → API → Tokens

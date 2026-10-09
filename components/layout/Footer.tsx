@@ -49,9 +49,9 @@ export async function Footer() {
               />
             </Link>
             <p className="max-w-[300px] text-body-s text-text-on-dark-2">{t("footer.about")}</p>
-            {/* ALUMIL partner badge (UI §2.4): official logo on a light tile, never recoloured */}
+            {/* ALUMIL partner badge (UI §2.4): official logo, transparent PNG (owner request), never recoloured */}
             <div className="flex flex-col items-start gap-2">
-              <AlumilLogo cmsLogo={site.alumilLogo} width={120} tile />
+              <AlumilLogo cmsLogo={site.alumilLogo} width={132} />
               <span className="font-mono text-label text-text-on-dark-3 uppercase">{t("footer.alumil")}</span>
             </div>
           </div>
@@ -153,6 +153,29 @@ export async function Footer() {
           </p>
           <LanguageSwitcher />
         </div>
+        {/* Site credit (owner request) */}
+        <a
+          href="https://ridgeabove.com/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Powered by Ridge Above"
+          className="group relative mt-6 inline-flex h-[50px] w-[182px]"
+        >
+          <Image
+            src="/brand/partners/powered-by-ridge.png"
+            alt=""
+            fill
+            sizes="182px"
+            className="object-contain object-left transition-opacity duration-(--dur-s) group-hover:opacity-0 group-focus-visible:opacity-0"
+          />
+          <Image
+            src="/brand/partners/powered-by-ridge-hover.png"
+            alt=""
+            fill
+            sizes="182px"
+            className="object-contain object-left opacity-0 transition-opacity duration-(--dur-s) group-hover:opacity-100 group-focus-visible:opacity-100"
+          />
+        </a>
       </div>
     </footer>
   );

@@ -4,9 +4,9 @@ import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
 import { ButtonPrimary } from "@/components/ui/Button";
 
-const ProfileScene = dynamic(() => import("@/components/three/ProfileScene"), { ssr: false });
+const WindowScene = dynamic(() => import("@/components/three/WindowScene"), { ssr: false });
 
-/** 1200×800 CSS px at dpr 2 = 2400×1600 render, transparent over ink-900. */
+/** 800×1000 CSS px at dpr 2 = 1600×2000 still of the assembled window, transparent. */
 export function ProfileRender() {
   const box = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
@@ -16,19 +16,14 @@ export function ProfileRender() {
     if (!canvas) return;
     const link = document.createElement("a");
     link.href = canvas.toDataURL("image/png");
-    link.download = "profile-exploded.png";
+    link.download = "window.png";
     link.click();
   }
 
   return (
     <div className="mt-8 flex flex-col items-start gap-6">
-      <div
-        ref={box}
-        data-ready={ready ? "" : undefined}
-        className="bg-ink-900"
-        style={{ width: 1200, height: 800 }}
-      >
-        <ProfileScene fixedProgress={0.5} preserveDrawingBuffer dpr={2} onReady={() => setReady(true)} />
+      <div ref={box} data-ready={ready ? "" : undefined} style={{ width: 800, height: 1000 }}>
+        <WindowScene fixedProgress={0.72} still preserveDrawingBuffer dpr={2} onReady={() => setReady(true)} />
       </div>
       <ButtonPrimary onClick={download} disabled={!ready}>
         Download PNG

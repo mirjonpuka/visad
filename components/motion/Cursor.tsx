@@ -78,8 +78,10 @@ export function Cursor() {
           "absolute flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full",
           "[transition:width_300ms_var(--ease-out-expo),height_300ms_var(--ease-out-expo),background-color_250ms,border-color_250ms,opacity_200ms]",
           mode === "hidden" && "h-2 w-2 opacity-0",
-          mode === "dot" && "h-2 w-2 bg-white mix-blend-difference",
-          mode === "ring" && "h-10 w-10 border border-white mix-blend-difference",
+          // Red dot with a thin white halo: visible on white, dark and photo backgrounds alike
+          mode === "dot" && "h-2.5 w-2.5 bg-red-500 shadow-[0_0_0_1.5px_rgba(255,255,255,0.9)]",
+          mode === "ring" &&
+            "h-10 w-10 border-2 border-red-500 bg-red-500/10 shadow-[0_0_0_1px_rgba(255,255,255,0.6)]",
           (mode === "view" || mode === "drag" || mode === "scroll") && "h-[88px] w-[88px] bg-[rgba(14,15,17,0.85)]",
         )}
       >

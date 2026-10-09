@@ -205,9 +205,10 @@ async function buildDocuments(): Promise<SanityDocumentStub[]> {
   // --- systems ------------------------------------------------------------
   const systemImages: Record<SystemKey, { thumb: () => Promise<object>; hero: () => Promise<object> }> = {
     dyer: { thumb: () => stock("stock-system-doors"), hero: () => stock("stock-system-doors") },
+    // Real Visad photos stay on projects and company slots (owner feedback, migration 003)
     dritare: {
-      thumb: () => photo("window-pvc-historic-facade"),
-      hero: () => photo("window-pvc-historic-facade"),
+      thumb: () => stock("stock-system-windows"),
+      hero: () => stock("stock-system-windows"),
     },
     "sisteme-rreshqitese": {
       thumb: () => stock("stock-system-sliding"),
@@ -215,11 +216,11 @@ async function buildDocuments(): Promise<SanityDocumentStub[]> {
     },
     grila: {
       thumb: () => stock("stock-system-shutters"),
-      hero: () => photo("project-villa-glass-balconies-shutters"),
+      hero: () => stock("stock-system-shutters"),
     },
     "ballkone-parmake": {
-      thumb: () => photo("railing-stainless-steel-balcony"),
-      hero: () => photo("railing-stainless-steel-balcony"),
+      thumb: () => stock("stock-system-railings"),
+      hero: () => stock("stock-system-railings"),
     },
     fasada: { thumb: () => stock("stock-system-facades"), hero: () => stock("stock-system-facades") },
   };
@@ -403,7 +404,10 @@ async function buildDocuments(): Promise<SanityDocumentStub[]> {
   docs.push({
     _id: "homePage",
     _type: "homePage",
-    heroImage: await photo("project-terrace-glass-railing-vineyard", { hotspot: { x: 0.62, y: 0.3 } }),
+    heroImage: await stock("stock-hero-1"),
+    heroImages: await Promise.all(
+      ["stock-hero-1", "stock-hero-2", "stock-hero-3", "stock-hero-4"].map((id, i) => stock(id, { key: `h${i + 1}` })),
+    ),
     heroEyebrow: str({
       sq: "Partner i certifikuar ALUMIL · Shkodër",
       en: "Certified ALUMIL partner · Shkodër",

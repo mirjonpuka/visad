@@ -56,6 +56,7 @@ export type HomeData = {
   settings: { stats?: { value: string; label?: string | null }[] | null; whatsappNumber?: string } | null;
   home: {
     heroImage: SanityImage;
+    heroImages?: SanityImage[] | null;
     heroVideo?: string | null;
     heroEyebrow?: string | null;
     heroTitle?: string | null;

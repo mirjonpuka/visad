@@ -1,8 +1,8 @@
 /**
- * Exports the static 3D render (3D spec §Generating the static render):
- * opens /dev/profile-render on the running dev server, reads the 2400×1600
- * canvas and writes public/brand/3d/profile-exploded.webp (+ -1200 version),
- * WebP quality 82. Usage: npm run dev, then npm run profile:render
+ * Exports the still of the 3D window (poster + phone version): opens
+ * /dev/profile-render on the running dev server, reads the 1600×2000 canvas
+ * and writes public/brand/3d/window.webp with a transparent background, so it
+ * matches any section colour. Usage: npm run dev, then npm run profile:render
  */
 import { mkdirSync } from "node:fs";
 import { chromium } from "@playwright/test";
@@ -12,11 +12,11 @@ const base = process.env.BASE_URL ?? "http://localhost:3000";
 const out = "public/brand/3d";
 
 const browser = await chromium.launch({ args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
-const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } });
+const page = await browser.newPage({ viewport: { width: 1440, height: 1300 } });
 await page.addInitScript(() => localStorage.setItem("visad-intro-seen", "1"));
-await page.goto(`${base}/dev/profile-render`, { waitUntil: "networkidle" });
-await page.locator("[data-ready]").waitFor({ timeout: 60_000 });
-await page.waitForTimeout(2500);
+await page.goto(`${base}/dev/profile-render`, { waitUntil: "load" });
+await page.locator("[data-ready]").waitFor({ timeout: 90_000 });
+await page.waitForTimeout(3000);
 
 const dataUrl = await page.evaluate(() => document.querySelector("[data-ready] canvas").toDataURL("image/png"));
 await browser.close();
@@ -26,8 +26,7 @@ const meta = await sharp(png).metadata();
 console.log(`canvas ${meta.width}×${meta.height}`);
 
 mkdirSync(out, { recursive: true });
-// Flatten onto ink-900 (#0E0F11) so the image matches the section background
-const flat = sharp(png).flatten({ background: "#0E0F11" });
-await flat.clone().resize(2400, 1600, { fit: "cover" }).webp({ quality: 82 }).toFile(`${out}/profile-exploded.webp`);
-await flat.clone().resize(1200, 800, { fit: "cover" }).webp({ quality: 82 }).toFile(`${out}/profile-exploded-1200.webp`);
-console.log(`saved ${out}/profile-exploded.webp + -1200.webp`);
+// Trim the empty margin, keep the alpha channel
+await sharp(png).trim().webp({ quality: 85, alphaQuality: 90 }).toFile(`${out}/window.webp`);
+const info = await sharp(`${out}/window.webp`).metadata();
+console.log(`saved ${out}/window.webp ${info.width}×${info.height}`);

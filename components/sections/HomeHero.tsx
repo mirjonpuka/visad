@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { HeroUnderNav } from "@/components/layout/LayoutUIProvider";
 import { CMSImage } from "@/components/media/CMSImage";
+import { HeroSlideshow } from "@/components/media/HeroSlideshow";
 import { HeroVideo } from "@/components/media/HeroVideo";
 import { HeroMotion } from "@/components/motion/HeroMotion";
 import { SplitHeadline } from "@/components/motion/reveals";
@@ -20,20 +21,27 @@ type Props = { home: NonNullable<HomeData["home"]> };
 export async function HomeHero({ home }: Props) {
   const t = await getTranslations();
   const ctas = (home.heroCtas ?? []).slice(0, 2);
+  // Slideshow photos (CMS "Fotot e hero-s"), else the single hero photo
+  const slides = ((home.heroImages ?? []).map(toSiteImage).filter(Boolean) as NonNullable<ReturnType<typeof toSiteImage>>[]);
+  if (!slides.length && home.heroImage) slides.push(toSiteImage(home.heroImage)!);
 
   return (
     <HeroMotion className="surface-dark relative isolate flex h-svh max-h-[980px] min-h-[600px] items-end overflow-hidden md:min-h-[720px]">
       <HeroUnderNav />
       <div data-hero-parallax="" className="absolute inset-0 -z-20">
         <div data-hero-image="" className="absolute inset-0">
-          <CMSImage
-            image={toSiteImage(home.heroImage)}
-            fill
-            priority
-            sizes="100vw"
-            className="rounded-none"
-            placeholderNote="PHOTO: Home hero"
-          />
+          {slides.length > 1 ? (
+            <HeroSlideshow images={slides} placeholderNote="PHOTO: Home hero" />
+          ) : (
+            <CMSImage
+              image={slides[0] ?? null}
+              fill
+              priority
+              sizes="100vw"
+              className="rounded-none"
+              placeholderNote="PHOTO: Home hero"
+            />
+          )}
           {home.heroVideo && <HeroVideo src={home.heroVideo} />}
         </div>
       </div>
@@ -41,6 +49,11 @@ export async function HomeHero({ home }: Props) {
       <div
         aria-hidden
         className="absolute inset-0 -z-10 bg-linear-to-b from-transparent from-45% to-[rgba(14,15,17,0.75)]"
+      />
+      {/* Left shade so the headline stays readable on every slideshow photo */}
+      <div
+        aria-hidden
+        className="absolute inset-y-0 left-0 -z-10 w-full bg-linear-to-r from-[rgba(14,15,17,0.55)] via-[rgba(14,15,17,0.2)] via-50% to-transparent md:w-3/4"
       />
       {/* Extra shade under the navbar so white nav content stays readable on bright skies */}
       <div

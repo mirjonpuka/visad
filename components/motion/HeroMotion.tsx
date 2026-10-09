@@ -60,9 +60,9 @@ export function HeroMotion({
       });
 
       if (parallax && !isTouch) {
+        // Gentle parallax only; no darkening (owner: the photo must not turn black on scroll)
         gsap.to(parallax, {
           yPercent: 15,
-          filter: "brightness(0.75)",
           ease: "none",
           scrollTrigger: { trigger: root, start: "top top", end: "bottom top", scrub: true },
         });

@@ -1,4 +1,5 @@
 import { checkFile, UPLOAD_KINDS, type UploadKind } from "@/lib/forms/uploads";
+import { STRICT_PRODUCTION } from "@/lib/preview-site";
 import { leadsWriteClient } from "@/sanity/lib/server";
 
 /**
@@ -11,8 +12,8 @@ export async function POST(request: Request) {
   if (process.env.BLOB_READ_WRITE_TOKEN) {
     return Response.json({ error: "use-blob" }, { status: 400 });
   }
-  // Never an open upload endpoint on the live site
-  if (process.env.VERCEL_ENV === "production") {
+  // Never an open upload endpoint on the live site (allowed on the client review deployment)
+  if (STRICT_PRODUCTION) {
     return Response.json({ error: "blob-not-configured" }, { status: 503 });
   }
   const form = await request.formData();

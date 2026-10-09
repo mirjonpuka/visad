@@ -262,6 +262,22 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | D10.3 | README: developer setup + editor guide in Albanian (add a project, replace a temporary photo, translations, leads) with screenshot placeholders | Phase 10 prompt |
 | D10.4 | Deployment itself, DNS, token rotation, Search Console and Business Profile are left to the owner (need their accounts) | Outward-facing, owner access |
 
+## Owner feedback round 1 (after Phase 10)
+
+| # | Decision | Why |
+|---|---|---|
+| F1.1 | Real Visad photos only on projects and company slots (factory, truck, installation). Home hero → 4 new temporary photos as a crossfading slideshow (CMS field "Fotot e hero-s"); Windows / Balconies / Shutters hero → stock photos (migration 003) | Owner request |
+| F1.2 | ALUMIL logo as a transparent PNG rendered from the official SVG; no light tile in the footer (dark letters are less readable on ink — owner's choice) | Owner request |
+| F1.3 | Magnetic buttons removed everywhere (incl. WhatsApp) | Owner: elements must not follow the cursor |
+| F1.4 | Cursor: red dot / red ring with a thin white halo instead of white difference-blend | Invisible on white backgrounds |
+| F1.5 | Hero parallax keeps the movement but no darkening | Owner: photo turned black on scroll |
+| F1.6 | Stats: static numbers with small isometric SVG icons (no count-up) | Owner request |
+| F1.7 | Systems accordion compact (row padding 18px, side image 460px, smaller gaps) | Fits ~one screen |
+| F1.8 | 3D: a full window (frame + sash from the profile cross-sections, double glazing, handle, wall) that builds, opens inwards and the camera flies out into daylight; pin 300vh; no transmission/shadow pass, dpr ≤ 1.5, slow frames only lower dpr, WebGL context loss remounts the canvas; poster = transparent still; canvas edges feathered | Owner: ran once / crashed / bg mismatch; wanted a full window |
+| F1.9 | "Powered by Ridge Above" badge under the copyright → ridgeabove.com (hover image swap) | Owner request |
+| F1.10 | `PREVIEW_SITE=true` review deployment: noindex, forms with Turnstile test keys and Sanity uploads, no external accounts needed | Owner wants to send a link to the client |
+| F1.11 | Sanity tokens kept as they are | Owner decision (LAUNCH.md still recommends rotating before go-live) |
+
 ## Open conflicts reported to the client/owner
 - C7 **X-Frame-Options**: 06 §10 asks for `DENY` (except /studio), but the Presentation preview loads site pages inside the Studio → `SAMEORIGIN` (still blocks every other site).
 - C8 **Mobile Lighthouse ≥ 90 / LCP < 2.2s** (06 §9) vs. the mandated first-visit logo intro (≈2.3s on Home by design) and the motion stack. Desktop meets the budget; mobile scores 66–86 under Lighthouse's simulated 4× slower CPU. Proposal: judge mobile on real devices with Vercel Speed Insights after launch.

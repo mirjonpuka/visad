@@ -66,8 +66,12 @@ test("3D profile: pinned WebGL scene on laptop, steps follow the scroll", async 
   const top = await section.evaluate((el) => el.getBoundingClientRect().top + scrollY);
   await page.evaluate((y) => window.scrollTo(0, y), top + 100);
   await expect(section.locator("canvas")).toHaveCount(1);
-  await page.evaluate((y) => window.scrollTo(0, y), top + 900 * 2.4);
+  await page.evaluate((y) => window.scrollTo(0, y), top + 900 * 2.8);
   await expect(section.locator('[aria-current="step"] h3')).toHaveText(/I montuar/);
+  // Scrolling back up plays it in reverse (it must not run only once)
+  await page.evaluate((y) => window.scrollTo(0, y), top + 900 * 0.3);
+  await expect(section.locator('[aria-current="step"] h3')).toHaveText(/Profili/);
+  await expect(section.locator("canvas")).toHaveCount(1);
 });
 
 test("3D profile: phone gets the static render and a plain list", async ({ page }) => {
@@ -75,7 +79,7 @@ test("3D profile: phone gets the static render and a plain list", async ({ page 
   await open(page, "/");
   const section = page.locator("#sistemet");
   await section.scrollIntoViewIfNeeded();
-  await expect(section.locator('img[src*="profile-exploded"]')).toHaveCount(1);
+  await expect(section.locator('img[src*="window"]')).toHaveCount(1);
   await expect(section.locator("canvas")).toHaveCount(0);
   await expect(section.locator(".pin-spacer")).toHaveCount(0);
 });

@@ -14,8 +14,8 @@ export type AccordionItem = {
 
 type Props = {
   items: AccordionItem[];
-  /** "lg" = Home systems accordion (h3 rows); "sm" = FAQ (h4 rows) */
-  size?: "lg" | "sm";
+  /** "lg" = tall h3 rows; "md" = compact h3 rows (Home systems); "sm" = FAQ (h4 rows) */
+  size?: "lg" | "md" | "sm";
   /** Index open on first render; null = all closed. Default: first row */
   defaultOpen?: number | null;
   /** Controlled open index */
@@ -70,7 +70,8 @@ export function Accordion({
     triggers.current[target]?.focus();
   }
 
-  const lg = size === "lg";
+  const lg = size !== "sm";
+  const rowPadding = size === "lg" ? "py-[26px]" : size === "md" ? "py-[18px]" : "py-5";
 
   return (
     <div className={cn("border-b hairline", className)}>
@@ -93,7 +94,7 @@ export function Accordion({
                 aria-controls={panelId}
                 onClick={() => toggle(index)}
                 onKeyDown={(e) => onKeyDown(e, index)}
-                className={cn("group flex w-full items-center gap-4 text-left", lg ? "py-[26px]" : "py-5")}
+                className={cn("group flex w-full items-center gap-4 text-left", rowPadding)}
               >
                 {item.number && (
                   <span className="w-9 shrink-0 font-mono text-[12px] tracking-[0.1em] text-(--surface-fg-3) tabular">
@@ -120,7 +121,7 @@ export function Accordion({
               inert={!isOpen}
             >
               <div className="acc-panel__inner">
-                <div className={cn("acc-panel__content", item.number && "pl-[52px]", lg ? "pb-8" : "pb-6")}>
+                <div className={cn("acc-panel__content", item.number && "pl-[52px]", size === "lg" ? "pb-8" : "pb-6")}>
                   {item.content}
                 </div>
               </div>

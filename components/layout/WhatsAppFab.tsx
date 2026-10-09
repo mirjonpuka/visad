@@ -39,7 +39,6 @@ export function WhatsAppFab() {
         rel="noopener noreferrer"
         aria-label={t("whatsappFab")}
         tabIndex={visible ? undefined : -1}
-        data-magnetic=""
         className={cn(
           "group flex h-14 items-center rounded-full bg-whatsapp text-whatsapp-ink",
           visible ? "pointer-events-auto" : "pointer-events-none",

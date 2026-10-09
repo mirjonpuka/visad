@@ -16,11 +16,11 @@ import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { Cursor } from "@/components/motion/Cursor";
 import { IntroOverlay, introHeadScript } from "@/components/motion/IntroOverlay";
 import { LenisProvider } from "@/components/motion/LenisProvider";
-import { Magnetic } from "@/components/motion/Magnetic";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { RouteChangeEmitter } from "@/components/motion/routeEvents";
 import { TransitionProvider } from "@/components/motion/TransitionProvider";
 import { BusinessJsonLd } from "@/components/seo/JsonLd";
+import { PREVIEW_SITE } from "@/lib/preview-site";
 import { routing } from "@/i18n/routing";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -42,6 +42,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://visad.al"),
   title: { default: "VISAD Construction", template: "%s · VISAD" },
   description: "Sisteme alumini dhe PVC. Prodhim dhe montim në Shkodër.",
+  // Client review deployment: never indexed
+  ...(PREVIEW_SITE ? { robots: { index: false, follow: false } } : {}),
 };
 
 export const viewport: Viewport = {
@@ -91,7 +93,6 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
                     <CookieBanner />
                   </TransitionProvider>
                   <Cursor />
-                  <Magnetic />
                 </LayoutUIProvider>
               </LenisProvider>
             </MotionProvider>

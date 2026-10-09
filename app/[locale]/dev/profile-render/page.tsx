@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "3D render", robots: { index: false, 
 /**
  * Dev-only (3D spec §Generating the static render): the scene at p = 0.5
  * (exploded), 2400×1600, with a PNG download. Convert with
- * `npm run profile:render` → public/brand/3d/profile-exploded(-1200).webp.
+ * `npm run profile:render` → public/brand/3d/window.webp (transparent).
  */
 export default function ProfileRenderPage() {
   if (!devRoutesEnabled) notFound();

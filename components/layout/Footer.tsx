@@ -189,28 +189,25 @@ export async function Footer() {
           <p className="font-mono text-label text-text-on-dark-3 uppercase">
             {t("footer.copyright", { year })}
           </p>
-          {/* Site credit (owner request): their badge images, hover swaps to the second one */}
+          {/* Site credit (owner): their pill badge. Muted at rest, brighter on hover/focus: colour,
+              opacity, border, background and glow only. It never moves (no transform anywhere). */}
           <a
             href="https://ridgeabove.com/"
             target="_blank"
             rel="noopener"
             aria-label={t("footer.credit")}
-            className="group ease-out relative col-start-2 row-span-2 row-start-1 inline-flex h-[42px] w-[150px] self-end transition-transform duration-150 active:scale-[0.97] md:row-span-1 md:self-center"
+            className="group ease-out relative col-start-2 row-span-2 row-start-1 inline-flex h-[41px] w-[150px] self-end rounded-full border border-transparent transition-[border-color,background-color,box-shadow] duration-250 hover:border-white/35 hover:bg-white/6 hover:shadow-[0_0_24px_rgba(255,255,255,0.08)] focus-visible:border-white/35 focus-visible:bg-white/6 focus-visible:shadow-[0_0_24px_rgba(255,255,255,0.08)] md:row-span-1 md:self-center"
           >
-            <Image
-              src="/brand/partners/powered-by-ridge.png"
-              alt=""
-              fill
-              sizes="150px"
-              className="object-contain transition-opacity duration-(--dur-s) group-hover:opacity-0 group-focus-visible:opacity-0"
-            />
-            <Image
-              src="/brand/partners/powered-by-ridge-hover.png"
-              alt=""
-              fill
-              sizes="150px"
-              className="object-contain opacity-0 transition-opacity duration-(--dur-s) group-hover:opacity-100 group-focus-visible:opacity-100"
-            />
+            {/* -inset-px: the image's own pill edge sits exactly under the hover border */}
+            <span className="absolute -inset-px">
+              <Image
+                src="/brand/partners/powered-by-ridge.png"
+                alt=""
+                fill
+                sizes="150px"
+                className="ease-out object-contain opacity-70 transition-opacity duration-250 group-hover:opacity-100 group-focus-visible:opacity-100"
+              />
+            </span>
           </a>
           <LanguageSwitcher className="md:col-start-3 md:justify-self-end" />
         </div>

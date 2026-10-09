@@ -101,7 +101,12 @@ function Window({ fixedProgress, active, still }: WindowProps) {
       spacer: new THREE.MeshStandardMaterial({ color: "#3A3D42", metalness: 0.8, roughness: 0.4 }),
       handle: new THREE.MeshStandardMaterial({ color: "#E8EAEC", metalness: 0.7, roughness: 0.25 }),
       wall: new THREE.MeshBasicMaterial({ color: BG, toneMapped: false }),
-      outside: new THREE.MeshBasicMaterial({ map: outside, toneMapped: false }),
+      outside: new THREE.MeshBasicMaterial({
+        map: outside,
+        toneMapped: false,
+        transparent: true,
+        opacity: 0,
+      }),
     }),
     [outside],
   );
@@ -208,8 +213,9 @@ function Window({ fixedProgress, active, still }: WindowProps) {
     // The hinges arrive with the sash bar they sit on (left)
     hinges.current!.visible = c.sash[SIDES.indexOf("left")] > 0.98;
     hinge.current!.rotation.y = -1.4 * c.open; // opens towards the room (camera)
-    // Daylight stays dim until the window opens
-    mats.outside.color.setScalar(0.28 + 0.72 * Math.max(c.open, c.fly));
+    // The opening shows the page colour until the window opens, then daylight fades in
+    // (it used to glow from step 1 and read as glass before the glass arrived)
+    mats.outside.setValues({ opacity: Math.max(c.open, c.fly) });
 
     // The poster still is posed at a 3/4 angle to show the depth of the profiles
     if (still) root.current!.rotation.set(0.1, 0.5, 0);

@@ -50,7 +50,11 @@ function canRunScene(flags: ReturnType<typeof useMotion>) {
 
 /** Phones / touch (owner): the window opens behind the text unless low power or reduced motion. */
 function canRunBackdrop(flags: ReturnType<typeof useMotion>) {
-  if (flags.reducedMotion || flags.isLowPower) return false;
+  if (flags.reducedMotion) return false;
+  // Not flags.isLowPower: iOS Safari always reports 4 CPU cores, which excluded every iPhone.
+  // Only Save-Data and very little memory (Android, ≤2GB) keep the still image.
+  const nav = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
+  if (nav.connection?.saveData || (nav.deviceMemory ?? 8) <= 2) return false;
   try {
     return !!document.createElement("canvas").getContext("webgl2");
   } catch {
@@ -306,7 +310,9 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
             alt={poster.alt}
             fill
             sizes="(min-width: 1440px) 640px, (min-width: 1024px) 50vw, 100vw"
-            className={cn("object-contain transition-opacity duration-[400ms]", showCanvas && "opacity-0")}
+            // Hidden as soon as the scene loads (it shows the finished window, glass included, which
+            // gave the story away); it comes back only if WebGL gives up
+            className={cn("object-contain transition-opacity duration-[400ms]", sceneAlive && "opacity-0")}
           />
 
           {scene && sceneAlive && (

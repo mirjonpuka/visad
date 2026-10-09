@@ -109,7 +109,9 @@ test.describe("laptop 1440", () => {
   });
 });
 
-test("WhatsApp button: hides while scrolling, returns after, hidden over the footer bottom bar", async ({ page }) => {
+test("WhatsApp button: hides while scrolling, returns after, hidden over the footer bottom bar", async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await open(page, "/sistemet");
   const fab = page.locator("[data-fab-visible]");
@@ -128,6 +130,23 @@ test("WhatsApp button: hides while scrolling, returns after, hidden over the foo
   await page.waitForTimeout(1500);
   await expect(page.locator("[data-footer-bottom]")).toBeInViewport();
   await expect(fab).toHaveCount(0);
+});
+
+test("Ridge badge: brighter on hover, never moves", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await open(page, "/sistemet");
+  const badge = page.locator('footer a[href="https://ridgeabove.com/"]');
+  await badge.scrollIntoViewIfNeeded();
+  const img = badge.locator("img");
+  await expect(img).toHaveCSS("opacity", "0.7");
+  const before = (await badge.boundingBox())!;
+  await page.mouse.move(before.x + before.width * 0.8, before.y + before.height / 2, { steps: 6 });
+  await expect(img).toHaveCSS("opacity", "1");
+  expect(await badge.boundingBox()).toEqual(before);
+  const transforms = await badge.evaluate((el) =>
+    [el, ...el.querySelectorAll("*")].map((n) => getComputedStyle(n).transform).filter((v) => v !== "none"),
+  );
+  expect(transforms).toEqual([]);
 });
 
 test.describe("phone 390", () => {

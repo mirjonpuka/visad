@@ -49,6 +49,10 @@
     "finish": "Ngjyra e profilit",
     "finishSilver": "Argjend",
     "finishAnthracite": "Antracit",
+    "view3d": "Shiko në 3D",
+    "view3dOpen": "Hap",
+    "view3dClose": "Mbyll",
+    "view3dDrag": "Tërhiqni për ta rrotulluar",
     "profileRenderAlt": "Dritare alumini me urë termike: kornizë, kanat, guarnicione EPDM, xham dyfish dhe dorezë"
   },
   "skip": "Kalo te përmbajtja",

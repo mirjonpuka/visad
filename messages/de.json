@@ -49,6 +49,10 @@
     "finish": "Profiloberfläche",
     "finishSilver": "Silber",
     "finishAnthracite": "Anthrazit",
+    "view3d": "In 3D ansehen",
+    "view3dOpen": "Öffnen",
+    "view3dClose": "Schließen",
+    "view3dDrag": "Zum Drehen ziehen",
     "profileRenderAlt": "Thermisch getrenntes Aluminiumfenster: Rahmen, Flügel, EPDM-Dichtungen, Zweifachverglasung und Griff"
   },
   "skip": "Zum Inhalt springen",

@@ -2,16 +2,21 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { Rotate3d } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/components/motion/gsap";
 import { useMotion } from "@/components/motion/MotionProvider";
 import { Reveal, SplitHeadline } from "@/components/motion/reveals";
 import { profileStore, ramp, type ProfileFinish } from "@/components/three/profileStore";
+import type { ViewerControls } from "@/components/three/WindowViewer";
+import { ButtonSecondary } from "@/components/ui/Button";
 import { Chip } from "@/components/ui/Chip";
 import { cn } from "@/lib/utils";
 
-// three.js + R3F live only in this lazy chunk (never in the first load)
+// three.js + R3F live only in these lazy chunks (never in the first load)
 const WindowScene = dynamic(() => import("@/components/three/WindowScene"), { ssr: false });
+// Phones (owner brief E1): requested only after a tap on "Shiko në 3D"
+const WindowViewer = dynamic(() => import("@/components/three/WindowViewer"), { ssr: false });
 
 type Step = { title?: string | null; text?: string | null };
 
@@ -21,7 +26,15 @@ type Props = {
   steps: Step[];
   /** Still render of the same scene, transparent background */
   poster: { src: string; alt: string };
-  labels: { finish: string; silver: string; anthracite: string };
+  labels: {
+    finish: string;
+    silver: string;
+    anthracite: string;
+    view3d: string;
+    open: string;
+    close: string;
+    dragHint: string;
+  };
 };
 
 const STEP_COUNT = 5;
@@ -39,6 +52,16 @@ const MAX_RECOVERIES = 3;
 function canRunScene(flags: ReturnType<typeof useMotion>) {
   if (flags.reducedMotion || flags.isTouch || flags.isLowPower) return false;
   if (window.innerWidth < 768) return false;
+  try {
+    return !!document.createElement("canvas").getContext("webgl2");
+  } catch {
+    return false;
+  }
+}
+
+/** Phones / touch (owner brief E1): the light viewer is offered unless low power or reduced motion. */
+function canRunViewer(flags: ReturnType<typeof useMotion>) {
+  if (flags.reducedMotion || flags.isLowPower) return false;
   try {
     return !!document.createElement("canvas").getContext("webgl2");
   } catch {
@@ -66,12 +89,21 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
   const lineRef = useRef<HTMLSpanElement>(null);
   const fadeRef = useRef<HTMLDivElement>(null);
   const decided = useRef(false);
+  // Phone viewer: offered → loading (chunk + first frame) → ready
+  const [viewer, setViewer] = useState<"off" | "offered" | "loading" | "ready">("off");
+  const [open, setOpen] = useState(false);
+  const viewerControls = useRef<ViewerControls | null>(null);
+  const dragX = useRef<number | null>(null);
 
   // Decide once on mount (3D spec: "decide once")
   useEffect(() => {
     if (!motion.ready || decided.current) return;
     decided.current = true;
-    if (!canRunScene(motion)) return;
+    if (!canRunScene(motion)) {
+      if (!canRunViewer(motion)) return;
+      const id = requestAnimationFrame(() => setViewer("offered"));
+      return () => cancelAnimationFrame(id);
+    }
     const id = requestAnimationFrame(() => setMode("scene"));
     return () => cancelAnimationFrame(id);
   }, [motion]);
@@ -143,6 +175,13 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
   const scene = mode === "scene";
   const sceneAlive = scene && load && recoveries <= MAX_RECOVERIES;
   const showCanvas = sceneAlive && sceneReady;
+  const viewerOn = viewer === "loading" || viewer === "ready";
+
+  function toggleOpen() {
+    const next = !open;
+    setOpen(next);
+    viewerControls.current?.setOpen(next);
+  }
 
   function chooseFinish(next: ProfileFinish) {
     setFinish(next);
@@ -166,7 +205,10 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
         {title && (
           <SplitHeadline
             as="h2"
-            className={cn("text-balance", scene ? "mt-4 text-[clamp(30px,2.9vw,46px)] leading-[1.05] tracking-[-0.02em]" : "mt-5 text-h2")}
+            className={cn(
+              "text-balance",
+              scene ? "mt-4 text-[clamp(30px,2.9vw,46px)] leading-[1.05] tracking-[-0.02em]" : "mt-5 text-h2",
+            )}
           >
             {title}
           </SplitHeadline>
@@ -176,7 +218,11 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
           {/* Vertical progress line; red fill follows the scroll progress */}
           <span aria-hidden className="absolute top-1 bottom-1 left-0 w-px bg-line-dark">
             {scene && (
-              <span ref={lineRef} className="absolute inset-0 origin-top bg-red-500" style={{ transform: "scaleY(0)" }} />
+              <span
+                ref={lineRef}
+                className="absolute inset-0 origin-top bg-red-500"
+                style={{ transform: "scaleY(0)" }}
+              />
             )}
           </span>
           <Reveal as="ol" stagger className={cn("flex flex-col", scene ? "gap-3.5 laptop:gap-4" : "gap-6")}>
@@ -189,7 +235,9 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
                     scene && i !== active && "opacity-35",
                   )}
                 >
-                  <span className="font-mono text-label text-red-text-on-dark tabular">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-mono text-label text-red-text-on-dark tabular">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <h3 className="relative self-start justify-self-start text-[18px] leading-[1.25] font-medium laptop:text-[20px]">
                     {step.title}
                     {scene && i === STEP_COUNT - 1 && (
@@ -203,7 +251,9 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
                     )}
                   </h3>
                   {step.text && (
-                    <p className="col-start-2 mt-1 max-w-[440px] text-[14px] leading-[1.45] text-text-on-dark-2">{step.text}</p>
+                    <p className="col-start-2 mt-1 max-w-[440px] text-[14px] leading-[1.45] text-text-on-dark-2">
+                      {step.text}
+                    </p>
                   )}
                 </div>
               </li>
@@ -216,23 +266,65 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
         {/* No box, no border: the scene's wall and the poster share the section colour */}
         <div
           ref={stageRef}
-          className={cn("relative mx-auto w-full max-w-[640px]", scene ? "h-full min-h-[420px]" : "aspect-[4/5] max-h-[78svh]")}
+          className={cn(
+            "relative mx-auto w-full max-w-[640px]",
+            scene ? "h-full min-h-[420px]" : "aspect-[4/5] max-h-[78svh]",
+            viewer !== "off" && "mb-16",
+          )}
           data-cursor={showCanvas ? "scroll" : undefined}
+          // Phone viewer: horizontal drag turns the window, vertical swipes still scroll the page
+          style={viewerOn ? { touchAction: "pan-y" } : undefined}
+          onPointerDown={viewer === "ready" ? (e) => void (dragX.current = e.clientX) : undefined}
+          onPointerMove={
+            viewer === "ready"
+              ? (e) => {
+                  if (dragX.current === null) return;
+                  viewerControls.current?.drag(e.clientX - dragX.current);
+                  dragX.current = e.clientX;
+                }
+              : undefined
+          }
+          onPointerUp={() => void (dragX.current = null)}
+          onPointerCancel={() => void (dragX.current = null)}
         >
           <Image
             src={poster.src}
             alt={poster.alt}
             fill
             sizes="(min-width: 1440px) 640px, (min-width: 1024px) 50vw, 100vw"
-            className={cn("object-contain transition-opacity duration-[400ms]", showCanvas && "opacity-0")}
+            className={cn(
+              "object-contain transition-opacity duration-[400ms]",
+              (showCanvas || viewer === "ready") && "opacity-0",
+            )}
           />
+
+          {viewerOn && (
+            <div
+              role="img"
+              aria-label={`${poster.alt} — ${labels.dragHint}`}
+              className={cn(
+                "absolute inset-0 transition-opacity duration-[400ms]",
+                viewer === "ready" ? "opacity-100" : "opacity-0",
+              )}
+            >
+              <WindowViewer controlsRef={viewerControls} onReady={() => setViewer("ready")} />
+            </div>
+          )}
 
           {sceneAlive && (
             <div
               aria-hidden
-              className={cn("absolute inset-0 transition-opacity duration-[400ms]", showCanvas ? "opacity-100" : "opacity-0")}
+              className={cn(
+                "absolute inset-0 transition-opacity duration-[400ms]",
+                showCanvas ? "opacity-100" : "opacity-0",
+              )}
               // Feathered edges: the daylight of the fly-through dissolves into the page, no hard box
-              style={{ maskImage: FEATHER, WebkitMaskImage: FEATHER, maskComposite: "intersect", WebkitMaskComposite: "source-in" }}
+              style={{
+                maskImage: FEATHER,
+                WebkitMaskImage: FEATHER,
+                maskComposite: "intersect",
+                WebkitMaskComposite: "source-in",
+              }}
             >
               <WindowScene
                 key={recoveries}
@@ -242,7 +334,39 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
               />
             </div>
           )}
-          {scene && <div ref={fadeRef} aria-hidden className="pointer-events-none absolute -inset-px bg-ink-900 opacity-0" />}
+          {scene && (
+            <div
+              ref={fadeRef}
+              aria-hidden
+              className="pointer-events-none absolute -inset-px bg-ink-900 opacity-0"
+            />
+          )}
+
+          {viewer !== "off" && (
+            <div className="absolute inset-x-0 top-full mt-4 flex items-center justify-center gap-4">
+              {viewer === "ready" ? (
+                <>
+                  <Chip active={open} onClick={toggleOpen}>
+                    {open ? labels.close : labels.open}
+                  </Chip>
+                  <span aria-hidden className="font-mono text-label text-text-on-dark-3 uppercase">
+                    {labels.dragHint}
+                  </span>
+                </>
+              ) : (
+                <ButtonSecondary
+                  surface="dark"
+                  loading={viewer === "loading"}
+                  onClick={() => setViewer("loading")}
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <Rotate3d aria-hidden className="size-4" strokeWidth={1.5} />
+                    {labels.view3d}
+                  </span>
+                </ButtonSecondary>
+              )}
+            </div>
+          )}
 
           {showCanvas && (
             <>
@@ -255,7 +379,11 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
               >
                 VISAD × ALUMIL
               </span>
-              <div role="group" aria-label={labels.finish} className="absolute top-4 right-4 hidden gap-2 laptop:flex">
+              <div
+                role="group"
+                aria-label={labels.finish}
+                className="absolute top-4 right-4 hidden gap-2 laptop:flex"
+              >
                 {(["silver", "anthracite"] as const).map((value) => (
                   <Chip key={value} active={finish === value} onClick={() => chooseFinish(value)}>
                     {labels[value]}

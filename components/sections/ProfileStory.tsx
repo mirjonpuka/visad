@@ -16,7 +16,15 @@ export async function ProfileStory({ title, steps }: { title?: string | null; st
       title={title}
       steps={steps}
       poster={{ src: "/brand/3d/window.webp", alt: t("profileRenderAlt") }}
-      labels={{ finish: t("finish"), silver: t("finishSilver"), anthracite: t("finishAnthracite") }}
+      labels={{
+        finish: t("finish"),
+        silver: t("finishSilver"),
+        anthracite: t("finishAnthracite"),
+        view3d: t("view3d"),
+        open: t("view3dOpen"),
+        close: t("view3dClose"),
+        dragHint: t("view3dDrag"),
+      }}
     />
   );
 }

@@ -84,6 +84,38 @@ test("3D profile: phone gets the static render and a plain list", async ({ page 
   await expect(section.locator(".pin-spacer")).toHaveCount(0);
 });
 
+test.describe("phone 3D viewer", () => {
+  test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+
+  test("loads only after 'Shiko në 3D'; open/close toggle", async ({ page }) => {
+    await open(page, "/");
+    const section = page.locator("#sistemet");
+    const view = section.getByRole("button", { name: "Shiko në 3D" });
+    await view.scrollIntoViewIfNeeded();
+    await expect(section.locator("canvas")).toHaveCount(0);
+    await view.tap();
+    const toggle = section.getByRole("button", { name: "Hap", exact: true });
+    await expect(toggle).toBeVisible({ timeout: 30_000 });
+    await expect(section.locator("canvas")).toHaveCount(1);
+    await toggle.tap();
+    await expect(section.getByRole("button", { name: "Mbyll", exact: true })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+  });
+
+  test("reduced motion keeps the still image only", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await open(page, "/");
+    const section = page.locator("#sistemet");
+    await section.scrollIntoViewIfNeeded();
+    await expect(section.locator('img[src*="window"]')).toHaveCount(1);
+    // The offer appears a frame after hydration; give it time before asserting it stays away
+    await page.waitForTimeout(1500);
+    await expect(section.getByRole("button", { name: "Shiko në 3D" })).toHaveCount(0);
+  });
+});
+
 test("english home uses English CMS content", async ({ page }) => {
   await open(page, "/en");
   await expect(page.locator("h1")).toContainText("Precision");

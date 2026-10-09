@@ -303,6 +303,8 @@ Conflict rule: `03_UI_UX_SPEC.md` wins for design, `06_ARCHITECTURE.md` for tech
 | R3.2 | Phone menu fits one screen: row size and padding scale with the screen height (22–32px), phones side by side, and language/phones/WhatsApp are pinned to the bottom, so WhatsApp is reachable without scrolling even with a submenu open (checked at 390×664 and 390×844) | Owner |
 | R3.3 | Stats numbers are static again (count-up removed; replaces that part of R2.C2; line icons stay) | Owner: "remove the counter" |
 | R3.4 | Footer on phones: Systems and Company columns side by side | Owner |
+| R3.6 | Logo intro plays on Home on the first page load of the browser session (`sessionStorage`) **and on every reload** (navigation type "reload"); a normal later visit in the same session goes straight to the short hero entrance. Never with reduced motion. Tests/scripts opt out with `localStorage visad-intro-off`. Note: `sessionStorage` is per tab, so a new tab counts as a new session. **Replaces the first-visit-only rule of 04 §2 / D5.5** | Owner |
+| R3.7 | Tab icon without background: `app/icon.svg` (wordmark; dark letters on light tab bars, white on dark ones via `prefers-color-scheme`) + transparent `favicon.ico` with dark letters for browsers without SVG icons. Home-screen icons (apple-icon, manifest 192/512) keep the ink square because iOS fills transparency with black. `sync-assets` no longer copies the old _handoff icons | Owner |
 | R3.5 | Ridge credit is the owner's badge image again (hover swaps to the second image), replacing the R2.B3 text link: centred in the bottom bar on laptop, bottom-right corner on phones | Owner: "as I told you before" |
 
 ## Open conflicts reported to the client/owner

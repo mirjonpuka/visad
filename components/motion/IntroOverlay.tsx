@@ -4,14 +4,18 @@ import { useEffect } from "react";
 import { signalHeroIn } from "./heroSignal";
 import { CONSTRUCTION_PATH } from "./introPaths";
 
+/** sessionStorage: the intro has played in this browser session (owner: once per session) */
 export const INTRO_KEY = "visad-intro-seen";
+/** localStorage opt-out for automated tests and screenshot scripts only */
+export const INTRO_OFF_KEY = "visad-intro-off";
 
 /**
  * Runs in <head> before the first paint (Motion §2): marks JS motion as
- * available and decides whether the intro plays (first visit, no reduced
- * motion). Kept tiny and dependency-free.
+ * available and decides whether the intro plays on Home: the first page load
+ * of the browser session, and again on every reload (owner). Never with
+ * reduced motion. Kept tiny and dependency-free.
  */
-export const introHeadScript = `(function(){var d=document.documentElement;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js-motion');if(/^\\/(en|it|de)?\\/?$/.test(location.pathname)&&!localStorage.getItem('${INTRO_KEY}'))d.setAttribute('data-intro','play');else d.classList.add('hero-css')}catch(e){d.classList.add('hero-css')}})()`;
+export const introHeadScript = `(function(){var d=document.documentElement;try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js-motion');var n=performance.getEntriesByType('navigation')[0],reload=n&&n.type==='reload';if(/^\\/(en|it|de)?\\/?$/.test(location.pathname)&&!localStorage.getItem('${INTRO_OFF_KEY}')&&(reload||!sessionStorage.getItem('${INTRO_KEY}')))d.setAttribute('data-intro','play');else d.classList.add('hero-css')}catch(e){d.classList.add('hero-css')}})()`;
 
 // Timeline (seconds), from brand/intro/logo-intro-demo.html
 const WIPE_START = 1.75;
@@ -22,7 +26,7 @@ const WIPE_END = 2.85;
  * Logo intro (Motion §2): the red swoosh draws, V I A D rise from a mask,
  * "CONSTRUCTION" fades in, then a red panel wipes up and off revealing the
  * hero (already rendered underneath, so LCP is not delayed). Any click, key,
- * wheel or touch jumps straight to the wipe. First visit only.
+ * wheel or touch jumps straight to the wipe. Once per session + on reload.
  */
 export function IntroOverlay() {
   useEffect(() => {
@@ -32,7 +36,7 @@ export function IntroOverlay() {
       return;
     }
     try {
-      localStorage.setItem(INTRO_KEY, "1");
+      sessionStorage.setItem(INTRO_KEY, "1");
     } catch {}
 
     // The CSS animations started at first paint, possibly long before
@@ -48,10 +52,16 @@ export function IntroOverlay() {
       timers.forEach(window.clearTimeout);
       timers.length = 0;
       timers.push(
-        window.setTimeout(() => signalHeroIn("full"), Math.max(0, untilWipe + OVERLAY_HIDE - WIPE_START) * 1000),
-        window.setTimeout(() => {
-          html.dataset.intro = "done";
-        }, Math.max(0, untilWipe + WIPE_END - WIPE_START) * 1000),
+        window.setTimeout(
+          () => signalHeroIn("full"),
+          Math.max(0, untilWipe + OVERLAY_HIDE - WIPE_START) * 1000,
+        ),
+        window.setTimeout(
+          () => {
+            html.dataset.intro = "done";
+          },
+          Math.max(0, untilWipe + WIPE_END - WIPE_START) * 1000,
+        ),
       );
     };
     schedule(WIPE_START - elapsed());

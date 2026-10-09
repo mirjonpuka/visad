@@ -13,7 +13,7 @@ const out = "public/brand/3d";
 
 const browser = await chromium.launch({ args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
 const page = await browser.newPage({ viewport: { width: 1440, height: 1300 } });
-await page.addInitScript(() => localStorage.setItem("visad-intro-seen", "1"));
+await page.addInitScript(() => localStorage.setItem("visad-intro-off", "1"));
 await page.goto(`${base}/dev/profile-render`, { waitUntil: "load" });
 await page.locator("[data-ready]").waitFor({ timeout: 90_000 });
 await page.waitForTimeout(3000);

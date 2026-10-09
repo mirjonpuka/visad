@@ -1,25 +1,30 @@
 /**
- * Favicon set from the full VISAD wordmark on an ink-900 square (owner
- * request B1): as large as fits (wordmark width = 92% of the square).
- *   app/favicon.ico (16, 32, 48) · app/icon.png (32) · app/apple-icon.png (180)
- *   public/brand/logo/png/icon-192.png · icon-512.png (web manifest)
+ * Favicon set from the full VISAD wordmark, as large as fits (92% of the width).
+ * Browser tab (owner: no background):
+ *   app/icon.svg — transparent; dark letters on light tab bars, white on dark ones
+ *   app/favicon.ico (16, 32, 48) — transparent, dark letters (browsers without SVG icons)
+ * Home screen / web manifest keep the ink-900 square (iOS fills transparency with black):
+ *   app/apple-icon.png (180) · public/brand/logo/png/icon-192.png · icon-512.png
  * Usage: node scripts/make-favicons.mjs [previewDir]
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import sharp from "sharp";
 
 const BG = "#0E0F11";
-const svg = readFileSync("public/brand/logo/visad-wordmark-on-dark.svg");
+const onDark = readFileSync("public/brand/logo/visad-wordmark-on-dark.svg");
+const onLight = readFileSync("public/brand/logo/visad-wordmark-on-light.svg", "utf8");
 
-async function square(size, fill = 0.92) {
+async function square(size, { svg = onDark, background = BG, fill = 0.92 } = {}) {
   const w = Math.round(size * fill);
   const mark = await sharp(svg, { density: Math.max(72, Math.ceil((w / 1280) * 72 * 8)) })
     .resize({ width: w })
     .png()
     .toBuffer();
   const meta = await sharp(mark).metadata();
-  return sharp({ create: { width: size, height: size, channels: 4, background: BG } })
-    .composite([{ input: mark, left: Math.round((size - meta.width) / 2), top: Math.round((size - meta.height) / 2) }])
+  return sharp({ create: { width: size, height: size, channels: 4, background } })
+    .composite([
+      { input: mark, left: Math.round((size - meta.width) / 2), top: Math.round((size - meta.height) / 2) },
+    ])
     .png()
     .toBuffer();
 }
@@ -49,10 +54,24 @@ function ico(images) {
 }
 
 const sizes = {};
-for (const s of [16, 32, 48, 180, 192, 512]) sizes[s] = await square(s);
+for (const s of [180, 192, 512]) sizes[s] = await square(s);
+const tab = {};
+const clear = { r: 0, g: 0, b: 0, alpha: 0 };
+for (const s of [16, 32, 48]) tab[s] = await square(s, { svg: Buffer.from(onLight), background: clear });
 
-writeFileSync("app/favicon.ico", ico([16, 32, 48].map((size) => ({ size, data: sizes[size] }))));
-writeFileSync("app/icon.png", sizes[32]);
+// SVG tab icon: square viewBox around the 1280×500 wordmark, letters follow the browser theme
+const tabSvg = onLight
+  .replace(/ role="img" aria-label="[^"]*"/, "")
+  .replace(/<title>.*?<\/title>/, "")
+  .replace('viewBox="0 0 1280 500"', 'viewBox="0 -390 1280 1280"')
+  .replace(/fill="#111214"/g, 'class="l"')
+  .replace(
+    "<defs>",
+    "<style>.l{fill:#111214}@media (prefers-color-scheme:dark){.l{fill:#fff}}</style><defs>",
+  );
+writeFileSync("app/icon.svg", tabSvg);
+writeFileSync("app/favicon.ico", ico([16, 32, 48].map((size) => ({ size, data: tab[size] }))));
+if (existsSync("app/icon.png")) rmSync("app/icon.png");
 writeFileSync("app/apple-icon.png", sizes[180]);
 writeFileSync("public/brand/logo/png/icon-192.png", sizes[192]);
 writeFileSync("public/brand/logo/png/icon-512.png", sizes[512]);
@@ -61,13 +80,29 @@ console.log("favicons written");
 // Preview: the 32px icon shown at 1:1 and enlarged 8× (pixelated) for judging
 const previewDir = process.argv[2];
 if (previewDir) {
-  const big = await sharp(sizes[32]).resize(256, 256, { kernel: "nearest" }).toBuffer();
-  await sharp({ create: { width: 320, height: 280, channels: 4, background: "#ffffff" } })
-    .composite([
-      { input: sizes[32], left: 8, top: 8 },
-      { input: sizes[16], left: 48, top: 16 },
-      { input: big, left: 56, top: 12 },
-    ])
+  // Light and dark tab bars, the transparent 32px icon at 1:1 and enlarged 8×
+  const darkSvg = Buffer.from(onLight.replace(/#111214/g, "#FFFFFF"));
+  const dark32 = await square(32, { svg: darkSvg, background: clear });
+  const parts = [];
+  for (const [bg, icon, top] of [
+    ["#f1f3f4", tab[32], 0],
+    ["#202124", dark32, 280],
+  ]) {
+    const big = await sharp(icon).resize(256, 256, { kernel: "nearest" }).toBuffer();
+    parts.push(
+      {
+        input: await sharp({ create: { width: 320, height: 280, channels: 4, background: bg } })
+          .png()
+          .toBuffer(),
+        left: 0,
+        top,
+      },
+      { input: icon, left: 8, top: top + 8 },
+      { input: big, left: 56, top: top + 12 },
+    );
+  }
+  await sharp({ create: { width: 320, height: 560, channels: 4, background: "#ffffff" } })
+    .composite(parts)
     .png()
     .toFile(`${previewDir}/favicon-preview.png`);
   console.log("preview written");

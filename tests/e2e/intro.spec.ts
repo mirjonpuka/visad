@@ -1,11 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-// Phase 5: the logo intro plays on the first visit only and can be skipped.
+// The logo intro plays once per browser session and again on every reload (owner); skippable.
 
 test.describe("first visit", () => {
   test.use({ storageState: { cookies: [], origins: [] }, viewport: { width: 1440, height: 900 } });
 
-  test("intro plays once, a key press skips it, the hero comes in", async ({ page }) => {
+  test("intro plays, a key press skips it, the hero comes in; again on reload, not on a later visit", async ({
+    page,
+  }) => {
     // The intro lasts ~2.85s: check it right away, not after "networkidle"
     await page.goto("/", { waitUntil: "commit" });
     const html = page.locator("html");
@@ -15,8 +17,15 @@ test.describe("first visit", () => {
     await expect(html).toHaveAttribute("data-hero-in", /.*/);
     await expect(page.locator(".intro")).toBeHidden();
 
-    // Remembered: no intro on the next visit
-    await page.reload({ waitUntil: "networkidle" });
+    // Reload: plays again
+    await page.reload({ waitUntil: "commit" });
+    await expect(html).toHaveAttribute("data-intro", /play|skip|done/);
+    await page.waitForLoadState("load");
+    await page.keyboard.press("Space");
+
+    // Same session, a normal visit (not a reload): no intro
+    await page.goto("/fabrika", { waitUntil: "load" });
+    await page.goto("/", { waitUntil: "load" });
     await expect(html).not.toHaveAttribute("data-intro", /play|skip/);
   });
 });

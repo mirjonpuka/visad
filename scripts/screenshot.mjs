@@ -17,7 +17,7 @@ const errors = [];
 for (const width of widths) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
   // Returning visitor: no first-visit intro over the screenshots
-  await page.addInitScript(() => localStorage.setItem("visad-intro-seen", "1"));
+  await page.addInitScript(() => localStorage.setItem("visad-intro-off", "1"));
   page.on("console", (m) => m.type() === "error" && errors.push(`[${width}] ${m.text()}`));
   page.on("pageerror", (e) => errors.push(`[${width}] ${e.message}`));
   // "load" + settle: pages with Turnstile never reach "networkidle"

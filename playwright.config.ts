@@ -16,7 +16,7 @@ export default defineConfig({
     // Returning visitor: the first-visit intro (Motion §0) is covered by intro.spec.ts
     storageState: {
       cookies: [],
-      origins: [{ origin: new URL(baseURL).origin, localStorage: [{ name: "visad-intro-seen", value: "1" }] }],
+      origins: [{ origin: new URL(baseURL).origin, localStorage: [{ name: "visad-intro-off", value: "1" }] }],
     },
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],

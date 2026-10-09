@@ -18,10 +18,7 @@ for (const tone of ["on-dark", "on-light"]) {
   writeFileSync(file, svg.replace('viewBox="0 0 1280 420"', 'viewBox="0 0 1280 500"'));
 }
 
-// App icons (Next.js metadata file conventions)
-cpSync(join(handoff, "brand/logo/favicon.ico"), join(root, "app/favicon.ico"));
-cpSync(join(handoff, "brand/logo/visad-icon.svg"), join(root, "app/icon.svg"));
-cpSync(join(handoff, "brand/logo/png/apple-touch-icon.png"), join(root, "app/apple-icon.png"));
+// App icons come from `npm run favicons` (owner: wordmark, transparent tab icon), not from _handoff
 
 // WebP images only (never JPG/PNG to the browser)
 for (const dir of ["web", "crops"]) {

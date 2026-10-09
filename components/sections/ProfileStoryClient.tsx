@@ -25,6 +25,11 @@ type Props = {
 };
 
 const STEP_COUNT = 5;
+
+/** Navbar height in px (CSS --navbar-h) for the pin start */
+function navbarHeight() {
+  return parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--navbar-h")) || 76;
+}
 const FEATHER =
   "linear-gradient(to right, transparent, #000 12%, #000 88%, transparent), linear-gradient(to bottom, transparent, #000 10%, #000 90%, transparent)";
 /** Remounts after a lost WebGL context before falling back to the still image */
@@ -109,7 +114,8 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
         ease: "none",
         scrollTrigger: {
           trigger: pinRef.current,
-          start: "top top",
+          // Owner brief C3: the pin starts when the section reaches the bottom of the navbar
+          start: () => `top ${navbarHeight()}px`,
           end: "+=300%",
           pin: true,
           scrub: 1,
@@ -144,30 +150,47 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
   }
 
   return (
-    <div ref={pinRef} className={cn("grid-12 gap-y-12", scene && "min-h-svh content-center py-(--navbar-h)")}>
-      <div className="col-span-12 lg:col-span-5">
+    <div
+      ref={pinRef}
+      data-profile-scene={scene || undefined}
+      className={cn(
+        "grid-12 gap-y-12",
+        // One screen below the navbar: text column and canvas share the full height
+        scene && "h-[calc(100svh-var(--navbar-h))] min-h-[560px] items-stretch py-6",
+      )}
+    >
+      <div className="col-span-12 flex flex-col justify-center lg:col-span-5">
         <Reveal as="p" y={12} className="font-mono text-eyebrow text-text-on-dark-3 uppercase">
           {eyebrow}
         </Reveal>
         {title && (
-          <SplitHeadline as="h2" className="mt-5 text-h2 text-balance">
+          <SplitHeadline
+            as="h2"
+            className={cn("text-balance", scene ? "mt-4 text-[clamp(30px,2.9vw,46px)] leading-[1.05] tracking-[-0.02em]" : "mt-5 text-h2")}
+          >
             {title}
           </SplitHeadline>
         )}
 
-        <div className={cn("relative pl-8", scene ? "mt-10" : "mt-12")}>
+        <div className={cn("relative pl-8", scene ? "mt-6 laptop:mt-8" : "mt-12")}>
           {/* Vertical progress line; red fill follows the scroll progress */}
           <span aria-hidden className="absolute top-1 bottom-1 left-0 w-px bg-line-dark">
             {scene && (
               <span ref={lineRef} className="absolute inset-0 origin-top bg-red-500" style={{ transform: "scaleY(0)" }} />
             )}
           </span>
-          <Reveal as="ol" stagger className={cn("flex flex-col", scene ? "gap-6" : "gap-8")}>
+          <Reveal as="ol" stagger className={cn("flex flex-col", scene ? "gap-3.5 laptop:gap-4" : "gap-6")}>
             {steps.map((step, i) => (
               <li key={i} aria-current={scene && i === active ? "step" : undefined}>
-                <div className={cn("flex flex-col gap-1.5 transition-opacity duration-300", scene && i !== active && "opacity-35")}>
+                {/* Compact (owner brief C3): number beside the title, 18–20px titles, 14px text */}
+                <div
+                  className={cn(
+                    "grid grid-cols-[30px_1fr] items-baseline gap-x-2 transition-opacity duration-300",
+                    scene && i !== active && "opacity-35",
+                  )}
+                >
                   <span className="font-mono text-label text-red-text-on-dark tabular">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="relative self-start text-h4">
+                  <h3 className="relative self-start justify-self-start text-[18px] leading-[1.25] font-medium laptop:text-[20px]">
                     {step.title}
                     {scene && i === STEP_COUNT - 1 && (
                       <span
@@ -179,7 +202,9 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
                       />
                     )}
                   </h3>
-                  {step.text && <p className="max-w-[440px] text-body-s text-text-on-dark-2">{step.text}</p>}
+                  {step.text && (
+                    <p className="col-start-2 mt-1 max-w-[440px] text-[14px] leading-[1.45] text-text-on-dark-2">{step.text}</p>
+                  )}
                 </div>
               </li>
             ))}
@@ -187,11 +212,11 @@ export function ProfileStoryClient({ eyebrow, title, steps, poster, labels }: Pr
         </div>
       </div>
 
-      <div className="col-span-12 lg:col-span-7">
+      <div className="col-span-12 flex items-center lg:col-span-7">
         {/* No box, no border: the scene's wall and the poster share the section colour */}
         <div
           ref={stageRef}
-          className="relative mx-auto aspect-[4/5] max-h-[78svh] w-full max-w-[640px]"
+          className={cn("relative mx-auto w-full max-w-[640px]", scene ? "h-full min-h-[420px]" : "aspect-[4/5] max-h-[78svh]")}
           data-cursor={showCanvas ? "scroll" : undefined}
         >
           <Image

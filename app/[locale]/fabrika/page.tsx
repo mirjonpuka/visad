@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { FileText } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { CMSImage } from "@/components/media/CMSImage";
-import { CountUp, ImageWipe, Reveal } from "@/components/motion/reveals";
+import { ImageWipe } from "@/components/motion/reveals";
 import { FactoryProcess } from "@/components/sections/FactoryProcess";
 import { MapVisit } from "@/components/sections/MapVisit";
 import { PageCta } from "@/components/sections/PageCta";
 import { PageHero } from "@/components/sections/PageHero";
+import { StatsBand } from "@/components/sections/StatsBand";
 import { AlumilLogo } from "@/components/ui/AlumilLogo";
 import { LinkArrow } from "@/components/ui/LinkArrow";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -57,20 +58,8 @@ export default async function FactoryPage() {
         height="lg"
       />
 
-      {stats.length > 0 && (
-        <section className="surface-dark border-t border-line-dark" aria-label={t("home.statsLabel")}>
-          <Reveal as="dl" stagger className="site-container grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.value + stat.label} className="flex flex-col-reverse gap-3 border-line-dark py-10 md:px-8 md:first:pl-0 laptop:border-l laptop:first:border-l-0">
-                <dt className="text-body-s text-text-on-dark-2">{stat.label}</dt>
-                <dd className="text-display-l leading-none">
-                  <CountUp value={stat.value} />
-                </dd>
-              </div>
-            ))}
-          </Reveal>
-        </section>
-      )}
+      {/* Same band as Home (owner brief D1): centred, icons, counts once */}
+      <StatsBand stats={stats} />
 
       {steps.length > 0 && (
         <FactoryProcess

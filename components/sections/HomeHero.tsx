@@ -26,7 +26,7 @@ export async function HomeHero({ home }: Props) {
   if (!slides.length && home.heroImage) slides.push(toSiteImage(home.heroImage)!);
 
   return (
-    <HeroMotion className="surface-dark relative isolate flex h-svh max-h-[980px] min-h-[600px] items-end overflow-hidden md:min-h-[720px]">
+    <HeroMotion className="surface-dark relative isolate flex h-svh max-h-[980px] min-h-[600px] flex-col overflow-hidden md:min-h-[720px]">
       <HeroUnderNav />
       <div data-hero-parallax="" className="absolute inset-0 -z-20">
         <div data-hero-image="" className="absolute inset-0">
@@ -61,7 +61,10 @@ export async function HomeHero({ home }: Props) {
         className="absolute inset-x-0 top-0 -z-10 h-56 bg-linear-to-b from-[rgba(14,15,17,0.7)] via-[rgba(14,15,17,0.35)] to-transparent"
       />
 
-      <div className="site-container pb-14 md:pb-24">
+      {/* Owner brief C1: the block's centre sits at ~57% of the hero height (space 9 : 5 around
+          it) on tablet/laptop instead of resting on the bottom; phones keep it lower (3 : 1) */}
+      <div aria-hidden className="min-h-(--navbar-h) flex-[3] md:flex-[9]" />
+      <div className="site-container w-full">
         {home.heroEyebrow && (
           <p data-hero-fade="" className="font-mono text-eyebrow text-text-on-dark-2 uppercase">
             {home.heroEyebrow}
@@ -93,6 +96,7 @@ export async function HomeHero({ home }: Props) {
           </div>
         )}
       </div>
+      <div aria-hidden className="min-h-14 flex-[1] md:flex-[5]" />
 
       {/* Scroll cue (laptop only): a red segment travelling down a 48px line */}
       <div

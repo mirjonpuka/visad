@@ -99,7 +99,7 @@ function Window({ fixedProgress, active, still }: WindowProps) {
   useEffect(
     () => () => {
       [...geo.frame, ...geo.sash].forEach((m) => [m.aluminium, m.aluminiumInner, m.polyamide, m.epdm].forEach((g) => g.dispose()));
-      [geo.glass.pane, geo.glass.spacer, geo.handle.base, geo.handle.lever, geo.wall].forEach((g) => g.dispose());
+      [geo.glass.pane, geo.glass.spacer, geo.handle.base, geo.handle.lever, geo.hinge, geo.slot, geo.wall].forEach((g) => g.dispose());
       Object.values(mats).forEach((m) => m.dispose());
       outside.dispose();
     },
@@ -124,7 +124,9 @@ function Window({ fixedProgress, active, still }: WindowProps) {
   const frameSides = useRef<(THREE.Group | null)[]>([]);
   const sashSides = useRef<(THREE.Group | null)[]>([]);
   const hinge = useRef<THREE.Group>(null);
+  const hinges = useRef<THREE.Group>(null);
   const glass = useRef<THREE.Group>(null);
+  const glassPane = useRef<THREE.Mesh>(null);
   const handle = useRef<THREE.Group>(null);
   const strip = useRef<THREE.Mesh>(null);
   const current = useRef<Targets>(targetsFor(fixedProgress ?? profileStore.progress));
@@ -172,10 +174,14 @@ function Window({ fixedProgress, active, still }: WindowProps) {
     });
     (strip.current?.material as THREE.MeshStandardMaterial | undefined)?.setValues({ emissiveIntensity: 0.55 * c.glow });
 
-    glass.current!.position.y = 1800 * (1 - c.glass);
+    // Step 4 (owner brief C3): the glass comes from far behind the profile along Z and fades in
+    glass.current!.position.z = -1600 * (1 - c.glass);
     glass.current!.visible = c.glass > 0.001;
+    (glassPane.current?.material as THREE.MeshStandardMaterial | undefined)?.setValues({ opacity: 0.22 * c.glass });
     handle.current!.scale.setScalar(Math.max(0.001, c.handle));
     handle.current!.visible = c.handle > 0.001;
+    // The hinges arrive with the sash bar they sit on (left)
+    hinges.current!.visible = c.sash[SIDES.indexOf("left")] > 0.98;
     hinge.current!.rotation.y = -1.4 * c.open; // opens towards the room (camera)
     // Daylight stays dim until the window opens
     mats.outside.color.setScalar(0.28 + 0.72 * Math.max(c.open, c.fly));
@@ -223,11 +229,22 @@ function Window({ fixedProgress, active, still }: WindowProps) {
             <mesh geometry={m.aluminiumInner} material={mats.aluminium} />
             <mesh ref={i === 0 ? strip : undefined} geometry={m.polyamide} material={mats.polyamide} />
             <mesh geometry={m.epdm} material={mats.epdm} />
+            {/* Drainage slots on the outside face of the bottom bar */}
+            {m.side === "bottom" &&
+              [-360, 0, 360].map((x) => (
+                <mesh key={x} geometry={geo.slot} material={mats.epdm} position={[x, -WINDOW.height / 2 + 22, -WINDOW.frameDepth / 2 - 1]} />
+              ))}
           </group>
         ))}
 
         {/* Sash hangs on its left edge; set 12mm behind the frame's room face */}
         <group ref={hinge} position={[-sashSize.w / 2, 0, -12]}>
+          {/* Two hinges on the hinge edge, room side */}
+          <group ref={hinges}>
+            {[1, -1].map((s) => (
+              <mesh key={s} geometry={geo.hinge} material={mats.handle} position={[6, s * (sashSize.h / 2 - 230), WINDOW.sashDepth / 2 + 6]} />
+            ))}
+          </group>
           <group position={[sashSize.w / 2, 0, 0]}>
             {geo.sash.map((m, i) => (
               <group key={m.side} ref={(el) => void (sashSides.current[i] = el)}>
@@ -238,7 +255,7 @@ function Window({ fixedProgress, active, still }: WindowProps) {
               </group>
             ))}
             <group ref={glass}>
-              <mesh geometry={geo.glass.pane} material={mats.glass} position={[0, 0, -9]} />
+              <mesh ref={glassPane} geometry={geo.glass.pane} material={mats.glass} position={[0, 0, -9]} />
               <mesh geometry={geo.glass.pane} material={mats.glass} position={[0, 0, 9]} />
             </group>
             <group ref={handle} position={[sashSize.w / 2 - 36, 0, WINDOW.sashDepth / 2 + 8]}>
@@ -282,6 +299,8 @@ export default function WindowScene({
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance", preserveDrawingBuffer }}
       onCreated={({ gl }) => {
         gl.setClearColor(0x000000, 0);
+        // ?debug3d: expose the renderer for performance checks (triangles, calls)
+        if (location.search.includes("debug3d")) (window as unknown as { __visad3d: unknown }).__visad3d = gl;
         gl.domElement.addEventListener("webglcontextlost", (event) => {
           event.preventDefault();
           onContextLost?.();

@@ -16,7 +16,8 @@
     "seed": "tsx --env-file=.env.local scripts/seed-sanity.ts",
     "profile:render": "node scripts/export-profile-render.mjs",
     "test:cleanup-leads": "tsx --env-file=.env.local scripts/cleanup-test-leads.ts",
-    "favicons": "node scripts/make-favicons.mjs"
+    "favicons": "node scripts/make-favicons.mjs",
+    "map:balkans": "node scripts/make-balkans-map.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -55,14 +56,17 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.186.0",
+    "d3-geo": "^3.1.1",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
     "prettier": "^3.9.9",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "sharp": "^0.35.5",
     "tailwindcss": "^4",
+    "topojson-client": "^3.1.0",
     "tsx": "^4.23.15",
-    "typescript": "^5"
+    "typescript": "^5",
+    "world-atlas": "^2.0.2"
   },
   "allowScripts": {
     "unrs-resolver@1.12.2": true,

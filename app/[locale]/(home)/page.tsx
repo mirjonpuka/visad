@@ -47,7 +47,8 @@ export default async function HomePage() {
       <HomeHero home={home} />
       <StatsBand stats={data.settings?.stats ?? []} />
 
-      <section id="sistemet" className="surface-dark border-t border-line-dark section-y">
+      {/* With the 3D scene the pinned block starts at the section top (owner brief C3) */}
+      <section id="sistemet" className="surface-dark border-t border-line-dark section-y has-[[data-profile-scene]]:pt-0">
         <div className="site-container">
           <ProfileStory title={home.profileStoryTitle} steps={home.profileStorySteps ?? []} />
           <div className="mt-20 laptop:mt-28">

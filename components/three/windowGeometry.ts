@@ -105,7 +105,15 @@ function sideMatrix(side: Side, w: number, h: number, depth: number) {
 
 function extrudeAlong(shapes: THREE.Shape[], length: number, matrix: THREE.Matrix4) {
   const geos = shapes.map((shape) => {
-    const g = new THREE.ExtrudeGeometry(shape, { depth: length, bevelEnabled: false, curveSegments: 4 });
+    // Slightly chamfered edges (owner brief C3): a 0.6mm single-segment bevel
+    const g = new THREE.ExtrudeGeometry(shape, {
+      depth: length,
+      bevelEnabled: true,
+      bevelSize: 0.6,
+      bevelThickness: 0.6,
+      bevelSegments: 1,
+      curveSegments: 4,
+    });
     g.translate(0, 0, -length / 2);
     g.applyMatrix4(matrix);
     return g;
@@ -154,10 +162,17 @@ export function buildWindow() {
   const pane = new THREE.BoxGeometry(gw, gh, 6);
   const spacer = new THREE.BoxGeometry(gw - 4, gh - 4, 12);
 
-  // Handle on the side opposite the hinge
-  const handleBase = new THREE.BoxGeometry(30, 76, 14);
-  const handleLever = new THREE.BoxGeometry(22, 150, 14);
-  handleLever.translate(0, -60, 14);
+  // Handle on the side opposite the hinge: rounded rosette + lever pointing down (closed)
+  const handleBase = new THREE.CapsuleGeometry(13, 46, 4, 12);
+  handleBase.scale(1, 1, 0.55);
+  const handleLever = new THREE.CapsuleGeometry(9, 130, 4, 12);
+  handleLever.translate(0, -62, 16);
+
+  // Two hinges on the hinge side (room face of the sash)
+  const hinge = new THREE.CylinderGeometry(9, 9, 90, 16);
+
+  // Drainage slots on the outside face of the bottom frame bar
+  const slot = new THREE.BoxGeometry(32, 6, 3);
 
   // Wall around the frame (same colour as the page section); its room-side
   // face sits 20mm behind the frame's room-side face
@@ -166,7 +181,16 @@ export function buildWindow() {
   const wall = new THREE.ExtrudeGeometry(wallShape, { depth: 260, bevelEnabled: false });
   wall.translate(0, 0, -260 + frameDepth / 2 - 20);
 
-  return { frame, sash, sashSize: { w: sw, h: sh }, glass: { pane, spacer, w: gw, h: gh }, handle: { base: handleBase, lever: handleLever }, wall };
+  return {
+    frame,
+    sash,
+    sashSize: { w: sw, h: sh },
+    glass: { pane, spacer, w: gw, h: gh },
+    handle: { base: handleBase, lever: handleLever },
+    hinge,
+    slot,
+    wall,
+  };
 }
 
 /** Soft warm light seen through the opening; fades into the page colour at the edges. */
